@@ -71,7 +71,7 @@ export class AdviserSqliteStore {
         condition TEXT NOT NULL,
         stock_status TEXT NOT NULL,
         base_price_vnd INTEGER NOT NULL,
-        mandatory_fees_vnd INTEGER NOT NULL,
+        mandatory_fees_vnd INTEGER,
         shipping_vnd INTEGER,
         conditional_discount_vnd INTEGER NOT NULL,
         source_url TEXT NOT NULL,
@@ -237,7 +237,7 @@ export class AdviserSqliteStore {
       condition: string;
       stock_status: string;
       base_price_vnd: number;
-      mandatory_fees_vnd: number;
+      mandatory_fees_vnd: number | null;
       shipping_vnd: number | null;
       conditional_discount_vnd: number;
       source_url: string;

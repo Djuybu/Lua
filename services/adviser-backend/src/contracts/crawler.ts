@@ -21,8 +21,8 @@ export interface StagedCrawlerOffer {
 
   /** Non-negative safe integer in VND */
   basePriceVnd: number;
-  /** Taxes/mandatory fees EXCLUDING shipping fees */
-  mandatoryFeesVnd: number;
+  /** Taxes/mandatory fees EXCLUDING shipping fees, or null if unknown / unreviewed */
+  mandatoryFeesVnd: number | null;
   /** Shipping fee, or null if unknown / dependent on location */
   shippingVnd: number | null;
   /** Conditional discount (card promo, trade-in) separated from payable price */
@@ -91,7 +91,7 @@ export function validateStagedCrawlerOffer(offer: unknown): OfferValidationResul
   if (!isValidVnd(o.basePriceVnd)) {
     errors.push('basePriceVnd must be a non-negative safe integer');
   }
-  if (!isValidVnd(o.mandatoryFeesVnd)) {
+  if (o.mandatoryFeesVnd === null || !isValidVnd(o.mandatoryFeesVnd)) {
     errors.push('mandatoryFeesVnd must be a non-negative safe integer');
   }
   if (o.shippingVnd !== null && !isValidVnd(o.shippingVnd)) {

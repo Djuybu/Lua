@@ -1,6 +1,23 @@
 # @lua/adviser-backend
 
-Offline-first deterministic recommendation engine, SQLite catalog persistence, and bounded AI feature adapter for Lua Device Adviser.
+Deterministic recommendation engine with a PostgreSQL catalog, Qdrant keyword search, and bounded AI adapters for Lua Device Adviser.
+
+## Local application runtime
+
+The application now runs against PostgreSQL (`laptop`, port 5432) and Qdrant
+(port 6333). Configure the ignored `.env` from `.env.example`, then build and
+publish the catalog using the [warehouse pipeline](../../tools/data-pipeline/warehouse/README.md).
+Run `npm start` in this directory to serve the API on 8080. Expo serves the
+frontend on 8081 with `npm run web` in `apps/adviser`. Configure PostgreSQL and
+Qdrant in the ignored `.env`, then initialize the catalog using the
+[warehouse pipeline](../../tools/data-pipeline/warehouse/README.md).
+
+`GET /advisor/v1/catalog` reads the active PostgreSQL catalog;
+`GET /advisor/v1/catalog?q=Lenovo` retrieves matching IDs from Qdrant and loads
+their records from the same published PostgreSQL version. `/health` checks both
+stores. Observed crawl prices remain reference prices until reviewed as offers.
+The SQLite adapter below remains for offline snapshot tests and older tooling;
+it is not used by `npm start`.
 
 ## 1. Overview & Architecture
 

@@ -83,6 +83,10 @@ export function CartCandidateCard({
             </Body>
           )}
           {current.kind === "different_offer" &&
+            current.fresh &&
+            candidate.baselineCurrency === current.observation.currency &&
+            candidate.baselinePriceBasis !== "unknown" &&
+            candidate.baselinePriceBasis === current.offer?.priceBasis &&
             candidate.baselineAmount !== null &&
             current.observation.amount < candidate.baselineAmount && (
               <Body>Ưu đãi tốt hơn</Body>

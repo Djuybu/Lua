@@ -1,5 +1,16 @@
 import type { ConfirmedNeedsProfile } from "./model";
-import { validateConfirmedProfile } from "./model";
+import {
+  record,
+  text,
+  id,
+  amount,
+  date,
+  url,
+  profile,
+  variant,
+  uniqueIds,
+} from "./domain/validation";
+import { validPriceData } from "./domain/persisted-prices";
 import type { Preferences } from "./theme";
 const defaults: Preferences = {
   appearance: "system",
@@ -62,19 +73,44 @@ export const empty: State = {
   saved: [],
 };
 const key = "lua-adviser-v1";
-export function validState(x: any): x is State {
+function validSaved(s: unknown): s is Saved {
   return (
-    x?.version === 2 &&
+    record(s) &&
+    id(s.id) &&
+    date(s.at) &&
+    Array.isArray(s.variants) &&
+    s.variants.every(variant) &&
+    new Set(s.variants.map((v) => v.variantId)).size === s.variants.length &&
+    (s.profile === null || profile(s.profile)) &&
+    id(s.catalogVersion) &&
+    [s.groupName, s.decisionNote].every((x) => x === undefined || text(x)) &&
+    (s.baselineAmount === undefined ||
+      s.baselineAmount === null ||
+      amount(s.baselineAmount)) &&
+    (s.savedOfferId === undefined ||
+      s.savedOfferId === null ||
+      id(s.savedOfferId)) &&
+    (s.baselinePriceBasis === undefined ||
+      ["listing", "complete", "unknown"].includes(s.baselinePriceBasis)) &&
+    (s.sourceUrl === undefined || url(s.sourceUrl))
+  );
+}
+export function validState(x: unknown): x is State {
+  return (
+    record(x) &&
+    x.version === 2 &&
     validCartData(x.cartData) &&
-    Array.isArray(x.offers) &&
-    Array.isArray(x.observations) &&
-    Array.isArray(x.trackingRules) &&
-    Array.isArray(x.alertDeliveries) &&
+    validPriceData(x, x.cartData) &&
     Number.isSafeInteger(x.revision) &&
     x.revision >= 0 &&
-    (!x.confirmed || validateConfirmedProfile(x.confirmed).valid) &&
+    (x.confirmed === null || profile(x.confirmed)) &&
+    (x.destination === undefined ||
+      ["advisor", "compare", "carts", "settings"].includes(x.destination)) &&
+    (x.legacyRaw === undefined || text(x.legacyRaw)) &&
+    record(x.preferences) &&
     ["system", "light", "dark"].includes(x.preferences?.appearance) &&
-    /^#[0-9a-f]{6}$/i.test(x.preferences?.seed) &&
+    text(x.preferences.seed) &&
+    /^#[0-9a-f]{6}$/i.test(x.preferences.seed) &&
     typeof x.preferences?.dynamic === "boolean" &&
     typeof x.preferences?.endpoint === "string" &&
     (x.preferences.locale === undefined ||
@@ -84,34 +120,29 @@ export function validState(x: any): x is State {
     (x.preferences.offlineAiOnly === undefined ||
       typeof x.preferences.offlineAiOnly === "boolean") &&
     Array.isArray(x.saved) &&
-    x.saved.every(
-      (s: any) =>
-        typeof s.id === "string" &&
-        typeof s.at === "string" &&
-        Array.isArray(s.variants) &&
-        s.variants.every(
-          (v: any) =>
-            typeof v.variantId === "string" &&
-            typeof v.modelName === "string" &&
-            v.specifications,
-        ),
-    ) &&
-    new Set(x.saved.map((s: any) => s.id)).size === x.saved.length
+    x.saved.every(validSaved) &&
+    uniqueIds(x.saved) &&
+    Object.keys(x.cartData.legacyMap).every((key) =>
+      x.saved.some((s: Saved) => s.id === key),
+    )
   );
 }
 export function createStore(storage: {
   getItem: (key: string) => Promise<string | null>;
   setItem: (key: string, value: string) => Promise<void>;
 }) {
-  let state = empty;
+  let state = structuredClone(empty);
   let blocked = true;
   let tail = Promise.resolve();
   return {
     async load() {
+      blocked = true;
       const raw = await storage.getItem(key);
-      if (raw) {
+      if (raw !== null) {
         const parsed = JSON.parse(raw);
         if (parsed?.version === 1) {
+          if (!Array.isArray(parsed.saved) || !parsed.saved.every(validSaved))
+            throw Error("Invalid legacy snapshots");
           const migrated = {
             ...empty,
             ...parsed,
@@ -150,17 +181,17 @@ export function createStore(storage: {
         }
       }
       blocked = false;
-      return state;
+      return structuredClone(state);
     },
     update(fn: (s: State) => State) {
       const result = tail.then(async () => {
         if (blocked)
           throw new Error("Dữ liệu chưa được khôi phục; đang khóa ghi.");
-        const next = fn(state);
+        const next = structuredClone(fn(structuredClone(state)));
         if (!validState(next)) throw new Error("Dữ liệu không hợp lệ.");
         await storage.setItem(key, JSON.stringify(next));
         state = next;
-        return state;
+        return structuredClone(state);
       });
       tail = result.then(
         () => {},
@@ -174,9 +205,9 @@ export function createStore(storage: {
     async recover() {
       await tail;
       await storage.setItem(key, JSON.stringify(empty));
-      state = empty;
+      state = structuredClone(empty);
       blocked = false;
-      return state;
+      return structuredClone(state);
     },
   };
 }

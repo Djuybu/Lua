@@ -29,6 +29,8 @@ Subprocess regressions test exit-code propagation, CLI failure reports, live-lis
 
 `run-01/` retains the initial run: semantic red tests plus a harness error in the original Windows socket-probe timeout. That probe was fixed without weakening the check: only an explicit connection refusal proves closure; a timeout still fails. Final evidence is `run-02/` after the source commit recorded by `sourceHead` and harness hashes in `report.json`.
 
+Final execution on source `f6dd9b51a350083d9151932b1714727360b20588`: **runner exit 1 / semantic acceptance blocked**. Python **41/41 pass** (`02.log`), backend typecheck/build pass (`04.log`, `05.log`), backend **45/45 pass** (`06.log`). Actual HTTP suite: **20 pass / 10 fail** across 30 isolated cases (`http-suite.json`, `07.log`). All 30 server/store/directory cleanups pass. The deliberate assertion regression exits 1 and cleans up (`08.log`, `http-failure.json`); the deliberate hanging actual server is killed/reaped by the parent, its port is explicitly refused and its scratch directory is removed (`09.log`, report watchdog checks). Dataset hashes remain unchanged. Only the semantic acceptance check is red in the final runner report; backend unit-test counts do not waive these HTTP defects. Harness implementation is complete; further acceptance waits for the backend owner through coordinator.
+
 | Case | Required behavior |
 | --- | --- |
 | H01 | Health/catalog metadata, JSON header and recommendation schema/rule/request identity |

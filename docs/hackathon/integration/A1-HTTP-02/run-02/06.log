@@ -1,0 +1,292 @@
+
+> @lua/adviser-backend@0.1.0 test
+> node --experimental-strip-types --test tests/**/*.test.ts
+
+TAP version 13
+# Subtest: AI Adapter - successful provider returns verified proposal
+ok 1 - AI Adapter - successful provider returns verified proposal
+  ---
+  duration_ms: 1.4182
+  type: 'test'
+  ...
+# Subtest: AI Adapter - provider timeout triggers deterministic fallback with AI_TIMEOUT label
+ok 2 - AI Adapter - provider timeout triggers deterministic fallback with AI_TIMEOUT label
+  ---
+  duration_ms: 59.5853
+  type: 'test'
+  ...
+# Subtest: AI Adapter - upstream error triggers deterministic fallback with AI_PROVIDER_ERROR label
+ok 3 - AI Adapter - upstream error triggers deterministic fallback with AI_PROVIDER_ERROR label
+  ---
+  duration_ms: 0.387
+  type: 'test'
+  ...
+# Subtest: AI Adapter - invalid/hallucinated output triggers fallback with AI_OUTPUT_REJECTED label
+ok 4 - AI Adapter - invalid/hallucinated output triggers fallback with AI_OUTPUT_REJECTED label
+  ---
+  duration_ms: 0.182
+  type: 'test'
+  ...
+# Subtest: AI Validator - valid patch proposal passes
+ok 5 - AI Validator - valid patch proposal passes
+  ---
+  duration_ms: 2.1628
+  type: 'test'
+  ...
+# Subtest: AI Validator - stale profile revision is rejected
+ok 6 - AI Validator - stale profile revision is rejected
+  ---
+  duration_ms: 0.2678
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects CLEAR operation that includes a value property
+ok 7 - AI Validator - rejects CLEAR operation that includes a value property
+  ---
+  duration_ms: 0.1533
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects SET operation with invalid amount or type
+ok 8 - AI Validator - rejects SET operation with invalid amount or type
+  ---
+  duration_ms: 0.1051
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects explanation with hallucinated or unknown factId
+ok 9 - AI Validator - rejects explanation with hallucinated or unknown factId
+  ---
+  duration_ms: 0.2103
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects patch with prompt injection or unauthorized privileged paths
+ok 10 - AI Validator - rejects patch with prompt injection or unauthorized privileged paths
+  ---
+  duration_ms: 0.1988
+  type: 'test'
+  ...
+# Subtest: Taxonomy - valid confirmed profile passes validation
+ok 11 - Taxonomy - valid confirmed profile passes validation
+  ---
+  duration_ms: 0.7155
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects profile without exactly 3 ordered purposes or priorities
+ok 12 - Taxonomy - rejects profile without exactly 3 ordered purposes or priorities
+  ---
+  duration_ms: 0.2197
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects duplicates in purposes or priorities
+ok 13 - Taxonomy - rejects duplicates in purposes or priorities
+  ---
+  duration_ms: 0.1379
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects purposes incompatible with chosen category
+ok 14 - Taxonomy - rejects purposes incompatible with chosen category
+  ---
+  duration_ms: 0.0977
+  type: 'test'
+  ...
+# Subtest: Crawler - validateStagedCrawlerOffer validates correct payload
+ok 15 - Crawler - validateStagedCrawlerOffer validates correct payload
+  ---
+  duration_ms: 0.2053
+  type: 'test'
+  ...
+# Subtest: Crawler - validateStagedCrawlerOffer rejects malformed fields, URLs, and timestamps
+ok 16 - Crawler - validateStagedCrawlerOffer rejects malformed fields, URLs, and timestamps
+  ---
+  duration_ms: 0.2246
+  type: 'test'
+  ...
+# Subtest: Eligibility - eligible when all hard constraints and budget are met
+ok 17 - Eligibility - eligible when all hard constraints and budget are met
+  ---
+  duration_ms: 15.6738
+  type: 'test'
+  ...
+# Subtest: Eligibility - budget boundary: exceeds budget by 1 VND is excluded
+ok 18 - Eligibility - budget boundary: exceeds budget by 1 VND is excluded
+  ---
+  duration_ms: 0.383
+  type: 'test'
+  ...
+# Subtest: Eligibility - RAM below hard constraint is excluded
+ok 19 - Eligibility - RAM below hard constraint is excluded
+  ---
+  duration_ms: 0.1813
+  type: 'test'
+  ...
+# Subtest: Eligibility - OS mismatch is excluded
+ok 20 - Eligibility - OS mismatch is excluded
+  ---
+  duration_ms: 0.1145
+  type: 'test'
+  ...
+# Subtest: Eligibility - null shipping produces eligible without verified affordability
+ok 21 - Eligibility - null shipping produces eligible without verified affordability
+  ---
+  duration_ms: 0.1251
+  type: 'test'
+  ...
+# Subtest: Eligibility - variant with no offers or only out-of-stock offers is excluded with NO_OFFERS
+ok 22 - Eligibility - variant with no offers or only out-of-stock offers is excluded with NO_OFFERS
+  ---
+  duration_ms: 0.1304
+  type: 'test'
+  ...
+# (node:23488) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP Server Boundary - live localhost network integration
+ok 23 - HTTP Server Boundary - live localhost network integration
+  ---
+  duration_ms: 71.0207
+  type: 'test'
+  ...
+# Subtest: Ingest - accepts valid staged offers and updates observation count
+ok 24 - Ingest - accepts valid staged offers and updates observation count
+  ---
+  duration_ms: 2.0288
+  type: 'test'
+  ...
+# Subtest: Ingest - idempotent: identical observation is ignored without duplicate count
+ok 25 - Ingest - idempotent: identical observation is ignored without duplicate count
+  ---
+  duration_ms: 0.2737
+  type: 'test'
+  ...
+# Subtest: Ingest - updates latest offer when newer observation arrives for same stable key
+ok 26 - Ingest - updates latest offer when newer observation arrives for same stable key
+  ---
+  duration_ms: 0.2628
+  type: 'test'
+  ...
+# Subtest: Ingest - rejects offer referencing unknown catalog variant
+ok 27 - Ingest - rejects offer referencing unknown catalog variant
+  ---
+  duration_ms: 0.2465
+  type: 'test'
+  ...
+# Subtest: Ingest - detects and reports conflicting duplicate observations for same identity & timestamp
+ok 28 - Ingest - detects and reports conflicting duplicate observations for same identity & timestamp
+  ---
+  duration_ms: 0.1795
+  type: 'test'
+  ...
+# Subtest: Money - isValidVnd validates safe integer amounts
+ok 29 - Money - isValidVnd validates safe integer amounts
+  ---
+  duration_ms: 1.0848
+  type: 'test'
+  ...
+# Subtest: Money - calculatePayableTotal with complete known components
+ok 30 - Money - calculatePayableTotal with complete known components
+  ---
+  duration_ms: 0.2348
+  type: 'test'
+  ...
+# Subtest: Money - null shipping produces null totalVnd and isComplete = false
+ok 31 - Money - null shipping produces null totalVnd and isComplete = false
+  ---
+  duration_ms: 0.1692
+  type: 'test'
+  ...
+# Subtest: Money - budget boundary test: ceiling vs 1 VND over
+ok 32 - Money - budget boundary test: ceiling vs 1 VND over
+  ---
+  duration_ms: 0.1767
+  type: 'test'
+  ...
+# Subtest: Money - overflow protection throws MoneyOverflowError
+ok 33 - Money - overflow protection throws MoneyOverflowError
+  ---
+  duration_ms: 0.515
+  type: 'test'
+  ...
+# Subtest: Money - negative or invalid inputs throw InvalidMoneyError
+ok 34 - Money - negative or invalid inputs throw InvalidMoneyError
+  ---
+  duration_ms: 0.3253
+  type: 'test'
+  ...
+# (node:25152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Persistence - activates snapshot and retrieves variants
+ok 35 - Persistence - activates snapshot and retrieves variants
+  ---
+  duration_ms: 4.6664
+  type: 'test'
+  ...
+# Subtest: Persistence - rollback on failure: failed activation preserves prior active catalog
+ok 36 - Persistence - rollback on failure: failed activation preserves prior active catalog
+  ---
+  duration_ms: 0.8472
+  type: 'test'
+  ...
+# Subtest: Persistence - restart recovery preserves saved decisions and catalog across instance restarts
+ok 37 - Persistence - restart recovery preserves saved decisions and catalog across instance restarts
+  ---
+  duration_ms: 34.8962
+  type: 'test'
+  ...
+# Subtest: Persistence - migration on existing DB with baseline data preserves schema and historical records
+ok 38 - Persistence - migration on existing DB with baseline data preserves schema and historical records
+  ---
+  duration_ms: 23.2904
+  type: 'test'
+  ...
+# Subtest: Ranking - priority_budget_savings ranks cheaper machine first
+ok 39 - Ranking - priority_budget_savings ranks cheaper machine first
+  ---
+  duration_ms: 13.2717
+  type: 'test'
+  ...
+# Subtest: Ranking - priority_performance_cpu ranks high spec machine first
+ok 40 - Ranking - priority_performance_cpu ranks high spec machine first
+  ---
+  duration_ms: 0.5884
+  type: 'test'
+  ...
+# (node:25232) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Retail Pilot Regression - loads real dataset artifacts successfully
+ok 41 - Retail Pilot Regression - loads real dataset artifacts successfully
+  ---
+  duration_ms: 1.7581
+  type: 'test'
+  ...
+# Subtest: Retail Pilot Regression - activates 4 real catalog variants in SQLite and verifies restart & rollback
+ok 42 - Retail Pilot Regression - activates 4 real catalog variants in SQLite and verifies restart & rollback
+  ---
+  duration_ms: 3.9907
+  type: 'test'
+  ...
+# Subtest: Retail Pilot Regression - validates edge cases in 10 staging observations
+ok 43 - Retail Pilot Regression - validates edge cases in 10 staging observations
+  ---
+  duration_ms: 1.4289
+  type: 'test'
+  ...
+# Subtest: Retail Pilot Regression - unknown fees and unapproved offers never yield isVerifiedAffordable: true
+ok 44 - Retail Pilot Regression - unknown fees and unapproved offers never yield isVerifiedAffordable: true
+  ---
+  duration_ms: 0.5525
+  type: 'test'
+  ...
+# Subtest: Retail Pilot Regression - real LaptopAZ variant evaluated with mock provider does not fabricate facts
+ok 45 - Retail Pilot Regression - real LaptopAZ variant evaluated with mock provider does not fabricate facts
+  ---
+  duration_ms: 1.0942
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1276.8998
+
+STDERR:

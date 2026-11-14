@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "fptshop",
+  "seeds": [
+    "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt"
+  ],
+  "sitemap": "https://fptshop.com.vn/sitemap.xml",
+  "regionContext": null,
+  "variantMap": {}
+}

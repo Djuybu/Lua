@@ -8,8 +8,8 @@ export const MAX_SAFE_VND = Number.MAX_SAFE_INTEGER;
 export interface PriceBreakdownInput {
   /** Listed price from seller (must be non-negative safe integer) */
   basePriceVnd: number;
-  /** Mandatory taxes and service fees EXCLUDING shipping fees */
-  mandatoryFeesVnd: number;
+  /** Mandatory taxes and service fees EXCLUDING shipping fees, or null if unknown / unapproved */
+  mandatoryFeesVnd: number | null;
   /** Shipping fee, or null if unknown / unverified */
   shippingVnd: number | null;
   /** Confirmed eligible discount, defaults to 0 if none */
@@ -23,7 +23,7 @@ export interface PriceCalculationResult {
   isComplete: boolean;
   breakdown: {
     basePriceVnd: number;
-    mandatoryFeesVnd: number;
+    mandatoryFeesVnd: number | null;
     shippingVnd: number | null;
     confirmedDiscountVnd: number;
   };
@@ -68,8 +68,8 @@ export function calculatePayableTotal(input: PriceBreakdownInput): PriceCalculat
     throw new InvalidMoneyError(`Invalid basePriceVnd: ${basePriceVnd}. Must be a non-negative safe integer.`);
   }
 
-  if (!isValidVnd(mandatoryFeesVnd)) {
-    throw new InvalidMoneyError(`Invalid mandatoryFeesVnd: ${mandatoryFeesVnd}. Must be a non-negative safe integer.`);
+  if (mandatoryFeesVnd !== null && !isValidVnd(mandatoryFeesVnd)) {
+    throw new InvalidMoneyError(`Invalid mandatoryFeesVnd: ${mandatoryFeesVnd}. Must be null or a non-negative safe integer.`);
   }
 
   if (!isValidVnd(confirmedDiscountVnd)) {
@@ -78,6 +78,20 @@ export function calculatePayableTotal(input: PriceBreakdownInput): PriceCalculat
 
   if (shippingVnd !== null && !isValidVnd(shippingVnd)) {
     throw new InvalidMoneyError(`Invalid shippingVnd: ${shippingVnd}. Must be null or a non-negative safe integer.`);
+  }
+
+  // If mandatory fees are unknown, the complete payable total cannot be determined
+  if (mandatoryFeesVnd === null) {
+    return {
+      totalVnd: null,
+      isComplete: false,
+      breakdown: {
+        basePriceVnd,
+        mandatoryFeesVnd: null,
+        shippingVnd,
+        confirmedDiscountVnd
+      }
+    };
   }
 
   // Check overflow on addition of base and mandatory fees

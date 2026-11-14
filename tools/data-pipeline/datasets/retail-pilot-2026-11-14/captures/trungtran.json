@@ -1,0 +1,381 @@
+{
+  "sourceId": "trungtran",
+  "documentTitle": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16",
+  "errors": [],
+  "h1": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16\" 2.5K 165Hz Lunar White (Trắng Bạc)",
+  "observedAt": "2026-11-14T05:50:53.903Z",
+  "policySnippets": [
+    "(Đã bao gồm VAT)",
+    "(Đã bao gồm VAT)"
+  ],
+  "priceNodes": [
+    {
+      "classes": "_price",
+      "content": null,
+      "grandparentClass": "flashsale",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "mid_sale",
+      "tag": "SPAN",
+      "text": "39.300.000đ"
+    },
+    {
+      "classes": "_price",
+      "content": null,
+      "grandparentClass": "details_top",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "top_prd hidden",
+      "tag": "SPAN",
+      "text": "39.300.000đ"
+    },
+    {
+      "classes": "edit-price",
+      "content": null,
+      "grandparentClass": "details_top1",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "details_top",
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "link_a",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_title",
+      "tag": "DIV",
+      "text": "760.000 đ\nChọn sản phẩm khác"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "frame_title",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "760.000 đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "link_a",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_title",
+      "tag": "DIV",
+      "text": "35.000 đ\nChọn sản phẩm khác"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "frame_title",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "35.000 đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "link_a",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_title",
+      "tag": "DIV",
+      "text": "266.000 đ\nChọn sản phẩm khác"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "frame_title",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "266.000 đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "link_a",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_title",
+      "tag": "DIV",
+      "text": "85.000 đ\nChọn sản phẩm khác"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "frame_title",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "85.000 đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "link_a",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_title",
+      "tag": "DIV",
+      "text": "1.450.000 đ\nChọn sản phẩm khác"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "frame_title",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "1.450.000 đ"
+    },
+    {
+      "classes": "price_pagkage",
+      "content": null,
+      "grandparentClass": "row-same",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "right_pagkage",
+      "tag": "DIV",
+      "text": "Tiết kiệm :\n62.000đ\n\nTông tiền :\n41.896.000đ"
+    },
+    {
+      "classes": "price_com",
+      "content": null,
+      "grandparentClass": "right_pagkage",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price_pagkage",
+      "tag": "DIV",
+      "text": "Tiết kiệm :\n62.000đ\n\nTông tiền :\n41.896.000đ"
+    },
+    {
+      "classes": "total total_price",
+      "content": null,
+      "grandparentClass": "price_pagkage",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price_com",
+      "tag": "P",
+      "text": "Tông tiền :\n41.896.000đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "frame",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "",
+      "tag": "DIV",
+      "text": "150.000.000 đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "150.000.000 đ"
+    },
+    {
+      "classes": "frame_price",
+      "content": null,
+      "grandparentClass": "frame",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "",
+      "tag": "DIV",
+      "text": "123.490.000 đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "frame_price",
+      "tag": "SPAN",
+      "text": "123.490.000 đ"
+    }
+  ],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "mpn": "1299",
+      "name": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16 2.5K 165Hz Lunar White (Trắng Bạc)",
+      "offers": {
+        "@type": "AggregateOffer",
+        "availability": "http://schema.org/InStock",
+        "highPrice": 39300000,
+        "itemCondition": "http://schema.org/NewCondition",
+        "lowPrice": 39300000,
+        "priceCurrency": "VND",
+        "priceValidUntil": "2019-10-31",
+        "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+      },
+      "sku": "1299",
+      "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+    }
+  ],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [
+    [
+      "",
+      ""
+    ],
+    [
+      "CPU (Bộ vi xử lý)",
+      "AMD Ryzen AI 7 H 350 (8 nhân 16 luồng, xung nhịp cơ bản ~2GHz, tối đa có thể đạt ~5GHz, 8MB L2 Cache, 16MB L3 Cache, default TDP 28W, 4nm, Zen 5)"
+    ],
+    [
+      "Ram (Bộ nhớ trong)",
+      "16GB DDR5 5600MHz (có tổng cộng 2 slot, hỗ trợ tối đa tới 64GB)"
+    ],
+    [
+      "Storage (Ổ cứng)",
+      "1TB PCIe® NVMe™ M.2 SSD gen 4 (có tổng cộng 2 khe cắm ổ M.2, hiện còn trống 1 khe để lắp thêm, nâng cấp tối đa tới 4TB)"
+    ],
+    [
+      "Màn hình",
+      "16″, 2.5K (2560x1600) IPS, tỷ lệ khung hình 16:10, độ phủ màu 100% sRGB3, tần số quét màn 165Hz, độ sáng màn 400nits, hỗ trợ MUX Switch, Pantone® Validated, màn giảm ánh sáng xanh bảo vệ mắt đạt chuẩn TÜV Rheinland Low Blue Light"
+    ],
+    [
+      "Card đồ họa",
+      "AMD Radeon™ 860M + NVIDIA® GeForce RTX 5060 Laptop GPU 8GB GDDR7"
+    ],
+    [
+      "Pin",
+      "76wh kèm cục sạc 150w"
+    ],
+    [
+      "Âm thanh",
+      "2 loa stereo, Dolby Atmos, hỗ trợ Smart Amplifier (AMP)"
+    ],
+    [
+      "Cổng kết nối vật lý",
+      "jack tai nghe, HDMI 2.1, LAN, Cổng sạc, 3 cổng USB-A 3.2 Gen 2, 1 cổng Thunderbolt 5 (tích hợp USB4, DisplayPort 2.1, PowerDeliver3.0); 1 cổng Thunderbolt 4 (tích hợp USB4, DisplayPort 1.4, PowerDeliver3.0); khe đọc ghi thẻ SD"
+    ],
+    [
+      "Kết nối không dây",
+      "Wi-Fi® 6E, Bluetooth 5.2 trở lên"
+    ],
+    [
+      "Trọng lượng",
+      "1.9kg"
+    ],
+    [
+      "Màu sắc",
+      "Luna White (vỏ trên, dưới bạc (trắng bạc), viền màn và mặt C đen)"
+    ],
+    [
+      "Tình trạng sản phẩm",
+      "New 100%"
+    ],
+    [
+      "Bảo hành",
+      "24 tháng chính hãng Gigabyte Việt Nam"
+    ],
+    [
+      "CPU (Bộ vi xử lý)",
+      "AMD Ryzen AI 7 H 350 (8 nhân 16 luồng, xung nhịp cơ bản ~2GHz, tối đa có thể đạt ~5GHz, 8MB L2 Cache, 16MB L3 Cache, default TDP 28W, 4nm, Zen 5)"
+    ],
+    [
+      "Ram (Bộ nhớ trong)",
+      "16GB DDR5 5600MHz (có tổng cộng 2 slot, hỗ trợ tối đa tới 64GB)"
+    ],
+    [
+      "Storage (Ổ cứng)",
+      "1TB PCIe® NVMe™ M.2 SSD gen 4 (có tổng cộng 2 khe cắm ổ M.2, hiện còn trống 1 khe để lắp thêm, nâng cấp tối đa tới 4TB)"
+    ],
+    [
+      "Màn hình",
+      "16″, 2.5K (2560x1600) IPS, tỷ lệ khung hình 16:10, độ phủ màu 100% sRGB3, tần số quét màn 165Hz, độ sáng màn 400nits, hỗ trợ MUX Switch, Pantone® Validated, màn giảm ánh sáng xanh bảo vệ mắt đạt chuẩn TÜV Rheinland Low Blue Light"
+    ],
+    [
+      "Card đồ họa",
+      "AMD Radeon™ 860M + NVIDIA® GeForce RTX 5060 Laptop GPU 8GB GDDR7"
+    ],
+    [
+      "Hệ điều hành",
+      "Windows 11 Home"
+    ],
+    [
+      "Bàn phím",
+      "Rút gọn, led RGB 1 vùng, không có numberpad"
+    ],
+    [
+      "Fingerprint reader",
+      "Không hỗ trợ"
+    ],
+    [
+      "Pin",
+      "76wh kèm cục sạc 150w"
+    ],
+    [
+      "Camera",
+      "1080P FHD camera có IR cảm biến nhận diện khuôn mặt, cùng mic thu tầm xa tích hợp công nghệ AI noise cancelling"
+    ],
+    [
+      "Âm thanh",
+      "2 loa stereo, Dolby Atmos, hỗ trợ Smart Amplifier (AMP)"
+    ],
+    [
+      "Cổng kết nối vật lý",
+      "jack tai nghe, HDMI 2.1, LAN, Cổng sạc, 3 cổng USB-A 3.2 Gen 2, 1 cổng Thunderbolt 5 (tích hợp USB4, DisplayPort 2.1, PowerDeliver3.0); 1 cổng Thunderbolt 4 (tích hợp USB4, DisplayPort 1.4, PowerDeliver3.0); khe đọc ghi thẻ SD"
+    ],
+    [
+      "Kết nối không dây",
+      "Wi-Fi® 6E, Bluetooth 5.2 trở lên"
+    ],
+    [
+      "Kích thước máy",
+      "35.5 x 25.07 x 1.6~1.9cm"
+    ],
+    [
+      "Trọng lượng",
+      "1.9kg"
+    ],
+    [
+      "Màu sắc",
+      "Luna White (vỏ trên, dưới bạc (trắng bạc), viền màn và mặt C đen)"
+    ],
+    [
+      "Tình trạng sản phẩm",
+      "New 100%"
+    ],
+    [
+      "Năm sản xuất",
+      "2025"
+    ],
+    [
+      "Bảo hành",
+      "24 tháng chính hãng Gigabyte Việt Nam"
+    ],
+    [
+      "Hãng sản xuất",
+      "Gigabyte"
+    ],
+    [
+      "Xuất xứ",
+      "China"
+    ]
+  ],
+  "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": null
+}

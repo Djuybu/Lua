@@ -144,3 +144,55 @@ Chi tiết kết quả:
   - `POST /advisor/v1/recommend` với profile hợp lệ trả về HTTP 200, danh sách shortlist được chấm điểm và xác minh giá (pass).
   - `POST /advisor/v1/recommend` với profile sai trả về HTTP 400 kèm mã lỗi chuẩn `ERR_INVALID_PROFILE` (pass).
   - `POST /advisor/v1/ingest` nạp dữ liệu crawler thành công qua HTTP (pass).
+
+---
+
+## 5. Tiếp nhận & Kiểm chứng Dữ liệu Thật (Retail Pilot Dataset 2026-11-14)
+
+### 5.1. Tiếp nhận Dataset từ Agent 1
+- **Branch nguồn:** `origin/codex/dev/agent-1/data-pipeline` (Commit `d885e33837eab5d3cc473a27b69675f87944cc71`).
+- **Thư mục dataset:** `tools/data-pipeline/datasets/retail-pilot-2026-11-14/`.
+- **Cấu trúc dữ liệu thật:**
+  - 8 browser product captures thật (không dữ liệu giả).
+  - 10 staging observations: 6 `ready_for_review`, 4 `quarantine`.
+  - 4 catalog variants chuẩn (`catalog-snapshot.json`) với đầy đủ typed fields.
+  - `facts: []` và `offers: []` (chưa có fee approvals).
+- **Edge cases thực tế được kiểm chứng:**
+  1. FPT price mismatch giữa JSON-LD và HTML niêm yết.
+  2. Thế Giới Di Động 3 màu sắc, RAM unobserved (không tự động đoán RAM).
+  3. Trung Trần AggregateOffer hết hạn từ 2019.
+  4. Oneway JSON-LD parse error kèm xung đột tiền tố `X/A` vs `zp-a`.
+  5. ShopDunk tình trạng máy và tồn kho chưa xác định (unknown condition/stock).
+
+### 5.2. Kết quả Chạy Kiểm thử Toàn diện
+
+1. **Python Pipeline Tests (`tools/data-pipeline/tests/`):**
+   - Lệnh: `python -m unittest discover tests`
+   - Kết quả: **36/36 tests passed** (thời gian: 3.947s).
+2. **Agent 1 Verification Script (`verify-retail-backend.mjs`):**
+   - Lệnh: `node tools/data-pipeline/scripts/verify-retail-backend.mjs services/adviser-backend tools/data-pipeline/datasets/retail-pilot-2026-11-14`
+   - Kết quả: **Passed 100%**:
+     `{"variantsImported":4,"restart":"passed","rollback":"passed","observationsChecked":10,"unknownFeeOffersRejected":10,"providerCalls":0,"productionWrites":0}`
+3. **Backend Node Tests (`services/adviser-backend/tests/`):**
+   - Lệnh: `node --experimental-strip-types --test tests/**/*.test.ts`
+   - Kết quả: **40/40 tests passed** (bao gồm 5 tests hồi quy dữ liệu thật trong `retail-pilot.test.ts`).
+   - Chi tiết 5 tests dữ liệu thật:
+     - `Retail Pilot Regression - loads real dataset artifacts successfully` (pass).
+     - `Retail Pilot Regression - activates 4 real catalog variants in SQLite and verifies restart & rollback` (pass).
+     - `Retail Pilot Regression - validates edge cases in 10 staging observations` (pass).
+     - `Retail Pilot Regression - unknown fees and unapproved offers never yield isVerifiedAffordable: true` (pass).
+     - `Retail Pilot Regression - real LaptopAZ variant evaluated with mock provider does not fabricate facts` (pass).
+4. **TypeScript Typecheck:**
+   - Lệnh: `npm.cmd run typecheck`
+   - Kết quả: **0 errors**, clean typecheck.
+
+---
+
+## 6. Phạm vi Merge & Tích hợp vào dev
+
+- Merge có chủ đích nhánh `codex/dev/agent-3/plan-03` vào `dev` theo ngoại lệ được người dùng cho phép.
+- Chỉ bao gồm các thay đổi trong:
+  - `services/adviser-backend/**`
+  - `docs/hackathon/agent-3-backend.md`
+- Giữ nguyên toàn bộ mã nguồn pipeline của Agent 1 (`tools/data-pipeline/**`).
+- Không tương tác hay thay đổi các nhánh `main` hoặc `develop`.

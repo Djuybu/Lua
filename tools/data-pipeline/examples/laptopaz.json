@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "laptopaz",
+  "seeds": [
+    "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html"
+  ],
+  "sitemap": "https://laptopaz.vn/sitemap.xml",
+  "regionContext": null,
+  "variantMap": {}
+}

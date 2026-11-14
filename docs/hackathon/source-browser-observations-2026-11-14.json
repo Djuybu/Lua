@@ -1,0 +1,1342 @@
+{
+  "date": "2026-11-14",
+  "method": "T3 integrated browser, rendered DOM and JSON-LD; not raw HTTP crawl",
+  "limitations": [
+    "Sample pages only; observed values are retailer claims, not verified specifications or approved offers.",
+    "DOM readiness affected some observations; empty results do not establish permanent schema absence.",
+    "Robots text captured up to 8500 or 4500 characters; no HTTP status or full policy audit.",
+    "No customer reviews or reviewer identities retained."
+  ],
+  "pages": [
+    {
+      "url": "https://www.thegioididong.com/",
+      "title": "Thegioididong.com - Điện thoại, Laptop, Phụ kiện, Đồng hồ chính hãng",
+      "h1": [
+        "Thegioididong.com - Điện thoại, tablet, laptop, phụ kiện, đồng hồ chính hãng, giá rẻ"
+      ],
+      "links": [
+        {
+          "text": "Điện thoại",
+          "url": "https://www.thegioididong.com/dtdd"
+        },
+        {
+          "text": "Laptop",
+          "url": "https://www.thegioididong.com/laptop"
+        },
+        {
+          "text": "Ốp lưng Magsafe iPhone 17 PC TPU Innostyle CG10TRN-17",
+          "url": "https://www.thegioididong.com/op-lung-flipcover/op-lung-magsafe-iphone-17-pc-tpu-innostyle-cg10trn-17?code=1840431010943"
+        },
+        {
+          "text": "Balo Laptop 15.6 inch TUCANO Loop Eco",
+          "url": "https://www.thegioididong.com/tui-chong-soc/balo-laptop-156-inch-tucano-loop-eco?code=1845975000242"
+        },
+        {
+          "text": "iPhone 17 Pro Max 1TB",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731"
+        },
+        {
+          "text": "iPhone 17e 256GB",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17e-256gb?code=0131491005120"
+        },
+        {
+          "text": "Đèn Livestream Magnetic Cổ Vịt Gắn Điện Thoại 2W 400mAh Ulanzi M10",
+          "url": "https://www.thegioididong.com/den-thong-minh/den-livestream-magnetic-co-vit-gan-dien-thoai-2w-400mah-ulanzi-m10?code=0160079000104"
+        },
+        {
+          "text": "iphone 17",
+          "url": "https://www.thegioididong.com/dtdd-apple-iphone-17-series"
+        },
+        {
+          "text": "laptop",
+          "url": "https://www.thegioididong.com/laptop"
+        },
+        {
+          "text": "điện thoại xiaomi",
+          "url": "https://www.thegioididong.com/dtdd-xiaomi"
+        },
+        {
+          "text": "iphone 17 pro",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro"
+        },
+        {
+          "text": "iphone 17 256gb",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17"
+        },
+        {
+          "text": "iphone 17 pro max",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max"
+        },
+        {
+          "text": "iphone 17e",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17e-256gb"
+        },
+        {
+          "text": "điện thoại iphone",
+          "url": "https://www.thegioididong.com/dtdd-apple-iphone"
+        },
+        {
+          "text": "iphone 18",
+          "url": "https://www.thegioididong.com/dtdd-apple-iphone-18-series"
+        }
+      ]
+    },
+    {
+      "url": "https://fptshop.com.vn/",
+      "title": "Fptshop.com.vn | Điện thoại, Laptop, Điện máy, Gia dụng, Phụ kiện chính hãng, giá tốt",
+      "h1": [
+        "FPTShop | Điện thoại, Laptop, Tablet, Phụ kiện chính hãng giá tốt nhất"
+      ],
+      "links": [
+        {
+          "text": "iphone 18",
+          "url": "https://fptshop.com.vn/tim-kiem?s=iphone+18"
+        },
+        {
+          "text": "iphone duo",
+          "url": "https://fptshop.com.vn/tim-kiem?s=iphone+duo"
+        },
+        {
+          "text": "laptop",
+          "url": "https://fptshop.com.vn/tim-kiem?s=laptop"
+        },
+        {
+          "text": "Điện thoại",
+          "url": "https://fptshop.com.vn/dien-thoai"
+        },
+        {
+          "text": "Laptop",
+          "url": "https://fptshop.com.vn/may-tinh-xach-tay"
+        },
+        {
+          "text": "24.490.000đ-12%\n\n21.490.000đ\n\nGiảm 3.000.000đ\n\nLaptop Acer Aspire Go 15 AI AG15-52P-52WT Ultra5 115U",
+          "url": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt"
+        },
+        {
+          "text": "30.490.000đ-7%\n\n28.490.000đ\n\nGiảm 2.000.000đ\n\nLaptop Dell Inspiron 14 5441 X1P-64-100 (N4O10441W1)",
+          "url": "https://fptshop.com.vn/may-tinh-xach-tay/dell-inspiron-14-5441-x1p-64-100n4o10441w1"
+        },
+        {
+          "text": "27.590.000đ-8%\n\n25.490.000đ\n\nGiảm 2.100.000đ\n\nLaptop HP 15-fd1289TU Ultra 7-155H (C2CV8PA)",
+          "url": "https://fptshop.com.vn/may-tinh-xach-tay/hp-15-fd1289tu-ultra-7-155h-c2cv8pa"
+        },
+        {
+          "text": "Nạp thẻ điện thoại",
+          "url": "https://fptshop.com.vn/dich-vu/the-cao-dien-thoai"
+        },
+        {
+          "text": "Điện thoại trả sau",
+          "url": "https://fptshop.com.vn/dich-vu/thanh-toan-cuoc-dien-thoai-tra-sau"
+        },
+        {
+          "text": "Chính sách bảo hành",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-bao-hanh"
+        },
+        {
+          "text": "Chính sách đổi trả",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-doi-san-pham"
+        },
+        {
+          "text": "Chính sách trả góp",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-tra-gop"
+        },
+        {
+          "text": "Chính sách kiểm hàng, khui hộp sản phẩm",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-kiem-hang-khui-hop-san-pham"
+        },
+        {
+          "text": "Chính sách giao hàng & lắp đặt",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-giao-hang"
+        },
+        {
+          "text": "Chính sách mạng di động FPT",
+          "url": "https://fptshop.com.vn/ho-tro/chinh-sach-gia-cuoc"
+        }
+      ]
+    },
+    {
+      "url": "https://trungtran.vn/",
+      "title": "TrungTran.vn - Hệ thống bán lẻ Laptop Nhập khẩu số 1 về Bảo hành và hậu mãi",
+      "h1": [],
+      "links": [
+        {
+          "text": "Laptop theo hãng",
+          "url": "https://trungtran.vn//"
+        },
+        {
+          "text": "Surface Laptop",
+          "url": "https://trungtran.vn/surface-laptop/"
+        },
+        {
+          "text": "Laptop theo nhu cầu",
+          "url": "https://trungtran.vn//"
+        },
+        {
+          "text": "Laptop theo khoảng giá",
+          "url": "https://trungtran.vn//"
+        },
+        {
+          "text": "Laptop theo cấu hình",
+          "url": "https://trungtran.vn//"
+        },
+        {
+          "text": "Laptop Gaming - Đồ Họa",
+          "url": "https://trungtran.vn/laptop-gaming-dohoa/"
+        },
+        {
+          "text": "Laptop Gaming",
+          "url": "https://trungtran.vn/laptop-chuyen-game/"
+        },
+        {
+          "text": "Laptop Gaming Acer",
+          "url": "https://trungtran.vn/acer-gaming/"
+        },
+        {
+          "text": "Laptop Gaming Lenovo",
+          "url": "https://trungtran.vn/lenovo-gaming/"
+        },
+        {
+          "text": "Laptop Lenovo Legion",
+          "url": "https://trungtran.vn/lenovo-legion/"
+        },
+        {
+          "text": "Laptop Gaming HP",
+          "url": "https://trungtran.vn/hp-gaming/"
+        },
+        {
+          "text": "Laptop Gaming Asus",
+          "url": "https://trungtran.vn/asus-gaming/"
+        },
+        {
+          "text": "Laptop Gaming Dell",
+          "url": "https://trungtran.vn/dell-gaming/"
+        },
+        {
+          "text": "Laptop Đồ Họa",
+          "url": "https://trungtran.vn/laptop-do-hoa/"
+        },
+        {
+          "text": "Laptop Đồ Họa Asus",
+          "url": "https://trungtran.vn//"
+        },
+        {
+          "text": "Laptop Đồ Họa Acer",
+          "url": "https://trungtran.vn/acer-predator/"
+        }
+      ]
+    },
+    {
+      "error": "Preview automation evaluate failed: TypeError: Cannot read properties of null (reading 'innerText')\n    at <anonymous>:1:121"
+    },
+    {
+      "url": "https://shopdunk.com/",
+      "title": "ShopDunk - Chuỗi cửa hàng chuyên Apple",
+      "h1": [
+        ""
+      ],
+      "links": [
+        {
+          "text": "iPhone 17 Pro Max",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb"
+        },
+        {
+          "text": "iPhone 17 Pro",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-256gb"
+        },
+        {
+          "text": "iPhone",
+          "url": "https://shopdunk.com/iphone"
+        },
+        {
+          "text": "Ốp lưng Apple iPhone 14 series Chính Hãng",
+          "url": "https://shopdunk.com/op-lung-apple-iphone-14-series-chinh-hang"
+        },
+        {
+          "text": "Ốp lưng Apple iPhone 15 series Chính Hãng",
+          "url": "https://shopdunk.com/op-lung-apple-iphone-15-series-chinh-hang"
+        },
+        {
+          "text": "iPhone",
+          "url": "https://shopdunk.com/iphone"
+        },
+        {
+          "text": "Ốp lưng iPhone 12 series",
+          "url": "https://shopdunk.com/%C3%B4p-l%C6%B0ng-iphone-12-series"
+        },
+        {
+          "text": "iPhone 17 Pro Max",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb"
+        },
+        {
+          "text": "iPhone 17 Pro",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-256gb"
+        },
+        {
+          "text": "iPhone 18 Pro Max 1TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-18-pro-max-1tb"
+        },
+        {
+          "text": "iPhone 18 Pro Max 2TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-18-pro-max-2tb"
+        },
+        {
+          "text": "iPhone 17 Pro Max 2TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-2tb"
+        },
+        {
+          "text": "iPhone 16 Plus 128GB",
+          "url": "https://shopdunk.com/iphone-16-plus"
+        },
+        {
+          "text": "iPhone Air 256GB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-air-256gb"
+        },
+        {
+          "text": "Phụ kiện Apple Pin dự phòng Apple iPhone Air MagSafe Battery MGPG4VN/A",
+          "url": "https://shopdunk.com/pin-magsafe-cho-iphone-air-mgpg4vna"
+        },
+        {
+          "text": "Ốp Clear Case MagSafe iPhone 17/18 Pro Max",
+          "url": "https://shopdunk.com/op-lung-trong-suot-magsafe-cho-iphone-17-pro-max"
+        },
+        {
+          "text": "Ốp Clear Case MagSafe iPhone 17/18 Pro",
+          "url": "https://shopdunk.com/op-lung-trong-suot-magsafe-cho-iphone-18-pro-mkdu4fea"
+        },
+        {
+          "text": "iPhone 18 Pro Max 1TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-18-pro-max-1tb"
+        },
+        {
+          "text": "iPhone 18 Pro Max 2TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-18-pro-max-2tb"
+        },
+        {
+          "text": "iPhone 17 Pro Max 2TB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-2tb"
+        },
+        {
+          "text": "iPhone 16 Plus 128GB",
+          "url": "https://shopdunk.com/iphone-16-plus"
+        },
+        {
+          "text": "iPhone Air 256GB",
+          "url": "https://shopdunk.com/dien-thoai-iphone-air-256gb"
+        },
+        {
+          "text": "Phụ kiện Apple Pin dự phòng Apple iPhone Air MagSafe Battery MGPG4VN/A",
+          "url": "https://shopdunk.com/pin-magsafe-cho-iphone-air-mgpg4vna"
+        },
+        {
+          "text": "Ốp Clear Case MagSafe iPhone 17/18 Pro Max",
+          "url": "https://shopdunk.com/op-lung-trong-suot-magsafe-cho-iphone-17-pro-max"
+        }
+      ]
+    },
+    {
+      "url": "https://www.dienmayxanh.com/",
+      "title": "Siêu thị Điện máy XANH - Mua bán điện tử, điện lạnh, gia dụng",
+      "h1": [
+        "Siêu thị Điện máy XANH - Mua bán điện tử, điện lạnh, gia dụng"
+      ],
+      "links": [
+        {
+          "text": "3.790k\nMáy giặt",
+          "url": "https://www.dienmayxanh.com/may-giat"
+        },
+        {
+          "text": "4.190k\nTivi",
+          "url": "https://www.dienmayxanh.com/tivi"
+        },
+        {
+          "text": "4.790k\nMáy lạnh",
+          "url": "https://www.dienmayxanh.com/may-lanh"
+        },
+        {
+          "text": "4.990k\nMáy sấy quần áo",
+          "url": "https://www.dienmayxanh.com/may-say-quan-ao"
+        },
+        {
+          "text": "2.990k\nTủ đông mát",
+          "url": "https://www.dienmayxanh.com/tu-dong"
+        },
+        {
+          "text": "1.990k\nBếp điện âm",
+          "url": "https://www.dienmayxanh.com/bep-dien"
+        },
+        {
+          "text": "6.990.000đ",
+          "url": "https://www.dienmayxanh.com/tivi/smart-tivi-qled-samsung-fhd-43-inch-qa43q5faa?code=3041094002289"
+        },
+        {
+          "text": "8.400.000đ\n-16%",
+          "url": "https://www.dienmayxanh.com/tivi/smart-tivi-qled-samsung-fhd-43-inch-qa43q5faa?code=3041094002289"
+        },
+        {
+          "text": "12.990.000đ",
+          "url": "https://www.dienmayxanh.com/tu-lanh/tu-lanh-xiaomi-inverter-510-lit-multi-door-mijia-cross-door-vn-mrc51hmpavn?code=1751097000220"
+        },
+        {
+          "text": "16.990.000đ\n-23%",
+          "url": "https://www.dienmayxanh.com/tu-lanh/tu-lanh-xiaomi-inverter-510-lit-multi-door-mijia-cross-door-vn-mrc51hmpavn?code=1751097000220"
+        },
+        {
+          "text": "5.290.000đ",
+          "url": "https://www.dienmayxanh.com/may-lanh/midea-inverter-1-hp-mafa-09cdn8?code=3051098001626"
+        },
+        {
+          "text": "8.590.000đ\n-38%",
+          "url": "https://www.dienmayxanh.com/may-lanh/midea-inverter-1-hp-mafa-09cdn8?code=3051098001626"
+        },
+        {
+          "text": "6.990.000đ",
+          "url": "https://www.dienmayxanh.com/may-giat/may-giat-lg-inverter-9-kg-fb1209s5w?code=1751099000104"
+        },
+        {
+          "text": "9.290.000đ\n-24%",
+          "url": "https://www.dienmayxanh.com/may-giat/may-giat-lg-inverter-9-kg-fb1209s5w?code=1751099000104"
+        },
+        {
+          "text": "790.000đ",
+          "url": "https://www.dienmayxanh.com/noi-com-dien/noi-com-dien-tu-bear-1-lit-rc-4h30u?code=4844158000222"
+        },
+        {
+          "text": "2.090.000đ\n-62%",
+          "url": "https://www.dienmayxanh.com/noi-com-dien/noi-com-dien-tu-bear-1-lit-rc-4h30u?code=4844158000222"
+        },
+        {
+          "text": "6.990.000đ",
+          "url": "https://www.dienmayxanh.com/may-loc-nuoc/may-loc-nuoc-ro-nong-nguoi-lanh-kangaroo-kg10a17-10-loi?code=1114171000137"
+        },
+        {
+          "text": "10.990.000đ\n-36%",
+          "url": "https://www.dienmayxanh.com/may-loc-nuoc/may-loc-nuoc-ro-nong-nguoi-lanh-kangaroo-kg10a17-10-loi?code=1114171000137"
+        },
+        {
+          "text": "10.490.000đ",
+          "url": "https://www.dienmayxanh.com/tivi/google-tivi-qled-tcl-4k-55-inch-55t6d?code=3041094002303"
+        },
+        {
+          "text": "13.990.000đ\n-25%",
+          "url": "https://www.dienmayxanh.com/tivi/google-tivi-qled-tcl-4k-55-inch-55t6d?code=3041094002303"
+        },
+        {
+          "text": "14.990.000đ",
+          "url": "https://www.dienmayxanh.com/tu-lanh/gr-rf611wi-pgv-22-xk?code=1751097000009"
+        },
+        {
+          "text": "17.630.000đ\n-14%",
+          "url": "https://www.dienmayxanh.com/tu-lanh/gr-rf611wi-pgv-22-xk?code=1751097000009"
+        },
+        {
+          "text": "2.890.000đ",
+          "url": "https://www.dienmayxanh.com/may-nuoc-nong/ferroli-mido-msp-45s?code=3050911000412"
+        },
+        {
+          "text": "3.590.000đ\n-19%",
+          "url": "https://www.dienmayxanh.com/may-nuoc-nong/ferroli-mido-msp-45s?code=3050911000412"
+        }
+      ]
+    },
+    {
+      "url": "https://onewaymobile.vn/",
+      "title": "ONEWAY - Điện thoại, MacBook, máy tính bảng, thiết bị nhà thông minh",
+      "h1": [
+        ""
+      ],
+      "links": [
+        {
+          "text": "Điện thoại",
+          "url": "https://onewaymobile.vn/dien-thoai"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro Max 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-max-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro 512GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-512gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro Max 512GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-max-512gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone Duo 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-duo-256gb-zp-a"
+        },
+        {
+          "text": "iPhone",
+          "url": "https://onewaymobile.vn/dien-thoai/iphone"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro Max 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-max-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro 512GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-512gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone Duo 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-duo-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone Duo 512GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-duo-512gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone Duo 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-duo-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 18 Pro Max 256GB X/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-max-256gb-zp-a"
+        },
+        {
+          "text": "Điện thoại Apple iPhone 17 256GB ZP/A",
+          "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-17-256gb-vn-a"
+        },
+        {
+          "text": "Apple phát hành iOS 27.2, bổ sung loạt tính năng mới trên iPhone",
+          "url": "https://onewaymobile.vn/tin-moi/apple-phat-hanh-ios-27-2-bo-sung-loat-tinh-nang-moi-tren-iphone"
+        },
+        {
+          "text": "Apple phát hành iOS 27.2, bổ sung loạt tính năng mới trên iPhone",
+          "url": "https://onewaymobile.vn/tin-moi/apple-phat-hanh-ios-27-2-bo-sung-loat-tinh-nang-moi-tren-iphone"
+        },
+        {
+          "text": "Điện thoại",
+          "url": "https://onewaymobile.vn/#product-group-0"
+        },
+        {
+          "text": "Điện thoại",
+          "url": "https://onewaymobile.vn/dien-thoai/iphone"
+        },
+        {
+          "text": "Chính sách thanh toán",
+          "url": "https://onewaymobile.vn/chinh-sach-thanh-toan"
+        },
+        {
+          "text": "Chính sách bảo hành",
+          "url": "https://onewaymobile.vn/chinh-sach-bao-hanh"
+        },
+        {
+          "text": "Chính sách vận chuyển",
+          "url": "https://onewaymobile.vn/chinh-sach-van-chuyen"
+        },
+        {
+          "text": "Chính sách bảo mật",
+          "url": "https://onewaymobile.vn/chinh-sach-bao-mat"
+        },
+        {
+          "text": "Chính sách giá",
+          "url": "https://onewaymobile.vn/chinh-sach-gia"
+        }
+      ]
+    },
+    {
+      "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb",
+      "title": "iPhone 17 Pro Max 1TB giá giảm đến 6,2 triệu, đủ màu, góp 0%",
+      "canonical": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb",
+      "h1": [
+        "Điện thoại iPhone 17 Pro Max 1TB"
+      ],
+      "pagination": [
+        {
+          "text": "Xem thêm"
+        },
+        {
+          "text": "Xem thêm đánh giá"
+        }
+      ]
+    },
+    {
+      "url": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt",
+      "title": "Acer Aspire Go 15 AI AG15-52P-52WT | Giá hấp dẫn, ưu đãi lớn",
+      "canonical": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt",
+      "h1": [
+        "Laptop Acer Aspire Go 15 AI AG15-52P-52WT Ultra5 115U/16GB/512GB/15.6\" FHD/Win11"
+      ],
+      "pagination": [
+        {
+          "text": "Xem thêm 8 ưu đãi"
+        },
+        {
+          "text": "5"
+        },
+        {
+          "text": "4"
+        },
+        {
+          "text": "3"
+        },
+        {
+          "text": "2"
+        },
+        {
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb",
+      "title": "iPhone 17 Pro Max 256GB: Màu cam vũ trụ đẹp keng",
+      "canonical": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb",
+      "h1": [
+        "iPhone 17 Pro Max 256GB"
+      ],
+      "pagination": [
+        {
+          "href": "https://shopdunk.com/uu-dai-mua-kem-tai-shopdunk",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/tong-hop-cac-uu-dai-mo-the-shopdunk",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/mua-hang-shopdunk-thanh-toan-spaylater-giam-500-nghin-dong",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/tra-gop-0-lai-suat-tai-shopdunk",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/uu-dai-hoc-sinh-sinh-vien-tai-shopdunk",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/uu-dai-bao-hanh-tai-shopdunk",
+          "text": "Xem thêm"
+        },
+        {
+          "href": "https://shopdunk.com/mua-hang-shopdunk-thanh-toan-spaylater-giam-500-nghin-dong",
+          "text": "Xem thêm ›"
+        },
+        {
+          "href": "https://shopdunk.com/tong-hop-cac-uu-dai-mo-the-shopdunk",
+          "text": "Xem thêm ›"
+        },
+        {
+          "href": "https://shopdunk.com/mo-the-vib-lien-tay-nhan-ngay-voucher-mua-sam-tai-shopdunk",
+          "text": "Xem thêm ›"
+        },
+        {
+          "href": "https://shopdunk.com/mo-the-tpbank-evo-tai-shopdunk-hoan-tien",
+          "text": "Xem thêm ›"
+        },
+        {
+          "href": "https://shopdunk.com/mua-iphone-ipad-mac-tang-voucher-toi-500000d-khi-mua-kem-robot-hut-bui-va-may-say-toc-dreame-mova",
+          "text": "Xem thêm ›"
+        },
+        {
+          "text": "Next"
+        }
+      ]
+    },
+    {
+      "url": "https://trungtran.vn/laptop-chuyen-game/",
+      "title": "Xu hướng Laptop Laptop Gaming",
+      "jsonldTypes": [],
+      "products": [
+        {
+          "text": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16\" 2.5K 165Hz Lunar White (Trắng Bạc)",
+          "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+        },
+        {
+          "text": "GIGABYTE EAGLE GL6J 9LJR2VNF93SH Ryzen 5 7533HS RAM 16GB SSD 512GB RTX 3050 16″ FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM",
+          "url": "https://trungtran.vn/gigabyte-eagle-gl6j-ryzen-5-rtx-3050-9ljr2vnf93sh/"
+        },
+        {
+          "text": "Lenovo Legion 5 15IRX10 83LY00HQVN i7-13650HX RAM 16GB SSD 512GB RTX 5060 8GB 15.3'' FHD+ 165Hz OFFICE",
+          "url": "https://trungtran.vn/lenovo-legion-5-i7-16-512-5060-fhd-83ly00hqvn/"
+        },
+        {
+          "text": "Lenovo LOQ 15IRX10 83JE01AGVN i7 13645HX RAM 16GB SSD 512GB RTX 5050 8GB 15.6\" FHD 144Hz",
+          "url": "https://trungtran.vn/lenovo-loq-i7-13645hx-16gb-512gb-5050-8gb-fhd-83je01agvn/"
+        },
+        {
+          "text": "Lenovo LOQ Essential 15ARP10E 83S0000DVN Ryzen 5 7535HS RAM 16GB SSD 512GB RTX 3050 15.6\" FHD 144Hz",
+          "url": "https://trungtran.vn/lenovo-loq-15arp10e-ryzen-5-16-512-rtx-3050-fhd-83s0000dvn/"
+        },
+        {
+          "text": "GIGABYTE EAGLE GL6J 9MJR2VNF93SH Ryzen 5 7533HS RAM 16GB SSD 512GB RTX 4050 16″ FHD+ IPS 165Hz",
+          "url": "https://trungtran.vn/gigabyte-eagle-gl6j-ryzen-5-rtx-4050-9mjr2vnf93sh/"
+        },
+        {
+          "text": "Lenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM",
+          "url": "https://trungtran.vn/lenovo-loq-essential-15irh11-core-5-8gb-rtx-3050-83y9003vvn/"
+        }
+      ],
+      "pagination": [
+        {
+          "text": "2",
+          "url": "https://trungtran.vn/laptop-chuyen-game/page-2/"
+        },
+        {
+          "text": "3",
+          "url": "https://trungtran.vn/laptop-chuyen-game/page-3/"
+        },
+        {
+          "text": "4",
+          "url": "https://trungtran.vn/laptop-chuyen-game/page-4/"
+        }
+      ]
+    },
+    {
+      "url": "https://cellphones.com.vn/mobile.html",
+      "title": "Điện thoại thông minh | Smartphone chính hãng, giá rẻ",
+      "jsonldTypes": [
+        "BreadcrumbList",
+        "Product",
+        "FAQPage"
+      ],
+      "products": [
+        {
+          "text": "OPPO Find X8 16GB 512GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html"
+        },
+        {
+          "text": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-xiaomi-redmi-note-14-pro-plus.html"
+        },
+        {
+          "text": "Xiaomi 15 Ultra 5G 16GB 1TB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-xiaomi-15-ultra-1tb.html"
+        },
+        {
+          "text": "Xiaomi 15 5G 12GB 512GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-xiaomi-15-12gb-512gb.html"
+        },
+        {
+          "text": "OPPO Reno15 5G 12GB 256GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-oppo-reno15.html"
+        },
+        {
+          "text": "POCO X8 Pro Max 12GB 512GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-xiaomi-poco-x8-pro-max-12gb-512gb.html"
+        },
+        {
+          "text": "HONOR X7d 8GB 128GB\n\nTrả góp 0% - 0đ phụ phí - 0đ trả trước - kỳ hạn đến 12 tháng",
+          "url": "https://cellphones.com.vn/dien-thoai-honor-x7d-8gb-128gb.html"
+        }
+      ],
+      "pagination": [
+        {
+          "text": "Xem thêm 895 sản phẩm",
+          "url": ""
+        },
+        {
+          "text": "Xem thêm",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "url": "https://www.dienmayxanh.com/laptop",
+      "title": "Laptop, máy tính xách tay chính hãng, giá tốt, góp 0%",
+      "jsonldTypes": [
+        "CollectionPage",
+        "BreadcrumbList",
+        "OfferCatalog"
+      ],
+      "products": [
+        {
+          "text": "14 inch\nRAM 16 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+        },
+        {
+          "text": "14 inch\nRAM 16 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/asus-vivobook-s14-s3407va-core-5-210h-ly146w"
+        },
+        {
+          "text": "15.6 inch\nRAM 16 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/dell-15-dc15255-r5-7530u-dc5r5973w1-2y"
+        },
+        {
+          "text": "15.3 inch\nRAM 16 GB\nSSD 512 GB\nCopilot+ PC",
+          "url": "https://www.dienmayxanh.com/laptop/lenovo-ideapad-slim-3-15iph11-ultra-5-322-83ur00a4vn"
+        },
+        {
+          "text": "15.6 inch\nRAM 16 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/hp-15-fc0023au-r5-7520u-d0bh1pa"
+        },
+        {
+          "text": "15.6 inch\nRAM 16 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/dell-15-dc15250-i5-1334u-dc5i5897w1"
+        },
+        {
+          "text": "14.5 inch\nRAM 8 GB\nSSD 512 GB",
+          "url": "https://www.dienmayxanh.com/laptop/acer-aspire-lite-14-al14-44p-r0sp-r7-7730u-nx-dmcsv-003"
+        }
+      ],
+      "pagination": [
+        {
+          "text": "Xem thêm 428 Laptop"
+        },
+        {
+          "text": "Xem thêm"
+        }
+      ]
+    },
+    {
+      "url": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html",
+      "title": "OPPO Find X8 giá tốt | Giảm 4.5tr, thu cũ giảm 3tr - 11/2026",
+      "canonical": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html",
+      "h1": [
+        "OPPO Find X8 16GB 512GB"
+      ],
+      "structured": [
+        {
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Hệ điều hành khi ra mắt",
+              "value": "ColorOS 15, nền tảng Android 15"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Dung lượng RAM",
+              "value": "16 GB"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Loại CPU",
+              "value": "8 nhân"
+            }
+          ],
+          "mpn": "dien-thoai-oppo-find-x8",
+          "name": "OPPO Find X8 16GB 512GB",
+          "sku": "dien-thoai-oppo-find-x8",
+          "type": "Product"
+        },
+        {
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "17990000",
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html"
+        }
+      ],
+      "selectors": [
+        {
+          "class": "box-product-price",
+          "id": "",
+          "tag": "DIV",
+          "text": "17.990.000đ\n22.990.000đ\n\nHoặc\n\n1.349.300đ /tháng\n12 tháng, lãi suất 0%\n\nHSSV, Giáo viên\nđến 300.000đ"
+        },
+        {
+          "class": "box-product-price-wrapper",
+          "id": "",
+          "tag": "DIV",
+          "text": "17.990.000đ\n22.990.000đ\n\nHoặc\n\n1.349.300đ /tháng\n12 tháng, lãi suất 0%"
+        },
+        {
+          "class": "smember-price-label",
+          "id": "",
+          "tag": "DIV",
+          "text": "17.990.000đ\n22.990.000đ"
+        },
+        {
+          "class": "sale-price",
+          "id": "",
+          "tag": "DIV",
+          "text": "17.990.000đ"
+        },
+        {
+          "class": "base-price",
+          "id": "",
+          "tag": "DEL",
+          "text": "22.990.000đ"
+        },
+        {
+          "class": "devide-price-label",
+          "id": "",
+          "tag": "DIV",
+          "text": "Hoặc"
+        },
+        {
+          "class": "installment-price-label",
+          "id": "",
+          "tag": "DIV",
+          "text": "1.349.300đ /tháng\n12 tháng, lãi suất 0%"
+        },
+        {
+          "class": "sale-price",
+          "id": "",
+          "tag": "DIV",
+          "text": "1.349.300đ /tháng"
+        }
+      ]
+    },
+    {
+      "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/",
+      "title": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16",
+      "canonical": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/",
+      "h1": [
+        "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16\" 2.5K 165Hz Lunar White (Trắng Bạc)"
+      ],
+      "structured": [
+        {
+          "mpn": "1299",
+          "name": "Gigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16 2.5K 165Hz Lunar White (Trắng Bạc)",
+          "sku": "1299",
+          "type": "Product",
+          "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+        },
+        {
+          "availability": "http://schema.org/InStock",
+          "highPrice": 39300000,
+          "itemCondition": "http://schema.org/NewCondition",
+          "lowPrice": 39300000,
+          "priceCurrency": "VND",
+          "type": "AggregateOffer",
+          "url": "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+        }
+      ],
+      "selectors": [
+        {
+          "class": "",
+          "id": "price_discount",
+          "tag": "INPUT",
+          "text": ""
+        },
+        {
+          "class": "",
+          "id": "data_price_old",
+          "tag": "INPUT",
+          "text": ""
+        },
+        {
+          "class": "",
+          "id": "data_price",
+          "tag": "INPUT",
+          "text": ""
+        },
+        {
+          "class": "_price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "39.300.000đ "
+        },
+        {
+          "class": "_price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "\n                        39.300.000đ                    "
+        },
+        {
+          "class": "edit-price",
+          "id": "",
+          "tag": "DIV",
+          "text": ""
+        },
+        {
+          "class": "frame_price",
+          "id": "",
+          "tag": "DIV",
+          "text": "760.000 đ\nChọn sản phẩm khác "
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "760.000 đ"
+        }
+      ]
+    },
+    {
+      "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a",
+      "title": "Điện thoại Apple iPhone 18 Pro 256GB X/A",
+      "canonical": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a",
+      "h1": [
+        "Điện thoại Apple iPhone 18 Pro 256GB X/A"
+      ],
+      "structured": [],
+      "selectors": [
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "37.790.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "43.890.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "57.390.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "76.690.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "37.790.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "37.790.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "37.790.000đ"
+        },
+        {
+          "class": "price",
+          "id": "",
+          "tag": "SPAN",
+          "text": "37.790.000đ"
+        }
+      ]
+    },
+    {
+      "url": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+      "title": "Laptop Acer Gaming Aspire 7 A715-59G-59RD | Core 5 210H, RTX 3050, 15.6 inch FHD 144Hz | LaptopAZ.vn",
+      "canonical": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+      "h1": [
+        "Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen"
+      ],
+      "structured": [
+        {
+          "name": "Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen",
+          "sku": "SP002078",
+          "type": "Product"
+        },
+        {
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "26590000",
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html"
+        },
+        {
+          "type": "OfferShippingDetails"
+        }
+      ],
+      "selectors": [
+        {
+          "class": "pd-price-group pd-price-deal-group",
+          "id": "",
+          "tag": "DIV",
+          "text": "26.590.000đ\n\n27.590.000đ\n\nTiết kiệm: 1.000.000đ (4%)\n\n(Đã bao gồm VAT)\n\nBảo hành: 24 tháng Acer Việt"
+        },
+        {
+          "class": "pd-deal-price",
+          "id": "",
+          "tag": "DIV",
+          "text": "26.590.000đ\n\n27.590.000đ\n\nTiết kiệm: 1.000.000đ (4%)\n\n(Đã bao gồm VAT)\n\nBảo hành: 24 tháng Acer Việt"
+        },
+        {
+          "class": "pd-price",
+          "id": "",
+          "tag": "P",
+          "text": "26.590.000đ"
+        },
+        {
+          "class": "pd-priceoff",
+          "id": "",
+          "tag": "P",
+          "text": "Tiết kiệm: 1.000.000đ (4%)"
+        }
+      ]
+    },
+    {
+      "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at",
+      "title": "HP 240R G10 Core 5 120U (C3RU7AT). Chính hãng, giá tốt",
+      "canonical": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at",
+      "h1": [
+        "Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)"
+      ],
+      "structured": [
+        {
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Loại CPU",
+              "value": "120U"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Hỗ trợ RAM tối đa",
+              "value": "32 GB"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Hệ điều hành",
+              "value": "Windows 11 Home SL"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Tốc độ CPU",
+              "value": "1.40 GHz (Lên đến 5.00 GHz khi tải nặng)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "RAM",
+              "value": "16 GB"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Tốc độ Bus RAM",
+              "value": "3200 MHz"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Loại RAM",
+              "value": "DDR4 (1 khe 16 GB + 1 khe rời)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Công nghệ CPU",
+              "value": "Intel Core 5 Raptor Lake"
+            }
+          ],
+          "name": "Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)",
+          "sku": "0220042003457",
+          "type": "Product",
+          "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+        },
+        {
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": 21290000,
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+        },
+        {
+          "type": "OfferShippingDetails"
+        }
+      ],
+      "selectors": []
+    },
+    {
+      "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb",
+      "title": "iPhone 17 Pro Max 1TB giá giảm đến 6,2 triệu, đủ màu, góp 0%",
+      "canonical": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb",
+      "h1": [
+        "Điện thoại iPhone 17 Pro Max 1TB"
+      ],
+      "structured": [
+        {
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Hệ điều hành",
+              "value": "iOS 26"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Tốc độ CPU",
+              "value": "Hãng không công bố"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "RAM",
+              "value": "Hãng không công bố"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Chip xử lý (CPU)",
+              "value": "Apple A19 Pro 6 nhân"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Dung lượng khả dụng",
+              "value": "1009"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Dung lượng lưu trữ",
+              "value": "1 TB"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Dung lượng pin",
+              "value": "37 giờ"
+            }
+          ],
+          "hasVariantCount": 6,
+          "name": "Điện thoại iPhone 17 Pro Max",
+          "productGroupID": "201300",
+          "type": "ProductGroup"
+        },
+        {
+          "color": "Xanh Đậm",
+          "name": "iPhone 17 Pro Max 1TB Xanh Đậm",
+          "size": "1 TB",
+          "sku": "0131491004731",
+          "type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731"
+        },
+        {
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": 47990000,
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731"
+        },
+        {
+          "type": "OfferShippingDetails"
+        },
+        {
+          "color": "Bạc",
+          "name": "iPhone 17 Pro Max 1TB Bạc",
+          "size": "1 TB",
+          "sku": "0131491004733",
+          "type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733"
+        },
+        {
+          "availability": "https://schema.org/OutOfStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": 47990000,
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733"
+        },
+        {
+          "type": "OfferShippingDetails"
+        },
+        {
+          "color": "Cam Vũ Trụ",
+          "name": "iPhone 17 Pro Max 1TB Cam Vũ Trụ",
+          "size": "1 TB",
+          "sku": "0131491004732",
+          "type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732"
+        },
+        {
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": 47990000,
+          "priceCurrency": "VND",
+          "type": "Offer",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732"
+        },
+        {
+          "type": "OfferShippingDetails"
+        },
+        {
+          "type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max"
+        },
+        {
+          "type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-512gb"
+        }
+      ],
+      "selectors": []
+    },
+    {
+      "url": "https://fptshop.com.vn/may-tinh-xach-tay",
+      "title": "Laptop | Máy tính xách tay giá rẻ, giảm đến 14tr, tặng bảo hành",
+      "controls": [
+        {
+          "text": "Xem thêm"
+        },
+        {
+          "text": "Xem thêm"
+        },
+        {
+          "text": "Xem thêm 366 kết quả"
+        },
+        {
+          "text": "Xem thêm"
+        }
+      ],
+      "links": []
+    },
+    {
+      "url": "https://shopdunk.com/iphone",
+      "title": "",
+      "controls": [],
+      "links": []
+    },
+    {
+      "url": "https://onewaymobile.vn/dien-thoai",
+      "title": "Điện thoại",
+      "controls": [],
+      "links": [
+        {
+          "text": "",
+          "url": "https://onewaymobile.vn/landing-page-apple"
+        },
+        {
+          "text": "Apple",
+          "url": "https://onewaymobile.vn/landing-page-apple"
+        }
+      ]
+    }
+  ],
+  "robots": [
+    {
+      "text": "## GENERAL SETTINGS\n \n## Enable robots.txt rules for all crawlers\nUser-agent: *\nUser-agent: Googlebot\nDisallow:\nUser-agent: Googlebot-image\nDisallow:\n \n## Crawl-delay parameter: number of seconds to wait between successive requests to the same server.\n## Set a custom crawl rate if you're experiencing traffic problems with your server.\n# Crawl-delay: 30\n \n## Magento sitemap: uncomment and replace the URL to your Magento sitemap file\n# Sitemap: http://www.example.com/sitemap/sitemap.xml\n \n## DEVELOPMENT RELATED SETTINGS\n \n## Do not crawl development files and folders: CVS, svn directories and dump files\nDisallow: /CVS\nDisallow: /*.svn$\nDisallow: /*.idea$\nDisallow: /*.sql$\nDisallow: /*.tgz$\n \n## GENERAL MAGENTO SETTINGS\n \n## Do not crawl Magento admin page\nDisallow: /admin/\nDisallow: /index.php/admin/\n \n## Do not crawl common Magento technical folders\nDisallow: /app/\nDisallow: /downloader/\nDisallow: /errors/\nDisallow: /includes/\nDisallow: /lib/\nDisallow: /pkginfo/\nDisallow: /shell/\nDisallow: /var/\n \n## Do not crawl common Magento files\nDisallow: /api.php\nDisallow: /cron.php\nDisallow: /cron.sh\nDisallow: /error_log\nDisallow: /get.php\nDisallow: /install.php\nDisallow: /LICENSE.html\nDisallow: /LICENSE.txt\nDisallow: /LICENSE_AFL.txt\nDisallow: /README.txt\nDisallow: /RELEASE_NOTES.txt\n \n## MAGENTO SEO IMPROVEMENTS\n \n## Do not crawl sub category pages that are sorted or filtered.\nDisallow: /*?*\nDisallow: /*?dir*\nDisallow: /*?dir=desc\nDisallow: /*?dir=asc\nDisallow: /*?limit*\nDisallow: /*?limit=all\nDisallow: /*?mode*\nDisallow: /*?price*\nDisallow: /*?manufacturer*\nDisallow: /*?operating_system*\nDisallow: /*?id*\nDisallow: /?changestore*\nDisallow: /*?loaisp*\nDisallow: /*?model_dienthoai_mtb*\nDisallow: /*?storage*\nDisallow: /*?sim_card*\nDisallow: /*?screen_size*\nDisallow: /*?phone_accessory_brands*\nDisallow: /*?battery_capacity*\nDisallow: /*?chieu_dai_cap*\nDisallow: /*?sound_capacity*\nDisallow: /*?tinh_nang*\nDisallow: /*?product_id\nDisallow: /order/warranty/*\n\nAllow: *?v=*\nDisallow: /sforum/*?utm*\nDisallow: /sforum/page/\n \n## Do not crawl 2-nd home page copy (example.com/index.php/). Uncomment it only if you activated Magento SEO URLs.\nDisallow: /index.php/\n \n## Do not crawl links with session IDs\nDisallow: /*?SID=\n \n## Do not crawl checkout and user account pages\nDisallow: /checkout/\nDisallow: /onestepcheckout/\nDisallow: /customer/\nDisallow: /customer/account/\nDisallow: /customer/account/login/\n \n## Do not crawl seach pages and not-SEO optimized catalog links\nDisallow: /catalogsearch/\nDisallow: /catalog/product_compare/\nDisallow: /catalog/category/view/\nDisallow: /catalog/product/view/\n\n## Disable API \nDisallow: /ltpextra/*\nDisallow: /lapi/*\nDisallow: /ltpg/*\n\n## Test page\nDisallow: /test*\n \n## SERVER SETTINGS\n\n## Do not crawl common server technical folders and files\nDisallow: /cgi-bin/\nDisallow: /cleanup.php\nDisallow: /apc.php\nDisallow: /memcache.php\nDisallow: /phpinfo.php\n \n## IMAGE CRAWLERS SETTINGS\n \n## Extra: Uncomment if you do not wish Google and Bing to index your images\n# User-agent: Googlebot-Image\n# Disallow: /\n# User-agent: msnbot-media\n# Disallow: /\n\n## Cellphones Sitemap \nSitemap: https://cellphones.com.vn/sitemap/sitemap_index.xml?v=google",
+      "title": "",
+      "url": "https://cellphones.com.vn/robots.txt"
+    },
+    {
+      "text": "User-agent: *\nCrawl-delay: 5\nDisallow: /bin/\nDisallow: /cms/\nDisallow: /zzz/\nDisallow: /price/\nDisallow: /support/\nDisallow: /may-nghe-nhac-mp3\nDisallow: /may-nghe-nhac-mp3/*\nDisallow: /tu-dien-dien-tu\nDisallow: /tu-dien-dien-tu-tan-tu-dien\nDisallow: /tu-dien-dien-tu/*\nDisallow: /tu-dien-dien-tu-tan-tu-dien/*\nDisallow: /may-mp4-mp5\nDisallow: /may-mp4-mp5/*\nDisallow: /may-tinh-tin-hoc\nDisallow: /may-tinh-tin-hoc/*\nDisallow: /loa-nghe-nhac-da-nang\nDisallow: /loa-nghe-nhac-da-nang/*\nDisallow: /balo-laptop\nDisallow: /balo-laptop/*\nDisallow: /dien-dan\nDisallow: /dien-dan/*\nDisallow: /commentse\nDisallow: /commentse/*\nDisallow: /commentv3\nDisallow: /commentv3/*\nDisallow: /commentv4\nDisallow: /commentv4/*\nDisallow: /tu-van\nDisallow: /tu-van/*\nDisallow: /bannertracking\nDisallow: /bannertracking/*\nDisallow: /rao-vat-may-cu\nDisallow: /rao-vat-may-cu/*\nDisallow: /mua-ban\nDisallow: /mua-ban/*\nDisallow: /bang-xep-hang\nDisallow: /bang-xep-hang/*\nDisallow: /qtcm\nDisallow: /qtcm/*\nDisallow: /cart\nDisallow: /cart/*\nDisallow: /gio-hang*\nDisallow: /checkout*\nDisallow: /dat-hang-thanh-cong*\nDisallow: /thong-tin-thanh-toan*\nDisallow: /dat-mua\nDisallow: /dat-mua/*\nDisallow: /hoi-dap/xem-truoc/*\nDisallow: /hoi-dap/xem-truoc\nDisallow: /game-app/xem-truoc/*\nDisallow: /game-app/xem-truoc\nDisallow: /tin-tuc/xem-truoc/*\nDisallow: /tin-tuc/xem-truoc\n\nUser-agent: PetalBot\nDisallow: /may-doi-tra/*\n\nSitemap: https://www.thegioididong.com/newsitemap/sitemap-cate\nSitemap: https://www.thegioididong.com/newsitemap/sitemap-product\nSitemap: https://www.thegioididong.com/newsitemap/sitemap-news\nSitemap: https://www.thegioididong.com/newsitemap/sitemap-image",
+      "title": "",
+      "url": "https://www.thegioididong.com/robots.txt"
+    },
+    {
+      "text": "User-agent: *\nDisallow: /admin/\nDisallow: /cms/\nDisallow: /web/\nDisallow: /ajax/\nDisallow: /gio-hang/\nDisallow: /*hang-san-xuat=\nDisallow: /*muc-gia=\nDisallow: /*loai-san-pham=\nDisallow: /*ket-noi=\nDisallow: /*hieu-nang-va-pin=\nDisallow: /*camera=\nDisallow: /*chuan-man-hinh=\nDisallow: /*tinh-nang-dac-biet=\nDisallow: /*nhu-cau=\nDisallow: /*ram=\nDisallow: /*mau-sac=\nDisallow: /*o-cung=\nDisallow: /*tinh-nang=\nDisallow: /*tien-ich=\nDisallow: /*tinh-nang-an-toan=\nDisallow: /*nhom-hang=\nDisallow: /so-sanh-san-pham/\nDisallow: /dien-dan/\nDisallow: /tai-khoan/\nDisallow: /don-hang/\nDisallow: /dat-hang/\nDisallow: /*sort=\nDisallow: /*tinh-nang-suc-khoe=\nDisallow: /*chat-lieu-long-noi=\nDisallow: /*loai-noi=\nDisallow: /*bang-dieu-khien=\nDisallow: /*model-series=\nDisallow: /*chuc-nang-nau=\nDisallow: /*noi-san-xuat=\nDisallow: /*dung-tich=\nDisallow: /*cong-suat=\nDisallow: /*dung-tich-nau=\nDisallow: /*dau-hut-bui=\nDisallow: /*fbclid=\nDisallow: /*utm_source=\nDisallow: /*utm_campaign=\nDisallow: /*utm_medium=\nDisallow: /*utm_content=\nDisallow: /*utm_term=\nDisallow: /*luc-hut=\nDisallow: /*duong-kinh-chao=\nDisallow: /*chat-lieu-chao=\nDisallow: /*chat-lieu-day=\nDisallow: /*loai-may=\nDisallow: /*dung-luong=\nDisallow: /*loai-chao=\nDisallow: /*so-loi-loc=\nDisallow: /*ruot-binh=\nDisallow: /*he-dieu-hanh=\nDisallow: /*gia-cao-nhat=\nDisallow: /*zarsrc=\nDisallow: /*thong-so=\nDisallow: /*t=\nDisallow: /*categories=\nDisallow: /*orderby=\n# =========================\n# Sitemap Declarations\n# =========================\nSitemap: https://fptshop.com.vn/sitemap.xml\n",
+      "title": "",
+      "url": "https://fptshop.com.vn/robots.txt"
+    },
+    {
+      "text": "Giới thiệu\nKhuyến mãi\nTin tức\nĐỊA CHỈ CỬA HÀNG\n0\n0\nDANH MỤC\n\nTrung Trần - Đại lý Ủy Quyền Chính Hãng Của Asus Việt Nam\n\nTrung Trần - Đại Lý Ủy Quyền Chính Hãng Của Lenovo Việt Nam\n\nTrung Trần - Đại Lý Ủy Quyền Chính Hãng Của Gigabyte Việt Nam\n\nMáy tính xách tay\nLaptop theo hãng\nACER\nGigabyte\nAPPLE\nASUS\nDELL\nHP\nLENOVO\nMICROSOFT\nTHINKPAD\nTHINKBOOK\nLaptop theo nhu cầu\nGame\nLập trình\nHọc tập, Văn phòng\nĐồ họa, Kỹ thuật\nSiêu phẩm\nWorkstations\nMỏng nhẹ\nLaptop theo khoảng giá\nDưới 10 Triệu\n10 Triệu - 15 Triệu\n15 Triệu - 20 Triệu\n20 Triệu - 25 Triệu\n25 Triệu - 30 Triệu\n30 Triệu - 40 Triệu\nTrên 40 Triệu\nLaptop theo cấu hình\nCPU\nGPU\nRAM\nStorage (Ổ Cứng)\nKích Thước Màn Hình\nĐộ Phân Giải Màn\nTần Số Quét Màn\nTình Trạng\nBrand New 100%\nOutlet/Refurbished\nLike New\nLaptop Gaming - Đồ Họa\nLaptop Gaming\nLaptop Gaming Acer\nLaptop Gaming Lenovo\nLaptop Gaming HP\nLaptop Gaming Asus\nLaptop Gaming Dell\nLaptop Đồ Họa\nLaptop Đồ Họa Asus\nLaptop Đồ Họa Acer\nApple\nLaptop Đồ Họa Dell\nLaptop Đồ Họa Lenovo\nLaptop Đồ Họa HP\nKhoảng Giá\nCấu Hình\nTình Trạng\nLoại Hàng\nLaptop Văn phòng\nLaptop Acer\nAcer Aspire\nAcer Swift\nApple\nMacbook Air\nMacbook Pro\nTheo Hãng\nCấu Hình\nTình Trạng\nLaptop Asus\nAsus Zenbook\nAsus Vivobook\nKhoảng Giá\nLaptop Dell\nDell Inspiron\nDell Latitude\nDell Vostro\nDell XPS\nLaptop Lập trình\nPC All In One\nApple Macbook\nRAM - SSD\nKho phụ kiện\nCổng chuyển\nTản nhiệt laptop\n\nChương trình khuyến mãi tháng 11: SUPER DEAL SEASON - Chào đón Black Friday 2026!\n\nLenovo Yoga Slim 7 2026 - Liệu còn hot như thế hệ tiền nhiệm Yoga Slim 7 Gen 10?\n\nCTKM GIGABYTE: LÊN ĐỜI LAPTOP AI - DEAL HỜI CHỐT NĂM\n\nLOQ 15IRH11E 83Y9003VVN - LOQ Gen 11 đã tới, liệu đã ngon nhất phân khúc?\n\nTIN MỚI NHẤT\n\nChương trình khuyến mãi tháng 11: SUPER DEAL SEASON - Chào đón Black Friday 2026!\n\n09/11/2026 - 763 views\n\nLenovo Yoga Slim 7 2026 - Liệu còn hot như thế hệ tiền nhiệm Yoga Slim 7 Gen 10?\n\n07/11/2026 - 597 views\n\nCTKM GIGABYTE: LÊN ĐỜI LAPTOP AI - DEAL HỜI CHỐT NĂM\n\n03/11/2026 - 226 views\n\nLOQ 15IRH11E 83Y9003VVN - LOQ Gen 11 đã tới, liệu đã ngon nhất phân khúc?\n\n29/10/2026 - 365 views\n\nTất cả tin tức \n\nHOT SALE\n\n0\nNgày\n\n20\nGiờ\n\n47\nPhút\n\n3\nGiây\n\nXem tất cả (70)\n\nSIÊU DEAL, GIÁ TỐT!!!\n\nSẵn hàng\n\nASUS ExpertBook P3 G1 P3406CCAP-U516W Core™ Ultra 5 225H RAM 16GB SSD 512GB 14\" FHD+ IPS | GIÁ ĐÃ ÁP DỤNG CTKM\n\n22.990.000\n\n1 phiên bản\n\nYêu thích\n\nBH 36 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo Yoga Slim 7 14ILL11 83R0003BVN 2026 Ultra 5 226V RAM 16GB SSD 512GB 14\" OLED FHD+ (Tặng Office 2024)\n\n31.690.000\n\n1 phiên bản\n\nYêu thích\n\nBH 36 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo Legion 5 15IPH11 83RW0023VN Ultra 7 356H RAM 16GB SSD 512GB RTX 5060 15.3\" 2.5K OLED 165Hz - Tặng OFFICE 2024\n\n55.990.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Lenovo VN\n\nSẵn hàng\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\n2 phiên bản\n\nYêu thích\n\nTrung Trần Shorts\n\nXem thêm\nGỬI\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\nLenovo LOQ 15IRH11E Core 5 205H RAM 16GB SSD 512GB RTX 3050 15.3\" FHD+ IPS 165Hz\n\n29.290.000\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\nLenovo LOQ 15IRH11E Core 5 205H RAM 16GB SSD 512GB RTX 3050 15.3\" FHD+ IPS 165Hz\n\n29.290.000\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\nGỬI\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\nLenovo LOQ 15IRH11E Core 5 205H RAM 16GB SSD 512GB RTX 3050 15.3\" FHD+ IPS 165Hz\n\n29.290.000\n\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\nLenovo LOQ 15IRH11E Core 5 205H RAM 16GB SSD 512GB RTX 3050 15.3\" FHD+ IPS 165Hz\n\n29.290.000\n\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\nGỬI\nLenovo IdeaPad Slim 5 14IPH11 83S5000DVN Core Ultra 5 322 RAM 16GB SSD 512GB 14'' FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\n28.500.000\n\nLenovo IdeaPad Slim 5 14AGP11 83S1006RVN Ryzen AI 7 445 RAM 16GB SSD 512GB 14\" FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\nliên hệ\n\nLenovo IdeaPad Slim 5 13IWC11 83UE000UVN Core 5 315 RAM 16GB SSD 512GB 13.3\" 2.5K IPS (Tặng Office)\n\n32.390.000\n\nLenovo IdeaPad Slim 5 14IPH11 83S5000DVN Core Ultra 5 322 RAM 16GB SSD 512GB 14'' FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\n28.500.000\n\nLenovo IdeaPad Slim 5 14AGP11 83S1006RVN Ryzen AI 7 445 RAM 16GB SSD 512GB 14\" FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\nliên hệ\n\nLenovo IdeaPad Slim 5 13IWC11 83UE000UVN Core 5 315 RAM 16GB SSD 512GB 13.3\" 2.5K IPS (Tặng Office)\n\n32.390.000\n\nLenovo IdeaPad Slim 5 14IPH11 83S5000DVN Core Ultra 5 322 RAM 16GB SSD 512GB 14'' FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\n28.500.000\n\nLaptop theo nhu cầu\n\nSIÊU PHẨM\nHỌC TẬP, VĂN PHÒNG\nĐỒ HỌA, KỸ THUẬT\nLẬP TRÌNH\nLAPTOP GAMING\nSiêu phẩm\nXem tất cả (3)\n\nBH 36 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo Yoga Slim 7 Ultra 14IPH11 83QK009PVN Ultra X9 378H RAM 32GB SSD 1TB 14\" 2.8K POLED Touch (Tặng OFFICE 2024)\n\n74.990.000\n\n1 phiên bản\n\nYêu thích\n\nBH 36 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo Yoga Pro 9 15N1X11 83SR001HVN NVIDIA RTX Spark™ N1X RAM 64GB SSD 1TB 15.3\" 2.5K OLED Touch 165Hz\n\n123.490.000\n\n1 phiên bản\n\nYêu thích\n\nBH 36 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo Yoga 7 2-in-1 14IPH11 83TC002JVN Ultra 7 355 RAM 32GB SSD 1TB 14\" FHD+ OLED Touch (Tặng kèm bút) - Tặng Office 2024\n\n51.990.000\n\n1 phiên bản\n\nYêu thích\n\nSiêu HOT!!!\n\nThinkPad X9-15p Aura Edition Ultra X7 358H RAM 32GB SSD 1TB 15.3\" 2.8K OLED Touch 120Hz\n\n78.990.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Asus VN\n\nSẵn hàng\n\nAsus ROG Zephyrus G16 GU606AW-TB121W Ultra 9 386H RAM 32GB SSD 1TB RTX 5080 16\" 2.5K OLED 240Hz\n\n111.990.000\n\n1 phiên bản\n\nYêu thích\n\nMáy tính xách tay\nPhần Mềm Bản Quyền\nLenovo\nAsus\nGigabyte\nXem tất cả (1404)\n\nBH 24 tháng Gigabyte VN\n\nSẵn hàng\n\nGigabyte AERO X16 1VH93VNC94DH AMD Ryzen™ AI 7 350 RAM 16GB SSD 1TB RTX™ 5060 16\" 2.5K 165Hz Lunar White (Trắng Bạc)\n\n39.300.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Lenovo VN\n\nSẵn hàng\n\nLenovo IdeaPad Slim 5 14IPH11 83S5000DVN Core Ultra 5 322 RAM 16GB SSD 512GB 14'' FHD+ OLED | GIÁ ĐÃ ÁP DỤNG CTKM\n\n28.500.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Lenovo VN\n\nSẵn hàng\n\nLenovo IdeaPad Slim 3 14IWC11 83RQ002NVN Core 5 320 RAM 16GB SSD 512GB 14\" FHD+ IPS\n\n22.190.000\n\n1 phiên bản\n\nYêu thích\n\nSIÊU DEAL, GIÁ TỐT!!!\n\nSẵn hàng\n\nGIGABYTE EAGLE GL6J 9LJR2VNF93SH Ryzen 5 7533HS RAM 16GB SSD 512GB RTX 3050 16″ FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\n1 phiên bản\n\nYêu thích\n\nSIÊU DEAL, GIÁ TỐT!!!\n\nSẵn hàng\n\nASUS ExpertBook P3 G1 P3406CCAP-U516W Core™ Ultra 5 225H RAM 16GB SSD 512GB 14\" FHD+ IPS | GIÁ ĐÃ ÁP DỤNG CTKM\n\n22.990.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Lenovo VN\n\nSẵn hàng\n\nLenovo LOQ 15AHP11 83TN0040VN 2026 Ryzen 7 250 RAM 16GB SSD 512GB RTX 5050 15.3\" FHD+ IPS\n\n40.150.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng, OFFICE 2024\n\nSẵn hàng\n\nLenovo IdeaPad Slim 5 13IWC11 83UE000UVN Core 5 315 RAM 16GB SSD 512GB 13.3\" 2.5K IPS (Tặng Office)\n\n32.390.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Gigabyte VN\n\nSẵn hàng\n\nGIGABYTE EAGLE GL6J 9MJR2VNF93SH Ryzen 5 7533HS RAM 16GB SSD 512GB RTX 4050 16″ FHD+ IPS 165Hz\n\n29.400.000\n\n1 phiên bản\n\nYêu thích\n\nBH 24 tháng Lenovo VN\n\nSẵn hàng\n\nLenovo LOQ 15IRH11E 83Y9003VVN Core 5 205H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n24.990.000\n\n2 phiên bản\n\nYêu thích\n\nSIÊU DEAL, GIÁ TỐT!!!\n\nSẵn hàng\n\nLenovo LOQ 15IRH11E 83Y9003YVN Core 7 230H RAM 8GB SSD 512GB RTX 3050 6GB VRAM 15.3\" FHD+ IPS 165Hz | GIÁ ĐÃ ÁP DỤNG CTKM\n\n26.990.000\n\n2 phiên bản\n\nYêu thích\n\nPhần Mềm Bản Quyền\nXem tất cả (0)\n\nPhần mềm Microsoft Windows Home 11 64Bit USB HAJ-00090\n\n3.548.000\n\n1 phiên bản\n\nYêu thích\n\nPhần mềm Office Microsoft 365 Fami",
+      "title": "TrungTran.vn - Hệ thống bán lẻ Laptop Nhập khẩu số 1 về Bảo hành và hậu mãi",
+      "url": "https://trungtran.vn/"
+    },
+    {
+      "text": "# As a condition of accessing this website, you agree to abide by the following\n# content signals:\n\n# (a)  If a Content-Signal = yes, you may collect content for the corresponding\n#      use.\n# (b)  If a Content-Signal = no, you may not collect content for the\n#      corresponding use.\n# (c)  If the website operator does not include a Content-Signal for a\n#      corresponding use, the website operator neither grants nor restricts\n#      permission via Content-Signal with respect to the corresponding use.\n\n# The content signals and their meanings are:\n\n# search:   building a search index and providing search results (e.g., returning\n#           hyperlinks and short excerpts from your website's contents). Search does not\n#           include providing AI-generated search summaries.\n# ai-input: inputting content into one or more AI models (e.g., retrieval\n#           augmented generation, grounding, or other real-time taking of content for\n#           generative AI search answers).\n# ai-train: training or fine-tuning AI models.\n# use:      how AI systems may consume the content (immediate, reference, or full).\n\n# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF\n# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT\n# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.\n\n# BEGIN Cloudflare Managed content\n\n\nUser-agent: *\nContent-Signal: search=yes,ai-train=no,use=reference\nAllow: /\n\n# Training crawlers\nUser-agent: Amazonbot\nDisallow: /\n\nUser-agent: Applebot-Extended\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Diffbot\nDisallow: /\n\nUser-agent: Google-Extended\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: omgili\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: Claude-Web\nDisallow: /\n\nUser-agent: cohere-ai\nDisallow: /\n\nUser-agent: MistralAI-Training\nDisallow: /\n\nUser-agent: meta-externalagent\nDisallow: /\n\nUser-agent: GoogleOther\nDisallow: /\n\nUser-agent: Baiduspider\nDisallow: /\n\nUser-agent: PetalBot\nDisallow: /\n\nUser-agent: AwarioSmartBot\nUser-agent: AwarioRssBot\nDisallow: /\n\nUser-agent: Google-CloudVertexBot\nDisallow: /\n\nUser-agent: QualifiedBot\nDisallow: /\n\nUser-agent: Cotoyogi\nDisallow: /\n\nUser-agent: ICC-Crawler\nDisallow: /\n\nUser-agent: atlassian-bot\nDisallow: /\n\nUser-agent: FishBot\nDisallow: /\n\nUser-agent: BorderxBot\nDisallow: /\n\nUser-agent: NavuBot\nDisallow: /\n\nUser-agent: SemrushBot-SWA\nDisallow: /\n\nUser-agent: WARDBot\nDisallow: /\n\nUser-agent: magpie-crawler\nDisallow: /\n\nUser-agent: KimiBot\nDisallow: /\n\nUser-agent: CitibotSiteCrawler\nDisallow: /\n\n# END Cloudflare Managed Content\n\nUser-agent: *\nAllow: /ajax/get_json.php\nDisallow: /admin\nDisallow: /ajax/\nDisallow: /ad.php\n\nSitemap: https://laptopaz.vn/sitemap.xml\n",
+      "title": "",
+      "url": "https://laptopaz.vn/robots.txt"
+    },
+    {
+      "text": "User-agent: *\nSitemap: https://shopdunk.com/sitemap.xml\nHost: https://shopdunk.com/\nDisallow: /admin\nDisallow: /bin/\nDisallow: /files/\nDisallow: /files/exportimport/\nDisallow: /country/getstatesbycountryid\nDisallow: /install\nDisallow: /setproductreviewhelpfulness\nDisallow: /*?*returnUrl=\nDisallow: /addproducttocart/catalog/\nDisallow: /addproducttocart/details/\nDisallow: /backinstocksubscriptions/manage\nDisallow: /boards/forumsubscriptions\nDisallow: /boards/forumwatch\nDisallow: /boards/postedit\nDisallow: /boards/postdelete\nDisallow: /boards/postcreate\nDisallow: /boards/topicedit\nDisallow: /boards/topicdelete\nDisallow: /boards/topiccreate\nDisallow: /boards/topicmove\nDisallow: /boards/topicwatch\nDisallow: /cart$\nDisallow: /changecurrency\nDisallow: /changelanguage\nDisallow: /changetaxtype\nDisallow: /checkout\nDisallow: /checkout/billingaddress\nDisallow: /checkout/completed\nDisallow: /checkout/confirm\nDisallow: /checkout/shippingaddress\nDisallow: /checkout/shippingmethod\nDisallow: /checkout/paymentinfo\nDisallow: /checkout/paymentmethod\nDisallow: /clearcomparelist\nDisallow: /compareproducts\nDisallow: /compareproducts/add/*\nDisallow: /customer/avatar\nDisallow: /customer/activation\nDisallow: /customer/addresses\nDisallow: /customer/changepassword\nDisallow: /customer/checkusernameavailability\nDisallow: /customer/downloadableproducts\nDisallow: /customer/info\nDisallow: /customer/productreviews\nDisallow: /deletepm\nDisallow: /emailwishlist\nDisallow: /eucookielawaccept\nDisallow: /inboxupdate\nDisallow: /newsletter/subscriptionactivation\nDisallow: /onepagecheckout\nDisallow: /order/history\nDisallow: /orderdetails\nDisallow: /passwordrecovery/confirm\nDisallow: /poll/vote\nDisallow: /privatemessages\nDisallow: /recentlyviewedproducts\nDisallow: /returnrequest\nDisallow: /returnrequest/history\nDisallow: /rewardpoints/history\nDisallow: /search?\nDisallow: /sendpm\nDisallow: /sentupdate\nDisallow: /shoppingcart/*\nDisallow: /storeclosed\nDisallow: /subscribenewsletter\nDisallow: /topic/authenticate\nDisallow: /viewpm\nDisallow: /uploadfilecheckoutattribute\nDisallow: /uploadfileproductattribute\nDisallow: /uploadfilereturnrequest\nDisallow: /wishlist\n",
+      "title": "",
+      "url": "https://shopdunk.com/robots.txt"
+    },
+    {
+      "text": "User-agent: Googlebot\nUser-agent: Bingbot\nUser-agent: Applebot\nUser-agent: GPTBot\nUser-agent: OAI-SearchBot\nUser-agent: ChatGPT-User\nUser-agent: ClaudeBot\nUser-agent: Claude-SearchBot\nUser-agent: Claude-User\nUser-agent: PerplexityBot\nUser-agent: Perplexity-User\nUser-agent: Google-Extended\nUser-agent: GoogleOther\nUser-agent: Applebot-Extended\nUser-agent: Meta-ExternalAgent\nUser-agent: AhrefsBot\nUser-agent: AhrefsSiteAudit\nUser-agent: *\nDisallow: /bin/\nDisallow: /cms/\nDisallow: /zzz/\nDisallow: /price/\nDisallow: /tracking/\nDisallow: /aj/\nDisallow: /support/\nDisallow: /may-nghe-nhac-mp3\nDisallow: /tu-dien-dien-tu\nDisallow: /may-mp4-mp5\nDisallow: /may-tinh-tin-hoc\nDisallow: /loa-nghe-nhac-da-nang\nDisallow: /balo-laptop\nDisallow: /uploads\nDisallow: /Services\nDisallow: /tu-van\nDisallow: /chat\nDisallow: /sim-so-dep/dat-mua/\nDisallow: /cart\nDisallow: /gio-hang*\nDisallow: /checkout*\nDisallow: /dat-hang-thanh-cong*\nDisallow: /thong-tin-thanh-toan*\nDisallow: /vao-bep/xem-truoc\nDisallow: /kinh-nghiem-hay/xem-truoc\nDisallow: /bannertracking?bid=\n\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-cate\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-product\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-cateknh\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-newsknh\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-sieuthi\nSitemap: https://www.dienmayxanh.com/newsitemap/sitemap-image\n",
+      "title": "",
+      "url": "https://www.dienmayxanh.com/robots.txt"
+    },
+    {
+      "text": "User-agent: *\nDisallow: /public\nDisallow: /web-admin\nDisallow: /gio-hang\nDisallow: /tai-khoan\nDisallow: /tra-cuu-don-hang\nDisallow: /tim-kiem\nDisallow: /*?\n\nSitemap: https://onewaymobile.vn/sitemap.xml",
+      "title": "",
+      "url": "https://onewaymobile.vn/robots.txt"
+    }
+  ]
+}

@@ -46,6 +46,8 @@ At the pinned baseline the accepted-offer validator rejects the ten raw rows; th
 
 Real data counts: 8 sources, 10 observations (6 ready for review / 4 quarantine), 4 variants, zero catalog offers/facts. Manifest SHA256: `6b6c6cc13730bf375324b246de99a31acb25054b580e87b060f9b9d4928de963`. Retailer IDs remain source-bound. Historical observations are not live price/stock qualification. Existing FPT price conflict, TGDD color stock, stale Trung Tran aggregate and Oneway identity/JSON-LD issues remain preserved.
 
+Final execution: **passed**, source commit `42039a44dec7772e6c48440a274d4be887efaece`; Python 3.15.2, Node 22.19.0, npm 10.9.3. Python **37/37** tests pass (`run-02/08.log`); backend typecheck/build pass (`10.log`, `11.log`), **35/35** tests pass (`12.log`). Integration `17.log` passes import/restart/rollback/restart-after-rollback, synthetic positive/ingest/replay/restart, unknown-shipping and isolated null-fee checks. Both corruption probes fail as expected (`16.log`: exit 2; `18.log`: exit 1). The runner itself exits 0. No backend source changes or BE defects were found. The pinned validator rejects all ten raw rows and the isolated null-fee fixture; these outcomes do not qualify Agent 3's later raw boundary.
+
 ## Limits and next handoff
 
 - No production writes, live retailer refresh, paid/live AI inference, Android/native/UI testing, or publication.

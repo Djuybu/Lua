@@ -1,0 +1,277 @@
+{
+  "task": "A1-INT-01",
+  "status": "passed",
+  "consumerSha": "579b719d92be8e68d00837c727113f08b84afc75",
+  "backendRoot": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "01.log"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "579b719d92be8e68d00837c727113f08b84afc75:services/adviser-backend"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "02.log"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "579b719d92be8e68d00837c727113f08b84afc75",
+        "--",
+        "services/adviser-backend"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "03.log"
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard",
+        "--",
+        "services/adviser-backend"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "04.log"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "05.log"
+    },
+    {
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "06.log"
+    },
+    {
+      "argv": [
+        "D:\\nodejs\\npm.cmd",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "07.log"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Minh Duy\\AppData\\Local\\Python\\pythoncore-3.15-64\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "08.log"
+    },
+    {
+      "argv": [
+        "D:\\nodejs\\npm.cmd",
+        "ci"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "09.log"
+    },
+    {
+      "argv": [
+        "D:\\nodejs\\npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "10.log"
+    },
+    {
+      "argv": [
+        "D:\\nodejs\\npm.cmd",
+        "run",
+        "build"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "11.log"
+    },
+    {
+      "argv": [
+        "D:\\nodejs\\npm.cmd",
+        "run",
+        "test"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "12.log"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Minh Duy\\AppData\\Local\\Python\\pythoncore-3.15-64\\python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import build_retail_pilot as b; import sys; b.DATA=Path(sys.argv[1]); b.ROOT=Path(sys.argv[2]); b.main()",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\dataset",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "13.log"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Minh Duy\\AppData\\Local\\Python\\pythoncore-3.15-64\\python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import build_retail_pilot as b; import sys; b.DATA=Path(sys.argv[1]); b.ROOT=Path(sys.argv[2]); b.main()",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\dataset",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "14.log"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Minh Duy\\AppData\\Local\\Python\\pythoncore-3.15-64\\python.exe",
+        "-m",
+        "lua_pipeline",
+        "verify-export",
+        "--input",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\dataset\\staging-bundle.json"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "15.log"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Minh Duy\\AppData\\Local\\Python\\pythoncore-3.15-64\\python.exe",
+        "-m",
+        "lua_pipeline",
+        "verify-export",
+        "--input",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\tampered.json"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 2,
+      "expectedExit": 2,
+      "log": "16.log"
+    },
+    {
+      "argv": [
+        "node",
+        "--experimental-strip-types",
+        "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline\\scripts\\integration_backend.mjs",
+        "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\dataset",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\synthetic-positive.json"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "log": "17.log"
+    },
+    {
+      "argv": [
+        "node",
+        "--experimental-strip-types",
+        "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline\\scripts\\integration_backend.mjs",
+        "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\services\\adviser-backend",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\dataset",
+        "C:\\Users\\MINHDU~1\\AppData\\Local\\Temp\\lua-a1-integration-be4j5zx7\\synthetic-positive.json"
+      ],
+      "cwd": "C:\\Users\\Minh Duy\\.t3\\worktrees\\lua\\codex-dev-agent-1-lead--54ea4e0052bc84a3\\tools\\data-pipeline",
+      "exitCode": 1,
+      "expectedExit": null,
+      "log": "18.log"
+    }
+  ],
+  "productionWrites": 0,
+  "coverage": "real captured retailer projections + labelled synthetic fixture; no live HTTP/AI",
+  "consumerTree": "ef1c425415d202def79011268c9008e136b7984f",
+  "integrationHeadBeforeRun": "197280180d25b1be12a8c1d3a9b940cf50bba08b",
+  "runtime": {
+    "python": "3.15.2 (tags/v3.15.2:5e58eaa, Oct 25 2026, 17:27:03) [MSC v.1951 64 bit (AMD64)]",
+    "node": "v22.19.0",
+    "npm": "10.9.3"
+  },
+  "backend": {
+    "variantsImported": 4,
+    "restart": "passed",
+    "rollback": "passed",
+    "restartAfterRollback": "passed",
+    "observationsChecked": 10,
+    "unknownFeeContractOutcomes": {
+      "rejected": 10,
+      "acceptedIncomplete": 0
+    },
+    "syntheticPositive": "passed",
+    "syntheticReplayRestart": "passed",
+    "unknownShipping": "passed",
+    "providerCalls": 0,
+    "httpCalls": 0,
+    "productionWrites": 0
+  },
+  "dataset": {
+    "sources": 8,
+    "captures": 8,
+    "observations": 10,
+    "variants": 4,
+    "readyForReview": 6,
+    "quarantine": 4,
+    "rebuilds": 2,
+    "replayInserted": 0,
+    "manifest": {
+      "count": 10,
+      "includesQuarantine": true,
+      "purpose": "staging_review_only",
+      "sha256": "6b6c6cc13730bf375324b246de99a31acb25054b580e87b060f9b9d4928de963"
+    },
+    "quarantinePreserved": true,
+    "unreviewedOffersExported": 0
+  },
+  "negativeProbes": [
+    "tampered manifest exit 2",
+    "incorrect catalog count assertion exit nonzero"
+  ]
+}

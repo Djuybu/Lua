@@ -1,0 +1,230 @@
+
+> @lua/adviser-backend@0.1.0 test
+> node --experimental-strip-types --test tests/**/*.test.ts
+
+TAP version 13
+# Subtest: AI Adapter - successful provider returns verified proposal
+ok 1 - AI Adapter - successful provider returns verified proposal
+  ---
+  duration_ms: 0.7738
+  type: 'test'
+  ...
+# Subtest: AI Adapter - provider timeout triggers deterministic fallback with AI_TIMEOUT label
+ok 2 - AI Adapter - provider timeout triggers deterministic fallback with AI_TIMEOUT label
+  ---
+  duration_ms: 61.0062
+  type: 'test'
+  ...
+# Subtest: AI Adapter - upstream error triggers deterministic fallback with AI_PROVIDER_ERROR label
+ok 3 - AI Adapter - upstream error triggers deterministic fallback with AI_PROVIDER_ERROR label
+  ---
+  duration_ms: 0.3146
+  type: 'test'
+  ...
+# Subtest: AI Adapter - invalid/hallucinated output triggers fallback with AI_OUTPUT_REJECTED label
+ok 4 - AI Adapter - invalid/hallucinated output triggers fallback with AI_OUTPUT_REJECTED label
+  ---
+  duration_ms: 0.2486
+  type: 'test'
+  ...
+# Subtest: AI Validator - valid patch proposal passes
+ok 5 - AI Validator - valid patch proposal passes
+  ---
+  duration_ms: 1.0547
+  type: 'test'
+  ...
+# Subtest: AI Validator - stale profile revision is rejected
+ok 6 - AI Validator - stale profile revision is rejected
+  ---
+  duration_ms: 0.1726
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects CLEAR operation that includes a value property
+ok 7 - AI Validator - rejects CLEAR operation that includes a value property
+  ---
+  duration_ms: 0.1064
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects SET operation with invalid amount or type
+ok 8 - AI Validator - rejects SET operation with invalid amount or type
+  ---
+  duration_ms: 0.0827
+  type: 'test'
+  ...
+# Subtest: AI Validator - rejects explanation with hallucinated or unknown factId
+ok 9 - AI Validator - rejects explanation with hallucinated or unknown factId
+  ---
+  duration_ms: 0.2388
+  type: 'test'
+  ...
+# Subtest: Taxonomy - valid confirmed profile passes validation
+ok 10 - Taxonomy - valid confirmed profile passes validation
+  ---
+  duration_ms: 0.8394
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects profile without exactly 3 ordered purposes or priorities
+ok 11 - Taxonomy - rejects profile without exactly 3 ordered purposes or priorities
+  ---
+  duration_ms: 0.2064
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects duplicates in purposes or priorities
+ok 12 - Taxonomy - rejects duplicates in purposes or priorities
+  ---
+  duration_ms: 0.1044
+  type: 'test'
+  ...
+# Subtest: Taxonomy - rejects purposes incompatible with chosen category
+ok 13 - Taxonomy - rejects purposes incompatible with chosen category
+  ---
+  duration_ms: 0.0941
+  type: 'test'
+  ...
+# Subtest: Crawler - validateStagedCrawlerOffer validates correct payload
+ok 14 - Crawler - validateStagedCrawlerOffer validates correct payload
+  ---
+  duration_ms: 0.2477
+  type: 'test'
+  ...
+# Subtest: Eligibility - eligible when all hard constraints and budget are met
+ok 15 - Eligibility - eligible when all hard constraints and budget are met
+  ---
+  duration_ms: 11.1199
+  type: 'test'
+  ...
+# Subtest: Eligibility - budget boundary: exceeds budget by 1 VND is excluded
+ok 16 - Eligibility - budget boundary: exceeds budget by 1 VND is excluded
+  ---
+  duration_ms: 0.2398
+  type: 'test'
+  ...
+# Subtest: Eligibility - RAM below hard constraint is excluded
+ok 17 - Eligibility - RAM below hard constraint is excluded
+  ---
+  duration_ms: 0.173
+  type: 'test'
+  ...
+# Subtest: Eligibility - OS mismatch is excluded
+ok 18 - Eligibility - OS mismatch is excluded
+  ---
+  duration_ms: 0.144
+  type: 'test'
+  ...
+# Subtest: Eligibility - null shipping produces eligible without verified affordability
+ok 19 - Eligibility - null shipping produces eligible without verified affordability
+  ---
+  duration_ms: 0.1112
+  type: 'test'
+  ...
+# (node:14132) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP Server Boundary - live localhost network integration
+ok 20 - HTTP Server Boundary - live localhost network integration
+  ---
+  duration_ms: 42.8236
+  type: 'test'
+  ...
+# Subtest: Ingest - accepts valid staged offers and updates observation count
+ok 21 - Ingest - accepts valid staged offers and updates observation count
+  ---
+  duration_ms: 0.7022
+  type: 'test'
+  ...
+# Subtest: Ingest - idempotent: identical observation is ignored without duplicate count
+ok 22 - Ingest - idempotent: identical observation is ignored without duplicate count
+  ---
+  duration_ms: 0.1409
+  type: 'test'
+  ...
+# Subtest: Ingest - updates latest offer when newer observation arrives for same stable key
+ok 23 - Ingest - updates latest offer when newer observation arrives for same stable key
+  ---
+  duration_ms: 0.417
+  type: 'test'
+  ...
+# Subtest: Ingest - rejects offer referencing unknown catalog variant
+ok 24 - Ingest - rejects offer referencing unknown catalog variant
+  ---
+  duration_ms: 0.2149
+  type: 'test'
+  ...
+# Subtest: Money - isValidVnd validates safe integer amounts
+ok 25 - Money - isValidVnd validates safe integer amounts
+  ---
+  duration_ms: 1.1155
+  type: 'test'
+  ...
+# Subtest: Money - calculatePayableTotal with complete known components
+ok 26 - Money - calculatePayableTotal with complete known components
+  ---
+  duration_ms: 0.5048
+  type: 'test'
+  ...
+# Subtest: Money - null shipping produces null totalVnd and isComplete = false
+ok 27 - Money - null shipping produces null totalVnd and isComplete = false
+  ---
+  duration_ms: 0.0995
+  type: 'test'
+  ...
+# Subtest: Money - budget boundary test: ceiling vs 1 VND over
+ok 28 - Money - budget boundary test: ceiling vs 1 VND over
+  ---
+  duration_ms: 0.0869
+  type: 'test'
+  ...
+# Subtest: Money - overflow protection throws MoneyOverflowError
+ok 29 - Money - overflow protection throws MoneyOverflowError
+  ---
+  duration_ms: 0.4929
+  type: 'test'
+  ...
+# Subtest: Money - negative or invalid inputs throw InvalidMoneyError
+ok 30 - Money - negative or invalid inputs throw InvalidMoneyError
+  ---
+  duration_ms: 0.1324
+  type: 'test'
+  ...
+# (node:24836) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Persistence - activates snapshot and retrieves variants
+ok 31 - Persistence - activates snapshot and retrieves variants
+  ---
+  duration_ms: 2.1844
+  type: 'test'
+  ...
+# Subtest: Persistence - rollback on failure: failed activation preserves prior active catalog
+ok 32 - Persistence - rollback on failure: failed activation preserves prior active catalog
+  ---
+  duration_ms: 1.3931
+  type: 'test'
+  ...
+# Subtest: Persistence - restart recovery preserves saved decisions and catalog across instance restarts
+ok 33 - Persistence - restart recovery preserves saved decisions and catalog across instance restarts
+  ---
+  duration_ms: 22.055
+  type: 'test'
+  ...
+# Subtest: Ranking - priority_budget_savings ranks cheaper machine first
+ok 34 - Ranking - priority_budget_savings ranks cheaper machine first
+  ---
+  duration_ms: 13.1955
+  type: 'test'
+  ...
+# Subtest: Ranking - priority_performance_cpu ranks high spec machine first
+ok 35 - Ranking - priority_performance_cpu ranks high spec machine first
+  ---
+  duration_ms: 0.3033
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1215.1196
+
+STDERR:

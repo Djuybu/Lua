@@ -1,0 +1,5 @@
+{"variantsImported":4,"restart":"passed","rollback":"passed","restartAfterRollback":"passed","observationsChecked":10,"unknownFeeContractOutcomes":{"rejected":10,"acceptedIncomplete":0},"syntheticPositive":"passed","syntheticReplayRestart":"passed","unknownShipping":"passed","providerCalls":0,"httpCalls":0,"productionWrites":0}
+
+STDERR:
+(node:24276) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

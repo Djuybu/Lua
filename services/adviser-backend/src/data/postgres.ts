@@ -27,7 +27,11 @@ export class AdviserPostgresStore {
     const rows = ids === null
       ? await this.pool.query(`SELECT variant FROM "${pub.build_schema}".catalog_variants ORDER BY variant_id`)
       : await this.pool.query(`SELECT variant FROM "${pub.build_schema}".catalog_variants WHERE variant_id=ANY($1::text[]) ORDER BY array_position($1::text[],variant_id)`,[ids]);
-    return {schemaVersion:'1.0.0',catalogVersion:pub.version,ruleVersion:'2026.11',publishedAt:pub.published_at.toISOString(),variants:rows.rows.map(r=>r.variant),offers:[],facts:[],storage:'postgresql',search:query.trim()?'qdrant-lexical':null};
+    const variantIds = rows.rows.map(r => r.variant.variantId);
+    const offers = variantIds.length
+      ? (await this.pool.query('SELECT payload FROM lua_app.reviewed_offers WHERE variant_id=ANY($1::text[]) ORDER BY variant_id, payload->>\'observedAt\' DESC',[variantIds])).rows.map(r=>r.payload)
+      : [];
+    return {schemaVersion:'1.0.0',catalogVersion:pub.version,ruleVersion:'2026.11',publishedAt:pub.published_at.toISOString(),variants:rows.rows.map(r=>r.variant),offers,facts:[],storage:'postgresql',search:query.trim()?'qdrant-lexical':null};
   }
   async getOffersForVariant(variantId: string): Promise<StagedCrawlerOffer[]> {
     return (await this.pool.query('SELECT payload FROM lua_app.reviewed_offers WHERE variant_id=$1 ORDER BY payload->>\'observedAt\' DESC',[variantId])).rows.map(r=>r.payload);

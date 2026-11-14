@@ -1,3 +1,4 @@
+import { officialOffer, offerTotal } from "./domain/official";
 import { destination } from "./domain/navigation";
 import { probeCapabilities } from "./api/capabilities";
 import React, { useDeferredValue, useEffect, useRef, useState } from "react";
@@ -65,7 +66,8 @@ const destinations = [
 type Tab = (typeof destinations)[number]["id"];
 export default function AdviserApp({
   chatTransport,
-}: { chatTransport?: ChatTransport } = {}) {
+  explanationEndpoint,
+}: { chatTransport?: ChatTransport; explanationEndpoint?: string } = {}) {
   const [state, setState] = useState<State>(empty);
   const [boot, setBoot] = useState<"loading" | "ready" | "failed">("loading");
   useEffect(() => {
@@ -96,6 +98,7 @@ export default function AdviserApp({
       <LocaleProvider locale={state.preferences.locale ?? "vi"}>
         <AdvisorTheme preferences={state.preferences}>
           <Workspace
+            explanationEndpoint={explanationEndpoint}
             state={state}
             boot={boot}
             update={update}
@@ -113,6 +116,7 @@ export default function AdviserApp({
   );
 }
 function Workspace({
+  explanationEndpoint,
   state,
   boot,
   update,
@@ -123,6 +127,7 @@ function Workspace({
   boot: string;
   update: (fn: (x: State) => State) => Promise<State>;
   chatTransport?: ChatTransport;
+  explanationEndpoint?: string;
   recover: () => Promise<void>;
 }) {
   const { c, isDark } = useTheme();
@@ -315,7 +320,26 @@ function Workspace({
     setDetail(null);
     setAddVariants(v);
   }
-  const priceMetadata = pricingMetadata(state.offers, state.observations);
+  const priceMetadata = {
+    ...Object.fromEntries(
+      catalog.variants.flatMap((v) => {
+        const o = officialOffer(catalog, v.variantId);
+        return o
+          ? [
+              [
+                v.variantId,
+                {
+                  price: o.basePriceVnd,
+                  total: offerTotal(o),
+                  condition: o.condition === "NEW" ? "new" : "used",
+                },
+              ],
+            ]
+          : [];
+      }),
+    ),
+    ...pricingMetadata(state.offers, state.observations),
+  };
   const filtered = filterVariants(
     catalog.variants,
     filters,
@@ -485,6 +509,15 @@ function Workspace({
                 )}
                 {networkError && <Notice title={networkError} />}{" "}
                 {result && <Notice title={outcome(result)} />}
+                {result?.shortlist.map((candidate) => (
+                  <Notice key={candidate.variantId} title={candidate.modelName}>
+                    <Body>{vnd(candidate.totalVnd)}</Body>
+                    <Body muted>
+                      {candidate.bestOffer?.sourceId}{" "}
+                      {candidate.bestOffer?.observedAt}
+                    </Body>
+                  </Notice>
+                ))}
                 <View
                   onLayout={(e) => setGridWidth(e.nativeEvent.layout.width)}
                 >
@@ -610,7 +643,11 @@ function Workspace({
       <DeviceDetailModal
         variant={detail}
         variants={catalog.variants}
+        explanationEndpoint={explanationEndpoint}
         historical={historical}
+        profile={state.confirmed}
+        revision={state.revision}
+        offline={!!state.preferences.offlineAiOnly}
         onClose={() => setDetail(null)}
         onVariant={setDetail}
         onCompare={select}

@@ -82,7 +82,8 @@ export function ChatPanel({
       <Notice title="Giới hạn dữ liệu">
         Chatbot tra cứu catalog trực tuyến từ PostgreSQL/Qdrant. Kết quả có thể
         nhiều hơn danh sách mẫu đang hiển thị trên thiết bị, nhưng vẫn không xác
-        nhận giá trọn gói hoặc hiệu năng khi nguồn chưa đủ bằng chứng.
+        nhận hiệu năng khi chưa có benchmark độc lập. Các giá chính thức đã được
+        chấp nhận vẫn được gắn với đúng cấu hình và nguồn dữ liệu.
       </Notice>
       {state.messages.map((message) => (
         <View

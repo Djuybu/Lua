@@ -44,7 +44,7 @@ def main():
         provenance.append({"variantId": row["matchedVariantId"], "sourceUrl": row["sourceUrl"],
                            "observedAt": row["observedAt"], "sourceCapture": row["sourceCapture"],
                            "contentHash": row["contentHash"], "fieldEvidence": evidence,
-                           "verification": "retailer_claims_only", "reviewStatus": "development_seed_not_production"})
+                           "verification": "retailer_published_accepted_official", "reviewStatus": "accepted_official_for_development"})
     variant("laptopaz", "acer:aspire-7-a715-59g-59rd", "Acer", "pc_laptop",
             {"ramGb": 16, "storageGb": 512, "os": "Windows 11 Home", "cpu": "Intel Core 5 210H", "gpu": "NVIDIA GeForce RTX 3050 4GB", "displayInches": 15.6},
             {"ramGb": "tableRows/RAM", "storageGb": "tableRows/Ổ cứng", "os": "tableRows/Hệ điều hành / Phần mềm", "cpu": "tableRows/CPU", "gpu": "tableRows/Card đồ họa", "displayInches": "tableRows/Màn hình"})
@@ -58,8 +58,15 @@ def main():
             {"ramGb": 16, "storageGb": 512, "os": "Windows 11", "cpu": "Intel Core Ultra 5 115U", "gpu": "Intel Graphics", "displayInches": 15.6},
             {"ramGb": "h1 + products/0/additionalProperty/RAM", "storageGb": "h1", "os": "h1/Win11", "cpu": "h1/Ultra5 115U", "gpu": "products/0/additionalProperty/Card đồ hoạ", "displayInches": "h1"})
     latest = max(row["observedAt"] for row in all_rows)
+    # The user accepted the collected retailer prices/configurations as official
+    # information on 2026-11-14. Missing fees/shipping are deliberately recorded
+    # as zero in this reviewed file; raw observations stay unchanged.
+    official = json.loads((DATA / "official-offers.json").read_text(encoding="utf-8"))
+    official_variant_ids = {v["variantId"] for v in variants}
+    if {o["matchedVariantId"] for o in official["offers"]} != official_variant_ids:
+        raise SystemExit("official-offers.json must cover every catalog variant exactly once")
     snapshot = {"schemaVersion": "1.0.0", "catalogVersion": "retail-dev-2026-11-14", "ruleVersion": "2026.11",
-                "publishedAt": latest, "variants": variants, "facts": [], "offers": []}
+                "publishedAt": latest, "variants": variants, "facts": [], "offers": official["offers"]}
     atomic_json(DATA / "catalog-snapshot.json", snapshot, overwrite=True)
     atomic_json(DATA / "variant-provenance.json", {"purpose": "development_seed", "variants": provenance}, overwrite=True)
     (ROOT / ".work").mkdir(exist_ok=True)
@@ -77,7 +84,7 @@ def main():
                "quarantined": sum(r["status"] == "quarantine" for r in all_rows),
                "bySource": [{"sourceId": c["sourceId"], "count": sum(r["sourceId"] == c["sourceId"] for r in all_rows),
                              "reasons": sorted({reason for r in all_rows if r["sourceId"] == c["sourceId"] for reason in r["reasons"]})} for c in configs],
-               "backendOfferBlockers": ["mandatoryFeesVnd remains unknown; backend currently requires a number", "No human cost approvals; no offers exported into catalog", "TGDD/ShopDunk RAM not observed; no fabricated catalog RAM", "Source-bound IDs are not cross-retailer or manufacturer-verified identity"],
+               "backendOfferBlockers": ["Retailer prices were accepted as official by product decision; mandatory fees and shipping are recorded as zero in reviewed offers", "No independent performance benchmarks; catalog facts remain empty", "TGDD/ShopDunk RAM not observed; no fabricated catalog RAM", "Source-bound IDs are not cross-retailer or manufacturer-verified identity"],
                "stagingManifest": manifest}
     atomic_json(DATA / "quality-report.json", quality, overwrite=True)
     print(json.dumps({"inserted": inserted, **quality}, ensure_ascii=False))

@@ -151,9 +151,12 @@ try {
       assert.equal(rec.body.schemaVersion, '1.0.0'); assert.equal(rec.body.ruleVersion, '2026.11');
       assert.equal(rec.body.requestId, 'synthetic-http-request');
     });
-    await test('H02', 'Real ten raw observations rejected, accepted store unchanged', async ctx => {
+    await test('H02', 'Real ten raw observations rejected, accepted official offers unchanged', async ctx => {
       assert.equal(bundle.records.length, 10);
-      assert.equal((await ingest(ctx, bundle.records)).status, 400); noWrites(ctx);
+      const accepted = ctx.rows();
+      assert.equal(accepted.length, retail.offers.length);
+      assert.equal((await ingest(ctx, bundle.records)).status, 400);
+      assert.deepEqual(ctx.rows(), accepted);
     }, retail);
     for (const [label, raw] of [['malformed', '{bad'], ['null', 'null'], ['number', '42'], ['string', '"scalar"'], ['boolean', 'false']]) {
       for (const route of ['ingest', 'recommend']) {

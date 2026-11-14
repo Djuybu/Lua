@@ -1,3 +1,4 @@
+import { OfficialPrice } from "./OfficialPrice";
 import React from "react";
 import { Text, View } from "react-native";
 import { Laptop, Smartphone, Tablet, Monitor } from "lucide-react-native";
@@ -71,7 +72,7 @@ export function PSREFListingCard({
       <Body muted>
         {t("Hãng")}: {v.brand} · {t("Kiểu máy")}: {v.familyId}
       </Body>
-      <Body>Chưa có giá trọn gói đã xác minh</Body>
+      <OfficialPrice variantId={v.variantId} />
       {specRows(v).map(([label, value]) => (
         <View key={label} style={{ flexDirection: "row", gap: 12 }}>
           <Text style={{ width: 88, color: c.onSurfaceVariant, fontSize: 14 }}>

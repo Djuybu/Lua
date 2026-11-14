@@ -1,3 +1,6 @@
+import type { SnapshotManifest } from "./catalog";
+import { officialOffer, offerTotal } from "./domain/official";
+import seed from "./catalog.json";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Award } from "lucide-react-native";
@@ -32,7 +35,14 @@ export function ComparisonView({
     ["Pin", (v) => v.specifications.batteryWattHours ?? null, "higher"],
     ["Cân nặng", (v) => v.specifications.weightKg ?? null, "lower"],
     ["HĐH", (v) => v.specifications.os, "neutral"],
-    ["Tổng chi phí", () => null, "lower"],
+    [
+      "Tổng chi phí",
+      (v) => {
+        const o = officialOffer(seed as SnapshotManifest, v.variantId);
+        return o ? offerTotal(o) : null;
+      },
+      "lower",
+    ],
   ];
   const wins = rows.map(([, get, direction]) =>
     winners(

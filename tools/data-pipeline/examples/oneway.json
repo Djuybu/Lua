@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "oneway",
+  "seeds": [
+    "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a"
+  ],
+  "sitemap": "https://onewaymobile.vn/sitemap.xml",
+  "regionContext": null,
+  "variantMap": {}
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "cellphones",
+  "seeds": [
+    "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html"
+  ],
+  "sitemap": "https://cellphones.com.vn/sitemap/sitemap_index.xml?v=google",
+  "regionContext": null,
+  "variantMap": {}
+}

@@ -1,0 +1,388 @@
+{
+  "sourceId": "cellphones",
+  "documentTitle": "OPPO Find X8 giá tốt | Giảm 4.5tr, thu cũ giảm 3tr - 11/2026",
+  "errors": [],
+  "h1": "OPPO Find X8 16GB 512GB",
+  "observedAt": "2026-11-14T05:50:06.142Z",
+  "policySnippets": [],
+  "priceNodes": [
+    {
+      "classes": "box-product-price-wrapper",
+      "content": null,
+      "grandparentClass": "box-detail-product__box-center column",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price",
+      "tag": "DIV",
+      "text": "17.990.000đ\n22.990.000đ\n\nHoặc\n\n1.349.300đ /tháng\n12 tháng, lãi suất 0%"
+    },
+    {
+      "classes": "smember-price-label",
+      "content": null,
+      "grandparentClass": "box-product-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price-wrapper",
+      "tag": "DIV",
+      "text": "17.990.000đ\n22.990.000đ"
+    },
+    {
+      "classes": "sale-price",
+      "content": null,
+      "grandparentClass": "smember-price-label",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "is-flex is-align-items-center",
+      "tag": "DIV",
+      "text": "17.990.000đ"
+    },
+    {
+      "classes": "base-price",
+      "content": null,
+      "grandparentClass": "smember-price-label",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "is-flex is-align-items-center",
+      "tag": "DEL",
+      "text": "22.990.000đ"
+    },
+    {
+      "classes": "devide-price-label",
+      "content": null,
+      "grandparentClass": "box-product-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price-wrapper",
+      "tag": "DIV",
+      "text": "Hoặc"
+    },
+    {
+      "classes": "installment-price-label",
+      "content": null,
+      "grandparentClass": "box-product-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price-wrapper",
+      "tag": "DIV",
+      "text": "1.349.300đ /tháng\n12 tháng, lãi suất 0%"
+    },
+    {
+      "classes": "sale-price",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "installment-price-label",
+      "tag": "DIV",
+      "text": "1.349.300đ /tháng"
+    },
+    {
+      "classes": "installment-price-detail is-clickable",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "installment-price-label",
+      "tag": "DIV",
+      "text": "12 tháng, lãi suất 0%"
+    },
+    {
+      "classes": "exclusive-price-block",
+      "content": null,
+      "grandparentClass": "box-detail-product__box-center column",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price",
+      "tag": "DIV",
+      "text": "HSSV, Giáo viên\nđến 300.000đ Xác thực\n\nSmember\nGiảm thêm đến 180.000đ Kiểm tra"
+    },
+    {
+      "classes": "item-variant-price",
+      "content": null,
+      "grandparentClass": "button__change-color is-flex is-align-items-center",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "is-flex is-flex-direction-column",
+      "tag": "SPAN",
+      "text": "17.990.000₫"
+    },
+    {
+      "classes": "item-variant-price",
+      "content": null,
+      "grandparentClass": "button__change-color is-flex is-align-items-center",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "is-flex is-flex-direction-column",
+      "tag": "SPAN",
+      "text": "17.990.000₫"
+    },
+    {
+      "classes": "trade-in-promotion__price",
+      "content": null,
+      "grandparentClass": "trade-in-promotion__content",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "",
+      "tag": "STRONG",
+      "text": "14.810.000đ"
+    },
+    {
+      "classes": "block-box-price",
+      "content": null,
+      "grandparentClass": "info",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "upsell-item-action",
+      "tag": "DIV",
+      "text": "1.290.000đ\n\n1.790.000đ"
+    },
+    {
+      "classes": "box-info__box-price",
+      "content": null,
+      "grandparentClass": "upsell-item-action",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "block-box-price",
+      "tag": "DIV",
+      "text": "1.290.000đ\n\n1.790.000đ"
+    },
+    {
+      "classes": "product__price--show",
+      "content": null,
+      "grandparentClass": "block-box-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-info__box-price",
+      "tag": "P",
+      "text": "1.290.000đ"
+    },
+    {
+      "classes": "product__price--through",
+      "content": null,
+      "grandparentClass": "block-box-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-info__box-price",
+      "tag": "P",
+      "text": "1.790.000đ"
+    },
+    {
+      "classes": "block-box-price",
+      "content": null,
+      "grandparentClass": "info",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "upsell-item-action",
+      "tag": "DIV",
+      "text": "1.990.000đ\n\n2.990.000đ"
+    },
+    {
+      "classes": "box-info__box-price",
+      "content": null,
+      "grandparentClass": "upsell-item-action",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "block-box-price",
+      "tag": "DIV",
+      "text": "1.990.000đ\n\n2.990.000đ"
+    },
+    {
+      "classes": "product__price--show",
+      "content": null,
+      "grandparentClass": "block-box-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-info__box-price",
+      "tag": "P",
+      "text": "1.990.000đ"
+    },
+    {
+      "classes": "product__price--through",
+      "content": null,
+      "grandparentClass": "block-box-price",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-info__box-price",
+      "tag": "P",
+      "text": "2.990.000đ"
+    }
+  ],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Hệ điều hành khi ra mắt",
+          "value": "ColorOS 15, nền tảng Android 15"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Chipset",
+          "value": "MediaTek Dimensity 9400 "
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dung lượng RAM",
+          "value": "16 GB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Bộ nhớ trong",
+          "value": "512 GB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Loại CPU",
+          "value": "8 nhân"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "GPU",
+          "value": "Immortalis G925 MC12"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kích thước màn hình",
+          "value": "6.59 inches"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ màn hình",
+          "value": "AMOLED"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phân giải màn hình",
+          "value": "1256 x 2760 pixels"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tính năng màn hình",
+          "value": "Tần số quét: 120Hz, Kính cường lực GG 7i  Độ sáng tối đa: 1600 nits  Màu sắc hiển thị: 1 tỷ màu"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Camera sau",
+          "value": "50MP OIS (Chính) + 50MP (Chân dung Tele) + 50MP (Góc rộng)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Camera trước",
+          "value": "32MP, khẩu độ F/2.4"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Pin",
+          "value": "5630 mAh"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Hỗ trợ mạng",
+          "value": "5G"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thẻ SIM",
+          "value": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ NFC",
+          "value": "Có"
+        }
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "OPPO"
+      },
+      "mpn": "dien-thoai-oppo-find-x8",
+      "name": "OPPO Find X8 16GB 512GB",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": "17990000",
+        "priceCurrency": "VND",
+        "url": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html"
+      },
+      "sku": "dien-thoai-oppo-find-x8"
+    }
+  ],
+  "regionLabels": [
+    "Hà Nội"
+  ],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [
+    [
+      "Hệ điều hành khi ra mắt",
+      "ColorOS 15, nền tảng Android 15"
+    ],
+    [
+      "Chipset",
+      "MediaTek Dimensity 9400"
+    ],
+    [
+      "Dung lượng RAM",
+      "16 GB"
+    ],
+    [
+      "Bộ nhớ trong",
+      "512 GB"
+    ],
+    [
+      "Loại CPU",
+      "8 nhân"
+    ],
+    [
+      "GPU",
+      "Immortalis G925 MC12"
+    ],
+    [
+      "Kích thước màn hình",
+      "6.59 inches"
+    ],
+    [
+      "Công nghệ màn hình",
+      "AMOLED"
+    ],
+    [
+      "Độ phân giải màn hình",
+      "1256 x 2760 pixels"
+    ],
+    [
+      "Tính năng màn hình",
+      "Tần số quét: 120Hz, Kính cường lực GG 7i\nĐộ sáng tối đa: 1600 nits\nMàu sắc hiển thị: 1 tỷ màu"
+    ],
+    [
+      "Camera sau",
+      "50MP OIS (Chính) + 50MP (Chân dung Tele) + 50MP (Góc rộng)"
+    ],
+    [
+      "Camera trước",
+      "32MP, khẩu độ F/2.4"
+    ],
+    [
+      "Pin",
+      "5630 mAh"
+    ],
+    [
+      "Hỗ trợ mạng",
+      "5G"
+    ],
+    [
+      "Thẻ SIM",
+      "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM"
+    ],
+    [
+      "Công nghệ NFC",
+      "Có"
+    ]
+  ],
+  "url": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html",
+  "tableScope": "first specification table; marketing/article tables excluded",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": "Hà Nội"
+}

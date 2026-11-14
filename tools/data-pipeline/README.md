@@ -6,6 +6,10 @@ Pipeline tách fetch → extract → normalize/quality → SQLite history → ex
 
 ## Bắt đầu và demo không mạng
 
+Bộ dữ liệu **thật** từ 8 nguồn đã có tại [retail-pilot-2026-11-14](datasets/retail-pilot-2026-11-14/README.md): 10 observations và catalog development seed 4 variants. Đọc quality report trước import; không nhầm bộ này với demo synthetic bên dưới.
+
+Đọc capture đã thu thập từ browser bằng `parse-capture --config <config.json> --input <capture.json> --db <staging.sqlite>`. Capture giữ thời điểm quan sát gốc, được kiểm tra source và gắn `captureMode=rendered_projection`; không phải HTML nguyên bản hoặc một lần HTTP crawl mới.
+
 Trong PowerShell, từ repo root:
 
 ```powershell

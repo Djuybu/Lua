@@ -1,0 +1,118 @@
+{
+  "sourceId": "laptopaz",
+  "documentTitle": "Laptop Acer Gaming Aspire 7 A715-59G-59RD | Core 5 210H, RTX 3050, 15.6 inch FHD 144Hz | LaptopAZ.vn",
+  "errors": [],
+  "h1": "Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen",
+  "observedAt": "2026-11-14T05:49:52.231Z",
+  "policySnippets": [
+    "(Đã bao gồm VAT)"
+  ],
+  "priceNodes": [
+    {
+      "classes": "pd-deal-price",
+      "content": null,
+      "grandparentClass": "pd-info-left",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "pd-price-group pd-price-deal-group",
+      "tag": "DIV",
+      "text": "26.590.000đ\n\n27.590.000đ\n\nTiết kiệm: 1.000.000đ (4%)\n\n(Đã bao gồm VAT)\n\nBảo hành: 24 tháng Acer Việt Nam"
+    },
+    {
+      "classes": "pd-price",
+      "content": null,
+      "grandparentClass": "pd-price-group pd-price-deal-group",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "pd-deal-price",
+      "tag": "P",
+      "text": "26.590.000đ"
+    },
+    {
+      "classes": "pd-priceoff",
+      "content": null,
+      "grandparentClass": "pd-price-group pd-price-deal-group",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "pd-deal-price",
+      "tag": "P",
+      "text": "Tiết kiệm: 1.000.000đ (4%)"
+    }
+  ],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "brand": {
+        "@type": "Brand",
+        "name": "Acer"
+      },
+      "name": "Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": "26590000",
+        "priceCurrency": "VND",
+        "url": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html"
+      },
+      "sku": "SP002078"
+    }
+  ],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [
+    [
+      "CPU",
+      "Intel Core 5 210H (8 nhân / 12 luồng, up to 4.8GHz)"
+    ],
+    [
+      "Card đồ họa",
+      "NVIDIA GeForce RTX 3050 4GB GDDR6"
+    ],
+    [
+      "RAM",
+      "16GB DDR4 3200MHz, còn trống 1 khe RAM"
+    ],
+    [
+      "Ổ cứng",
+      "512GB SSD M.2 NVMe PCIeMáy có 2 khe SSD M.2 PCIe, hỗ trợ nâng cấp thêm"
+    ],
+    [
+      "Màn hình",
+      "15.6 inch FHD (1920x1080) IPS, tần số quét 144Hz"
+    ],
+    [
+      "Cổng kết nối",
+      "USB-C 3.2 Gen 2 (hỗ trợ xuất hình DisplayPort, sạc thiết bị ngoài)1x USB-A 3.2 Gen 11x USB-A 2.01x HDMI 2.11x Mini DisplayPort 1.41x LAN RJ451x Khe thẻ microSD1x Jack tai nghe / micro 3.5mm"
+    ],
+    [
+      "Kết nối không dây",
+      "Wi-Fi 6, Bluetooth 5.2"
+    ],
+    [
+      "Bàn phím",
+      "Full-size có phím số, đèn nền RGB 1 vùng"
+    ],
+    [
+      "Webcam",
+      "HD 720p"
+    ],
+    [
+      "Pin / Sạc",
+      "54.8Wh, sạc bằng cổng DC riêng"
+    ],
+    [
+      "Hệ điều hành / Phần mềm",
+      "Windows 11 Home bản quyền"
+    ],
+    [
+      "Chất liệu / Màu sắc",
+      "Đen (Titanium Black)"
+    ]
+  ],
+  "url": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": null
+}

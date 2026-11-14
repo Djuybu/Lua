@@ -1,0 +1,354 @@
+{
+  "sourceId": "tgdd",
+  "documentTitle": "iPhone 17 Pro Max 1TB giá giảm đến 6,2 triệu, đủ màu, góp 0%",
+  "errors": [],
+  "h1": "Điện thoại iPhone 17 Pro Max 1TB",
+  "observedAt": "2026-11-14T05:50:16.847Z",
+  "policySnippets": [],
+  "priceNodes": [],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProductGroup",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Quay phim camera sau",
+          "value": "FullHD 1080p@120fps, 2.8K 60fps, 4K 2160p@30fps, 4K 2160p@25fps, 4K 2160p@24fps, FullHD 1080p@30fps, HD 720p@30fps, 4K 2160p@120fps, 4K 2160p@100fps, FullHD 1080p@25fps, 4K 2160p@60fps, FullHD 1080p@60fps"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Radio",
+          "value": "Không"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Nghe nhạc",
+          "value": "Apple Lossless, APAC, MP3, FLAC, AAC"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Hệ điều hành",
+          "value": "iOS 26"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tốc độ CPU",
+          "value": "Hãng không công bố"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "RAM",
+          "value": "Hãng không công bố"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ sáng",
+          "value": "3000"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "SIM",
+          "value": "1 Nano SIM & 1 eSIM"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tính năng camera trước",
+          "value": "TrueDepth, Tự động lấy nét (AF), Smart HDR 5, Quay chậm (Slow Motion), Xóa phông, Retina Flash, Chụp đêm, Nhãn dán (AR Stickers), Trôi nhanh thời gian (Time Lapse), Deep Fusion, Quay video HD, Quay video Full HD, Video hiển thị kép, Cinematic, Chống rung điện tử kỹ thuật số (EIS), Photonic Engine, Chụp ảnh Raw, Live Photos, Quay video 4K"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Chip xử lý (CPU)",
+          "value": "Apple A19 Pro 6 nhân"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tần số quét",
+          "value": "Tần số quét 120 Hz"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ màn hình",
+          "value": "OLED"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "GPS",
+          "value": "NavIC, iBeacon, QZSS, GPS, BEIDOU, GLONASS, GALILEO"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Đèn pin",
+          "value": "Không"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phân giải camera trước",
+          "value": "18 MP"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dung lượng khả dụng",
+          "value": "1009"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thẻ nhớ",
+          "value": "3"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Cổng tai nghe, headphone",
+          "value": "Type-C"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Sạc kèm theo máy",
+          "value": "Không"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kết nối",
+          "value": "NFC"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tính năng camera sau",
+          "value": "Tự động lấy nét (AF), Zoom kỹ thuật số, Chụp ảnh liên tục, Quay video hiển thị kép, Quay video định dạng Log, Chế độ hành động (Action Mode), Quay chậm (Slow Motion), Quay video ProRes, Chống rung điện tử kỹ thuật số (EIS), Xóa phông, Ban đêm (Night Mode), Ảnh Raw, Chống rung quang học (OIS), Smart HDR 5, Photonic Engine, Trôi nhanh thời gian (Time Lapse), Gắn thẻ địa lý (Geotagging), Zoom quang học, Điều khiển camera (Camera Control), Toàn cảnh (Panorama), Dolby Vision HDR, Điều chỉnh khẩu độ, Cinematic, Siêu cận (Macro), Góc siêu rộng (Ultrawide), Siêu độ phân giải, Live Photos, Deep Fusion"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Mạng di động",
+          "value": "Hỗ trợ 5G"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Chip đồ họa (GPU)",
+          "value": "Apple GPU 6 nhân"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Wifi",
+          "value": "Wi-Fi 7, Wi-Fi MIMO"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phân giải camera sau",
+          "value": "Chính 48 MP & Phụ 48 MP, 48 MP"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Chất liệu",
+          "value": "Khung nhôm nguyên khối & Mặt lưng kính cường lực"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Bluetooth",
+          "value": "v6.0"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dài",
+          "value": "Dài 163.4 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Ghi âm",
+          "value": "Ghi âm cuộc gọi, Ghi âm mặc định"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Danh bạ",
+          "value": "Không giới hạn"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Xem phim",
+          "value": "MP4, AV1, HEVC"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ pin",
+          "value": "Sạc pin nhanh, Sạc ngược qua cáp, Tiết kiệm pin, Sạc không dây, Sạc không dây MagSafe"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dày",
+          "value": "Dày 8.75 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Khối lượng máy",
+          "value": "Khối lượng 231g"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tính năng đặc biệt",
+          "value": "Trung tâm màn hình (Center Stage), Apple Pay, Công nghệ âm thanh Dolby Digital Plus, Khoanh tròn để tìm kiếm, Công nghệ HLG, Viết AI, HDR10, Âm thanh Dolby Atmos, Màn hình luôn hiển thị AOD, Loa kép, Chạm 2 lần sáng màn hình, Phát hiện va chạm (Crash Detection), HDR10+, Xoá vật thể AI, Công nghệ True Tone, Công nghê âm thanh Dolby Digital, DCI-P3"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dung lượng lưu trữ",
+          "value": "1 TB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Bảo mật",
+          "value": "Mở khoá khuôn mặt Face ID"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dung lượng pin",
+          "value": "37 giờ"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Đèn Flash camera sau",
+          "value": "Có"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thiết kế",
+          "value": "Nguyên khối"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Hỗ trợ sạc tối đa",
+          "value": "40 W"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Ngang",
+          "value": "Ngang 78 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phân giải màn hình",
+          "value": "Super Retina XDR (1320 x 2868 Pixels)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Cổng sạc",
+          "value": "Type-C"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Loại pin",
+          "value": "Li-Ion"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kích thước màn hình",
+          "value": "6.9\""
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thời gian ra mắt",
+          "value": "09/2025"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Mặt kính cảm ứng",
+          "value": "Kính cường lực Ceramic Shield 2"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tiêu chuẩn chống nước, chống bụi",
+          "value": "IP68"
+        }
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "iPhone (Apple)"
+      },
+      "category": "Điện thoại",
+      "hasVariant": [
+        {
+          "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731#product",
+          "@type": "Product",
+          "category": "Điện thoại",
+          "color": "Xanh Đậm",
+          "name": "iPhone 17 Pro Max 1TB Xanh Đậm",
+          "offers": {
+            "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731#offer",
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "price": 47990000,
+            "priceCurrency": "VND",
+            "priceValidUntil": "2026-12-14",
+            "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731"
+          },
+          "size": "1 TB",
+          "sku": "0131491004731",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004731"
+        },
+        {
+          "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733#product",
+          "@type": "Product",
+          "category": "Điện thoại",
+          "color": "Bạc",
+          "name": "iPhone 17 Pro Max 1TB Bạc",
+          "offers": {
+            "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733#offer",
+            "@type": "Offer",
+            "availability": "https://schema.org/OutOfStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "price": 47990000,
+            "priceCurrency": "VND",
+            "priceValidUntil": "2026-12-14",
+            "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733"
+          },
+          "size": "1 TB",
+          "sku": "0131491004733",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004733"
+        },
+        {
+          "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732#product",
+          "@type": "Product",
+          "category": "Điện thoại",
+          "color": "Cam Vũ Trụ",
+          "name": "iPhone 17 Pro Max 1TB Cam Vũ Trụ",
+          "offers": {
+            "@id": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732#offer",
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "price": 47990000,
+            "priceCurrency": "VND",
+            "priceValidUntil": "2026-12-14",
+            "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732"
+          },
+          "size": "1 TB",
+          "sku": "0131491004732",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb?code=0131491004732"
+        },
+        {
+          "@type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max"
+        },
+        {
+          "@type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-512gb"
+        },
+        {
+          "@type": "Product",
+          "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-2tb"
+        }
+      ],
+      "name": "Điện thoại iPhone 17 Pro Max",
+      "productGroupID": "201300",
+      "variesBy": [
+        "https://schema.org/color",
+        "https://schema.org/size"
+      ]
+    }
+  ],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [],
+  "url": "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": null
+}

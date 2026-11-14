@@ -10,6 +10,7 @@ from .storage import Store, atomic_json, export_bundle, verify_bundle
 from .fetch import Fetcher
 from .runner import parse_fixture, crawl, discover
 from .backend import backend_payload
+from .capture import parse_capture
 
 
 def positive(value):
@@ -31,6 +32,10 @@ def main(argv=None):
     p.add_argument("--url", required=True)
     p.add_argument("--observed-at", required=True, help="Capture time with timezone, never inferred from file mtime")
     p.add_argument("--rendered", action="store_true", help="Input is a reviewed rendered product snapshot")
+    p.add_argument("--db", required=True)
+    p = sub.add_parser("parse-capture")
+    p.add_argument("--config", required=True)
+    p.add_argument("--input", required=True)
     p.add_argument("--db", required=True)
     p = sub.add_parser("crawl")
     p.add_argument("--config", required=True)
@@ -79,9 +84,10 @@ def main(argv=None):
             if args.command in {"report", "export"} and not Path(args.db).is_file():
                 raise PipelineError("DATABASE_NOT_FOUND")
             store = Store(args.db)
-            if args.command == "parse-fixture":
-                rows = parse_fixture(args.html, args.url, args.observed_at, config,
-                                     "rendered_snapshot" if args.rendered else "fixture")
+            if args.command in {"parse-fixture", "parse-capture"}:
+                rows = (parse_capture(args.input, config) if args.command == "parse-capture" else
+                        parse_fixture(args.html, args.url, args.observed_at, config,
+                                      "rendered_snapshot" if args.rendered else "fixture"))
                 result = {"inserted": store.ingest(rows), "parsed": len(rows),
                           "quarantine": sum(r["status"] == "quarantine" for r in rows)}
             elif args.command == "crawl":

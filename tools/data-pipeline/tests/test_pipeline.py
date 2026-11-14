@@ -101,7 +101,7 @@ class ParserTests(unittest.TestCase):
     def test_DP_T04_oneway_region_conflict(self):
         cfg = config("oneway")
         cfg["seeds"] = ["https://onewaymobile.vn/synthetic-zp-a"]
-        body = '<h1>Synthetic Phone X/A</h1><div class="product-detail" data-productid="000123"><div class="product-price">12.000.000đ</div></div>'
+        body = '<h1>Synthetic Phone X/A</h1><div class="product-buy-box" data-productid="000123"><div class="current-price">12.000.000đ</div></div>'
         r = rows(body, cfg)[0]
         self.assertIn("REGION_IDENTITY_CONFLICT", r["reasons"])
         self.assertEqual(r["basePriceVnd"], 12000000)

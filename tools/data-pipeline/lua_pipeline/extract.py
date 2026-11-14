@@ -93,7 +93,7 @@ def scoped_prices(doc, source):
         "laptopaz": ("pd-price-group", "pd-price"),
         "cellphones": ("box-product-price-wrapper", "sale-price"),
         "shopdunk": ("product-essential", "product-price"),
-        "oneway": ("product-detail", "product-price"),
+        "oneway": ("product-buy-box", "current-price"),
         "trungtran": ("product", "_price"),
     }
     if source not in selectors:
@@ -195,8 +195,9 @@ def extract(html, capture, config):
                 properties.extend(props if isinstance(props, list) else [props])
             for prop in properties:
                 if isinstance(prop, dict) and isinstance(prop.get("name"), str):
-                    key, val = prop["name"], str(prop.get("value", ""))
-                    if key in attrs and attrs[key] != val:
+                    key = prop["name"]
+                    val = re.sub(r"\s+", " ", str(prop.get("value", ""))).strip()
+                    if key in attrs and re.sub(r"\s+", " ", attrs[key]).strip() != val:
                         reasons.append("SPEC_CONFLICT:" + key)
                         conflicts.append({"field": key, "domValue": attrs[key], "structuredValue": val})
                     attrs[key] = val

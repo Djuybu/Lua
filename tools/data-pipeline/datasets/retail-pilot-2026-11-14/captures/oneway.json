@@ -1,0 +1,442 @@
+{
+  "sourceId": "oneway",
+  "documentTitle": "Điện thoại Apple iPhone 18 Pro 256GB X/A",
+  "errors": [
+    "INVALID_JSON_LD"
+  ],
+  "h1": "Điện thoại Apple iPhone 18 Pro 256GB X/A",
+  "observedAt": "2026-11-14T05:51:01.893Z",
+  "policySnippets": [],
+  "priceNodes": [
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap active",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "43.890.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "57.390.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "76.690.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap attribute active",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap attribute ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap attribute ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "price",
+      "content": null,
+      "grandparentClass": "custom-checkbox-wrap attribute ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "custom-checkbox-inner",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "product-price",
+      "content": null,
+      "grandparentClass": "product-buy-box",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-body",
+      "tag": "DIV",
+      "text": "37.790.000đ 38.999.000đ -4%"
+    },
+    {
+      "classes": "current-price",
+      "content": null,
+      "grandparentClass": "box-body",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-price",
+      "tag": "SPAN",
+      "text": "37.790.000đ"
+    },
+    {
+      "classes": "regular-price",
+      "content": null,
+      "grandparentClass": "box-body",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-price",
+      "tag": "DEL",
+      "text": "38.999.000đ"
+    },
+    {
+      "classes": "product-item-price flex-box al-baseline",
+      "content": null,
+      "grandparentClass": "product-item relative ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "cont-wrap",
+      "tag": "DIV",
+      "text": "390.000đ\n450.000đ"
+    },
+    {
+      "classes": "current-price",
+      "content": null,
+      "grandparentClass": "cont-wrap",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-item-price flex-box al-baseline",
+      "tag": "SPAN",
+      "text": "390.000đ"
+    },
+    {
+      "classes": "regular-price",
+      "content": null,
+      "grandparentClass": "cont-wrap",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-item-price flex-box al-baseline",
+      "tag": "DEL",
+      "text": "450.000đ"
+    },
+    {
+      "classes": "product-item-price flex-box al-baseline",
+      "content": null,
+      "grandparentClass": "product-item relative ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "cont-wrap",
+      "tag": "DIV",
+      "text": "1.490.000đ\n1.590.000đ"
+    },
+    {
+      "classes": "current-price",
+      "content": null,
+      "grandparentClass": "cont-wrap",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-item-price flex-box al-baseline",
+      "tag": "SPAN",
+      "text": "1.490.000đ"
+    },
+    {
+      "classes": "regular-price",
+      "content": null,
+      "grandparentClass": "cont-wrap",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-item-price flex-box al-baseline",
+      "tag": "DEL",
+      "text": "1.590.000đ"
+    },
+    {
+      "classes": "product-item-price flex-box al-baseline",
+      "content": null,
+      "grandparentClass": "product-item relative ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "cont-wrap",
+      "tag": "DIV",
+      "text": "450.000đ"
+    },
+    {
+      "classes": "current-price",
+      "content": null,
+      "grandparentClass": "cont-wrap",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "product-item-price flex-box al-baseline",
+      "tag": "SPAN",
+      "text": "450.000đ"
+    },
+    {
+      "classes": "product-item-price flex-box al-baseline",
+      "content": null,
+      "grandparentClass": "product-item relative ",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "cont-wrap",
+      "tag": "DIV",
+      "text": "76.690.000đ\n77.999.000đ"
+    }
+  ],
+  "productIds": [],
+  "products": [],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [
+    [
+      "Thông số kỹ thuật",
+      "Xem cấu hình chi tiết"
+    ],
+    [
+      "Độ phân giải",
+      "Super Retina XDR (1206 x 2622 Pixels)"
+    ],
+    [
+      "Công nghệ màn hình",
+      "OLED"
+    ],
+    [
+      "Chip xử lý",
+      "Apple A20 Pro 6 lõi"
+    ],
+    [
+      "Kháng nước bụi",
+      "IP68"
+    ],
+    [
+      "Chất liệu",
+      "Khung nhôm & Mặt lưng kính Ceramic Shield"
+    ],
+    [
+      "Mặt kính cảm ứng",
+      "Kính cường lực Ceramic Shield 2"
+    ],
+    [
+      "Độ phân giải",
+      "Super Retina XDR (1206 x 2622 Pixels)"
+    ],
+    [
+      "Công nghệ màn hình",
+      "OLED"
+    ],
+    [
+      "Mặt kính cảm ứng",
+      "Kính cường lực Ceramic Shield 2"
+    ],
+    [
+      "Độ sáng tối đa",
+      "3000 nits"
+    ],
+    [
+      "Màn hình rộng",
+      "6.3\" - Tần số quét 120 Hz"
+    ],
+    [
+      "Chip xử lý",
+      "Apple A20 Pro 6 lõi"
+    ],
+    [
+      "Chip đồ họa",
+      "Apple GPU 7 lõi"
+    ],
+    [
+      "Hệ điều hành",
+      "iOS 27"
+    ],
+    [
+      "Kháng nước bụi",
+      "IP68"
+    ],
+    [
+      "Bảo mật nâng cao",
+      "Mở khoá khuôn mặt 3D"
+    ],
+    [
+      "Tính năng đặc biệt",
+      "Âm thanh Dolby Atmos\nÂm Thanh Không Gian\nSOS Khẩn Cấp\nPhát hiện va chạm (Crash Detection)\nMàn hình luôn hiển thị AOD\nHDR10+\nHDR10\nDynamic Island\nDCI-P3\nCông nghệ âm thanh Dolby Digital Plus\nCông nghệ hình ảnh Dolby Vision\nCông nghệ True Tone\nCông nghệ HLG\nCông nghê âm thanh Dolby Digital\nApple Pay\n4 mic"
+    ],
+    [
+      "Ghi âm",
+      "Ghi âm mặc định\nGhi âm cuộc gọi"
+    ],
+    [
+      "Xem phim",
+      "H.264\nAV1\nProRes\nHEVC"
+    ],
+    [
+      "Nghe nhạc",
+      "MP3\nFLAC\nApple Lossless\nAPAC\nAAC"
+    ],
+    [
+      "Chất liệu",
+      "Khung nhôm & Mặt lưng kính Ceramic Shield"
+    ],
+    [
+      "Thiết kế",
+      "Nguyên khối"
+    ],
+    [
+      "Độ phân giải camera sau",
+      "Chính 48 MP & Phụ 48 MP, 48 MP"
+    ],
+    [
+      "Quay phim",
+      "HD 720p@30fps\nFullHD 1080p@60fps\nFullHD 1080p@30fps\nFullHD 1080p@25fps\nFullHD 1080p@120fps\n4K 2160p@60fps\n4K 2160p@30fps\n4K 2160p@25fps\n4K 2160p@24fps\n4K 2160p@120fps\n4K 2160p@100fps\n2.8K 60fps"
+    ],
+    [
+      "Tính năng",
+      "Ảnh Raw\nZoom quang học\nZoom kỹ thuật số\nTự động lấy nét (AF)\nTrôi nhanh thời gian (Time Lapse)\nToàn cảnh (Panorama)\nSmart HDR 5\nSiêu độ phân giải\nSiêu cận (Macro)\nQuay video định dạng Apple Log 2\nQuay video macro\nQuay video không gian\nQuay video hiển thị kép\nQuay video QuickTake\nQuay video ProRes\nQuay chậm (Slow Motion)\nPhong Cách Nhiếp Ảnh 3\nLấy nét theo pha (PDAF)\nLive Photos\nHỗ trợ Genlock\nHiệu chỉnh mắt đỏ nâng cao\nGắn thẻ địa lý (Geotagging)\nGóc siêu rộng (Ultrawide)\nFlash True Tone Thích Ứng\nDeep Fusion\nCinematic\nChụp ảnh liên tục\nChống rung quang học (OIS)\nChế độ hành động (Action Mode)\nChế độ chân dung\nBan đêm (Night Mode)\nMáy ảnh không gian\nPhotonic Engine"
+    ],
+    [
+      "Đèn Flash",
+      "Có"
+    ],
+    [
+      "Độ phân giải camera trước",
+      "18 MP"
+    ],
+    [
+      "Tính năng camera",
+      "Smart HDR 5\nVideo hiển thị kép\nTự động lấy nét (AF)\nTrôi nhanh thời gian (Time Lapse)\nRetina Flash\nQuay video định dạng Apple Log 2\nQuay video QuickTake\nQuay video ProRes\nQuay video Full HD\nQuay video 4K\nQuay chậm (Slow Motion)\nPhong Cách Nhiếp Ảnh 3\nNhãn dán (AR Stickers)\nLive Photos\nDeep Fusion\nCinematic\nChụp ảnh liên tục\nChụp ảnh Raw\nChụp đêm\nChống rung điện tử kỹ thuật số (EIS)\nChế độ chân dung\nCenter Stage cho ảnh và video\nPhotonic Engine"
+    ],
+    [
+      "Sim",
+      "1 Nano SIM & 1 eSIM"
+    ],
+    [
+      "Mạng di động",
+      "Hỗ trợ 5G"
+    ],
+    [
+      "Wifi",
+      "Wi-Fi MIMO\nWi-Fi 7"
+    ],
+    [
+      "GPS",
+      "iBeacon\nQZSS\nNavIC\nGPS\nGLONASS\nGALILEO\nBEIDOU"
+    ],
+    [
+      "Bluetooth",
+      "v6.0"
+    ],
+    [
+      "Kết nối khác",
+      "NFC\nCông nghệ mạng Thread"
+    ],
+    [
+      "Cổng kết nối sạc",
+      "Type-C"
+    ],
+    [
+      "Jack tai nghe",
+      "Type-C"
+    ],
+    [
+      "Dung lượng pin",
+      "34 giờ"
+    ],
+    [
+      "Loại pin",
+      "Li-Ion"
+    ],
+    [
+      "Hỗ trợ sạc tối đa",
+      "60 W"
+    ],
+    [
+      "Công nghệ pin",
+      "Tiết kiệm pin\nSạc pin nhanh\nSạc không dây MagSafe"
+    ],
+    [
+      "Xuất xứ",
+      "Trung Quốc"
+    ],
+    [
+      "Kích thước khối lượng",
+      "Dài 150 mm - Ngang 71.9 mm - Dày 8.75 mm - Nặng 211g"
+    ],
+    [
+      "Danh bạ",
+      "Không giới hạn"
+    ],
+    [
+      "Thông số kỹ thuật",
+      "iPhone 18 Pro"
+    ],
+    [
+      "Màn hình",
+      "Super Retina XDR OLED 6.3 inch, ProMotion 120Hz"
+    ],
+    [
+      "Màu sắc",
+      "Đỏ Burgundy, Băng Thanh, Đen, Bạc"
+    ],
+    [
+      "Camera sau",
+      "Hệ thống 48MP Pro Fusion, Fusion Main khẩu độ thay đổi, Ultra Wide 48MP, Telephoto 48MP"
+    ],
+    [
+      "Camera trước",
+      "18MP Center Stage"
+    ],
+    [
+      "Chip",
+      "Apple A20 Pro"
+    ],
+    [
+      "Bộ nhớ",
+      "256GB / 512GB / 1TB / 2TB"
+    ],
+    [
+      "Pin",
+      "Xem video lên đến 34 giờ"
+    ],
+    [
+      "Sạc nhanh",
+      "50% trong khoảng 15 phút với bộ tiếp hợp 60W trở lên"
+    ],
+    [
+      "Kết nối",
+      "5G, Wi-Fi 7, Bluetooth 6, USB-C"
+    ],
+    [
+      "Chống nước, bụi",
+      "IP68"
+    ]
+  ],
+  "url": "https://onewaymobile.vn/dien-thoai-apple-iphone-18-pro-256gb-zp-a",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": "Hồ Chí Minh",
+  "regionEvidence": "Observed .product-buy-box text: Giá tại / Hồ Chí Minh"
+}

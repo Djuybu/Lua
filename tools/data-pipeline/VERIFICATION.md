@@ -1,5 +1,9 @@
 # Verification — 14 November 2026
 
+## Retail-data follow-up (parser 1.1.0)
+
+Collected eight real product browser projections and reproduced 10 observations (6 ready-for-review, 4 quarantine). Added four retailer-claim catalog variants without inventing missing RAM or trusted AI facts. 36 Python tests passed. Actual backend at origin/dev `579b719` imported all four variants into a temporary SQLite DB, restored them after restart, and preserved the active snapshot on injected rollback. All ten unknown-fee observations were rejected by the existing offer contract as expected. See `datasets/retail-pilot-2026-11-14/README.md` for artifacts and handoff. Earlier HTTP transport limitations below still apply; browser projection acquisition is a separate successful path.
+
 Environment: Windows, Python 3.15.2, SQLite 3.53.4, Node 22.19.0. No external Python dependencies.
 
 ## Passed

@@ -1,0 +1,142 @@
+{
+  "pin": "fbdcd485e6204690a868121875ac8dad066c8a1d",
+  "base": "fa468aed3271e0b2cd5e0566b931ceeea80546d8",
+  "root": "C:\\Users\\Minh Duy\\AppData\\Local\\Temp\\lua-a2-uiux-review-ts9g7ryy",
+  "sourceTree": "c51e6547069b10206e8bc55c27bf0867e2ae4216",
+  "files": 69,
+  "fingerprints": {
+    "apps/adviser/verification/acceptance-compact-settings.png": "7532ac2845c8881972841d48bb64a12bfc4d43efe59b41c1b798611262f1f662",
+    "apps/adviser/verification/acceptance-expanded-catalog.png": "e5829a47a510472afc5e23b0139e941a24ad7961a57a69cc56855ab9dce60cd1"
+  },
+  "blobs": {
+    "apps/adviser/package-lock.json": "057ba4c482149b7fd73dba7d2698be8e785c4021",
+    "apps/adviser/src/catalog.json": "f2e3fb85159aafa8de681c461bee88dd407eb9ab",
+    "apps/adviser/src/provenance.json": "50ac5728f02ad928c05912e5a3aad3cb264656c7"
+  },
+  "status": "changes_requested",
+  "blockingFindings": [
+    "UIUX-F01",
+    "UIUX-F02"
+  ],
+  "sourceUnchangedAfterChecks": true,
+  "verificationImagesRegeneratedByExistingE2E": true,
+  "runtime": {
+    "node": "v22.19.0",
+    "npm": "10.9.3",
+    "python": "3.15.2"
+  },
+  "commands": [
+    {
+      "argv": [
+        "npm.cmd",
+        "ci",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exitCode": 0,
+      "log": "npm-ci.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "test"
+      ],
+      "exitCode": 0,
+      "passed": 39,
+      "failed": 0,
+      "log": "unit-tests.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": "build.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "test:e2e"
+      ],
+      "exitCode": 0,
+      "passed": 5,
+      "failed": 0,
+      "log": "e2e.log"
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/tsx/dist/cli.mjs",
+        "--test",
+        "<review-root>/corruption-probe.ts"
+      ],
+      "cwd": "apps/adviser",
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 3,
+      "log": "corruption-probe.log"
+    },
+    {
+      "argv": [
+        "expo.cmd",
+        "export",
+        "--platform",
+        "web",
+        "--output-dir",
+        "dist-offline-probe"
+      ],
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://acceptance.invalid"
+      },
+      "exitCode": 0,
+      "log": "offline-build.log"
+    },
+    {
+      "argv": [
+        "node",
+        "<review-root>/browser-probe.mjs"
+      ],
+      "exitCode": 1,
+      "passed": 2,
+      "failed": 2,
+      "log": "browser-probe.log"
+    }
+  ],
+  "externalProviderCalls": 0,
+  "productionWrites": 0,
+  "evidenceSha256": {
+    "npm-ci.log": "b7565af291472802941e8a8d91bea7d1eb6e07de175308a6500f7de1e12a2ffc",
+    "typecheck.log": "6e6108ff6ee063c6fa5142bcc8b7fc0d206bb02dc06d7009851a1d4b57a479b1",
+    "unit-tests.log": "a0045f686aa68902b492c24062e1e193eae9b601bb303ce6f521f59ca1d04a99",
+    "build.log": "f14c6db8281e1f4936b66d762eb7d49f940ff4f1982c02379242166e18b626a7",
+    "e2e.log": "be547136dcda1e063e1f1a16cc874d702810eb08cbab5a28770e1edf0e0283e3",
+    "offline-build.log": "3ba2a43d2228e8e44184234ebbd3bbdd4ef2567f37cb0e75d8f638429bf5f91f",
+    "corruption-probe.ts": "e7978f497f1253f39b5c46c538910c32e56677d86c46d92a311c13a4740079d5",
+    "corruption-probe.log": "f1418fb9cb007a2eefb6dbd3614521ab790f642ca424ee4e74f3fcb65f066a3c",
+    "browser-probe.mjs": "8f1a28ae7ace0c18f397c3c789212ae6ffaed103baab49a00acdce9a62593650",
+    "browser-probe.json": "16378753e7ba26bca2c076dce8fa25a837a071d285952ec6689d15db8138b8ff",
+    "browser-probe.log": "16378753e7ba26bca2c076dce8fa25a837a071d285952ec6689d15db8138b8ff"
+  },
+  "notRun": [
+    "APK/native/device acceptance",
+    "live backend/chat/provider/Nano",
+    "tracking adapter/poller/notifications",
+    "full bilingual native/manual acceptance"
+  ],
+  "logNormalization": {
+    "corruption-probe.log": "trailing ASCII whitespace on blank TAP lines removed; no diagnostic content changed",
+    "rawSha256": "ff967429e92693946601e4ce2323084cf5ac1dd2753cf8f97056df4dfd241a1a"
+  }
+}

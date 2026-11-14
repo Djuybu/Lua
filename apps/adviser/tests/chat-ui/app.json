@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "L\u1ef1a chat fixture \u2014 not live",
+    "slug": "lua-chat-fixture",
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

@@ -13,6 +13,9 @@ export type Preferences = {
   seed: string;
   dynamic: boolean;
   endpoint: string;
+  locale?: "vi" | "en";
+  motion?: "system" | "reduced";
+  offlineAiOnly?: boolean;
 };
 export const defaults: Preferences = {
   appearance: "system",
@@ -41,6 +44,18 @@ export function contrast(a: string, b: string) {
   return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
 }
 const light = {
+  outlineVariant: "#CAC4D0",
+  onTertiaryContainer: "#31111D",
+  tertiaryContainer: "#FFD8E4",
+  onTertiary: "#FFFFFF",
+  tertiary: "#7D5260",
+  onSecondaryContainer: "#1D192B",
+  secondaryContainer: "#E8DEF8",
+  onSecondary: "#FFFFFF",
+  secondary: "#625B71",
+  surfaceContainerHigh: "#ECE6F0",
+  surfaceContainerLow: "#F7F2FA",
+  surfaceContainerLowest: "#FFFFFF",
   background: "#FFFBFE",
   surface: "#FFFBFE",
   surfaceContainer: "#F3EDF7",
@@ -56,6 +71,18 @@ const light = {
   onError: "#FFFFFF",
 };
 const dark = {
+  outlineVariant: "#49454F",
+  onTertiaryContainer: "#FFD8E4",
+  tertiaryContainer: "#633B48",
+  onTertiary: "#492532",
+  tertiary: "#EFB8C8",
+  onSecondaryContainer: "#E8DEF8",
+  secondaryContainer: "#4A4458",
+  onSecondary: "#332D41",
+  secondary: "#CCC2DC",
+  surfaceContainerHigh: "#2B2930",
+  surfaceContainerLow: "#1D1B20",
+  surfaceContainerLowest: "#0F0D13",
   background: "#141218",
   surface: "#1D1B20",
   surfaceContainer: "#211F26",
@@ -140,7 +167,14 @@ export function AdvisorTheme({
     };
   }, []);
   return (
-    <ThemeContext.Provider value={{ c, reduceMotion, isDark, fallback }}>
+    <ThemeContext.Provider
+      value={{
+        c,
+        reduceMotion: reduceMotion || preferences.motion === "reduced",
+        isDark,
+        fallback,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

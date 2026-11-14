@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { useTheme } from "./theme";
+import { useLocale } from "./i18n";
 export function Button({
   label,
   onPress,
@@ -27,6 +28,7 @@ export function Button({
   a11yLabel?: string;
 }) {
   const { c, reduceMotion } = useTheme();
+  const { t } = useLocale();
   const scale = useRef(new Animated.Value(1)).current;
   function animate(v: number) {
     scale.stopAnimation();
@@ -54,8 +56,8 @@ export function Button({
   }, [reduceMotion]);
   return (
     <Pressable
-      accessibilityLabel={a11yLabel ?? label}
-      {...(Platform.OS === "web" ? {"aria-pressed": selected} : {})}
+      accessibilityLabel={t(a11yLabel ?? label)}
+      {...(Platform.OS === "web" ? { "aria-pressed": selected } : {})}
       accessibilityRole="button"
       accessibilityState={{ selected, disabled }}
       disabled={disabled}
@@ -98,7 +100,7 @@ export function Button({
             fontSize: 15,
           }}
         >
-          {label}
+          {t(label)}
         </Text>
       </Animated.View>
     </Pressable>
@@ -112,6 +114,7 @@ export function Title({
   small?: boolean;
 }) {
   const { c } = useTheme();
+  const { t } = useLocale();
   return (
     <Text
       accessibilityRole="header"
@@ -123,7 +126,9 @@ export function Title({
         letterSpacing: -0.5,
       }}
     >
-      {children}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? t(child) : child,
+      )}
     </Text>
   );
 }
@@ -135,6 +140,7 @@ export function Body({
   muted?: boolean;
 }) {
   const { c } = useTheme();
+  const { t } = useLocale();
   return (
     <Text
       style={{
@@ -143,7 +149,9 @@ export function Body({
         color: muted ? c.onSurfaceVariant : c.onSurface,
       }}
     >
-      {children}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? t(child) : child,
+      )}
     </Text>
   );
 }
@@ -155,6 +163,7 @@ export function Notice({
   children?: React.ReactNode;
 }) {
   const { c } = useTheme();
+  const { t } = useLocale();
   return (
     <View
       accessibilityLiveRegion="polite"
@@ -166,9 +175,14 @@ export function Notice({
       }}
     >
       <Text style={{ fontSize: 17, fontWeight: "600", color: c.onSurface }}>
-        {title}
+        {t(title)}
       </Text>
-      {children && <Body muted>{children}</Body>}
+      {children &&
+        (typeof children === "string" ? (
+          <Body muted>{children}</Body>
+        ) : (
+          <View style={{ gap: 12 }}>{children}</View>
+        ))}
     </View>
   );
 }

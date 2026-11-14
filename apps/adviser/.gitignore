@@ -6,3 +6,5 @@ ios/
 test-results/
 playwright-report/
 dist-android/
+dist-chat-fixture/
+tests/chat-ui/.expo/

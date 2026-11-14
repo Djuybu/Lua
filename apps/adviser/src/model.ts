@@ -93,7 +93,7 @@ export function changeCategory(d: Draft, category: DeviceCategory): Draft {
   return { ...d, category, purposes: [], os: "", minRam: "" };
 }
 export function vnd(n: number | null | undefined) {
-  return n == null
+  return n == null || !Number.isFinite(n)
     ? "Chưa xác định"
     : new Intl.NumberFormat("vi-VN", {
         style: "currency",

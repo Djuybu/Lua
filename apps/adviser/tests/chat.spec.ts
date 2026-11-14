@@ -3,6 +3,7 @@ test("CHAT-U01 production unavailable: labelled input, keyboard focus and disabl
   page,
 }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Tư vấn AI", exact: true }).click();
   await expect(
     page.getByText("Chatbot chưa khả dụng", { exact: true }),
   ).toBeVisible();
@@ -14,6 +15,7 @@ test("CHAT-U01 production unavailable: labelled input, keyboard focus and disabl
     page.getByRole("button", { name: "Gửi tin nhắn", exact: true }),
   ).toBeDisabled();
   await page.reload();
+  await page.getByRole("button", { name: "Tư vấn AI", exact: true }).click();
   await expect(page.getByLabel("Tin nhắn tư vấn", { exact: true })).toHaveValue(
     "",
   );
@@ -23,6 +25,7 @@ test("CHAT-U02 injected fixture: sending/cancel/late/error/retry/fallback and fo
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("http://127.0.0.1:4174");
+  await page.getByRole("button", { name: "Tư vấn AI", exact: true }).click();
   const field = page.getByLabel("Tin nhắn tư vấn", { exact: true });
   await field.fill("slow");
   await page.getByRole("button", { name: "Gửi tin nhắn", exact: true }).click();
@@ -42,8 +45,9 @@ test("CHAT-U02 injected fixture: sending/cancel/late/error/retry/fallback and fo
     page.getByText("Phản hồi dự phòng", { exact: true }),
   ).toBeVisible();
   await expect(field).toBeFocused();
-  await page.getByRole("button", { name: "Khám phá", exact: true }).click();
-  await page.getByRole("button", { name: "Tư vấn", exact: true }).click();
+  await page.getByRole("button", { name: "Đóng", exact: true }).click();
+  await page.getByRole("button", { name: "Giỏ hàng", exact: true }).click();
+  await page.getByRole("button", { name: "Tư vấn AI", exact: true }).click();
   await expect(
     page.getByText("Phản hồi dự phòng", { exact: true }),
   ).toBeVisible();
@@ -56,6 +60,7 @@ test("CHAT-U03 proposal cancel/write failure/durable confirm and session-only hi
   page,
 }) => {
   await page.goto("http://127.0.0.1:4174");
+  await page.getByRole("button", { name: "Tư vấn AI", exact: true }).click();
   const send = async () => {
     await page.getByLabel("Tin nhắn tư vấn", { exact: true }).fill("proposal");
     await page
@@ -96,9 +101,13 @@ test("CHAT-U03 proposal cancel/write failure/durable confirm and session-only hi
   await page
     .getByRole("button", { name: "Xác nhận đề xuất", exact: true })
     .click();
-  await expect(page.getByText("Laptop · trần")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Điều chỉnh nhu cầu", exact: true }),
+  ).toHaveCount(1);
   await page.reload();
-  await expect(page.getByText("Laptop · trần")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Điều chỉnh nhu cầu", exact: true }),
+  ).toHaveCount(1);
   await expect(
     page.getByText("Phản hồi dự phòng", { exact: true }),
   ).toHaveCount(0);

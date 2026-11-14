@@ -1,5 +1,7 @@
 # Frontend verification — 14 November 2026
 
+Latest acceptance increment: see [ACCEPTANCE.md](ACCEPTANCE.md). Current results are 39/39 unit checks and 5/5 browser journeys, TypeScript and web export passed. The sections below preserve historical evidence and do not represent additional runs.
+
 New frontend implementation in the existing checkout. No backend/pipeline files modified. No commit or push.
 
 | Check | Observed result |

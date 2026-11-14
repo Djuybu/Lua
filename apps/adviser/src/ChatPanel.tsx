@@ -18,6 +18,7 @@ import { categories, labels, vnd } from "./model";
 import { ChatController, type ChatTransport, type ChatProposal } from "./chat";
 export type ChatPanelProps = {
   transport?: ChatTransport;
+  initialPrompt?: string;
   revision: number;
   active: boolean;
   canCommit: boolean;
@@ -25,6 +26,7 @@ export type ChatPanelProps = {
 };
 export function ChatPanel({
   transport,
+  initialPrompt,
   revision,
   active,
   canCommit,
@@ -38,6 +40,9 @@ export function ChatPanel({
     controller.snapshot,
   );
   const [text, setText] = useState("");
+  useEffect(() => {
+    if (initialPrompt !== undefined) setText(initialPrompt);
+  }, [initialPrompt]);
   const input = useRef<React.ComponentRef<typeof TextInput>>(null);
   const previous = useRef(state.status);
   useEffect(() => () => controller.dispose(), [controller]);

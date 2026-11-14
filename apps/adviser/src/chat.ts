@@ -1,3 +1,4 @@
+import { recordError } from "./utils/error-logger";
 import { draftErrors, profileOf, type Draft } from "./model";
 import type { State } from "./storage";
 /** UI view models only. Not an HTTP/Agent3 schema. No default transport. */
@@ -182,6 +183,7 @@ export class ChatController {
         proposal: reply.proposal ?? null,
       });
     } catch {
+      recordError("chat", "REPLY_FAILED");
       if (seq === this.sequence && !this.disposed)
         this.publish({
           status: "error",

@@ -5,25 +5,57 @@ const defaults: Preferences = {
   appearance: "system",
   seed: "#6750A4",
   dynamic: true,
-  endpoint: "",
+  endpoint: DEFAULT_API_ENDPOINT,
 };
+import { destination } from "./domain/navigation";
 import type { ProductVariant } from "./catalog";
+import {
+  emptyCarts,
+  importSaved,
+  validCartData,
+  type CartData,
+} from "./domain/carts";
+import type {
+  RetailerOffer,
+  PriceObservation,
+  TrackingRule,
+  AlertDelivery,
+} from "./domain/price-tracking";
+import { DEFAULT_API_ENDPOINT } from "./api/config";
 export type Saved = {
   id: string;
   at: string;
   variants: ProductVariant[];
   profile: ConfirmedNeedsProfile | null;
   catalogVersion: string;
+  groupName?: string;
+  decisionNote?: string;
+  baselineAmount?: number | null;
+  savedOfferId?: string | null;
+  baselinePriceBasis?: "listing" | "complete" | "unknown";
+  sourceUrl?: string;
 };
 export type State = {
-  version: 1;
+  version: 2;
+  destination?: "advisor" | "compare" | "carts" | "settings";
+  cartData: CartData;
+  offers: RetailerOffer[];
+  observations: PriceObservation[];
+  trackingRules: TrackingRule[];
+  alertDeliveries: AlertDelivery[];
+  legacyRaw?: string;
   preferences: Preferences;
   confirmed: ConfirmedNeedsProfile | null;
   revision: number;
   saved: Saved[];
 };
 export const empty: State = {
-  version: 1,
+  version: 2,
+  cartData: emptyCarts,
+  offers: [],
+  observations: [],
+  trackingRules: [],
+  alertDeliveries: [],
   preferences: defaults,
   confirmed: null,
   revision: 0,
@@ -32,7 +64,12 @@ export const empty: State = {
 const key = "lua-adviser-v1";
 export function validState(x: any): x is State {
   return (
-    x?.version === 1 &&
+    x?.version === 2 &&
+    validCartData(x.cartData) &&
+    Array.isArray(x.offers) &&
+    Array.isArray(x.observations) &&
+    Array.isArray(x.trackingRules) &&
+    Array.isArray(x.alertDeliveries) &&
     Number.isSafeInteger(x.revision) &&
     x.revision >= 0 &&
     (!x.confirmed || validateConfirmedProfile(x.confirmed).valid) &&
@@ -40,6 +77,12 @@ export function validState(x: any): x is State {
     /^#[0-9a-f]{6}$/i.test(x.preferences?.seed) &&
     typeof x.preferences?.dynamic === "boolean" &&
     typeof x.preferences?.endpoint === "string" &&
+    (x.preferences.locale === undefined ||
+      ["vi", "en"].includes(x.preferences.locale)) &&
+    (x.preferences.motion === undefined ||
+      ["system", "reduced"].includes(x.preferences.motion)) &&
+    (x.preferences.offlineAiOnly === undefined ||
+      typeof x.preferences.offlineAiOnly === "boolean") &&
     Array.isArray(x.saved) &&
     x.saved.every(
       (s: any) =>
@@ -68,8 +111,43 @@ export function createStore(storage: {
       const raw = await storage.getItem(key);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (!validState(parsed)) throw new Error("Dữ liệu lưu không hợp lệ.");
-        state = parsed;
+        if (parsed?.version === 1) {
+          const migrated = {
+            ...empty,
+            ...parsed,
+            version: 2,
+            destination: destination(parsed.destination ?? parsed.tab),
+            cartData: importSaved(parsed.saved ?? []),
+            offers: [],
+            observations: [],
+            trackingRules: importSaved(parsed.saved ?? []).candidates.map(
+              (candidate) => ({
+                id: "off:" + candidate.id,
+                candidateId: candidate.id,
+                status: "off",
+                offerScope: [],
+                targetAmount: null,
+                currency: "VND",
+                notificationsEnabled: false,
+                createdAt: candidate.savedAt,
+                updatedAt: candidate.savedAt,
+              }),
+            ),
+            alertDeliveries: [],
+            legacyRaw: raw,
+            preferences: {
+              ...defaults,
+              ...parsed.preferences,
+              endpoint: DEFAULT_API_ENDPOINT,
+            },
+          };
+          if (!validState(migrated)) throw Error("Invalid legacy data");
+          await storage.setItem(key, JSON.stringify(migrated));
+          state = migrated;
+        } else {
+          if (!validState(parsed)) throw new Error("Dữ liệu lưu không hợp lệ.");
+          state = parsed;
+        }
       }
       blocked = false;
       return state;

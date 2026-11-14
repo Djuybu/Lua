@@ -200,3 +200,43 @@ Chi tiết kết quả:
 - Giữ nguyên toàn bộ mã nguồn pipeline của Agent 1 (`tools/data-pipeline/**`).
 - Không tương tác hay thay đổi các nhánh `main` hoặc `develop`.
 - Báo cáo kết quả trực tiếp về thread điều phối gốc (`environmentId: "0d643e83-f77e-4710-96b0-3f8b4d2c8fc9"`, `threadId: "8a87aa59-85d2-41db-8572-751ac87fd1b2"`).
+
+---
+
+## 7. Khắc phục Triệt để 7 Nhóm Lỗi HTTP (D01 -> D07) theo A1-HTTP-02
+
+**Nhánh triển khai:** `codex/dev/agent-3/data-02`  
+**Bộ kiểm thử chuẩn:** `tools/data-pipeline/scripts/http_backend.mjs` (30 ca kiểm thử thực tế trên loopback ephemeral ports và disposable SQLite).
+
+### 7.1. Bảng Đối chiếu Before / After Sửa Lỗi
+
+| Defect ID | Nhóm Lỗi & Test Cases | Hiện trạng Trước Sửa (Baseline) | Giải pháp & Trạng thái Sau Sửa |
+|---|---|---|---|
+| **D01** | `H03-ingest-null`, `H03-recommend-null`, scalar JSON (`42`, `"scalar"`, `false`) | Crash / trả về 500 do `body.offers` trên non-object scalar (`FAILED`) | Bổ sung guard `!body \|\| typeof body !== 'object'` ở cả 2 routes; trả về HTTP 400 `ERR_INVALID_PAYLOAD` / `ERR_INVALID_PROFILE`, zero writes (`PASSED`). |
+| **D02** | `H04`, `H09-unknown`: Variant chưa biết trong danh mục catalog | Ingest nhận offer rác của variant không tồn tại, ghi vào DB (`FAILED`) | Đối chiếu `matchedVariantId` của từng offer với `store.getVariantsForActiveCatalog()`; nếu có variant chưa biết -> trả HTTP 400 `ERR_UNKNOWN_VARIANT`, zero writes (`PASSED`). |
+| **D03** | `H06-utf8`: Multi-byte UTF-8 payload boundary | Chỉ đếm ký tự JS (`str.length`), payload 1.2MB UTF-8 (400k ký tự) lọt qua kiểm tra (`FAILED`) | Đệm `Buffer` nhị phân, kiểm tra `totalBytes += chunk.length` theo UTF-8 byte length thật; chặn chính xác > 1,000,000 bytes với HTTP 413 `ERR_PAYLOAD_TOO_LARGE`, cho phép đúng 1,000,000 bytes (`PASSED`). |
+| **D04** | `H08`, `H09-conflict`: Duplicate observations có xung đột dữ liệu | Không phát hiện xung đột intra-batch và ghi đè âm thầm trong DB (`FAILED`) | Dùng SQLite `SAVEPOINT save_offers_batch`, kiểm tra observation key cả intra-batch lẫn DB: nếu trùng khớp giá trị -> idempotent ignore; nếu xung đột giá/tình trạng -> ném HTTP 409 `ERR_CONFLICT` và atomic rollback toàn bộ batch (`PASSED`). |
+| **D05** | `H09-storage`: Enum `completenessStatus` lạ | Không validate enum `completenessStatus`, chấp nhận giá trị rác như `INVALID` (`FAILED`) | Bổ sung validation bắt buộc `completenessStatus` thuộc `['COMPLETE', 'PARTIAL_UNKNOWN']` trong `contracts/crawler.ts`; vi phạm trả về HTTP 400 `ERR_SEMANTIC_VALIDATION` (`PASSED`). |
+| **D06** | `H10-nooffer`: Biến thể phù hợp nhu cầu nhưng không có offer | Trả về `status: "NO_FIT"` sai ngữ nghĩa dù cấu hình phần cứng đạt yêu cầu (`FAILED`) | Cập nhật logic: khi shortlist rỗng nhưng có variant bị loại chỉ vì `NO_OFFERS` -> trả về `status: "NO_VERIFIED_OFFER"`, giữ `NO_FIT` riêng cho trường hợp không đạt phần cứng/ngân sách (`PASSED`). |
+| **D07** | `H10-unknown`: Shortlist có sản phẩm nhưng phí ship chưa biết | Trả về `status: "SUCCESS"` dù chưa xác minh được tổng chi phí (`FAILED`) | Cập nhật logic: nếu không có candidate nào đạt `isVerifiedAffordable === true` (do phí ship null) -> trả về `status: "NO_VERIFIED_OFFER"` (`PASSED`). |
+
+### 7.2. Kết quả Đo kiểm Toàn diện
+
+1. **Suite 30-case HTTP Runner (`tools/data-pipeline/scripts/http_backend.mjs`):**
+   - Lệnh: `node tools/data-pipeline/scripts/http_backend.mjs services/adviser-backend tools/data-pipeline/datasets/retail-pilot-2026-11-14 tools/data-pipeline/tests/fixtures/http-approved-synthetic.json .work/test-scratch .work/test-scratch/result.json suite`
+   - Kết quả: **30 passed / 0 failed / status: "passed"** (trước sửa: 20 passed / 10 failed).
+   - Hạ tầng mạng: Actual `createHttpServer` trên IPv4 loopback ephemeral ports, disposable SQLite.
+   - External provider calls: 0, production writes: 0.
+2. **Backend Unit & Integration Tests (`services/adviser-backend/tests/`):**
+   - Lệnh: `npm.cmd test --prefix services/adviser-backend`
+   - Kết quả: **45 passed / 0 failed / duration: ~1.3s**.
+3. **Python Pipeline Tests (`tools/data-pipeline/tests/`):**
+   - Lệnh: `$env:PYTHONPATH="tools/data-pipeline;tools/data-pipeline/src"; python -m unittest discover -s tools/data-pipeline/tests`
+   - Kết quả: **41 passed / 0 failed / duration: ~9.5s**.
+4. **Retail Verification Script (`verify-retail-backend.mjs`):**
+   - Lệnh: `node tools/data-pipeline/scripts/verify-retail-backend.mjs services/adviser-backend tools/data-pipeline/datasets/retail-pilot-2026-11-14`
+   - Kết quả: `{"variantsImported":4,"restart":"passed","rollback":"passed","observationsChecked":10,"unknownFeeOffersRejected":10,"providerCalls":0,"productionWrites":0}` (100% Passed).
+5. **TypeScript Typecheck:**
+   - Lệnh: `npm.cmd run typecheck --prefix services/adviser-backend`
+   - Kết quả: **0 errors**.
+

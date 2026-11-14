@@ -10,6 +10,7 @@ import { validateConfirmedProfile } from '../contracts/taxonomy.ts';
 import {
   type RecommendationRequestEnvelope,
   type RecommendationResponseEnvelope,
+  type ResponseStatus,
   CURRENT_SCHEMA_VERSION,
   CURRENT_RULE_VERSION
 } from '../contracts/envelope.ts';
@@ -34,23 +35,32 @@ export function createHttpServer(
     // Helper to read incoming JSON body
     const readBody = (): Promise<any> => {
       return new Promise((resolve, reject) => {
-        let body = '';
+        const chunks: Buffer[] = [];
+        let totalBytes = 0;
         let rejected = false;
         req.on('data', chunk => {
           if (rejected) return;
-          body += chunk;
-          if (body.length > 1_000_000) {
+          const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+          totalBytes += buf.length;
+          if (totalBytes > 1_000_000) {
             rejected = true;
             const err: any = new Error('Payload Too Large');
             err.statusCode = 413;
             err.code = 'ERR_PAYLOAD_TOO_LARGE';
             reject(err);
+            return;
           }
+          chunks.push(buf);
         });
         req.on('end', () => {
           if (rejected) return;
+          const raw = Buffer.concat(chunks).toString('utf8');
+          if (raw.length === 0) {
+            resolve({});
+            return;
+          }
           try {
-            resolve(body ? JSON.parse(body) : {});
+            resolve(JSON.parse(raw));
           } catch (e) {
             const err: any = new Error('Malformed JSON');
             err.statusCode = 400;
@@ -78,6 +88,16 @@ export function createHttpServer(
       // 2. Crawler Staging Ingest
       if (method === 'POST' && url === '/advisor/v1/ingest') {
         const body = await readBody();
+        if (!body || typeof body !== 'object') {
+          return sendJson(400, {
+            error: {
+              code: 'ERR_INVALID_PAYLOAD',
+              message: 'Payload must be an object with an offers array or an array of offers',
+              retryable: false
+            }
+          });
+        }
+
         const offers = Array.isArray(body) ? (body as StagedCrawlerOffer[]) : (body.offers as StagedCrawlerOffer[]);
         if (!Array.isArray(offers)) {
           return sendJson(400, {
@@ -108,6 +128,21 @@ export function createHttpServer(
           });
         }
 
+        // Validate that each matchedVariantId exists in active catalog
+        const activeVariants = store.getVariantsForActiveCatalog();
+        const knownVariantIds = new Set(activeVariants.map(v => v.variantId));
+        for (const o of offers) {
+          if (!knownVariantIds.has(o.matchedVariantId)) {
+            return sendJson(400, {
+              error: {
+                code: 'ERR_UNKNOWN_VARIANT',
+                message: `matchedVariantId '${o.matchedVariantId}' does not match any variant in active catalog`,
+                retryable: false
+              }
+            });
+          }
+        }
+
         store.saveOffers(offers);
         return sendJson(200, { status: 'accepted', count: offers.length });
       }
@@ -117,20 +152,26 @@ export function createHttpServer(
         const envelope = (await readBody()) as RecommendationRequestEnvelope;
 
         // Metadata validation
-        if (!envelope.requestId || !envelope.decisionId) {
+        if (
+          !envelope ||
+          typeof envelope !== 'object' ||
+          Array.isArray(envelope) ||
+          !envelope.requestId ||
+          !envelope.decisionId
+        ) {
           return sendJson(400, {
             schemaVersion: CURRENT_SCHEMA_VERSION,
-            requestId: envelope.requestId || 'unknown',
-            decisionId: envelope.decisionId || 'unknown',
-            profileRevision: envelope.profileRevision || 0,
+            requestId: envelope?.requestId || 'unknown',
+            decisionId: envelope?.decisionId || 'unknown',
+            profileRevision: envelope?.profileRevision || 0,
             catalogVersion: store.getActiveCatalogVersion() || 'none',
             ruleVersion: CURRENT_RULE_VERSION,
-            status: 'ERROR',
+            status: 'ERR_INVALID_PROFILE',
             shortlist: [],
             excludedVariants: [],
             error: {
               code: 'ERR_INVALID_PROFILE',
-              message: 'Missing requestId or decisionId',
+              message: 'Missing or invalid envelope metadata (requestId and decisionId required)',
               retryable: false
             }
           });
@@ -198,7 +239,16 @@ export function createHttpServer(
         // Rank candidates
         const shortlist = rankEligibleCandidates(eligibleList, envelope.profile);
 
-        const status = shortlist.length > 0 ? 'SUCCESS' : 'NO_FIT';
+        let status: ResponseStatus;
+        if (shortlist.some(c => c.isVerifiedAffordable)) {
+          status = 'SUCCESS';
+        } else if (shortlist.length > 0) {
+          status = 'NO_VERIFIED_OFFER';
+        } else if (excludedList.some(e => e.reasonCode === 'NO_OFFERS')) {
+          status = 'NO_VERIFIED_OFFER';
+        } else {
+          status = 'NO_FIT';
+        }
 
         const responseEnv: RecommendationResponseEnvelope = {
           schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -219,7 +269,7 @@ export function createHttpServer(
       return sendJson(404, { error: 'Not Found' });
     } catch (err: any) {
       const statusCode = err?.statusCode || 500;
-      const code = err?.code || (statusCode === 500 ? 'ERR_INTERNAL' : 'ERR_BAD_REQUEST');
+      const code = err?.code || (statusCode === 500 ? 'ERR_INTERNAL' : (statusCode === 409 ? 'ERR_CONFLICT' : 'ERR_BAD_REQUEST'));
       return sendJson(statusCode, {
         error: {
           code,

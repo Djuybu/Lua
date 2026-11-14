@@ -144,3 +144,47 @@ test('Persistence - restart recovery preserves saved decisions and catalog acros
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
 });
+
+test('Persistence - migration on existing DB with baseline data preserves schema and historical records', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lua-migration-'));
+  const dbFile = path.join(tempDir, 'baseline.sqlite');
+
+  try {
+    // 1. Populate initial baseline data
+    const storeBaseline = new AdviserSqliteStore(dbFile);
+    storeBaseline.activateSnapshot(sampleManifestV1);
+    storeBaseline.saveOffers([
+      {
+        sourceId: 'shop-old',
+        externalOfferId: 'off-old-1',
+        matchedVariantId: 'laptop-1',
+        condition: 'NEW',
+        stockStatus: 'IN_STOCK',
+        basePriceVnd: 17_000_000,
+        mandatoryFeesVnd: 0,
+        shippingVnd: 0,
+        conditionalDiscountVnd: 0,
+        sourceUrl: 'https://shop-old.com/item',
+        observedAt: '2026-11-13T00:00:00.000Z',
+        completenessStatus: 'COMPLETE'
+      }
+    ]);
+    storeBaseline.close();
+
+    // 2. Re-open store with potential schema migration initialization
+    const storeMigrated = new AdviserSqliteStore(dbFile);
+    assert.equal(storeMigrated.getActiveCatalogVersion(), 'cat-v1.0');
+
+    // Historical variant and offers remain intact
+    const variants = storeMigrated.getVariantsForActiveCatalog();
+    assert.equal(variants.length, 1);
+    assert.equal(variants[0]!.variantId, 'laptop-1');
+
+    const offers = storeMigrated.getOffersForVariant('laptop-1');
+    assert.equal(offers.length, 2); // Initial sampleManifest offer + old offer
+
+    storeMigrated.close();
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+});

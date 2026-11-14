@@ -101,12 +101,26 @@ export function validateStagedCrawlerOffer(offer: unknown): OfferValidationResul
     errors.push('conditionalDiscountVnd must be a non-negative safe integer');
   }
 
-  if (!o.sourceUrl || typeof o.sourceUrl !== 'string' || !o.sourceUrl.startsWith('http')) {
-    errors.push('sourceUrl must be a valid http(s) URL');
+  if (!o.sourceUrl || typeof o.sourceUrl !== 'string') {
+    errors.push('sourceUrl is required and must be a string');
+  } else {
+    try {
+      const parsedUrl = new URL(o.sourceUrl);
+      if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+        errors.push("sourceUrl must have http: or https: protocol");
+      }
+    } catch {
+      errors.push('sourceUrl must be a valid, well-formed URL');
+    }
   }
 
-  if (!o.observedAt || typeof o.observedAt !== 'string' || Number.isNaN(Date.parse(o.observedAt))) {
-    errors.push('observedAt must be a valid ISO 8601 date string');
+  if (!o.observedAt || typeof o.observedAt !== 'string') {
+    errors.push('observedAt is required and must be a string');
+  } else {
+    const timestampMs = Date.parse(o.observedAt);
+    if (Number.isNaN(timestampMs) || !o.observedAt.includes('T')) {
+      errors.push('observedAt must be a valid ISO 8601 date string');
+    }
   }
 
   return {

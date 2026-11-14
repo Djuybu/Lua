@@ -113,3 +113,37 @@ test('Ingest - rejects offer referencing unknown catalog variant', () => {
   assert.equal(report.rejected, 1);
   assert.match(report.rejectedReasons[0]!.reason, /does not match any known catalog variant/);
 });
+
+test('Ingest - detects and reports conflicting duplicate observations for same identity & timestamp', () => {
+  const store = new StagingIngestStore(['macbook-air-m2-8-256']);
+
+  const offer1: StagedCrawlerOffer = {
+    sourceId: 'cellphones',
+    externalOfferId: 'cps-conflict',
+    matchedVariantId: 'macbook-air-m2-8-256',
+    condition: 'NEW',
+    stockStatus: 'IN_STOCK',
+    basePriceVnd: 24_000_000,
+    mandatoryFeesVnd: 0,
+    shippingVnd: 0,
+    conditionalDiscountVnd: 0,
+    sourceUrl: 'https://cellphones.com.vn/macbook-air-m2.html',
+    observedAt: '2026-11-14T09:00:00.000Z',
+    completenessStatus: 'COMPLETE'
+  };
+
+  const offerConflict: StagedCrawlerOffer = {
+    ...offer1,
+    basePriceVnd: 22_000_000 // Conflicting price for exact same observation key!
+  };
+
+  const r1 = store.ingest([offer1]);
+  assert.equal(r1.accepted, 1);
+  assert.equal(r1.conflictsReported, 0);
+
+  const r2 = store.ingest([offerConflict]);
+  assert.equal(r2.accepted, 0);
+  assert.equal(r2.duplicateIgnored, 1);
+  assert.equal(r2.conflictsReported, 1);
+  assert.match(r2.conflictDetails[0]!.description, /Conflicting duplicate observation detected/);
+});

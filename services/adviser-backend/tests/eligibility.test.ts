@@ -108,3 +108,28 @@ test('Eligibility - null shipping produces eligible without verified affordabili
   assert.equal(res.verifiedOffer?.price.totalVnd, null);
   assert.equal(res.verifiedOffer?.price.isComplete, false);
 });
+
+test('Eligibility - variant with no offers or only out-of-stock offers is excluded with NO_OFFERS', () => {
+  // 1. Completely empty offers
+  const resNoOffers = evaluateEligibility(baseVariant, [], baseProfile);
+  assert.equal(resNoOffers.isEligible, false);
+  assert.equal(resNoOffers.exclusion?.reasonCode, 'NO_OFFERS');
+
+  // 2. Only OUT_OF_STOCK offer
+  const outOfStockOffer: StagedCrawlerOffer = {
+    ...baseOffer,
+    stockStatus: 'OUT_OF_STOCK'
+  };
+  const resOutOfStock = evaluateEligibility(baseVariant, [outOfStockOffer], baseProfile);
+  assert.equal(resOutOfStock.isEligible, false);
+  assert.equal(resOutOfStock.exclusion?.reasonCode, 'NO_OFFERS');
+
+  // 3. Offer belongs to a different variant (exact identity required)
+  const differentVariantOffer: StagedCrawlerOffer = {
+    ...baseOffer,
+    matchedVariantId: 'different-variant-id-999'
+  };
+  const resMismatchVariant = evaluateEligibility(baseVariant, [differentVariantOffer], baseProfile);
+  assert.equal(resMismatchVariant.isEligible, false);
+  assert.equal(resMismatchVariant.exclusion?.reasonCode, 'NO_OFFERS');
+});

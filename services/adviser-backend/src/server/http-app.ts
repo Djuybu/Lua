@@ -15,7 +15,7 @@ import {
 } from '../contracts/envelope.ts';
 import { evaluateEligibility } from '../domain/eligibility.ts';
 import { rankEligibleCandidates } from '../domain/ranking.ts';
-import { type StagedCrawlerOffer } from '../contracts/crawler.ts';
+import { type StagedCrawlerOffer, validateStagedCrawlerOffer } from '../contracts/crawler.ts';
 
 export function createHttpServer(
   store: AdviserSqliteStore,
@@ -35,17 +35,27 @@ export function createHttpServer(
     const readBody = (): Promise<any> => {
       return new Promise((resolve, reject) => {
         let body = '';
+        let rejected = false;
         req.on('data', chunk => {
+          if (rejected) return;
           body += chunk;
           if (body.length > 1_000_000) {
-            reject(new Error('Payload Too Large'));
+            rejected = true;
+            const err: any = new Error('Payload Too Large');
+            err.statusCode = 413;
+            err.code = 'ERR_PAYLOAD_TOO_LARGE';
+            reject(err);
           }
         });
         req.on('end', () => {
+          if (rejected) return;
           try {
             resolve(body ? JSON.parse(body) : {});
           } catch (e) {
-            reject(new Error('Invalid JSON'));
+            const err: any = new Error('Malformed JSON');
+            err.statusCode = 400;
+            err.code = 'ERR_INVALID_JSON';
+            reject(err);
           }
         });
         req.on('error', reject);
@@ -70,8 +80,34 @@ export function createHttpServer(
         const body = await readBody();
         const offers = Array.isArray(body) ? (body as StagedCrawlerOffer[]) : (body.offers as StagedCrawlerOffer[]);
         if (!Array.isArray(offers)) {
-          return sendJson(400, { error: 'Payload must be an array of offers or have an offers array' });
+          return sendJson(400, {
+            error: {
+              code: 'ERR_INVALID_PAYLOAD',
+              message: 'Payload must be an array of offers or have an offers array',
+              retryable: false
+            }
+          });
         }
+
+        // Validate each offer semantically
+        const validationErrors: string[] = [];
+        for (let i = 0; i < offers.length; i++) {
+          const res = validateStagedCrawlerOffer(offers[i]);
+          if (!res.valid) {
+            validationErrors.push(`Offer at index ${i}: ${res.errors.join(', ')}`);
+          }
+        }
+
+        if (validationErrors.length > 0) {
+          return sendJson(400, {
+            error: {
+              code: 'ERR_SEMANTIC_VALIDATION',
+              message: validationErrors.join('; '),
+              retryable: false
+            }
+          });
+        }
+
         store.saveOffers(offers);
         return sendJson(200, { status: 'accepted', count: offers.length });
       }
@@ -182,9 +218,11 @@ export function createHttpServer(
       // 404 for unknown routes
       return sendJson(404, { error: 'Not Found' });
     } catch (err: any) {
-      return sendJson(500, {
+      const statusCode = err?.statusCode || 500;
+      const code = err?.code || (statusCode === 500 ? 'ERR_INTERNAL' : 'ERR_BAD_REQUEST');
+      return sendJson(statusCode, {
         error: {
-          code: 'ERR_INTERNAL',
+          code,
           message: err?.message || 'Internal Server Error',
           retryable: false
         }

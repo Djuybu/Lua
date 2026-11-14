@@ -164,31 +164,34 @@ Chi tiết kết quả:
   4. Oneway JSON-LD parse error kèm xung đột tiền tố `X/A` vs `zp-a`.
   5. ShopDunk tình trạng máy và tồn kho chưa xác định (unknown condition/stock).
 
-### 5.2. Kết quả Chạy Kiểm thử Toàn diện
+### 5.2. Kết quả Chạy Kiểm thử Toàn diện (45/45 Backend Tests Passing)
 
 1. **Python Pipeline Tests (`tools/data-pipeline/tests/`):**
    - Lệnh: `python -m unittest discover tests`
-   - Kết quả: **36/36 tests passed** (thời gian: 3.947s).
+   - Kết quả: **36/36 tests passed** (thời gian: 3.948s).
 2. **Agent 1 Verification Script (`verify-retail-backend.mjs`):**
    - Lệnh: `node tools/data-pipeline/scripts/verify-retail-backend.mjs services/adviser-backend tools/data-pipeline/datasets/retail-pilot-2026-11-14`
    - Kết quả: **Passed 100%**:
      `{"variantsImported":4,"restart":"passed","rollback":"passed","observationsChecked":10,"unknownFeeOffersRejected":10,"providerCalls":0,"productionWrites":0}`
 3. **Backend Node Tests (`services/adviser-backend/tests/`):**
    - Lệnh: `node --experimental-strip-types --test tests/**/*.test.ts`
-   - Kết quả: **40/40 tests passed** (bao gồm 5 tests hồi quy dữ liệu thật trong `retail-pilot.test.ts`).
-   - Chi tiết 5 tests dữ liệu thật:
-     - `Retail Pilot Regression - loads real dataset artifacts successfully` (pass).
-     - `Retail Pilot Regression - activates 4 real catalog variants in SQLite and verifies restart & rollback` (pass).
-     - `Retail Pilot Regression - validates edge cases in 10 staging observations` (pass).
-     - `Retail Pilot Regression - unknown fees and unapproved offers never yield isVerifiedAffordable: true` (pass).
-     - `Retail Pilot Regression - real LaptopAZ variant evaluated with mock provider does not fabricate facts` (pass).
+   - Kết quả: **45/45 tests passed** (45 passed, 0 failed, duration: ~1.3s).
+   - Chi tiết các nhóm kiểm thử hoàn tất theo A3-RAW-01:
+     - **Malformed fields / URLs / Timestamps (`tests/contracts.test.ts`):** Kiểm định scheme `http:/https:`, chặn URL hỏng/gãy cú pháp, kiểm tra ISO 8601 string có `T`, kiểm tra enum `condition` và `stockStatus`.
+     - **Money boundaries & overflow (`tests/money.test.ts`):** Safe integer >= 0, biên ngân sách, chặn tràn số `MoneyOverflowError` và số âm `InvalidMoneyError`.
+     - **Conflicting duplicates & provenance (`tests/ingest.test.ts`):** Phát hiện duplicate trùng observation key nhưng khác giá/tình trạng, ghi nhận `conflictsReported` và `conflictDetails` mà không nuốt lỗi âm thầm.
+     - **Exact identity & stock constraints (`tests/eligibility.test.ts`):** Không có offer hoặc offer hết hàng (`OUT_OF_STOCK`), offer lệch `matchedVariantId` đều bị loại với `NO_OFFERS`.
+     - **Database migration on baseline data (`tests/persistence.test.ts`):** Khởi động lại store trên DB SQLite đã có sẵn dữ liệu và schema baseline, bảo toàn nguyên vẹn 100% các biến thể và chào hàng lịch sử.
+     - **Bounded HTTP payload & semantic rejection (`tests/http-server.test.ts`):** Chặn payload > 1MB với mã `413 Payload Too Large` (`ERR_PAYLOAD_TOO_LARGE`), bắt lỗi JSON malformed với mã `400 Bad Request` (`ERR_INVALID_JSON`), và kiểm tra semantic validation trên route `/advisor/v1/ingest`.
+     - **AI prompt injection & privileged paths (`tests/ai-validator.test.ts`):** Chặn các nỗ lực inject path lạ (`adminRole`), payload phá vỡ schema (SQL injection string), và từ chối `factId` bịa đặt.
+     - **Real dataset regression (`tests/retail-pilot.test.ts`):** Đọc trực tiếp 8 captures, 10 staging observations, 4 variants thật từ dataset của Agent 1; kiểm thử atomic rollback và phục hồi restart.
 4. **TypeScript Typecheck:**
    - Lệnh: `npm.cmd run typecheck`
    - Kết quả: **0 errors**, clean typecheck.
 
 ---
 
-## 6. Phạm vi Merge & Tích hợp vào dev
+## 6. Phạm vi Merge & Tích hợp vào dev (A3-RAW-01)
 
 - Merge có chủ đích nhánh `codex/dev/agent-3/plan-03` vào `dev` theo ngoại lệ được người dùng cho phép.
 - Chỉ bao gồm các thay đổi trong:
@@ -196,3 +199,4 @@ Chi tiết kết quả:
   - `docs/hackathon/agent-3-backend.md`
 - Giữ nguyên toàn bộ mã nguồn pipeline của Agent 1 (`tools/data-pipeline/**`).
 - Không tương tác hay thay đổi các nhánh `main` hoặc `develop`.
+- Báo cáo kết quả trực tiếp về thread điều phối gốc (`environmentId: "0d643e83-f77e-4710-96b0-3f8b4d2c8fc9"`, `threadId: "8a87aa59-85d2-41db-8572-751ac87fd1b2"`).

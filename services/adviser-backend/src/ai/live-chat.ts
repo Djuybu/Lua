@@ -48,7 +48,7 @@ export class LiveChat {
   }
 
   async reply(input: ChatInput, variants: ProductVariant[], signal?: AbortSignal) {
-    const sources = variants.slice(0, 5).flatMap((variant) => {
+    const sources = variants.slice(0, 8).flatMap((variant) => {
       const url = (variant as ProductVariant & { sourceUrl?: string }).sourceUrl;
       return url?.startsWith('https://') ? [{ label: variant.modelName, url }] : [];
     });
@@ -65,7 +65,9 @@ export class LiveChat {
     this.busy = true;
     this.calls++;
     try {
-      const catalog = variants.slice(0, 12).map((variant) => ({
+      // Qdrant already ranks these candidates. Keep a bounded but broad set so
+      // the model can compare more than the small frontend seed catalog.
+      const catalog = variants.slice(0, 30).map((variant) => ({
         variantId: variant.variantId,
         modelName: variant.modelName,
         brand: variant.brand,
@@ -85,6 +87,7 @@ export class LiveChat {
           input: JSON.stringify({
             message: input.text,
             history: input.history.slice(-10),
+            retrieval: { source: 'qdrant-lexical', matchedCandidates: variants.length, suppliedCandidates: catalog.length },
             taxonomy: { categories: VALID_CATEGORIES, purposesByCategory: CATEGORY_PURPOSES, priorities: VALID_PRIORITIES },
             catalog,
           }),

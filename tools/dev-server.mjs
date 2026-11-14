@@ -51,7 +51,11 @@ const backend = http.createServer(async (req, res) => {
       if (!body || typeof body.text !== 'string' || !body.text.trim() || body.text.length > 4000 || !Number.isSafeInteger(body.profileRevision) || body.profileRevision < 0 || !historyValid) {
         return send(res, 400, { error: { message: 'Invalid chat request' } });
       }
-      const catalog = await store.catalog(body.text);
+      let catalog = await store.catalog(body.text);
+      // A natural-language query may share no lexical token with the index.
+      // Keep chat useful by falling back to the full active SQL catalog while
+      // preserving Qdrant as the primary retrieval path.
+      if (!catalog.variants.length) catalog = await store.catalog('');
       const reply = await chat.reply({ text: body.text.trim(), history: body.history, profileRevision: body.profileRevision }, catalog.variants, controller.signal);
       if (!res.destroyed) send(res, 200, reply);
       return;

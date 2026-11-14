@@ -34,7 +34,7 @@ import {
 import type { ProductVariant, SnapshotManifest } from "./catalog";
 import type { RecommendationResponseEnvelope } from "./envelope";
 import seed from "./catalog.json";
-import { recommend } from "./api";
+import { loadCatalog, recommend } from "./api";
 import { DEFAULT_API_ENDPOINT } from "./api/config";
 import { recordError } from "./utils/error-logger";
 import { ChatPanel } from "./ChatPanel";
@@ -55,7 +55,14 @@ import { DeviceDetailModal } from "./screens/DeviceDetailModal";
 import { CartsScreen } from "./screens/CartsScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { ComparisonView } from "./ComparisonView";
-const catalog = seed as SnapshotManifest;
+import { CatalogProvider } from "./catalog-context";
+const emptyCatalog: SnapshotManifest = {
+  ...(seed as SnapshotManifest),
+  catalogVersion: "unavailable",
+  variants: [],
+  facts: [],
+  offers: [],
+};
 const store = createStore(AsyncStorage);
 const destinations = [
   { id: "advisor", label: "Trang chủ", icon: House },
@@ -135,6 +142,33 @@ function Workspace({
   const { width, height } = useWindowDimensions();
   const rail = width >= 840 || (width >= 600 && height >= 600);
   const expanded = width >= 840;
+  const [catalog, setCatalog] = useState<SnapshotManifest>(emptyCatalog);
+  const [catalogStatus, setCatalogStatus] = useState<
+    "loading" | "live" | "failed"
+  >("loading");
+  useEffect(() => {
+    if (!DEFAULT_API_ENDPOINT) {
+      setCatalogStatus("failed");
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    loadCatalog(DEFAULT_API_ENDPOINT, controller.signal)
+      .then((manifest) => {
+        setCatalog(manifest);
+        setCatalogStatus("live");
+      })
+      .catch(() => {
+        recordError("network", "CATALOG_UNAVAILABLE");
+        setCatalog(emptyCatalog);
+        setCatalogStatus("failed");
+      })
+      .finally(() => clearTimeout(timer));
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, []);
   const [priceTracking, setPriceTracking] = useState(false);
   useEffect(() => {
     setPriceTracking(false);
@@ -398,6 +432,7 @@ function Workspace({
     </View>
   );
   return (
+    <CatalogProvider manifest={catalog}>
     <SafeAreaView style={{ flex: 1, backgroundColor: c.background }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
       <View
@@ -449,6 +484,20 @@ function Workspace({
               </Notice>
             )}
             {notice && <Notice title={notice} />}
+            {catalogStatus === "loading" && (
+              <Notice title="Đang tải catalog từ PostgreSQL/Qdrant…" />
+            )}
+            {catalogStatus === "failed" && (
+              <Notice title="Không kết nối được catalog backend">
+                Không hiển thị dữ liệu seed để tránh nhầm placeholder là dữ liệu
+                đang hoạt động.
+              </Notice>
+            )}
+            {catalogStatus === "live" && (
+              <Body muted>
+                Catalog live · {catalog.variants.length} cấu hình · {catalog.catalogVersion}
+              </Body>
+            )}
             {tab === "advisor" && (
               <View style={s.section}>
                 <Title>Những gì đã biết, và những gì còn thiếu.</Title>
@@ -764,5 +813,6 @@ function Workspace({
         </View>
       </Modal>
     </SafeAreaView>
+    </CatalogProvider>
   );
 }

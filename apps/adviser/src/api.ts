@@ -1,6 +1,40 @@
 import type { RecommendationResponseEnvelope } from "./envelope";
 import type { ConfirmedNeedsProfile } from "./model";
 import { safeEndpoint } from "./model";
+import type { SnapshotManifest } from "./catalog";
+
+export async function loadCatalog(
+  endpoint: string,
+  signal: AbortSignal,
+): Promise<SnapshotManifest> {
+  if (!safeEndpoint(endpoint)) throw new Error("INVALID_CATALOG_ENDPOINT");
+  const response = await fetch(
+    endpoint.replace(/\/$/, "") + "/advisor/v1/catalog",
+    { signal },
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(data?.error?.message ?? "CATALOG_UNAVAILABLE");
+  if (
+    !data ||
+    data.schemaVersion !== "1.0.0" ||
+    typeof data.catalogVersion !== "string" ||
+    typeof data.ruleVersion !== "string" ||
+    typeof data.publishedAt !== "string" ||
+    !Array.isArray(data.variants) ||
+    !Array.isArray(data.offers) ||
+    !Array.isArray(data.facts) ||
+    !data.variants.every(
+      (variant: any) =>
+        typeof variant?.variantId === "string" &&
+        typeof variant?.modelName === "string" &&
+        typeof variant?.brand === "string" &&
+        typeof variant?.specifications?.ramGb === "number" &&
+        typeof variant?.specifications?.storageGb === "number",
+    )
+  )
+    throw new Error("INVALID_CATALOG_RESPONSE");
+  return data as SnapshotManifest;
+}
 export interface ExplanationResponse {
   requestId: string;
   variantId: string;

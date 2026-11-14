@@ -1,6 +1,5 @@
-import type { SnapshotManifest } from "./catalog";
 import { officialOffer, offerTotal } from "./domain/official";
-import seed from "./catalog.json";
+import { useCatalog } from "./catalog-context";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Award } from "lucide-react-native";
@@ -22,6 +21,7 @@ export function ComparisonView({
 }) {
   const { c } = useTheme();
   const { t } = useLocale();
+  const catalog = useCatalog();
   const rows: [
     string,
     (v: ProductVariant) => string | number | null,
@@ -38,7 +38,7 @@ export function ComparisonView({
     [
       "Tổng chi phí",
       (v) => {
-        const o = officialOffer(seed as SnapshotManifest, v.variantId);
+        const o = officialOffer(catalog, v.variantId);
         return o ? offerTotal(o) : null;
       },
       "lower",

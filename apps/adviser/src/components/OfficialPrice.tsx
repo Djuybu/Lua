@@ -1,11 +1,11 @@
-import type { SnapshotManifest } from "../catalog";
 import React from "react";
 import { Body } from "../ui";
 import { officialOffer, offerTotal, sourceLabel } from "../domain/official";
 import { vnd } from "../model";
-import seed from "../catalog.json";
+import { useCatalog } from "../catalog-context";
 export function OfficialPrice({ variantId }: { variantId: string }) {
-  const offer = officialOffer(seed as SnapshotManifest, variantId);
+  const catalog = useCatalog();
+  const offer = officialOffer(catalog, variantId);
   if (!offer) return <Body>Chưa có giá trọn gói đã xác minh</Body>;
   return (
     <>

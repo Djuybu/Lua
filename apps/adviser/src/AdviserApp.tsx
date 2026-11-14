@@ -52,6 +52,10 @@ import {
   profileOf,
   vnd,
   safeEndpoint,
+  officialOffer,
+  offerTotal,
+  sourceLabel,
+  aiFallbackCopy,
   type Draft,
   type DeviceCategory,
 } from "./model";
@@ -60,7 +64,7 @@ import type { ProductVariant, SnapshotManifest } from "./catalog";
 import type { RecommendationResponseEnvelope } from "./envelope";
 import seed from "./catalog.json";
 import provenance from "./provenance.json";
-import { recommend } from "./api";
+import { explain, recommend, type ExplanationResponse } from "./api";
 const catalog = seed as SnapshotManifest;
 const store = createStore(AsyncStorage);
 const tabs = [
@@ -84,6 +88,21 @@ const steps = [
   "Làm rõ",
   "Xem lại",
 ];
+function compareValue(v: ProductVariant, field: number) {
+  const offer = officialOffer(catalog, v.variantId);
+  const total = offer ? offerTotal(offer) : null;
+  return (
+    [
+      v.modelName,
+      v.specifications.ramGb + " GB",
+      v.specifications.storageGb + " GB",
+      v.specifications.cpu,
+      v.specifications.os,
+      total === null ? "Chưa có giá" : vnd(total),
+      "Chưa có benchmark độc lập",
+    ][field] ?? ""
+  );
+}
 export default function App() {
   const [state, setState] = useState<State>(empty);
   const [boot, setBoot] = useState<"loading" | "ready" | "failed">("loading");
@@ -159,8 +178,14 @@ function Workspace({
   );
   const [loading, setLoading] = useState(false);
   const [networkError, setNetworkError] = useState("");
+  const [aiQuestion, setAiQuestion] = useState("");
+  const [aiResult, setAiResult] = useState<ExplanationResponse | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
   const ticket = useRef(0);
   const abort = useRef<AbortController | null>(null);
+  const aiTicket = useRef(0);
+  const aiAbort = useRef<AbortController | null>(null);
   const mutation = useRef(false);
   const [endpoint, setEndpoint] = useState(state.preferences.endpoint);
   const [customSeed, setCustomSeed] = useState(state.preferences.seed);
@@ -171,10 +196,19 @@ function Workspace({
   useEffect(
     () => () => {
       abort.current?.abort();
+      aiAbort.current?.abort();
       ticket.current++;
+      aiTicket.current++;
     },
     [],
   );
+  useEffect(() => {
+    if (!detail) {
+      aiAbort.current?.abort();
+      aiTicket.current++;
+      setAiLoading(false);
+    }
+  }, [detail]);
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
       if (intake) {
@@ -247,6 +281,59 @@ function Workspace({
     } finally {
       clearTimeout(timeout);
       if (id === ticket.current) setLoading(false);
+    }
+  }
+  function openDetail(v: ProductVariant, saved: Saved | null = null) {
+    aiAbort.current?.abort();
+    aiTicket.current++;
+    setAiLoading(false);
+    setAiResult(null);
+    setAiError("");
+    setAiQuestion("");
+    setHistorical(saved);
+    setDetail(v);
+  }
+  async function askAi(questionText = aiQuestion) {
+    if (!detail) return;
+    if (!state.confirmed) {
+      setAiError(
+        "Xác nhận nhu cầu ở tab Tư vấn để AI đối chiếu ngân sách và ưu tiên.",
+      );
+      return;
+    }
+    if (!state.preferences.endpoint) {
+      setAiError("Chưa cấu hình địa chỉ máy chủ tư vấn.");
+      return;
+    }
+    aiAbort.current?.abort();
+    const controller = new AbortController();
+    aiAbort.current = controller;
+    const current = ++aiTicket.current;
+    const id = `${Date.now()}-${detail.variantId}`.slice(0, 100);
+    setAiLoading(true);
+    setAiError("");
+    setAiResult(null);
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const data = await explain(
+        state.preferences.endpoint,
+        detail.variantId,
+        state.confirmed,
+        id,
+        questionText,
+        controller.signal,
+      );
+      if (current === aiTicket.current) setAiResult(data);
+    } catch (e) {
+      if (current === aiTicket.current)
+        setAiError(
+          controller.signal.aborted
+            ? "Yêu cầu tư vấn đã hủy hoặc hết thời gian. Bạn có thể thử lại."
+            : (e as Error).message,
+        );
+    } finally {
+      clearTimeout(timeout);
+      if (current === aiTicket.current) setAiLoading(false);
     }
   }
   function openNeeds() {
@@ -390,6 +477,8 @@ function Workspace({
   function DeviceCard({ v }: { v: ProductVariant }) {
     const Icon = categoryIcons[v.category];
     const selected = compare.some((x) => x.variantId === v.variantId);
+    const offer = officialOffer(catalog, v.variantId);
+    const total = offer ? offerTotal(offer) : null;
     return (
       <View
         style={[
@@ -440,15 +529,13 @@ function Workspace({
             </View>
           ))}
         </View>
-        <Body muted>Chưa có giá trọn gói đã xác minh</Body>
+        <Body muted>
+          {offer && total !== null
+            ? `Giá chính thức: ${vnd(total)} · ${sourceLabel(offer.sourceId)}`
+            : "Chưa có giá trong dữ liệu hiện tại"}
+        </Body>
         <View style={s.row}>
-          <Button
-            label="Xem chi tiết"
-            onPress={() => {
-              setHistorical(null);
-              setDetail(v);
-            }}
-          />
+          <Button label="Xem chi tiết" onPress={() => openDetail(v)} />
           <Button
             label={selected ? "Đã chọn" : "So sánh"}
             selected={selected}
@@ -558,8 +645,8 @@ function Workspace({
         </Body>
         <Title small>Dữ liệu trên thiết bị</Title>
         <Body>
-          Quyết định và tùy chọn chỉ lưu trên thiết bị này. Dữ liệu tham khảo
-          không phải chào bán đã được duyệt.
+          Quyết định và tùy chọn chỉ lưu trên thiết bị này. Giá và cấu hình
+          chính thức được dùng cho tư vấn và so sánh.
         </Body>
         <Button
           label="Xuất dữ liệu cá nhân"
@@ -571,6 +658,8 @@ function Workspace({
       </View>
     );
   }
+  const detailOffer = detail ? officialOffer(catalog, detail.variantId) : null;
+  const detailTotal = detailOffer ? offerTotal(detailOffer) : null;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: c.background }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
@@ -724,28 +813,44 @@ function Workspace({
                   {result && (
                     <Notice title={outcome(result)}>
                       {result.shortlist.length
-                        ? "Thông tin giá và độ phù hợp cần được kiểm tra theo nguồn."
-                        : "Chưa thể kết luận thiết bị không phù hợp chỉ vì thiếu chào bán."}
+                        ? "Giá chính thức và mức phù hợp theo dữ liệu đã thu thập."
+                        : "Dữ liệu hiện tại chưa có cấu hình đáp ứng đủ ngân sách và ràng buộc đã xác nhận."}
                     </Notice>
                   )}
                   {result?.shortlist.map((r) => (
                     <Notice key={r.variantId} title={r.modelName}>
                       <Body>
                         {r.totalVnd === null
-                          ? "Tổng giá chưa xác định"
-                          : `Tổng theo dịch vụ: ${vnd(r.totalVnd)}`}
+                          ? "Chưa có tổng giá trong dữ liệu hiện tại"
+                          : `Giá chính thức: ${vnd(r.totalVnd)}`}
                       </Body>
+                      {r.bestOffer && (
+                        <Body muted>
+                          {sourceLabel(r.bestOffer.sourceId)} · quan sát{" "}
+                          {new Date(
+                            r.bestOffer.observedAt,
+                          ).toLocaleDateString("vi-VN")}
+                        </Body>
+                      )}
                       <Body muted>
                         {r.factIds.length
-                          ? "Có tham chiếu dữ liệu; cần kiểm tra nội dung."
-                          : "Chưa có bằng chứng hiệu năng độc lập."}
+                          ? "Có tham chiếu benchmark độc lập."
+                          : "Chưa có benchmark hiệu năng độc lập."}
                       </Body>
+                      <Button
+                        label="Xem chi tiết & hỏi AI"
+                        onPress={() => {
+                          const variant = catalog.variants.find(
+                            (v) => v.variantId === r.variantId,
+                          );
+                          if (variant) openDetail(variant);
+                        }}
+                      />
                     </Notice>
                   ))}
-                  <Notice title="Dữ liệu tham khảo, không phải chào bán">
-                    4 cấu hình từ nguồn bán lẻ; chưa có phí trọn gói hoặc bằng
-                    chứng hiệu năng được duyệt. Bạn vẫn có thể xem chi tiết và
-                    so sánh thông số.
+                  <Notice title="Giá và cấu hình chính thức">
+                    Giá niêm yết được dùng làm giá phải trả, đã bao gồm phí bắt
+                    buộc và vận chuyển. Dữ liệu thu thập ngày 14/11/2026.
                   </Notice>
                   <Title small>Khám phá từ thông số</Title>
                   <View style={s.row}>
@@ -766,7 +871,7 @@ function Workspace({
                 <View style={s.section}>
                   <Title>Khám phá thiết bị</Title>
                   <Body muted>
-                    Thông số rõ ràng. Những điều chưa biết cũng rõ ràng.
+                    Giá và cấu hình chính thức từ dữ liệu đã thu thập.
                   </Body>
                   <TextInput
                     accessibilityLabel="Tìm theo tên, RAM hoặc dung lượng"
@@ -792,7 +897,7 @@ function Workspace({
                     ))}
                   </View>
                   <Body muted>
-                    {filtered.length} cấu hình tham khảo · quan sát 14/11/2026
+                    {filtered.length} cấu hình chính thức · quan sát 14/11/2026
                   </Body>
                   {!filtered.length && (
                     <Notice title="Chưa có cấu hình trong bộ lọc này">
@@ -841,8 +946,8 @@ function Workspace({
                           "Lưu trữ",
                           "CPU",
                           "Hệ điều hành",
-                          "Tổng chi phí",
-                          "Bằng chứng hiệu năng",
+                          "Giá chính thức",
+                          "Benchmark hiệu năng",
                         ].map((field, i) => (
                           <View
                             key={field}
@@ -879,17 +984,7 @@ function Workspace({
                                     lineHeight: 23,
                                   }}
                                 >
-                                  {
-                                    [
-                                      v.modelName,
-                                      v.specifications.ramGb + " GB",
-                                      v.specifications.storageGb + " GB",
-                                      v.specifications.cpu,
-                                      v.specifications.os,
-                                      "Chưa xác định",
-                                      "Chưa có đo kiểm độc lập",
-                                    ][i]
-                                  }
+                                  {compareValue(v, i)}
                                 </Text>
                                 {i === 0 && (
                                   <>
@@ -954,10 +1049,7 @@ function Workspace({
                         <Button
                           key={v.variantId}
                           label={v.modelName}
-                          onPress={() => {
-                            setHistorical(x);
-                            setDetail(v);
-                          }}
+                          onPress={() => openDetail(v, x)}
                         />
                       ))}
                       <View style={s.row}>
@@ -1217,12 +1309,15 @@ function Workspace({
               maxWidth: 760,
             }}
           >
-            <ScrollView contentContainerStyle={{ padding: 24, gap: 18 }}>
+            <ScrollView
+              contentContainerStyle={{ padding: 24, gap: 18 }}
+              keyboardShouldPersistTaps="handled"
+            >
               {detail && (
                 <>
                   <View style={{ ...s.row, justifyContent: "space-between" }}>
                     <Body muted>
-                      {historical ? "Bản lưu lịch sử" : "Thông số tham khảo"}
+                      {historical ? "Bản lưu lịch sử" : "Thông số chính thức"}
                     </Body>
                     <Button
                       quiet
@@ -1232,10 +1327,16 @@ function Workspace({
                   </View>
                   <Title small>{detail.modelName}</Title>
                   {notice && <Notice title={notice} />}
-                  <Notice title="Chưa xác minh tổng chi phí">
-                    Chưa có chào bán được duyệt; phí vận chuyển và phí bắt buộc
-                    chưa biết. Không thể xác nhận giá thấp nhất hoặc đủ ngân
-                    sách.
+                  <Notice
+                    title={
+                      detailTotal !== null
+                        ? `Giá chính thức: ${vnd(detailTotal)}`
+                        : "Chưa có giá trong dữ liệu hiện tại"
+                    }
+                  >
+                    {detailOffer
+                      ? `Tại ${sourceLabel(detailOffer.sourceId)}; đã bao gồm phí bắt buộc và vận chuyển; quan sát ${new Date(detailOffer.observedAt).toLocaleDateString("vi-VN")}.`
+                      : "Cấu hình này chưa có chào bán được ghi nhận."}
                   </Notice>
                   {Object.entries(detail.specifications).map(([k, v]) => (
                     <View
@@ -1263,25 +1364,87 @@ function Workspace({
                       </View>
                     </View>
                   ))}
-                  <Title small>Nguồn & điều còn thiếu</Title>
+                  <Title small>Nguồn dữ liệu</Title>
                   <Body muted>
-                    Thông tin do nhà bán lẻ công bố, chưa phải đo kiểm độc lập.
-                    Quan sát ngày 14/11/2026; không phải thông tin giá hiện tại.
+                    Giá và cấu hình do nhà bán lẻ công bố, được thu thập ngày
+                    14/11/2026 và dùng làm thông tin chính thức cho tư vấn.
                   </Body>
                   {provenance.variants
                     .filter((p) => p.variantId === detail.variantId)
                     .map((p) => (
                       <Button
                         key={p.variantId}
-                        label="Mở nguồn thông số"
+                        label="Mở trang sản phẩm"
                         quiet
                         onPress={() => Linking.openURL(p.sourceUrl)}
                       />
                     ))}
-                  <Body>
-                    Chưa có bằng chứng hiệu năng theo tác vụ. AI không được dùng
-                    để lấp các dữ liệu còn thiếu.
+                  <Title small>Hỏi AI về cấu hình này</Title>
+                  <Body muted>
+                    AI trả lời dựa trên giá và thông số chính thức ở trên; không
+                    tự thêm dữ liệu.
                   </Body>
+                  <View style={s.row}>
+                    {["Giá và ngân sách", "Hiệu năng", "Có đáng mua?"].map(
+                      (question) => (
+                        <Button
+                          key={question}
+                          label={question}
+                          quiet
+                          disabled={aiLoading || !state.confirmed}
+                          onPress={() => {
+                            setAiQuestion(question);
+                            askAi(question);
+                          }}
+                        />
+                      ),
+                    )}
+                  </View>
+                  <TextInput
+                    accessibilityLabel="Câu hỏi cho AI"
+                    placeholder="Hỏi về giá, cấu hình, nhu cầu…"
+                    placeholderTextColor={c.onSurfaceVariant}
+                    value={aiQuestion}
+                    onChangeText={setAiQuestion}
+                    style={input}
+                  />
+                  <Button
+                    label="Hỏi AI"
+                    disabled={aiLoading || !state.confirmed}
+                    onPress={() => askAi()}
+                  />
+                  {!state.confirmed && (
+                    <Body muted>
+                      Xác nhận nhu cầu ở tab Tư vấn để AI đối chiếu ngân sách và
+                      ưu tiên.
+                    </Body>
+                  )}
+                  {aiLoading && (
+                    <ActivityIndicator
+                      accessibilityLabel="Đang tải tư vấn AI"
+                      color={c.primary}
+                    />
+                  )}
+                  {aiError && (
+                    <Notice title="Không tải được tư vấn">{aiError}</Notice>
+                  )}
+                  {aiResult && (
+                    <View
+                      style={[
+                        s.card,
+                        { backgroundColor: c.surfaceContainer },
+                      ]}
+                    >
+                      {aiResult.lines.map((line, i) => (
+                        <Body key={`${i}-${line}`}>{line}</Body>
+                      ))}
+                      {aiResult.isFallback && (
+                        <Body muted>
+                          {aiFallbackCopy(aiResult.fallbackReason)}
+                        </Body>
+                      )}
+                    </View>
+                  )}
                   <View style={s.row}>
                     <Button label="So sánh" onPress={() => select(detail)} />
                     <Button

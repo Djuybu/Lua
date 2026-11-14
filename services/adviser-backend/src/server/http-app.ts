@@ -18,6 +18,7 @@ import {
 import { evaluateEligibility } from '../domain/eligibility.ts';
 import { rankEligibleCandidates } from '../domain/ranking.ts';
 import { type StagedCrawlerOffer, validateStagedCrawlerOffer } from '../contracts/crawler.ts';
+import { type ProductVariant } from '../contracts/catalog.ts';
 
 export function createHttpServer(
   store: AdviserSqliteStore | AdviserPostgresStore,
@@ -36,16 +37,6 @@ export function createHttpServer(
     // Helper to read incoming JSON body
     const readBody = (): Promise<any> => {
       return new Promise((resolve, reject) => {
-<<<<<<< HEAD
-        let body = '';
-        let bytes = 0;
-        let rejected = false;
-        req.on('data', chunk => {
-          if (rejected) return;
-          body += chunk;
-          bytes += Buffer.byteLength(chunk);
-          if (bytes > 1_000_000) {
-=======
         const chunks: Buffer[] = [];
         let totalBytes = 0;
         let rejected = false;
@@ -54,7 +45,6 @@ export function createHttpServer(
           const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
           totalBytes += buf.length;
           if (totalBytes > 1_000_000) {
->>>>>>> 149388f (fix(backend): resolve HTTP defects D01-D07 from A1-HTTP-02)
             rejected = true;
             const err: any = new Error('Payload Too Large');
             err.statusCode = 413;
@@ -180,17 +170,10 @@ export function createHttpServer(
         ) {
           return sendJson(400, {
             schemaVersion: CURRENT_SCHEMA_VERSION,
-<<<<<<< HEAD
-            requestId: envelope.requestId || 'unknown',
-            decisionId: envelope.decisionId || 'unknown',
-            profileRevision: envelope.profileRevision || 0,
-            catalogVersion: await store.getActiveCatalogVersion() || 'none',
-=======
             requestId: envelope?.requestId || 'unknown',
             decisionId: envelope?.decisionId || 'unknown',
             profileRevision: envelope?.profileRevision || 0,
-            catalogVersion: store.getActiveCatalogVersion() || 'none',
->>>>>>> 149388f (fix(backend): resolve HTTP defects D01-D07 from A1-HTTP-02)
+            catalogVersion: (await store.getActiveCatalogVersion()) || 'none',
             ruleVersion: CURRENT_RULE_VERSION,
             status: 'ERR_INVALID_PROFILE',
             shortlist: [],

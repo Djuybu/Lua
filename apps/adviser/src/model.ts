@@ -1,4 +1,6 @@
 import type { ConfirmedNeedsProfile, DeviceCategory } from "./taxonomy";
+import type { SnapshotManifest } from "./catalog";
+import type { StagedCrawlerOffer } from "./crawler";
 import {
   CATEGORY_PURPOSES,
   VALID_PRIORITIES,
@@ -6,6 +8,56 @@ import {
 } from "./taxonomy";
 export { CATEGORY_PURPOSES, VALID_PRIORITIES, validateConfirmedProfile };
 export type { ConfirmedNeedsProfile, DeviceCategory };
+export const sourceLabels: Record<string, string> = {
+  laptopaz: "LaptopAZ",
+  cellphones: "CellphoneS",
+  dienmayxanh: "Điện Máy Xanh",
+  fptshop: "FPT Shop",
+  tgdd: "Thế Giới Di Động",
+  shopdunk: "ShopDunk",
+  trungtran: "Trung Trần",
+  oneway: "Oneway",
+};
+export function sourceLabel(sourceId: string) {
+  return sourceLabels[sourceId] ?? sourceId;
+}
+/** Payable total: listed price plus known mandatory fees and shipping. */
+export function offerTotal(offer: StagedCrawlerOffer): number | null {
+  if (offer.mandatoryFeesVnd === null || offer.shippingVnd === null)
+    return null;
+  const total =
+    offer.basePriceVnd + offer.mandatoryFeesVnd + offer.shippingVnd;
+  return Number.isSafeInteger(total) ? total : null;
+}
+/** Lowest-priced in-stock official offer for a variant. */
+export function officialOffer(
+  manifest: Pick<SnapshotManifest, "offers">,
+  variantId: string,
+): StagedCrawlerOffer | null {
+  return (
+    manifest.offers
+      .filter(
+        (offer) =>
+          offer.matchedVariantId === variantId &&
+          offer.stockStatus === "IN_STOCK" &&
+          offer.completenessStatus === "COMPLETE" &&
+          offerTotal(offer) !== null,
+      )
+      .sort(
+        (a, b) =>
+          offerTotal(a)! - offerTotal(b)! ||
+          Date.parse(b.observedAt) - Date.parse(a.observedAt),
+      )[0] ?? null
+  );
+}
+export function aiFallbackCopy(reason: string | null | undefined) {
+  if (!reason) return "";
+  if (reason === "AI_MOCK" || reason === "AI_DISABLED")
+    return "Mô hình AI đang tắt; câu trả lời được tổng hợp trực tiếp từ dữ liệu chính thức.";
+  if (reason === "AI_LOCAL_LIMIT")
+    return "Đã đạt giới hạn lượt gọi AI; câu trả lời được tổng hợp từ dữ liệu chính thức.";
+  return "AI tạm thời không phản hồi; câu trả lời lấy từ dữ liệu chính thức.";
+}
 export const categories: Record<DeviceCategory, string> = {
   phone: "Điện thoại",
   tablet: "Máy tính bảng",
@@ -118,15 +170,15 @@ export function outcome(result: {
   shortlist: unknown[];
   excludedVariants: { reasonCode: string }[];
 }) {
-  if (result.shortlist.length) return "Kết quả từ dịch vụ tư vấn";
+  if (result.shortlist.length) return "Cấu hình phù hợp từ dữ liệu chính thức";
   if (
     result.excludedVariants.some((x) => x.reasonCode === "UNKNOWN_CAPABILITY")
   )
-    return "Chưa đủ bằng chứng về độ phù hợp";
+    return "Chưa đủ dữ liệu về độ phù hợp";
   if (
     !result.excludedVariants.length ||
     result.excludedVariants.some((x) => x.reasonCode === "NO_OFFERS")
   )
-    return "Chưa có chào bán đủ căn cứ";
+    return "Chưa có cấu hình có giá chính thức";
   return "Chưa có cấu hình đáp ứng ràng buộc";
 }

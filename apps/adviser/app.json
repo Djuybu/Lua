@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "L\u1ef1a",
+    "slug": "lua-adviser",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package": "vn.lua.adviser",
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "./plugins/with-local-network.cjs"
+    ]
+  }
+}

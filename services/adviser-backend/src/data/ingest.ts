@@ -15,7 +15,9 @@ export interface IngestReport {
   accepted: number;
   duplicateIgnored: number;
   rejected: number;
+  conflictsReported: number;
   rejectedReasons: Array<{ offerId: string; reason: string }>;
+  conflictDetails: Array<{ offerId: string; description: string }>;
 }
 
 export class StagingIngestStore {
@@ -45,7 +47,9 @@ export class StagingIngestStore {
       accepted: 0,
       duplicateIgnored: 0,
       rejected: 0,
-      rejectedReasons: []
+      conflictsReported: 0,
+      rejectedReasons: [],
+      conflictDetails: []
     };
 
     for (let i = 0; i < offers.length; i++) {
@@ -73,8 +77,23 @@ export class StagingIngestStore {
       }
 
       const obsId = getObservationId(offer);
-      if (this.observations.has(obsId)) {
-        // Idempotent duplicate: already ingested this observation at this timestamp
+      const existingObs = this.observations.get(obsId);
+      if (existingObs) {
+        // Check for conflicting duplicate (same identity & timestamp, but differing values)
+        const isConflict =
+          existingObs.basePriceVnd !== offer.basePriceVnd ||
+          existingObs.condition !== offer.condition ||
+          existingObs.stockStatus !== offer.stockStatus ||
+          existingObs.mandatoryFeesVnd !== offer.mandatoryFeesVnd ||
+          existingObs.shippingVnd !== offer.shippingVnd;
+
+        if (isConflict) {
+          report.conflictsReported++;
+          report.conflictDetails.push({
+            offerId: obsId,
+            description: `Conflicting duplicate observation detected for ${obsId}: existing basePrice=${existingObs.basePriceVnd}, new basePrice=${offer.basePriceVnd}`
+          });
+        }
         report.duplicateIgnored++;
         continue;
       }

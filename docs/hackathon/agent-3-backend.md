@@ -144,3 +144,59 @@ Chi tiết kết quả:
   - `POST /advisor/v1/recommend` với profile hợp lệ trả về HTTP 200, danh sách shortlist được chấm điểm và xác minh giá (pass).
   - `POST /advisor/v1/recommend` với profile sai trả về HTTP 400 kèm mã lỗi chuẩn `ERR_INVALID_PROFILE` (pass).
   - `POST /advisor/v1/ingest` nạp dữ liệu crawler thành công qua HTTP (pass).
+
+---
+
+## 5. Tiếp nhận & Kiểm chứng Dữ liệu Thật (Retail Pilot Dataset 2026-11-14)
+
+### 5.1. Tiếp nhận Dataset từ Agent 1
+- **Branch nguồn:** `origin/codex/dev/agent-1/data-pipeline` (Commit `d885e33837eab5d3cc473a27b69675f87944cc71`).
+- **Thư mục dataset:** `tools/data-pipeline/datasets/retail-pilot-2026-11-14/`.
+- **Cấu trúc dữ liệu thật:**
+  - 8 browser product captures thật (không dữ liệu giả).
+  - 10 staging observations: 6 `ready_for_review`, 4 `quarantine`.
+  - 4 catalog variants chuẩn (`catalog-snapshot.json`) với đầy đủ typed fields.
+  - `facts: []` và `offers: []` (chưa có fee approvals).
+- **Edge cases thực tế được kiểm chứng:**
+  1. FPT price mismatch giữa JSON-LD và HTML niêm yết.
+  2. Thế Giới Di Động 3 màu sắc, RAM unobserved (không tự động đoán RAM).
+  3. Trung Trần AggregateOffer hết hạn từ 2019.
+  4. Oneway JSON-LD parse error kèm xung đột tiền tố `X/A` vs `zp-a`.
+  5. ShopDunk tình trạng máy và tồn kho chưa xác định (unknown condition/stock).
+
+### 5.2. Kết quả Chạy Kiểm thử Toàn diện (45/45 Backend Tests Passing)
+
+1. **Python Pipeline Tests (`tools/data-pipeline/tests/`):**
+   - Lệnh: `python -m unittest discover tests`
+   - Kết quả: **36/36 tests passed** (thời gian: 3.948s).
+2. **Agent 1 Verification Script (`verify-retail-backend.mjs`):**
+   - Lệnh: `node tools/data-pipeline/scripts/verify-retail-backend.mjs services/adviser-backend tools/data-pipeline/datasets/retail-pilot-2026-11-14`
+   - Kết quả: **Passed 100%**:
+     `{"variantsImported":4,"restart":"passed","rollback":"passed","observationsChecked":10,"unknownFeeOffersRejected":10,"providerCalls":0,"productionWrites":0}`
+3. **Backend Node Tests (`services/adviser-backend/tests/`):**
+   - Lệnh: `node --experimental-strip-types --test tests/**/*.test.ts`
+   - Kết quả: **45/45 tests passed** (45 passed, 0 failed, duration: ~1.3s).
+   - Chi tiết các nhóm kiểm thử hoàn tất theo A3-RAW-01:
+     - **Malformed fields / URLs / Timestamps (`tests/contracts.test.ts`):** Kiểm định scheme `http:/https:`, chặn URL hỏng/gãy cú pháp, kiểm tra ISO 8601 string có `T`, kiểm tra enum `condition` và `stockStatus`.
+     - **Money boundaries & overflow (`tests/money.test.ts`):** Safe integer >= 0, biên ngân sách, chặn tràn số `MoneyOverflowError` và số âm `InvalidMoneyError`.
+     - **Conflicting duplicates & provenance (`tests/ingest.test.ts`):** Phát hiện duplicate trùng observation key nhưng khác giá/tình trạng, ghi nhận `conflictsReported` và `conflictDetails` mà không nuốt lỗi âm thầm.
+     - **Exact identity & stock constraints (`tests/eligibility.test.ts`):** Không có offer hoặc offer hết hàng (`OUT_OF_STOCK`), offer lệch `matchedVariantId` đều bị loại với `NO_OFFERS`.
+     - **Database migration on baseline data (`tests/persistence.test.ts`):** Khởi động lại store trên DB SQLite đã có sẵn dữ liệu và schema baseline, bảo toàn nguyên vẹn 100% các biến thể và chào hàng lịch sử.
+     - **Bounded HTTP payload & semantic rejection (`tests/http-server.test.ts`):** Chặn payload > 1MB với mã `413 Payload Too Large` (`ERR_PAYLOAD_TOO_LARGE`), bắt lỗi JSON malformed với mã `400 Bad Request` (`ERR_INVALID_JSON`), và kiểm tra semantic validation trên route `/advisor/v1/ingest`.
+     - **AI prompt injection & privileged paths (`tests/ai-validator.test.ts`):** Chặn các nỗ lực inject path lạ (`adminRole`), payload phá vỡ schema (SQL injection string), và từ chối `factId` bịa đặt.
+     - **Real dataset regression (`tests/retail-pilot.test.ts`):** Đọc trực tiếp 8 captures, 10 staging observations, 4 variants thật từ dataset của Agent 1; kiểm thử atomic rollback và phục hồi restart.
+4. **TypeScript Typecheck:**
+   - Lệnh: `npm.cmd run typecheck`
+   - Kết quả: **0 errors**, clean typecheck.
+
+---
+
+## 6. Phạm vi Merge & Tích hợp vào dev (A3-RAW-01)
+
+- Merge có chủ đích nhánh `codex/dev/agent-3/plan-03` vào `dev` theo ngoại lệ được người dùng cho phép.
+- Chỉ bao gồm các thay đổi trong:
+  - `services/adviser-backend/**`
+  - `docs/hackathon/agent-3-backend.md`
+- Giữ nguyên toàn bộ mã nguồn pipeline của Agent 1 (`tools/data-pipeline/**`).
+- Không tương tác hay thay đổi các nhánh `main` hoặc `develop`.
+- Báo cáo kết quả trực tiếp về thread điều phối gốc (`environmentId: "0d643e83-f77e-4710-96b0-3f8b4d2c8fc9"`, `threadId: "8a87aa59-85d2-41db-8572-751ac87fd1b2"`).

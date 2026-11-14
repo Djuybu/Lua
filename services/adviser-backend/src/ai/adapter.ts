@@ -55,7 +55,7 @@ export class MockAiProvider implements AiProvider {
     }
 
     // Valid mock explanation
-    const knownFactId = options.facts[0]?.factId ?? 'f1';
+    const knownFactId = options.facts[0]?.factId ?? options.variant.factIds[0];
     return {
       requestId: options.requestId,
       variantId: options.variant.variantId,
@@ -63,7 +63,7 @@ export class MockAiProvider implements AiProvider {
         {
           kind: 'advantage',
           relation: 'HIGH_PERFORMANCE_FOR_WORKLOAD',
-          factIds: [knownFactId],
+          factIds: knownFactId ? [knownFactId] : [],
           wordingKey: 'wording_advantage_performance_suitable'
         }
       ],

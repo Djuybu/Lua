@@ -20,11 +20,11 @@ export function generateDeterministicFallbackExplanation(
   const factIdMap = new Map(variantFacts.map(f => [f.domain, f.factId]));
 
   // 1. Performance claim
-  const perfFactId = factIdMap.get('performance') ?? (variant.factIds[0] || 'fact_ram');
+  const perfFactId = factIdMap.get('performance') ?? variant.factIds[0];
   claims.push({
     kind: 'advantage',
     relation: 'HIGH_PERFORMANCE_FOR_WORKLOAD',
-    factIds: [perfFactId],
+    factIds: perfFactId ? [perfFactId] : [],
     wordingKey: 'wording_advantage_performance_suitable'
   });
 

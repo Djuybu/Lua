@@ -21,8 +21,8 @@ export interface StagedCrawlerOffer {
 
   /** Non-negative safe integer in VND */
   basePriceVnd: number;
-  /** Taxes/mandatory fees EXCLUDING shipping fees */
-  mandatoryFeesVnd: number;
+  /** Taxes/mandatory fees EXCLUDING shipping fees, or null if unknown / unreviewed */
+  mandatoryFeesVnd: number | null;
   /** Shipping fee, or null if unknown / dependent on location */
   shippingVnd: number | null;
   /** Conditional discount (card promo, trade-in) separated from payable price */
@@ -91,7 +91,7 @@ export function validateStagedCrawlerOffer(offer: unknown): OfferValidationResul
   if (!isValidVnd(o.basePriceVnd)) {
     errors.push('basePriceVnd must be a non-negative safe integer');
   }
-  if (!isValidVnd(o.mandatoryFeesVnd)) {
+  if (o.mandatoryFeesVnd === null || !isValidVnd(o.mandatoryFeesVnd)) {
     errors.push('mandatoryFeesVnd must be a non-negative safe integer');
   }
   if (o.shippingVnd !== null && !isValidVnd(o.shippingVnd)) {
@@ -101,12 +101,26 @@ export function validateStagedCrawlerOffer(offer: unknown): OfferValidationResul
     errors.push('conditionalDiscountVnd must be a non-negative safe integer');
   }
 
-  if (!o.sourceUrl || typeof o.sourceUrl !== 'string' || !o.sourceUrl.startsWith('http')) {
-    errors.push('sourceUrl must be a valid http(s) URL');
+  if (!o.sourceUrl || typeof o.sourceUrl !== 'string') {
+    errors.push('sourceUrl is required and must be a string');
+  } else {
+    try {
+      const parsedUrl = new URL(o.sourceUrl);
+      if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+        errors.push("sourceUrl must have http: or https: protocol");
+      }
+    } catch {
+      errors.push('sourceUrl must be a valid, well-formed URL');
+    }
   }
 
-  if (!o.observedAt || typeof o.observedAt !== 'string' || Number.isNaN(Date.parse(o.observedAt))) {
-    errors.push('observedAt must be a valid ISO 8601 date string');
+  if (!o.observedAt || typeof o.observedAt !== 'string') {
+    errors.push('observedAt is required and must be a string');
+  } else {
+    const timestampMs = Date.parse(o.observedAt);
+    if (Number.isNaN(timestampMs) || !o.observedAt.includes('T')) {
+      errors.push('observedAt must be a valid ISO 8601 date string');
+    }
   }
 
   return {

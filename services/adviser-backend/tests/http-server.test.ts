@@ -139,7 +139,7 @@ test('HTTP Server Boundary - live localhost network integration', async () => {
     assert.equal(invalidRes.data.status, 'ERR_INVALID_PROFILE');
     assert.equal(invalidRes.data.error.code, 'ERR_INVALID_PROFILE');
 
-    // 4. POST /advisor/v1/ingest
+    // 4. POST /advisor/v1/ingest - success
     const ingestRes = await makeRequest(port, '/advisor/v1/ingest', 'POST', [
       {
         sourceId: 'shopY',
@@ -156,8 +156,87 @@ test('HTTP Server Boundary - live localhost network integration', async () => {
         completenessStatus: 'COMPLETE'
       }
     ]);
-    assert.equal(ingestRes.status, 200);
+    assert.equal(ingestRes.status, 200, `ingestRes failed: ${JSON.stringify(ingestRes.data)}`);
     assert.equal(ingestRes.data.count, 1);
+
+    // 5. POST /advisor/v1/ingest - semantic rejection (e.g. negative price or unapproved fees)
+    const badSemanticRes = await makeRequest(port, '/advisor/v1/ingest', 'POST', [
+      {
+        sourceId: 'shopY',
+        externalOfferId: 'oy-bad',
+        matchedVariantId: 'laptop-http-1',
+        condition: 'NEW',
+        stockStatus: 'IN_STOCK',
+        basePriceVnd: -500_000, // Negative money!
+        mandatoryFeesVnd: 0,
+        shippingVnd: 20_000,
+        conditionalDiscountVnd: 0,
+        sourceUrl: 'https://shopy.com',
+        observedAt: '2026-11-14T09:00:00.000Z',
+        completenessStatus: 'COMPLETE'
+      }
+    ]);
+    assert.equal(badSemanticRes.status, 400);
+    assert.equal(badSemanticRes.data.error.code, 'ERR_SEMANTIC_VALIDATION');
+
+    // 6. POST /advisor/v1/recommend - malformed JSON string
+    const malformedJsonRes = await new Promise<{ status: number; data: any }>((resolve, reject) => {
+      const req = http.request(
+        {
+          hostname: '127.0.0.1',
+          port,
+          path: '/advisor/v1/recommend',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        },
+        res => {
+          let raw = '';
+          res.on('data', chunk => (raw += chunk));
+          res.on('end', () => {
+            try {
+              resolve({ status: res.statusCode || 500, data: JSON.parse(raw) });
+            } catch {
+              resolve({ status: res.statusCode || 500, data: raw });
+            }
+          });
+        }
+      );
+      req.on('error', reject);
+      req.write('{ "brokenJson: true, ');
+      req.end();
+    });
+    assert.equal(malformedJsonRes.status, 400);
+    assert.equal(malformedJsonRes.data.error.code, 'ERR_INVALID_JSON');
+
+    // 7. POST /advisor/v1/ingest - bounded payload (exceeding 1MB rejected with 413)
+    const largePayload = 'a'.repeat(1_050_000);
+    const oversizedRes = await new Promise<{ status: number; data: any }>((resolve, reject) => {
+      const req = http.request(
+        {
+          hostname: '127.0.0.1',
+          port,
+          path: '/advisor/v1/ingest',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        },
+        res => {
+          let raw = '';
+          res.on('data', chunk => (raw += chunk));
+          res.on('end', () => {
+            try {
+              resolve({ status: res.statusCode || 500, data: JSON.parse(raw) });
+            } catch {
+              resolve({ status: res.statusCode || 500, data: raw });
+            }
+          });
+        }
+      );
+      req.on('error', reject);
+      req.write(largePayload);
+      req.end();
+    });
+    assert.equal(oversizedRes.status, 413);
+    assert.equal(oversizedRes.data.error.code, 'ERR_PAYLOAD_TOO_LARGE');
   } finally {
     await new Promise<void>(resolve => server.close(() => resolve()));
     store.close();

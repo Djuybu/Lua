@@ -95,3 +95,48 @@ test('Crawler - validateStagedCrawlerOffer validates correct payload', () => {
   assert.equal(res.valid, true);
   assert.equal(res.errors.length, 0);
 });
+
+test('Crawler - validateStagedCrawlerOffer rejects malformed fields, URLs, and timestamps', () => {
+  const baseOffer: StagedCrawlerOffer = {
+    sourceId: 'fpt_shop',
+    externalOfferId: 'fpt-12345',
+    matchedVariantId: 'dell-xps-13-9315-i7-16-512',
+    condition: 'NEW',
+    stockStatus: 'IN_STOCK',
+    basePriceVnd: 22_500_000,
+    mandatoryFeesVnd: 0,
+    shippingVnd: 50_000,
+    conditionalDiscountVnd: 0,
+    sourceUrl: 'https://fptshop.com.vn/item',
+    observedAt: '2026-11-14T08:00:00.000Z',
+    completenessStatus: 'COMPLETE'
+  };
+
+  // 1. Malformed URL (not parseable or javascript: scheme)
+  const resBadUrl = validateStagedCrawlerOffer({ ...baseOffer, sourceUrl: 'ftp://not-http.com' });
+  assert.equal(resBadUrl.valid, false);
+  assert.match(resBadUrl.errors.join('; '), /http: or https:/);
+
+  const resMalformedUrl = validateStagedCrawlerOffer({ ...baseOffer, sourceUrl: 'ht tp://broken' });
+  assert.equal(resMalformedUrl.valid, false);
+  assert.match(resMalformedUrl.errors.join('; '), /well-formed URL/);
+
+  // 2. Malformed timestamp (not ISO 8601)
+  const resBadDate = validateStagedCrawlerOffer({ ...baseOffer, observedAt: 'yesterday afternoon' });
+  assert.equal(resBadDate.valid, false);
+  assert.match(resBadDate.errors.join('; '), /ISO 8601/);
+
+  // 3. Invalid condition or stockStatus
+  const resBadCondition = validateStagedCrawlerOffer({ ...baseOffer, condition: 'OPEN_BOX' as any });
+  assert.equal(resBadCondition.valid, false);
+  assert.match(resBadCondition.errors.join('; '), /condition must be one of/);
+
+  const resBadStock = validateStagedCrawlerOffer({ ...baseOffer, stockStatus: 'FEW_LEFT' as any });
+  assert.equal(resBadStock.valid, false);
+  assert.match(resBadStock.errors.join('; '), /stockStatus must be one of/);
+
+  // 4. Missing or empty IDs
+  const resEmptySource = validateStagedCrawlerOffer({ ...baseOffer, sourceId: '   ' });
+  assert.equal(resEmptySource.valid, false);
+  assert.match(resEmptySource.errors.join('; '), /sourceId is required/);
+});

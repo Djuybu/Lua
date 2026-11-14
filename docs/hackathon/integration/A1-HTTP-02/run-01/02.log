@@ -1,0 +1,64 @@
+
+STDERR:
+test_cli_invalid_pin_exits_nonzero_with_failure_report (test_http_runner.HttpRunnerTests.test_cli_invalid_pin_exits_nonzero_with_failure_report) ... ok
+test_subprocess_nonzero_is_preserved (test_http_runner.HttpRunnerTests.test_subprocess_nonzero_is_preserved) ... ok
+test_timeout_kills_listener_before_disposable_directory_cleanup (test_http_runner.HttpRunnerTests.test_timeout_kills_listener_before_disposable_directory_cleanup) ... ERROR
+test_invalid_consumer_pin_exits_nonzero_and_leaves_failure_report (test_integration_runner.IntegrationRunnerTests.test_invalid_consumer_pin_exits_nonzero_and_leaves_failure_report) ... ok
+test_DP_T12_fixture_export_verify_end_to_end (test_pipeline.CliTests.test_DP_T12_fixture_export_verify_end_to_end) ... ok
+test_DP_T12_invalid_config_and_limits (test_pipeline.CliTests.test_DP_T12_invalid_config_and_limits) ... ok
+test_DP_T01_all_structured_sources (test_pipeline.ParserTests.test_DP_T01_all_structured_sources) ... ok
+test_DP_T01_duplicate_scripts_and_conflicting_offers (test_pipeline.ParserTests.test_DP_T01_duplicate_scripts_and_conflicting_offers) ... ok
+test_DP_T01_graph_reference (test_pipeline.ParserTests.test_DP_T01_graph_reference) ... ok
+test_DP_T01_invalid_json_or_nonproduct (test_pipeline.ParserTests.test_DP_T01_invalid_json_or_nonproduct) ... ok
+test_DP_T02_group_preserves_sibling_stock (test_pipeline.ParserTests.test_DP_T02_group_preserves_sibling_stock) ... ok
+test_DP_T03_conflicting_dom_price_is_quarantined (test_pipeline.ParserTests.test_DP_T03_conflicting_dom_price_is_quarantined) ... ok
+test_DP_T03_multiple_scoped_prices_are_ambiguous (test_pipeline.ParserTests.test_DP_T03_multiple_scoped_prices_are_ambiguous) ... ok
+test_DP_T03_scoped_price_ignores_installments_and_accessories (test_pipeline.ParserTests.test_DP_T03_scoped_price_ignores_installments_and_accessories) ... ok
+test_DP_T04_oneway_region_conflict (test_pipeline.ParserTests.test_DP_T04_oneway_region_conflict) ... ok
+test_DP_T04_shopdunk_dom_fallback (test_pipeline.ParserTests.test_DP_T04_shopdunk_dom_fallback) ... ok
+test_DP_T04_unmapped_and_aggregate_are_not_ready (test_pipeline.ParserTests.test_DP_T04_unmapped_and_aggregate_are_not_ready) ... ok
+test_DP_T05_unknown_and_conflicting_specs (test_pipeline.ParserTests.test_DP_T05_unknown_and_conflicting_specs) ... ok
+test_DP_T06_money_strict_boundaries (test_pipeline.ParserTests.test_DP_T06_money_strict_boundaries) ... ok
+test_DP_T06_unknown_costs_do_not_become_verified (test_pipeline.ParserTests.test_DP_T06_unknown_costs_do_not_become_verified) ... ok
+test_DP_T08_challenge_is_not_an_empty_catalog (test_pipeline.ParserTests.test_DP_T08_challenge_is_not_an_empty_catalog) ... ok
+test_DP_T10_failure_rolls_back_whole_batch_and_checkpoint (test_pipeline.PersistenceTests.test_DP_T10_failure_rolls_back_whole_batch_and_checkpoint) ... ok
+test_DP_T10_immutable_conflicting_replay (test_pipeline.PersistenceTests.test_DP_T10_immutable_conflicting_replay) ... ok
+test_DP_T10_replay_restart_and_history (test_pipeline.PersistenceTests.test_DP_T10_replay_restart_and_history) ... ok
+test_DP_T11_export_hash_tamper_quarantine (test_pipeline.PersistenceTests.test_DP_T11_export_hash_tamper_quarantine) ... ok
+test_DP_T11_quarantine_excluded_by_default (test_pipeline.PersistenceTests.test_DP_T11_quarantine_excluded_by_default) ... ok
+test_DP_T11_reviewed_backend_conversion_and_unknown_shipping (test_pipeline.PersistenceTests.test_DP_T11_reviewed_backend_conversion_and_unknown_shipping) ... ok
+test_DP_T12_atomic_write_failure_preserves_existing (test_pipeline.PersistenceTests.test_DP_T12_atomic_write_failure_preserves_existing) ... ok
+test_DP_T07_unresolved_and_html_robots (test_pipeline.PolicyTests.test_DP_T07_unresolved_and_html_robots) ... ok
+test_DP_T07_wildcards_allow_specific_ua (test_pipeline.PolicyTests.test_DP_T07_wildcards_allow_specific_ua) ... ok
+test_DP_T09_canonical_preserves_identity (test_pipeline.PolicyTests.test_DP_T09_canonical_preserves_identity) ... ok
+test_DP_T07_redirect_denied_before_target_request (test_pipeline.TransportTests.test_DP_T07_redirect_denied_before_target_request) ... ok
+test_DP_T08_429_retry_after_and_host_interval (test_pipeline.TransportTests.test_DP_T08_429_retry_after_and_host_interval) ... ok
+test_DP_T08_size_and_403_not_retried (test_pipeline.TransportTests.test_DP_T08_size_and_403_not_retried) ... ok
+test_DP_T08_timeout_has_bounded_retries (test_pipeline.TransportTests.test_DP_T08_timeout_has_bounded_retries) ... ok
+test_DP_T09_sitemap_cycle_and_dedup (test_pipeline.TransportTests.test_DP_T09_sitemap_cycle_and_dedup) ... ok
+test_DP_T10_crawl_resume_and_parse_failures (test_pipeline.TransportTests.test_DP_T10_crawl_resume_and_parse_failures) ... ok
+test_catalog_has_no_invented_offers_or_performance_facts (test_retail_dataset.RetailDatasetTests.test_catalog_has_no_invented_offers_or_performance_facts) ... ok
+test_real_captures_are_reproducible_and_never_synthetic (test_retail_dataset.RetailDatasetTests.test_real_captures_are_reproducible_and_never_synthetic) ... ok
+test_retail_edge_cases_are_preserved (test_retail_dataset.RetailDatasetTests.test_retail_edge_cases_are_preserved) ... ok
+
+======================================================================
+ERROR: test_timeout_kills_listener_before_disposable_directory_cleanup (test_http_runner.HttpRunnerTests.test_timeout_kills_listener_before_disposable_directory_cleanup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Minh Duy\.t3\worktrees\lua\codex-dev-agent-1-lead--54ea4e0052bc84a3\tools\data-pipeline\tests\test_http_runner.py", line 42, in test_timeout_kills_listener_before_disposable_directory_cleanup
+    self.assertTrue(is_port_closed(port))
+                    ~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Minh Duy\.t3\worktrees\lua\codex-dev-agent-1-lead--54ea4e0052bc84a3\tools\data-pipeline\scripts\http_integration.py", line 42, in is_port_closed
+    with socket.create_connection(('127.0.0.1', port), timeout=0.5):
+         ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Minh Duy\AppData\Local\Python\pythoncore-3.15-64\Lib\socket.py", line 883, in create_connection
+    raise exceptions[0]
+  File "C:\Users\Minh Duy\AppData\Local\Python\pythoncore-3.15-64\Lib\socket.py", line 868, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+TimeoutError: timed out
+
+----------------------------------------------------------------------
+Ran 40 tests in 3.053s
+
+FAILED (errors=1)

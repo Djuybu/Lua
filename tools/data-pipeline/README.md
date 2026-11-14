@@ -142,6 +142,14 @@ node --experimental-strip-types scripts/verify-backend-contract.mjs ../../servic
 
 ## Bằng chứng hiện tại
 
+HTTP integration runner với server thực, DB tạm và consumer pin:
+
+```powershell
+python -m scripts.http_integration --backend-root ../../services/adviser-backend --consumer-sha b979575aeb9f522565e53c69da777f37b8eb323c --report-dir .work/http-new-run
+```
+
+Xem [A1-HTTP-02 và defect/repro](../../docs/hackathon/integration/A1-HTTP-02/README.md). Consumer này còn semantic defects nên runner phải trả nonzero; raw adapter chờ contract thực từ A3-DATA-02.
+
 Integration runner dùng source backend explicit, consumer SHA pin và disposable DB:
 
 ```powershell

@@ -1,0 +1,62 @@
+{
+  "task": "A1-HTTP-02",
+  "mode": "failure",
+  "cases": [
+    {
+      "id": "PROBE-FAIL",
+      "name": "Deliberate assertion proves nonzero and cleanup",
+      "status": "failed",
+      "before": [],
+      "error": {
+        "message": "Expected values to be strictly equal:\n\n200 !== 599\n",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n200 !== 599\n\n    at file:///C:/Users/Minh%20Duy/.t3/worktrees/lua/codex-dev-agent-1-lead--54ea4e0052bc84a3/tools/data-pipeline/scripts/http_backend.mjs:141:14\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async test (file:///C:/Users/Minh%20Duy/.t3/worktrees/lua/codex-dev-agent-1-lead--54ea4e0052bc84a3/tools/data-pipeline/scripts/http_backend.mjs:116:5)\n    at async file:///C:/Users/Minh%20Duy/.t3/worktrees/lua/codex-dev-agent-1-lead--54ea4e0052bc84a3/tools/data-pipeline/scripts/http_backend.mjs:140:5",
+        "actual": 200,
+        "expected": 599
+      },
+      "trace": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "payloadBytes": 0,
+          "payloadChars": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "body": "",
+          "port": 61465,
+          "response": {
+            "status": 200,
+            "headers": {
+              "content-type": "application/json; charset=utf-8",
+              "x-content-type-options": "nosniff",
+              "date": "Sat, 14 Nov 2026 07:07:54 GMT",
+              "connection": "close",
+              "transfer-encoding": "chunked"
+            },
+            "body": {
+              "status": "ok",
+              "catalogVersion": "a1-http-synthetic",
+              "timestamp": "2026-11-14T07:07:54.154Z"
+            }
+          }
+        }
+      ],
+      "after": [],
+      "cleanup": {
+        "ports": [
+          61465
+        ],
+        "portsClosed": true,
+        "directoryRemoved": true
+      }
+    }
+  ],
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "transport": "actual createHttpServer / IPv4 loopback ephemeral ports",
+  "rawAdapter": {
+    "status": "not_enabled",
+    "reason": "No handed-off raw HTTP contract at pinned consumer b979575"
+  },
+  "passed": 0,
+  "failed": 1,
+  "status": "failed"
+}

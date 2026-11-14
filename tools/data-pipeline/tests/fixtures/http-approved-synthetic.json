@@ -1,0 +1,23 @@
+{
+  "fixtureMode": "synthetic_approved_known_charges_not_retail_data",
+  "approval": "Test-only approval: zero fees and zero shipping are explicitly known synthetic inputs",
+  "variant": {
+    "variantId": "synthetic:http:16-512", "familyId": "synthetic:http",
+    "modelName": "SYNTHETIC HTTP laptop", "brand": "Synthetic", "category": "pc_laptop",
+    "specifications": {"ramGb": 16, "storageGb": 512, "os": "Windows 11", "cpu": "synthetic i5"},
+    "factIds": []
+  },
+  "offer": {
+    "sourceId": "fptshop", "externalOfferId": "SYNTHETIC-HTTP-001",
+    "matchedVariantId": "synthetic:http:16-512", "condition": "NEW", "stockStatus": "IN_STOCK",
+    "basePriceVnd": 10000000, "mandatoryFeesVnd": 0, "shippingVnd": 0, "conditionalDiscountVnd": 0,
+    "sourceUrl": "https://fptshop.com.vn/lua-synthetic", "observedAt": "2026-11-14T00:00:00Z",
+    "completenessStatus": "COMPLETE"
+  },
+  "profile": {
+    "category": "pc_laptop",
+    "orderedPurposes": ["laptop_office_study", "laptop_software_dev", "laptop_ultraportable"],
+    "orderedPriorities": ["priority_budget_savings", "priority_performance_cpu", "priority_battery_life"],
+    "budget": {"hardCeilingVnd": 20000000}
+  }
+}

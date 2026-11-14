@@ -61,6 +61,8 @@ import type { RecommendationResponseEnvelope } from "./envelope";
 import seed from "./catalog.json";
 import provenance from "./provenance.json";
 import { recommend } from "./api";
+import { ChatPanel } from "./ChatPanel";
+import { commitProposal, type ChatTransport, type ChatProposal } from "./chat";
 const catalog = seed as SnapshotManifest;
 const store = createStore(AsyncStorage);
 const tabs = [
@@ -84,7 +86,9 @@ const steps = [
   "Làm rõ",
   "Xem lại",
 ];
-export default function App() {
+export default function App({
+  chatTransport,
+}: { chatTransport?: ChatTransport } = {}) {
   const [state, setState] = useState<State>(empty);
   const [boot, setBoot] = useState<"loading" | "ready" | "failed">("loading");
   const [issue, setIssue] = useState("");
@@ -111,6 +115,7 @@ export default function App() {
     <SafeAreaProvider>
       <AdvisorTheme preferences={state.preferences}>
         <Workspace
+          chatTransport={chatTransport}
           state={state}
           boot={boot}
           issue={issue}
@@ -126,12 +131,14 @@ export default function App() {
   );
 }
 function Workspace({
+  chatTransport,
   state,
   boot,
   issue,
   update,
   recover,
 }: {
+  chatTransport?: ChatTransport;
   state: State;
   boot: string;
   issue: string;
@@ -762,6 +769,29 @@ function Workspace({
                   </View>
                 </View>
               )}
+              <View style={{ display: tab === 0 ? "flex" : "none" }}>
+                <ChatPanel
+                  transport={chatTransport}
+                  revision={state.revision}
+                  active={tab === 0}
+                  canCommit={boot === "ready" && !pending}
+                  onConfirm={async (proposal: ChatProposal) => {
+                    if (mutation.current || boot !== "ready")
+                      throw Error("STORE_BUSY");
+                    mutation.current = true;
+                    setPending(true);
+                    try {
+                      const next = await commitProposal(update, proposal);
+                      setNotice("Đã xác nhận và lưu đề xuất nhu cầu.");
+                      setHistorical(null);
+                      void evaluate(next.confirmed, next.revision);
+                    } finally {
+                      mutation.current = false;
+                      setPending(false);
+                    }
+                  }}
+                />
+              </View>
               {tab === 1 && (
                 <View style={s.section}>
                   <Title>Khám phá thiết bị</Title>

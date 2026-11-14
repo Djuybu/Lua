@@ -36,3 +36,7 @@ npx playwright install chromium
 npm run test:e2e
 
 Android export produces a Hermes bundle, not an APK or native integration certification. Native Material You, TalkBack, Back/IME, rotation and physical performance still require a named installed build/device. Build outputs are ignored. See VERIFICATION.md for observed results.
+
+## Chat preparation
+
+Tư vấn now includes a session-only chat area with an injected transport seam. Default production state is unavailable until the approved backend contract is handed off. See [CHAT_PREP.md](CHAT_PREP.md) for states, proposal confirmation, fixtures and integration dependencies. `npm run test:e2e` builds a separate in-memory fixture; it does not test a live AI provider.

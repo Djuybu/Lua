@@ -1,0 +1,10 @@
+{
+  "name": "lua-chat-ui-fixture",
+  "private": true,
+  "main": "index.tsx",
+  "dependencies": {
+    "expo": "~58.0.25",
+    "react": "19.3.0",
+    "react-native": "0.88.1"
+  }
+}

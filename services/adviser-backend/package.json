@@ -1,0 +1,25 @@
+{
+  "name": "@lua/adviser-backend",
+  "version": "0.1.0",
+  "description": "Deterministic recommendation engine, SQLite catalog persistence, and bounded AI feature adapter for Lua Device Adviser",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "keywords": [
+    "device-adviser",
+    "recommendation-engine",
+    "sqlite",
+    "deterministic-ai"
+  ],
+  "author": "Agent 3 <backend-ai@lua.local>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

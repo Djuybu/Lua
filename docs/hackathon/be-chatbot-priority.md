@@ -14,6 +14,12 @@ Coordinator: environment `0d643e83-f77e-4710-96b0-3f8b4d2c8fc9`, thread `8a87aa5
 
 ## Gate P0: kết thúc A3-DATA-02 trước
 
+### Bàn giao một phần 149388f — chưa nghiệm thu task
+
+Đã xác nhận remote `origin/codex/dev/agent-3/data-02` tại `149388f3427cff11896e07c9e653e6844ae3ecf8`. Commit chỉ thay đổi crawler validation, SQLite accepted-offer batch, HTTP boundary và báo cáo backend. Agent 3 báo 30/30 HTTP cases pass; Coordinator đã đối chiếu diff, chưa chạy lại runtime trên pin này.
+
+Theo callback làm rõ phạm vi: D01–D07 đã sửa/push nhưng durable raw-staging route/migration và truthful AI fallback chưa được implement trong commit này. A3-DATA-02 vẫn `in_progress` trên cùng branch; chờ handoff cuối. Không coi báo cáo D01–D07 là nghiệm thu toàn task, không tích hợp phần này vào dev hoặc kích hoạt A3-CHAT-01 trước handoff cuối. Không mở task sửa trùng. A2-CHAT-PREP-01 tiếp tục phần UI độc lập theo brief đã giao.
+
 Owner Agent 3, phạm vi/task hiện tại không thay đổi. Cần callback sửa 7 defect với before/after và pin consumer mới; đúng 30/30 HTTP cases gốc, raw staging/migration/replay/conflict/rollback/restart, AI grounding và timeout/cancel tests theo brief hiện hữu. Unknown money/facts không được biến thành số 0 hoặc claim tích cực. Push nhánh task, không tự merge contract mới vào dev/main.
 
 Nếu chưa đạt gate, ưu tiên sửa lỗi còn lại; không gọi việc bổ sung chatbot là đã khép lỗi BE. Có thể gửi contract/source SHA bàn giao từng phần để rút ngắn thời gian chờ, phải ghi trạng thái incomplete.

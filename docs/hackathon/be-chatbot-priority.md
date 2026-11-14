@@ -51,6 +51,10 @@ Acceptance / test cases phải viết trước implementation:
 
 ## A2-CHAT-PREP-01: làm song song phần frontend độc lập
 
+### Handoff và review — hoàn tất phạm vi preparation
+
+Agent 2 đã push `agent2-fe` tại `fa468aed3271e0b2cd5e0566b931ceeea80546d8`. Supervisor đã xác nhận SHA/fingerprints, review source và chạy lại typecheck, 25/25 tests và production web build trên bản trích xuất bất biến. Fixture không có trong production bundle; không có default chat transport hoặc route đoán. Kết quả: nhận phạm vi UI/controller preparation, chưa tích hợp hoặc nghiệm thu live/native. Báo cáo/logs: `docs/hackathon/reviews/A2-CHAT-PREP-01/`. Chờ contract BE; không giao HTTP task trước handoff cuối A3-DATA-02 và A3-CHAT-01 contract.
+
 Owner Agent 2; baseline source `cc065d38fae6a18738fec6479f2264e5fb7ef1e6` trên nhánh người dùng chọn `agent2-fe`. Kiểm tra HEAD/status mới trước sửa; giữ các thay đổi người dùng. Sở hữu `apps/adviser/**` và tài liệu UI, không sửa BE/pipeline hoặc root/shared lockfile.
 
 Được triển khai ngay UI/controller chatbot trong luồng Tư vấn hiện có: nhập/gửi, lịch sử hội thoại trong phiên, sending/cancel/error/retry/unavailable, hiển thị nguồn và nhãn fallback, proposal review/confirm/cancel giữ draft/confirmed riêng. Tái sử dụng Material You và responsive shell; không tự thêm service/session persistence ngoài phạm vi. Transport được inject/disabled khi chưa có contract BE; không hardcode API chưa được implement hoặc coi fixture là chat live. Chốt runtime types/endpoint từ handoff A3-CHAT-01 trước nối HTTP.

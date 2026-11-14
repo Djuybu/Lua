@@ -1,0 +1,133 @@
+{
+  "pin": "fa468aed3271e0b2cd5e0566b931ceeea80546d8",
+  "sourceTree": "8b0d2ddc098498c0f97829bb4b636eb03d09ed88",
+  "lockBlob": "057ba4c482149b7fd73dba7d2698be8e785c4021",
+  "fingerprints": {
+    "apps/adviser/src/chat.ts": {
+      "sha256LF": "c0b8afc3f3bd3d709383b94dde3ee38926be143e297d0d0b4cd03f6eb0082237",
+      "sha256CRLF": "b54b3a67c8f90e1e64b8947a3d8459a8b9aeb5936c5b1b0fe08431350b2a349f"
+    },
+    "apps/adviser/src/ChatPanel.tsx": {
+      "sha256LF": "3e5b5551a0878e7372b6876c2e71d7c5e06098d5688444c4ea0ecbd3930ec826",
+      "sha256CRLF": "1698f34a48df5466796a85f0086c140cf9ad494eb8e315b322472ba8af72c140"
+    },
+    "apps/adviser/package-lock.json": {
+      "sha256LF": "04bab4ab177580ef960d8dca67f6152d346a4c34517744600244cfc038f0bd40",
+      "sha256CRLF": "a26221bf3b4887c70391060c8e054776a3d091375cb6e3fc064a2a85364d9531"
+    },
+    "apps/adviser/verification/chat-fixture-fallback.png": {
+      "sha256LF": "a4517296c1b012f4ef353fd4d4d4413e5ab6b60d8d496ed3ceac5f8fcbb71504",
+      "sha256CRLF": null
+    },
+    "apps/adviser/verification/chat-confirmed.png": {
+      "sha256LF": "e5b717305777e45b804fc598355a9417c7abda21a4650d9a8e80b7de7b0c7841",
+      "sha256CRLF": null
+    }
+  },
+  "root": "C:\\Users\\Minh Duy\\AppData\\Local\\Temp\\lua-a2-chat-review-sb5ae8_0",
+  "status": "accepted_preparation_scope_only",
+  "sourceMatchesPinAfterLFNormalization": true,
+  "lineEndingOnlyDifferences": [
+    "DESIGN.md",
+    "PRODUCT.md",
+    "apps/adviser/.gitignore",
+    "apps/adviser/App.tsx",
+    "apps/adviser/CHAT_PREP.md",
+    "apps/adviser/README.md",
+    "apps/adviser/VERIFICATION.md",
+    "apps/adviser/app.json",
+    "apps/adviser/index.ts",
+    "apps/adviser/package-lock.json",
+    "apps/adviser/package.json",
+    "apps/adviser/playwright.config.ts",
+    "apps/adviser/plugins/with-local-network.cjs",
+    "apps/adviser/src/AdviserApp.tsx",
+    "apps/adviser/src/ChatPanel.tsx",
+    "apps/adviser/src/api.test.ts",
+    "apps/adviser/src/api.ts",
+    "apps/adviser/src/catalog.json",
+    "apps/adviser/src/catalog.ts",
+    "apps/adviser/src/chat.test.ts",
+    "apps/adviser/src/chat.ts",
+    "apps/adviser/src/crawler.ts",
+    "apps/adviser/src/envelope.ts",
+    "apps/adviser/src/model.test.ts",
+    "apps/adviser/src/model.ts",
+    "apps/adviser/src/money.ts",
+    "apps/adviser/src/provenance.json",
+    "apps/adviser/src/storage.ts",
+    "apps/adviser/src/taxonomy.ts",
+    "apps/adviser/src/theme.tsx",
+    "apps/adviser/src/ui.tsx",
+    "apps/adviser/tests/chat-ui/app.json",
+    "apps/adviser/tests/chat-ui/index.tsx",
+    "apps/adviser/tests/chat-ui/metro.config.cjs",
+    "apps/adviser/tests/chat-ui/package.json",
+    "apps/adviser/tests/chat.spec.ts",
+    "apps/adviser/tests/journey.spec.ts",
+    "apps/adviser/tsconfig.json"
+  ],
+  "commands": [
+    {
+      "argv": [
+        "npm.cmd",
+        "ci",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exitCode": 0,
+      "log": "npm-ci.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "test"
+      ],
+      "exitCode": 0,
+      "passed": 25,
+      "failed": 0,
+      "log": "unit-tests.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": "build.log"
+    }
+  ],
+  "cwd": "C:\\Users\\Minh Duy\\AppData\\Local\\Temp\\lua-a2-chat-review-sb5ae8_0\\apps\\adviser",
+  "runtime": {
+    "node": "v22.19.0",
+    "npm": "10.9.3",
+    "python": "3.15.2"
+  },
+  "productionBundleExclusionChecks": {
+    "Fixture transport": true,
+    "aborted fixture": true,
+    "private fixture diagnostic": true,
+    "/advisor/v1/chat": true
+  },
+  "logSha256": {
+    "build.log": "a01b5d868885a7cb9849cf5cf4415c8083a7404eebbe7b3a72a1727e0319b30f",
+    "npm-ci.log": "55ab945c8335556fb20ade69043d3e71ade7d890630a9bf820775560ae1e367b",
+    "typecheck.log": "6e6108ff6ee063c6fa5142bcc8b7fc0d206bb02dc06d7009851a1d4b57a479b1",
+    "unit-tests.log": "b3e5b942ea072c124f469a5a3c905818e16e37e5e3d06708bf01d7243246dec6"
+  },
+  "notRerun": [
+    "Chromium E2E (Agent2 reported 4/4)",
+    "Android export/native device tests",
+    "live HTTP/provider chat"
+  ]
+}

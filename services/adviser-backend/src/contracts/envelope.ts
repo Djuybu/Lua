@@ -4,6 +4,7 @@
 
 import { type ConfirmedNeedsProfile } from './taxonomy.ts';
 import { type StagedCrawlerOffer } from './crawler.ts';
+import { type ProductVariant } from './catalog.ts';
 
 export const CURRENT_SCHEMA_VERSION = '1.0.0';
 export const CURRENT_RULE_VERSION = '2026.11';
@@ -67,6 +68,8 @@ export interface SafeErrorDetail {
 export interface RecommendationResponseEnvelope extends EnvelopeMetadata {
   status: ResponseStatus;
   shortlist: RankedCandidate[];
+  /** Spec-matching catalog records lacking a reviewed offer; never verified purchases. */
+  referenceCandidates?: ProductVariant[];
   excludedVariants: ExcludedCandidate[];
   error?: SafeErrorDetail;
 }

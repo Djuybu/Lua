@@ -5,6 +5,7 @@
 
 import http from 'node:http';
 import { type AdviserSqliteStore } from '../data/sqlite.ts';
+import { type AdviserPostgresStore } from '../data/postgres.ts';
 import { type BoundedAiClient } from '../ai/adapter.ts';
 import { validateConfirmedProfile } from '../contracts/taxonomy.ts';
 import {
@@ -18,7 +19,7 @@ import { rankEligibleCandidates } from '../domain/ranking.ts';
 import { type StagedCrawlerOffer, validateStagedCrawlerOffer } from '../contracts/crawler.ts';
 
 export function createHttpServer(
-  store: AdviserSqliteStore,
+  store: AdviserSqliteStore | AdviserPostgresStore,
   aiClient: BoundedAiClient
 ): http.Server {
   return http.createServer(async (req, res) => {
@@ -35,11 +36,13 @@ export function createHttpServer(
     const readBody = (): Promise<any> => {
       return new Promise((resolve, reject) => {
         let body = '';
+        let bytes = 0;
         let rejected = false;
         req.on('data', chunk => {
           if (rejected) return;
           body += chunk;
-          if (body.length > 1_000_000) {
+          bytes += Buffer.byteLength(chunk);
+          if (bytes > 1_000_000) {
             rejected = true;
             const err: any = new Error('Payload Too Large');
             err.statusCode = 413;
@@ -68,16 +71,24 @@ export function createHttpServer(
 
       // 1. Health check
       if (method === 'GET' && url === '/health') {
+        if ('health' in store) return sendJson(200, await store.health());
         return sendJson(200, {
           status: 'ok',
-          catalogVersion: store.getActiveCatalogVersion(),
+          catalogVersion: await store.getActiveCatalogVersion(),
           timestamp: new Date().toISOString()
         });
+      }
+
+      if (method === 'GET' && new URL(url,'http://localhost').pathname === '/advisor/v1/catalog' && 'catalog' in store) {
+        const query = new URL(url,'http://localhost').searchParams.get('q') || '';
+        if (query.length > 200) return sendJson(400,{error:{message:'Search query too long'}});
+        return sendJson(200, await store.catalog(query));
       }
 
       // 2. Crawler Staging Ingest
       if (method === 'POST' && url === '/advisor/v1/ingest') {
         const body = await readBody();
+        if (!body || typeof body !== 'object') return sendJson(400,{error:{code:'ERR_INVALID_PAYLOAD',message:'Object or array required'}});
         const offers = Array.isArray(body) ? (body as StagedCrawlerOffer[]) : (body.offers as StagedCrawlerOffer[]);
         if (!Array.isArray(offers)) {
           return sendJson(400, {
@@ -108,13 +119,14 @@ export function createHttpServer(
           });
         }
 
-        store.saveOffers(offers);
+        await store.saveOffers(offers);
         return sendJson(200, { status: 'accepted', count: offers.length });
       }
 
       // 3. Recommendation Request
       if (method === 'POST' && url === '/advisor/v1/recommend') {
         const envelope = (await readBody()) as RecommendationRequestEnvelope;
+        if (!envelope || typeof envelope !== 'object') return sendJson(400,{error:{code:'ERR_INVALID_PROFILE',message:'Object required'}});
 
         // Metadata validation
         if (!envelope.requestId || !envelope.decisionId) {
@@ -123,7 +135,7 @@ export function createHttpServer(
             requestId: envelope.requestId || 'unknown',
             decisionId: envelope.decisionId || 'unknown',
             profileRevision: envelope.profileRevision || 0,
-            catalogVersion: store.getActiveCatalogVersion() || 'none',
+            catalogVersion: await store.getActiveCatalogVersion() || 'none',
             ruleVersion: CURRENT_RULE_VERSION,
             status: 'ERROR',
             shortlist: [],
@@ -144,7 +156,7 @@ export function createHttpServer(
             requestId: envelope.requestId,
             decisionId: envelope.decisionId,
             profileRevision: envelope.profileRevision,
-            catalogVersion: store.getActiveCatalogVersion() || 'none',
+            catalogVersion: await store.getActiveCatalogVersion() || 'none',
             ruleVersion: CURRENT_RULE_VERSION,
             status: 'ERR_INVALID_PROFILE',
             shortlist: [],
@@ -159,7 +171,8 @@ export function createHttpServer(
         }
 
         // Active catalog check
-        const activeCatalog = store.getActiveCatalogVersion();
+        const catalogData = 'catalog' in store ? await store.catalog() : null;
+        const activeCatalog = catalogData?.catalogVersion ?? await store.getActiveCatalogVersion();
         if (!activeCatalog) {
           const resp: RecommendationResponseEnvelope = {
             schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -181,12 +194,12 @@ export function createHttpServer(
         }
 
         // Retrieve catalog variants
-        const variants = store.getVariantsForActiveCatalog();
+        const variants: import('../contracts/catalog.ts').ProductVariant[] = catalogData?.variants ?? await store.getVariantsForActiveCatalog();
         const eligibleList = [];
         const excludedList = [];
 
         for (const variant of variants) {
-          const offers = store.getOffersForVariant(variant.variantId);
+          const offers = await store.getOffersForVariant(variant.variantId);
           const eligibility = evaluateEligibility(variant, offers, envelope.profile);
           if (eligibility.isEligible) {
             eligibleList.push({ variant, eligibility });
@@ -197,8 +210,11 @@ export function createHttpServer(
 
         // Rank candidates
         const shortlist = rankEligibleCandidates(eligibleList, envelope.profile);
+        const noOfferIds = new Set(excludedList.filter(candidate => candidate.reasonCode === 'NO_OFFERS').map(candidate => candidate.variantId));
+        const referenceCandidates = variants.filter(variant => noOfferIds.has(variant.variantId));
 
-        const status = shortlist.length > 0 ? 'SUCCESS' : 'NO_FIT';
+        const status = shortlist.some(candidate => candidate.isVerifiedAffordable) ? 'SUCCESS'
+          : shortlist.length || excludedList.some(candidate => candidate.reasonCode === 'NO_OFFERS') ? 'NO_VERIFIED_OFFER' : 'NO_FIT';
 
         const responseEnv: RecommendationResponseEnvelope = {
           schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -209,6 +225,7 @@ export function createHttpServer(
           ruleVersion: CURRENT_RULE_VERSION,
           status,
           shortlist,
+          referenceCandidates,
           excludedVariants: excludedList
         };
 
@@ -223,7 +240,7 @@ export function createHttpServer(
       return sendJson(statusCode, {
         error: {
           code,
-          message: err?.message || 'Internal Server Error',
+          message: statusCode >= 500 ? 'Service temporarily unavailable' : err?.message || 'Invalid request',
           retryable: false
         }
       });

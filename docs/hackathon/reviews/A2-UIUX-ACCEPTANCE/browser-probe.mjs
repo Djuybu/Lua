@@ -1,0 +1,58 @@
+import http from 'node:http';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve, extname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { chromium } from './apps/adviser/node_modules/playwright/index.mjs';
+const baseDir=fileURLToPath(new URL('.', import.meta.url));
+const assets=resolve(baseDir,'apps/adviser/dist-offline-probe');
+const server=http.createServer(async(req,res)=>{try{
+  const path=resolve(assets,'.'+new URL(req.url,'http://localhost').pathname);
+  if(!path.startsWith(assets)) throw Error('bad path');
+  const target=path===assets?resolve(assets,'index.html'):path;
+  const data=await readFile(target);
+  res.writeHead(200,{'Content-Type':extname(target)==='.js'?'text/javascript':extname(target)==='.html'?'text/html':'application/octet-stream'});res.end(data);
+}catch{res.writeHead(404);res.end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const url='http://127.0.0.1:'+server.address().port;
+let browser;const report={pin:'fbdcd485e6204690a868121875ac8dad066c8a1d',externalRequests:0,cases:[]};
+const makeState=(offlineAiOnly)=>({version:2,preferences:{appearance:'light',seed:'#6750A4',dynamic:false,endpoint:'https://acceptance.invalid',offlineAiOnly},confirmed:null,revision:0,saved:[],cartData:{carts:[],candidates:[],legacyMap:{}},offers:[],observations:[],trackingRules:[],alertDeliveries:[]});
+try{
+ browser=await chromium.launch({headless:true,channel:'chromium',timeout:10000});
+ const page=await browser.newPage(); page.setDefaultTimeout(5000); const requests=[]; const startupErrors=[]; page.on('pageerror',e=>startupErrors.push(e.message));
+ await page.route('https://acceptance.invalid/**',async(route)=>{requests.push(route.request().url());await route.fulfill({status:200,contentType:'application/json',body:'{"status":"ok","capabilities":{"priceTracking":false}}'});});
+ await page.addInitScript(state=>localStorage.setItem('lua-adviser-v1',JSON.stringify(state)),makeState(true));
+ await page.goto(url,{timeout:5000}); await page.waitForTimeout(600);
+ report.cases.push({id:'offline-restored-no-network',expectedHealthRequests:0,actualRequests:requests,startupErrors,body:(await page.locator('body').innerText()).slice(0,300),passed:requests.length===0});
+ await page.close();
+ const online=await browser.newPage();const onlineRequests=[];
+ await online.route('https://acceptance.invalid/**',async route=>{onlineRequests.push(route.request().url());await route.fulfill({status:200,contentType:'application/json',body:'{}'});});
+ await online.addInitScript(state=>localStorage.setItem('lua-adviser-v1',JSON.stringify(state)),makeState(false));
+ await online.goto(url,{timeout:5000});await online.waitForTimeout(600);
+ report.cases.push({id:'online-health-positive-control',actualRequests:onlineRequests,passed:onlineRequests.length===1});await online.close();
+ const seed=JSON.parse(await readFile(resolve(baseDir,'apps/adviser/src/catalog.json'),'utf8'));
+ const basis=makeState(true),at=new Date().toISOString(),v=seed.variants[0];
+ basis.cartData.carts=[{id:'cart',title:'Synthetic basis probe',useCase:'',budget:100,currency:'VND',decisionNote:'Synthetic comparison only',createdAt:at,updatedAt:at,archivedAt:null}];
+ basis.cartData.candidates=[{id:'candidate',cartId:'cart',productVariantId:v.variantId,decisionSnapshot:{variant:v,profile:null,note:'Synthetic basis comparison',catalogVersion:'probe'},savedAt:at,savedOfferId:'complete-offer',baselineAmount:100,baselineCurrency:'VND',baselinePriceBasis:'complete'}];
+ basis.offers=[{id:'listing-offer',productVariantId:v.variantId,retailerId:'fixture-retailer',sellerId:'fixture-seller',canonicalUrl:'https://example.com/synthetic',condition:'new',warrantyRegion:'VN',priceBasis:'listing'}];
+ basis.observations=[{id:'obs',offerId:'listing-offer',amount:90,currency:'VND',availability:'available',fetchedAt:at,sourceUpdatedAt:null,validationStatus:'valid',sourceReference:'synthetic-basis-fixture'}];
+ const price=await browser.newPage();price.setDefaultTimeout(5000);
+ await price.route('https://acceptance.invalid/**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}));
+ await price.addInitScript(state=>localStorage.setItem('lua-adviser-v1',JSON.stringify(state)),basis);
+ await price.goto(url,{timeout:5000});await price.getByRole('button',{name:'Gi\u1ecf h\u00e0ng',exact:true}).click();await price.getByRole('button',{name:'Xem c\u1ea5u h\u00ecnh',exact:true}).click();
+ const betterVisible=await price.getByText('\u01afu \u0111\u00e3i t\u1ed1t h\u01a1n',{exact:true}).isVisible();
+ report.cases.push({id:'incompatible-price-basis-no-better-claim',fixture:'synthetic only; complete baseline100 vs listing90',expectedBetterClaim:false,actualBetterClaim:betterVisible,passed:!betterVisible});await price.close();
+ const corrupt=makeState(true);corrupt.cartData.carts=[{id:'a',title:'A',currency:'VND',budget:null},{id:'b',title:'B',currency:'VND',budget:null}];
+ const broken=await browser.newPage();const errors=[];
+ broken.on('pageerror',error=>errors.push(error.message));
+ await broken.route('https://acceptance.invalid/**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}));
+ await broken.addInitScript(state=>localStorage.setItem('lua-adviser-v1',JSON.stringify(state)),corrupt);
+ await broken.goto(url,{timeout:5000});await broken.waitForTimeout(600);
+ const recoveryVisible=await broken.getByText('C\u1ea7n kh\u00f4i ph\u1ee5c d\u1eef li\u1ec7u',{exact:true}).isVisible();
+ report.cases.push({id:'corrupt-v2-safe-recovery',expected:'recovery notice, no render crash',actualPageErrors:errors,recoveryVisible,passed:errors.length===0&&recoveryVisible});
+ await broken.close();
+}finally{
+ if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));
+ report.status=report.cases.length===4&&report.cases.every(x=>x.passed)?'passed':'failed';
+ await writeFile(resolve(baseDir,'browser-probe.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+ if(report.status!=='passed')process.exitCode=1;
+}

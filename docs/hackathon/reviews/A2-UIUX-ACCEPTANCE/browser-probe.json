@@ -1,0 +1,38 @@
+{
+  "pin": "fbdcd485e6204690a868121875ac8dad066c8a1d",
+  "externalRequests": 0,
+  "cases": [
+    {
+      "id": "offline-restored-no-network",
+      "expectedHealthRequests": 0,
+      "actualRequests": [],
+      "startupErrors": [],
+      "body": "Lựa.\nChọn có căn cứ\nNhu cầu\nTrang chủ\nSo sánh\nGiỏ hàng\nCài đặt\nNhững gì đã biết, và những gì còn thiếu.\nDữ liệu tham khảo, không phải chào bán\nTìm thiết bị cho tôi\nfptshop · Laptop\nAcer Aspire Go 15 AI AG15-52P-52WT\nHãng: Acer · Kiểu máy: acer:aspire-go-ag15-52p-52wt\nChưa có giá trọn gói đã xác minh",
+      "passed": true
+    },
+    {
+      "id": "online-health-positive-control",
+      "actualRequests": [
+        "https://acceptance.invalid/health"
+      ],
+      "passed": true
+    },
+    {
+      "id": "incompatible-price-basis-no-better-claim",
+      "fixture": "synthetic only; complete baseline100 vs listing90",
+      "expectedBetterClaim": false,
+      "actualBetterClaim": true,
+      "passed": false
+    },
+    {
+      "id": "corrupt-v2-safe-recovery",
+      "expected": "recovery notice, no render crash",
+      "actualPageErrors": [
+        "Cannot read properties of undefined (reading 'localeCompare')"
+      ],
+      "recoveryVisible": false,
+      "passed": false
+    }
+  ],
+  "status": "failed"
+}

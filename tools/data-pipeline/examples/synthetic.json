@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "fptshop",
+  "seeds": [],
+  "regionContext": "synthetic-test-only",
+  "variantMap": {"000123": "synthetic:variant:16-512"}
+}

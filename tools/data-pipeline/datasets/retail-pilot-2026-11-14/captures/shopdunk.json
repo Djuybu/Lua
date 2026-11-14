@@ -1,0 +1,367 @@
+{
+  "sourceId": "shopdunk",
+  "documentTitle": "iPhone 17 Pro Max 256GB: Màu cam vũ trụ đẹp keng",
+  "errors": [],
+  "h1": "iPhone 17 Pro Max 256GB",
+  "observedAt": "2026-11-14T05:50:58.915Z",
+  "policySnippets": [],
+  "priceNodes": [
+    {
+      "classes": "",
+      "content": "33490000.00",
+      "grandparentClass": "",
+      "id": "",
+      "itemprop": "price",
+      "parentClass": "",
+      "tag": "META",
+      "text": ""
+    },
+    {
+      "classes": "box-product-price-wrapper",
+      "content": null,
+      "grandparentClass": "overview",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "has-flashsale",
+      "tag": "DIV",
+      "text": "33.490.000₫\n37.999.000₫\n\nHoặc\n\nThu cũ lên đời chỉ từ\n29.490.000 đ Định giá ngay \nTrợ giá đến 4.000.000 đ\n(Chi tiết chương trình)"
+    },
+    {
+      "classes": "prices",
+      "content": null,
+      "grandparentClass": "has-flashsale",
+      "id": "",
+      "itemprop": "offers",
+      "parentClass": "box-product-price-wrapper",
+      "tag": "DIV",
+      "text": "33.490.000₫\n37.999.000₫\n\nHoặc\n\nThu cũ lên đời chỉ từ\n29.490.000 đ Định giá ngay"
+    },
+    {
+      "classes": "price-flex ",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": "offers",
+      "parentClass": "prices",
+      "tag": "DIV",
+      "text": "33.490.000₫\n37.999.000₫"
+    },
+    {
+      "classes": "product-price",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-flex ",
+      "tag": "DIV",
+      "text": "33.490.000₫"
+    },
+    {
+      "classes": "new-price price-value-5578",
+      "content": null,
+      "grandparentClass": "price-flex ",
+      "id": "price-value-5578",
+      "itemprop": null,
+      "parentClass": "product-price",
+      "tag": "SPAN",
+      "text": "33.490.000₫"
+    },
+    {
+      "classes": "old-product-price",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-flex ",
+      "tag": "DIV",
+      "text": "37.999.000₫"
+    },
+    {
+      "classes": "devide-price-label",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "prices",
+      "tag": "DIV",
+      "text": "Hoặc"
+    },
+    {
+      "classes": "container-price-thucu",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "prices",
+      "tag": "DIV",
+      "text": "Thu cũ lên đời chỉ từ\n29.490.000 đ Định giá ngay"
+    },
+    {
+      "classes": "price-thucu",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "container-price-thucu",
+      "tag": "SPAN",
+      "text": "29.490.000 đ Định giá ngay"
+    },
+    {
+      "classes": "exclusive-price-block",
+      "content": null,
+      "grandparentClass": "has-flashsale",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "box-product-price-wrapper",
+      "tag": "DIV",
+      "text": "Trợ giá đến 4.000.000 đ\n(Chi tiết chương trình)"
+    },
+    {
+      "classes": "price-tradeSupportAmount",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "exclusive-price-block",
+      "tag": "SPAN",
+      "text": "Trợ giá đến 4.000.000 đ"
+    },
+    {
+      "classes": "cta-price-label",
+      "content": null,
+      "grandparentClass": "all-btn-sticked",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-mobile",
+      "tag": "SPAN",
+      "text": "Giá sản phẩm"
+    },
+    {
+      "classes": "old-product-price",
+      "content": null,
+      "grandparentClass": "all-btn-sticked",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-mobile",
+      "tag": "DIV",
+      "text": "37999000,0000"
+    },
+    {
+      "classes": "product-price new-price price-value-5578",
+      "content": null,
+      "grandparentClass": "all-btn-sticked",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-mobile",
+      "tag": "DIV",
+      "text": "33.490.000₫"
+    },
+    {
+      "classes": "product-price",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-flex ",
+      "tag": "DIV",
+      "text": "33.490.000₫"
+    },
+    {
+      "classes": "new-price price-value-5578",
+      "content": null,
+      "grandparentClass": "price-flex ",
+      "id": "price-value-5578",
+      "itemprop": null,
+      "parentClass": "product-price",
+      "tag": "SPAN",
+      "text": "33.490.000₫"
+    },
+    {
+      "classes": "old-product-price",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "price-flex ",
+      "tag": "DIV",
+      "text": "37.999.000₫"
+    },
+    {
+      "classes": "devide-price-label",
+      "content": null,
+      "grandparentClass": "box-product-price-wrapper",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "prices",
+      "tag": "DIV",
+      "text": "Hoặc"
+    },
+    {
+      "classes": "price-thucu",
+      "content": null,
+      "grandparentClass": "prices",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "container-price-thucu",
+      "tag": "SPAN",
+      "text": "29.490.000 đ\n\n                        \n\n                            Định giá ngay"
+    }
+  ],
+  "productIds": [
+    "5578",
+    "6977",
+    "6980",
+    "5573",
+    "5589",
+    "5590"
+  ],
+  "products": [],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [
+    [
+      "Tên thuộc tính",
+      "Giá trị thuộc tính"
+    ],
+    [
+      "Công nghệ màn hình:",
+      "Super Retina XDR OLED, ProMotion 120Hz, HDR, True Tone, Haptic Touch"
+    ],
+    [
+      "Độ phân giải màn hình",
+      "2868 x 1320 pixels (460 ppi), tỷ lệ tương phản 2.000.000:1, độ sáng tối đa 3000 nit (ngoài trời)"
+    ],
+    [
+      "Camera:",
+      "Hệ thống 48MP Pro Fusion:- Camera chính: 48MP, f/1.78, 24mm, OIS, Focus Pixels- Camera góc siêu rộng: 48MP, f/2.2, 13mm, 120°- Tele 12MP: 48mm, f/1.78, OIS- Tele 12MP: 100mm, f/2.8, OIS, tetraprism- Tele 12MP: 200mm, f/2.8, OISZoom quang 8x, zoom số 40x, chụp đêm, Deep Fusion, Photonic Engine, ProRAW, quay video 4K ProRes"
+    ],
+    [
+      "Hệ điều hành & CPU",
+      "Hệ điều hành: iOS 26\nCPU: Apple A19 Pro (CPU 6 lõi, GPU 6 lõi, Neural Engine 16 lõi)"
+    ],
+    [
+      "Tiện ích đặc biệt:",
+      "Apple Intelligence tích hợp, hỗ trợ AI cục bộ và đám mây"
+    ],
+    [
+      "Bộ nhớ trong:",
+      "256GB"
+    ],
+    [
+      "Sim & nghe gọi:",
+      "SIM kép (nano-SIM và eSIM) – Hỗ trợ 2 eSIM"
+    ],
+    [
+      "Kích thước, khối lượng:",
+      "163.4 x 78.0 x 8.75 mm"
+    ],
+    [
+      "Chất liệu khung viền:",
+      "Khung nhôm, Ceramic Shield 2 (mặt trước), Ceramic Shield (mặt sau)"
+    ],
+    [
+      "Kết nối:",
+      "USB-C (USB 3, DisplayPort), Wi-Fi 7, Bluetooth 6, 5G, UWB thế hệ 2, NFC"
+    ],
+    [
+      "Tiện ích khác:",
+      "Face ID, LiDAR Scanner, Dynamic Island, Always-On Display, Âm thanh Spatial Audio, Siri, Apple Pay, MagSafe 25W, hỗ trợ Qi2"
+    ],
+    [
+      "Kích thước và Trọng lượng",
+      "Kích thước: 6.9 inches\nTrọng lượng: 233g"
+    ],
+    [
+      "Chống nước - Chống bụi",
+      "Chuẩn IP68 (tối đa 6m trong 30 phút)"
+    ],
+    [
+      "Camera trước",
+      "18MP, f/1.9, Focus Pixels, Center Stage, hỗ trợ quay video 4K Dolby Vision, ProRAW, 18MP, f/1.9, Focus Pixels, Center Stage, hỗ trợ quay video 4K Dolby Vision, ProRAW"
+    ],
+    [
+      "Pin",
+      "Xem video: Lên đến 39 giờXem video trực tuyến: Lên đến 35 giờSạc nhanh USB-C 40W, MagSafe 30W"
+    ],
+    [
+      "iPhone 17 Pro Max 256GB",
+      "33.990.000đ"
+    ],
+    [
+      "iPhone 17 Pro Max 512GB",
+      "40.490.000đ"
+    ],
+    [
+      "iPhone 17 Pro Max 1TB",
+      "46.990.000đ"
+    ],
+    [
+      "iPhone 17 Pro Max 2TB",
+      "58.9990.000đ"
+    ],
+    [
+      "Kích thước",
+      "163,4 mm x 78,0 mm x 8,75 mm"
+    ],
+    [
+      "Trọng lượng",
+      "231 gram"
+    ],
+    [
+      "SIM",
+      "SIM kép (nano SIM và eSIM)Hỗ trợ eSIM kép"
+    ],
+    [
+      "Độ bền",
+      "Tiêu chuẩn kháng nước kháng bụi IP68 \n(chống bụi hoàn toàn, chống nước 6m trong 30 phút)"
+    ],
+    [
+      "Công nghệ màn hình",
+      "Super Retina XDRTần số quét 120HzHDR10Dolby VisionKích thước: 6.9 inch Độ phân giải: 1320 x 2868 px (~458 ppi)Ceramic Shield (thế hệ 2)"
+    ],
+    [
+      "Hệ điều hành",
+      "iOS 26"
+    ],
+    [
+      "Chipset",
+      "Apple A19 Pro (3nm), CPU 6 lõi, GPU Apple 6 lõi đồ họa"
+    ],
+    [
+      "RAM / ROM",
+      "12GB RAM\n256GB / 512GB / 1TB / 2TB (không hỗ trợ thẻ nhớ ngoài)"
+    ],
+    [
+      "Camera sau",
+      "3 camera \n- 48MP Fusion Main- 48MP Fusion Ultra Wide- 48MP Fusion Telephoto- Zoom quang 8x"
+    ],
+    [
+      "Camera trước",
+      "24MP"
+    ],
+    [
+      "Kết nối",
+      "Wi-Fi 7 LTEBluetooth 6NFCUSB-C"
+    ],
+    [
+      "Công nghệ khác",
+      "Face IDLiDAR ScannerÁp kếCon quay hồi chuyển độ lệch tương phản caoGia tốc kế lực G caoCảm biến tiệm cậnHai cảm biến ánh sáng môi trường"
+    ],
+    [
+      "Pin",
+      "Pin Li-Ion (không tháo rời)"
+    ],
+    [
+      "Sạc",
+      "Sạc không dây MagSafe lên đến 25WSạc không dây Qi2 lên đến 25W"
+    ],
+    [
+      "Màu sắc",
+      "TrắngXanh ĐậmCam Vũ Trụ"
+    ]
+  ],
+  "url": "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "selectedProductId": "5578",
+  "regionContext": null
+}

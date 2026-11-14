@@ -1,0 +1,84 @@
+{
+  "sourceId": "fptshop",
+  "documentTitle": "Acer Aspire Go 15 AI AG15-52P-52WT | Giá hấp dẫn, ưu đãi lớn",
+  "errors": [],
+  "h1": "Laptop Acer Aspire Go 15 AI AG15-52P-52WT Ultra5 115U/16GB/512GB/15.6\" FHD/Win11",
+  "observedAt": "2026-11-14T05:50:14.627Z",
+  "policySnippets": [
+    "Giao hàng miễn phí toàn quốc",
+    "Giao hàng miễn phí toàn quốc"
+  ],
+  "priceNodes": [
+    {
+      "classes": "bg-special-price bg-clip-text text-transparent l7-semibold",
+      "content": null,
+      "grandparentClass": "flex flex-col justify-center",
+      "id": "",
+      "itemprop": null,
+      "parentClass": "flex items-center gap-2",
+      "tag": "P",
+      "text": "21.490.000đ"
+    }
+  ],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "CPU",
+          "value": "Core Ultra 5"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "RAM",
+          "value": "16 GB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Card đồ hoạ",
+          "value": "Intel Graphics"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kích thước màn hình",
+          "value": "15.6 inch"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thời lượng Pin",
+          "value": ""
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tấm nền",
+          "value": "IPS"
+        }
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Acer"
+      },
+      "mpn": "00928037",
+      "name": "Acer Aspire Go 15 AI AG15-52P-52WT",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 22990000,
+        "priceCurrency": "VND",
+        "priceValidUntil": "2026-11-14",
+        "url": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt"
+      },
+      "sku": "00928037"
+    }
+  ],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [],
+  "url": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": null
+}

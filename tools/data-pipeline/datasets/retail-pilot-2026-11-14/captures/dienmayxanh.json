@@ -1,0 +1,213 @@
+{
+  "sourceId": "dienmayxanh",
+  "documentTitle": "HP 240R G10 Core 5 120U (C3RU7AT). Chính hãng, giá tốt",
+  "errors": [],
+  "h1": "Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)",
+  "observedAt": "2026-11-14T05:50:47.598Z",
+  "policySnippets": [],
+  "priceNodes": [],
+  "productIds": [],
+  "products": [
+    {
+      "@context": "https://schema.org",
+      "@id": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at#product",
+      "@type": "Product",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Loại CPU",
+          "value": "120U"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thiết kế card",
+          "value": "Card tích hợp"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Chất liệu",
+          "value": "Vỏ nhựa"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Hỗ trợ RAM tối đa",
+          "value": "32 GB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Hệ điều hành",
+          "value": "Windows 11 Home SL"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thông tin Pin",
+          "value": "3 cell, 41.04 Wh"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tốc độ CPU",
+          "value": "1.40 GHz (Lên đến 5.00 GHz khi tải nặng)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "RAM",
+          "value": "16 GB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dài",
+          "value": "Dài 323.7 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tấm nền",
+          "value": "IPS"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ màn hình",
+          "value": "300 nits, Chống chói Anti Glare"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tần số quét",
+          "value": "Hãng không công bố"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Card đồ họa",
+          "value": "Intel UHD Graphics"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ âm thanh",
+          "value": "Dual speakers, Realtek High Definition Audio"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tốc độ Bus RAM",
+          "value": "3200 MHz"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Webcam",
+          "value": "HD webcam"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Dày",
+          "value": "Dày 9.3 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Khối lượng máy",
+          "value": "Nặng 1.402 kg"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Số nhân",
+          "value": "10"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Bảo mật",
+          "value": "Công tắc khoá camera"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Ổ cứng",
+          "value": "512 GB SSD PCIe M.2 (2280) (Có thể tháo rời, lắp thanh khác tối đa 1 TB (2280))"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Rộng",
+          "value": "Rộng 215 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phân giải",
+          "value": "Full HD (1920 x 1080)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kết nối",
+          "value": "Wi-Fi 6 (802.11ax), Bluetooth 5.4"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Loại RAM",
+          "value": "DDR4 (1 khe 16 GB + 1 khe rời)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Tản nhiệt",
+          "value": "Hãng không công bố"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Cổng giao tiếp",
+          "value": "HDMI, 2 x USB 3.2, Jack tai nghe 3.5 mm, 1 x USB 3.2 Gen 2 Type-C (hỗ trợ DisplayPort, Power delivery, HP Sleep and Charge)"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Kích thước màn hình",
+          "value": "14 inch"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Thời gian ra mắt",
+          "value": "2025"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Khe đọc thẻ nhớ",
+          "value": "Không"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Đèn bàn phím",
+          "value": "Không có đèn"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Độ phủ màu",
+          "value": "45% NTSC"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Số luồng",
+          "value": "12"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Công nghệ CPU",
+          "value": "Intel Core 5 Raptor Lake"
+        }
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Hp"
+      },
+      "category": "Laptop",
+      "name": "Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)",
+      "offers": {
+        "@id": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at#offer",
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 21290000,
+        "priceCurrency": "VND",
+        "priceValidUntil": "2026-12-14",
+        "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+      },
+      "sku": "0220042003457",
+      "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+    }
+  ],
+  "regionLabels": [],
+  "schemaVersion": "lua.browser-capture.v1",
+  "tableRows": [],
+  "url": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at",
+  "captureScope": "Selected public product JSON-LD and DOM projection, not full HTML; retailer claims, not manufacturer verification",
+  "regionContext": null
+}

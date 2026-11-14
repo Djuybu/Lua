@@ -1,5 +1,6 @@
 // Local PostgreSQL + Qdrant API. Expo serves the frontend on port 8081.
 import http from 'node:http';
+import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from 'node:process';
@@ -11,13 +12,46 @@ import { validateConfirmedProfile } from '../services/adviser-backend/src/contra
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const backendDir = resolve(root, 'services/adviser-backend');
+const datasetDir = resolve(root, 'tools/data-pipeline/datasets/retail-pilot-2026-11-14');
+// User decision 2026-11-14: collected retail prices/configurations are official.
+const official = JSON.parse(readFileSync(resolve(datasetDir, 'official-offers.json'), 'utf8'));
+const bundledCatalog = JSON.parse(readFileSync(resolve(datasetDir, 'catalog-snapshot.json'), 'utf8'));
 loadEnvFile(resolve(backendDir, '.env'));
 if (process.env.AI_MODE === 'provider' && process.env.AI_PROVIDER_NAME !== 'openai') throw new Error('This launcher supports AI_PROVIDER_NAME=openai');
 const port = Number(process.env.PORT || 8080);
 const store = new AdviserPostgresStore();
 await store.health();
+// Seed the accepted offers into the active build when its catalog contains the
+// same exact variant IDs. Existing identical observations are idempotent.
+try {
+  const known = new Set((await store.getVariantsForActiveCatalog()).map(v => v.variantId));
+  const seed = official.offers.filter(o => known.has(o.matchedVariantId));
+  if (seed.length) await store.saveOffers(seed);
+} catch (error) {
+  console.warn('Official offers were not seeded:', error?.code ?? error?.message ?? 'UNKNOWN');
+}
 const ai = new LiveExplanation({ mode: process.env.AI_MODE || 'mock', model: process.env.AI_MODEL || '', key: process.env.AI_API_KEY || '', timeoutMs: Number(process.env.AI_TIMEOUT_MS || 5000) });
-const legacy = createHttpServer(store, new BoundedAiClient(new MockAiProvider()));
+const offerKey = o => `${o.sourceId}::${o.externalOfferId}::${o.observedAt}`;
+const mergeOfficial = (stored, variantIds) => {
+  const wanted = new Set(variantIds);
+  const seen = new Set(stored.map(offerKey));
+  const accepted = official.offers.filter(o => wanted.has(o.matchedVariantId) && !seen.has(offerKey(o)));
+  return [...stored, ...accepted];
+};
+// The committed official offers are authoritative for this local launcher even
+// before PostgreSQL is seeded, so recommend and explain tell the same story.
+const officialStore = new Proxy(store, {
+  get(target, property) {
+    if (property === 'getOffersForVariant') return async variantId => mergeOfficial(await target.getOffersForVariant(variantId), [variantId]);
+    if (property === 'catalog') return async (query = '') => {
+      const result = await target.catalog(query);
+      return { ...result, offers: mergeOfficial(result.offers, result.variants.map(v => v.variantId)) };
+    };
+    const value = Reflect.get(target, property, target);
+    return typeof value === 'function' ? value.bind(target) : value;
+  }
+});
+const legacy = createHttpServer(officialStore, new BoundedAiClient(new MockAiProvider()));
 const send = (res, status, data) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(data)); };
 const expoPort = Number(process.env.EXPO_PORT || 8081);
 const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.2:${port}`]);
@@ -43,9 +77,15 @@ const backend = http.createServer(async (req, res) => {
     for await (const chunk of req) { size += chunk.length; if (size > 16000) { send(res, 413, { error: { message: 'Payload too large' } }); return; } chunks.push(chunk); }
     const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
     if (!body || typeof body.requestId !== 'string' || body.requestId.length > 100 || !validateConfirmedProfile(body.profile).valid) return send(res, 400, { error: { message: 'Invalid confirmed profile or request identity' } });
-    const variant = (await store.getVariantsForActiveCatalog()).find(v => v.variantId === body.variantId);
+    if (body.question !== undefined && body.question !== null && typeof body.question !== 'string') return send(res, 400, { error: { message: 'Question must be a string' } });
+    const question = body.question?.trim() || null;
+    if (question && question.length > 500) return send(res, 400, { error: { message: 'Question too long' } });
+    const variant = (await store.getVariantsForActiveCatalog()).find(v => v.variantId === body.variantId)
+      ?? bundledCatalog.variants.find(v => v.variantId === body.variantId);
     if (!variant) return send(res, 404, { error: { message: 'Variant not found in active catalog' } });
-    const explanation = await ai.explain(variant, body.profile, body.requestId, controller.signal);
+    const stored = await store.getOffersForVariant(variant.variantId);
+    const offers = mergeOfficial(stored, [variant.variantId]);
+    const explanation = await ai.explain(variant, body.profile, offers, body.requestId, question, controller.signal);
     if (!res.destroyed) send(res, 200, explanation);
   } catch { if (!res.destroyed) send(res, 400, { error: { message: 'Cannot process explanation request' } }); }
 });

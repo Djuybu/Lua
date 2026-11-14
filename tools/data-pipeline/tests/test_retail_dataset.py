@@ -36,17 +36,35 @@ class RetailDatasetTests(unittest.TestCase):
         self.assertEqual(stock["0131491004733"], "OUT_OF_STOCK")
         self.assertEqual(stock["0131491004731"], "IN_STOCK")
 
-    def test_catalog_has_no_invented_offers_or_performance_facts(self):
+    def test_catalog_offers_are_the_accepted_retail_observations(self):
         catalog = json.loads((DATA / "catalog-snapshot.json").read_text(encoding="utf-8"))
+        official = json.loads((DATA / "official-offers.json").read_text(encoding="utf-8"))
         provenance = json.loads((DATA / "variant-provenance.json").read_text(encoding="utf-8"))
-        self.assertEqual(catalog["offers"], [])
+        self.assertEqual(catalog["offers"], official["offers"])
         self.assertEqual(catalog["facts"], [])
         self.assertEqual({v["variantId"] for v in catalog["variants"]}, {v["variantId"] for v in provenance["variants"]})
+        self.assertEqual({o["matchedVariantId"] for o in catalog["offers"]}, {v["variantId"] for v in catalog["variants"]})
+        bundle = json.loads((DATA / "staging-bundle.json").read_text(encoding="utf-8"))
+        observations = {(r["sourceId"], r["externalOfferId"]): r for r in bundle["records"]}
+        for offer in catalog["offers"]:
+            observed = observations[(offer["sourceId"], offer["externalOfferId"])]
+            self.assertEqual(offer["basePriceVnd"], observed["basePriceVnd"])
+            self.assertEqual(offer["sourceUrl"], observed["sourceUrl"])
+            self.assertEqual(offer["observedAt"], observed["observedAt"])
+            self.assertEqual(offer["mandatoryFeesVnd"], 0)
+            self.assertEqual(offer["shippingVnd"], 0)
+            self.assertEqual(offer["completenessStatus"], "COMPLETE")
         for variant in catalog["variants"]:
             self.assertEqual(variant["specifications"]["ramGb"], 16)
             self.assertEqual(variant["specifications"]["storageGb"], 512)
             self.assertEqual(variant["factIds"], [])
             self.assertNotIn("tgdd", variant["variantId"])
+
+    def test_adviser_app_catalog_matches_the_published_snapshot(self):
+        catalog = json.loads((DATA / "catalog-snapshot.json").read_text(encoding="utf-8"))
+        app_catalog = json.loads((DATA.parents[3] / "apps/adviser/src/catalog.json").read_text(encoding="utf-8"))
+        plain = json.loads(json.dumps(app_catalog))
+        self.assertEqual(plain, catalog)
 
 
 if __name__ == "__main__":

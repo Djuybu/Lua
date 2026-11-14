@@ -123,6 +123,11 @@ export function validateStagedCrawlerOffer(offer: unknown): OfferValidationResul
     }
   }
 
+  const validCompleteness: OfferCompleteness[] = ['COMPLETE', 'PARTIAL_UNKNOWN'];
+  if (!o.completenessStatus || !validCompleteness.includes(o.completenessStatus)) {
+    errors.push(`completenessStatus must be one of: ${validCompleteness.join(', ')}`);
+  }
+
   return {
     valid: errors.length === 0,
     errors

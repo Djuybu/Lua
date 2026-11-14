@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "decision": "accepted_as_official",
+  "decidedAt": "2026-11-14T12:00:00.000Z",
+  "basis": "Giá niêm yết của nhà bán lẻ được chấp nhận làm giá phải trả chính thức; phí bắt buộc và phí vận chuyển không phát sinh nên được ghi 0. Cấu hình do nhà bán lẻ công bố được chấp nhận làm thông số chính thức.",
+  "sources": {
+    "laptopaz": "LaptopAZ",
+    "cellphones": "CellphoneS",
+    "dienmayxanh": "Điện Máy Xanh",
+    "fptshop": "FPT Shop"
+  },
+  "offers": [
+    {
+      "sourceId": "laptopaz",
+      "externalOfferId": "SP002078",
+      "matchedVariantId": "retailer:laptopaz:SP002078",
+      "condition": "NEW",
+      "stockStatus": "IN_STOCK",
+      "basePriceVnd": 26590000,
+      "mandatoryFeesVnd": 0,
+      "shippingVnd": 0,
+      "conditionalDiscountVnd": 0,
+      "sourceUrl": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+      "observedAt": "2026-11-14T05:49:52.231000+00:00",
+      "completenessStatus": "COMPLETE"
+    },
+    {
+      "sourceId": "cellphones",
+      "externalOfferId": "dien-thoai-oppo-find-x8",
+      "matchedVariantId": "retailer:cellphones:dien-thoai-oppo-find-x8",
+      "condition": "NEW",
+      "stockStatus": "IN_STOCK",
+      "basePriceVnd": 17990000,
+      "mandatoryFeesVnd": 0,
+      "shippingVnd": 0,
+      "conditionalDiscountVnd": 0,
+      "sourceUrl": "https://cellphones.com.vn/dien-thoai-oppo-find-x8.html",
+      "observedAt": "2026-11-14T05:50:06.142000+00:00",
+      "completenessStatus": "COMPLETE"
+    },
+    {
+      "sourceId": "dienmayxanh",
+      "externalOfferId": "0220042003457",
+      "matchedVariantId": "retailer:dienmayxanh:0220042003457",
+      "condition": "NEW",
+      "stockStatus": "IN_STOCK",
+      "basePriceVnd": 21290000,
+      "mandatoryFeesVnd": 0,
+      "shippingVnd": 0,
+      "conditionalDiscountVnd": 0,
+      "sourceUrl": "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at",
+      "observedAt": "2026-11-14T05:50:47.598000+00:00",
+      "completenessStatus": "COMPLETE"
+    },
+    {
+      "sourceId": "fptshop",
+      "externalOfferId": "00928037",
+      "matchedVariantId": "retailer:fptshop:00928037",
+      "condition": "NEW",
+      "stockStatus": "IN_STOCK",
+      "basePriceVnd": 22990000,
+      "mandatoryFeesVnd": 0,
+      "shippingVnd": 0,
+      "conditionalDiscountVnd": 0,
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt",
+      "observedAt": "2026-11-14T05:50:14.627000+00:00",
+      "completenessStatus": "COMPLETE"
+    }
+  ]
+}

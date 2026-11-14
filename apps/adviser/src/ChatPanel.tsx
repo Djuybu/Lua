@@ -80,9 +80,7 @@ export function ChatPanel({
         </Notice>
       )}
       <Notice title="Giới hạn dữ liệu">
-        Catalog tham khảo có 4 cấu hình, chưa có chào bán hoặc bằng chứng hiệu
-        năng được duyệt. Chat không xác nhận giá trọn gói hay độ phù hợp từ dữ
-        liệu còn thiếu.
+        Catalog có 4 cấu hình và 4 chào bán được chấp nhận. Chưa có benchmark độc lập; phản hồi cần gắn với nguồn dữ liệu.
       </Notice>
       {state.messages.map((message) => (
         <View

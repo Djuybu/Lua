@@ -43,6 +43,6 @@ const transport: ChatTransport = async (input, signal) => {
   };
 };
 function Fixture() {
-  return <AdviserApp chatTransport={transport} />;
+  return <AdviserApp explanationEndpoint="https://example.com" chatTransport={transport} />;
 }
 registerRootComponent(Fixture);

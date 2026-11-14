@@ -165,31 +165,100 @@ export class AdviserSqliteStore {
 
   /**
    * Idempotent offer saving into staged_offers table.
+   * Atomic batch transaction: checks for conflicting observations (same sourceId, externalOfferId, observedAt)
+   * and rolls back completely on any conflict, throwing 409 ERR_CONFLICT.
    */
   public saveOffers(offers: StagedCrawlerOffer[]): void {
-    const stmt = this.db.prepare(`
-      INSERT OR IGNORE INTO staged_offers (
-        source_id, external_offer_id, matched_variant_id, condition, stock_status,
-        base_price_vnd, mandatory_fees_vnd, shipping_vnd, conditional_discount_vnd,
-        source_url, observed_at, completeness_status
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+    if (!offers || offers.length === 0) return;
 
-    for (const o of offers) {
-      stmt.run(
-        o.sourceId,
-        o.externalOfferId,
-        o.matchedVariantId,
-        o.condition,
-        o.stockStatus,
-        o.basePriceVnd,
-        o.mandatoryFeesVnd,
-        o.shippingVnd,
-        o.conditionalDiscountVnd,
-        o.sourceUrl,
-        o.observedAt,
-        o.completenessStatus
-      );
+    this.db.exec('SAVEPOINT save_offers_batch');
+    try {
+      const selectStmt = this.db.prepare(`
+        SELECT * FROM staged_offers
+        WHERE source_id = ? AND external_offer_id = ? AND observed_at = ?
+      `);
+
+      const insertStmt = this.db.prepare(`
+        INSERT INTO staged_offers (
+          source_id, external_offer_id, matched_variant_id, condition, stock_status,
+          base_price_vnd, mandatory_fees_vnd, shipping_vnd, conditional_discount_vnd,
+          source_url, observed_at, completeness_status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+
+      const seenInBatch = new Map<string, StagedCrawlerOffer>();
+
+      for (const o of offers) {
+        const key = `${o.sourceId}::${o.externalOfferId}::${o.observedAt}`;
+
+        // Check intra-batch duplicate
+        const inBatch = seenInBatch.get(key);
+        if (inBatch) {
+          const isConflict =
+            inBatch.matchedVariantId !== o.matchedVariantId ||
+            inBatch.condition !== o.condition ||
+            inBatch.stockStatus !== o.stockStatus ||
+            inBatch.basePriceVnd !== o.basePriceVnd ||
+            inBatch.mandatoryFeesVnd !== o.mandatoryFeesVnd ||
+            inBatch.shippingVnd !== o.shippingVnd ||
+            inBatch.conditionalDiscountVnd !== o.conditionalDiscountVnd ||
+            inBatch.sourceUrl !== o.sourceUrl ||
+            inBatch.completenessStatus !== o.completenessStatus;
+          if (isConflict) {
+            const err: any = new Error(`Observation conflict for offer ${key}`);
+            err.statusCode = 409;
+            err.code = 'ERR_CONFLICT';
+            throw err;
+          }
+          continue; // Identical in batch, skip duplicate insert
+        }
+        seenInBatch.set(key, o);
+
+        // Check database for existing observation
+        const existing = selectStmt.get(o.sourceId, o.externalOfferId, o.observedAt) as any;
+        if (existing) {
+          const isConflict =
+            existing.matched_variant_id !== o.matchedVariantId ||
+            existing.condition !== o.condition ||
+            existing.stock_status !== o.stockStatus ||
+            existing.base_price_vnd !== o.basePriceVnd ||
+            existing.mandatory_fees_vnd !== o.mandatoryFeesVnd ||
+            existing.shipping_vnd !== o.shippingVnd ||
+            existing.conditional_discount_vnd !== o.conditionalDiscountVnd ||
+            existing.source_url !== o.sourceUrl ||
+            existing.completeness_status !== o.completenessStatus;
+          if (isConflict) {
+            const err: any = new Error(`Observation conflict for offer ${key}`);
+            err.statusCode = 409;
+            err.code = 'ERR_CONFLICT';
+            throw err;
+          }
+          // Identical replay: do nothing, preserve existing row
+          continue;
+        }
+
+        // Insert new observation
+        insertStmt.run(
+          o.sourceId,
+          o.externalOfferId,
+          o.matchedVariantId,
+          o.condition,
+          o.stockStatus,
+          o.basePriceVnd,
+          o.mandatoryFeesVnd,
+          o.shippingVnd,
+          o.conditionalDiscountVnd,
+          o.sourceUrl,
+          o.observedAt,
+          o.completenessStatus
+        );
+      }
+
+      this.db.exec('RELEASE save_offers_batch');
+    } catch (err) {
+      this.db.exec('ROLLBACK TO save_offers_batch');
+      this.db.exec('RELEASE save_offers_batch');
+      throw err;
     }
   }
 

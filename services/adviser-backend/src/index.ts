@@ -11,4 +11,5 @@ export * from './data/sqlite.ts';
 export * from './ai/validator.ts';
 export * from './ai/fallback.ts';
 export * from './ai/adapter.ts';
+export * from './ai/live-chat.ts';
 export * from './server/http-app.ts';

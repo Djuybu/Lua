@@ -1,6 +1,18 @@
 import type { ProductVariant } from "../catalog";
 import type { ConfirmedNeedsProfile } from "../model";
 import type { Saved } from "../storage";
+import {
+  record,
+  text,
+  id,
+  amount,
+  date,
+  url,
+  profile,
+  variant,
+  strings,
+  uniqueIds,
+} from "./validation";
 export type Cart = {
   id: string;
   title: string;
@@ -136,32 +148,61 @@ export function addCandidates(
   );
   return out;
 }
-export function validCartData(value: any): value is CartData {
+export function validCartData(value: unknown): value is CartData {
   return (
-    !!value &&
+    record(value) &&
     Array.isArray(value.carts) &&
     Array.isArray(value.candidates) &&
-    value.legacyMap &&
-    typeof value.legacyMap === "object" &&
+    record(value.legacyMap) &&
     value.carts.every(
       (c: any) =>
-        typeof c.id === "string" &&
-        typeof c.title === "string" &&
+        record(c) &&
+        id(c.id) &&
+        id(c.title) &&
+        text(c.useCase) &&
+        text(c.decisionNote) &&
+        date(c.createdAt) &&
+        date(c.updatedAt) &&
+        Date.parse(c.updatedAt) >= Date.parse(c.createdAt) &&
+        (c.archivedAt === null ||
+          (date(c.archivedAt) &&
+            Date.parse(c.archivedAt) >= Date.parse(c.createdAt))) &&
         c.currency === "VND" &&
-        (c.budget === null ||
-          (Number.isSafeInteger(c.budget) && c.budget >= 0)),
+        (c.budget === null || amount(c.budget)),
     ) &&
     new Set(value.carts.map((c: any) => c.id)).size === value.carts.length &&
     value.candidates.every(
       (c: any) =>
-        typeof c.id === "string" &&
-        typeof c.productVariantId === "string" &&
+        record(c) &&
+        id(c.id) &&
+        id(c.productVariantId) &&
+        id(c.cartId) &&
+        date(c.savedAt) &&
+        (c.savedOfferId === null || id(c.savedOfferId)) &&
+        c.baselineCurrency === "VND" &&
+        ["listing", "complete", "unknown"].includes(c.baselinePriceBasis) &&
+        record(c.decisionSnapshot) &&
+        variant(c.decisionSnapshot.variant) &&
+        (c.decisionSnapshot.profile === null ||
+          profile(c.decisionSnapshot.profile)) &&
+        text(c.decisionSnapshot.note) &&
+        id(c.decisionSnapshot.catalogVersion) &&
+        (c.decisionSnapshot.sourceUrl === undefined ||
+          url(c.decisionSnapshot.sourceUrl)) &&
         value.carts.some((x: any) => x.id === c.cartId) &&
         c.decisionSnapshot?.variant?.variantId === c.productVariantId &&
-        (c.baselineAmount === null ||
-          (Number.isSafeInteger(c.baselineAmount) && c.baselineAmount >= 0)),
+        (c.baselineAmount === null || amount(c.baselineAmount)),
     ) &&
     new Set(value.candidates.map((c: any) => c.id)).size ===
-      value.candidates.length
+      value.candidates.length &&
+    Object.entries(value.legacyMap).every(
+      ([key, refs]) =>
+        id(key) &&
+        strings(refs) &&
+        new Set(refs).size === refs.length &&
+        refs.every((ref) =>
+          value.candidates.some((c: CartCandidate) => c.id === ref),
+        ),
+    )
   );
 }

@@ -282,10 +282,21 @@ export function CartsScreen({
                     const legacyIds = Object.entries(x.cartData.legacyMap)
                       .filter(([, ids]) => ids.some((id) => removed.has(id)))
                       .map(([id]) => id);
+                    const removedRules = new Set(
+                      x.trackingRules
+                        .filter((r) => removed.has(r.candidateId))
+                        .map((r) => r.id),
+                    );
                     return {
                       ...x,
                       legacyRaw: undefined,
                       saved: x.saved.filter((y) => !legacyIds.includes(y.id)),
+                      trackingRules: x.trackingRules.filter(
+                        (r) => !removedRules.has(r.id),
+                      ),
+                      alertDeliveries: x.alertDeliveries.filter(
+                        (d) => !removedRules.has(d.trackingRuleId),
+                      ),
                       cartData: {
                         ...x.cartData,
                         carts: x.cartData.carts.filter(
@@ -293,6 +304,11 @@ export function CartsScreen({
                         ),
                         candidates: x.cartData.candidates.filter(
                           (y) => y.cartId !== deleting,
+                        ),
+                        legacyMap: Object.fromEntries(
+                          Object.entries(x.cartData.legacyMap).filter(
+                            ([id]) => !legacyIds.includes(id),
+                          ),
                         ),
                       },
                     };

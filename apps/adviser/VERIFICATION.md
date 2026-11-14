@@ -1,5 +1,7 @@
 # Frontend verification — 14 November 2026
 
+A2-UIUX-FIX-01 supersedes the acceptance increment totals: TypeScript, 45/45 unit tests, web export and 14/14 browser tests passed after the two P1 fixes. See [UIUX_FIX_01.md](UIUX_FIX_01.md) for before/after repro, permanent regressions, validation boundaries and native/live gates.
+
 Latest acceptance increment: see [ACCEPTANCE.md](ACCEPTANCE.md). Current results are 39/39 unit checks and 5/5 browser journeys, TypeScript and web export passed. The sections below preserve historical evidence and do not represent additional runs.
 
 New frontend implementation in the existing checkout. No backend/pipeline files modified. No commit or push.

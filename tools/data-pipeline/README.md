@@ -142,4 +142,20 @@ node --experimental-strip-types scripts/verify-backend-contract.mjs ../../servic
 
 ## Bằng chứng hiện tại
 
+HTTP integration runner với server thực, DB tạm và consumer pin:
+
+```powershell
+python -m scripts.http_integration --backend-root ../../services/adviser-backend --consumer-sha b979575aeb9f522565e53c69da777f37b8eb323c --report-dir .work/http-new-run
+```
+
+Xem [A1-HTTP-02 và defect/repro](../../docs/hackathon/integration/A1-HTTP-02/README.md). Consumer này còn semantic defects nên runner phải trả nonzero; raw adapter chờ contract thực từ A3-DATA-02.
+
+Integration runner dùng source backend explicit, consumer SHA pin và disposable DB:
+
+```powershell
+python -m scripts.integration --backend-root ../../services/adviser-backend --consumer-sha 579b719d92be8e68d00837c727113f08b84afc75 --report-dir .work/a1-new-run
+```
+
+Xem [A1-INT-01 runbook và logs](../../docs/hackathon/integration/A1-INT-01/README.md). Runner chạy Python suite, backend manifest typecheck/build/test, rebuild/replay dataset, SQLite restart/rollback và synthetic positive có nhãn. Unknown-fee rejection count chỉ là outcome của consumer đã pin; không là invariant cho raw boundary tương lai.
+
 Xem [VERIFICATION.md](VERIFICATION.md) và [kế hoạch](../../docs/hackathon/data-pipeline.md). Test dùng synthetic fixtures và local HTTP server; live HTTP smoke gặp lỗi mạng/kết nối ở cả 8 nguồn trong môi trường hiện tại. Cần bổ sung live-qualified fixtures/DOM selectors, kiểm tra nguồn/retention và backend import trước đưa dữ liệu vào catalog thực.

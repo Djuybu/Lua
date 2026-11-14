@@ -1,0 +1,22 @@
+
+STDERR:
+(node:21864) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+3 !== 4
+
+    at file:///C:/Users/Minh%20Duy/.t3/worktrees/lua/codex-dev-agent-1-lead--54ea4e0052bc84a3/tools/data-pipeline/scripts/integration_backend.mjs:19:8 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 3,
+  expected: 4,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.19.0

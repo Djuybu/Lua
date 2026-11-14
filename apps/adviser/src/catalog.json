@@ -1,1 +1,1169 @@
-{"catalogVersion":"retail-dev-2026-11-14","facts":[],"offers":[{"basePriceVnd":26590000,"completenessStatus":"COMPLETE","condition":"NEW","conditionalDiscountVnd":0,"externalOfferId":"SP002078","mandatoryFeesVnd":0,"matchedVariantId":"retailer:laptopaz:SP002078","observedAt":"2026-11-14T05:49:52.231000+00:00","shippingVnd":0,"sourceId":"laptopaz","sourceUrl":"https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html","stockStatus":"IN_STOCK"},{"basePriceVnd":17990000,"completenessStatus":"COMPLETE","condition":"NEW","conditionalDiscountVnd":0,"externalOfferId":"dien-thoai-oppo-find-x8","mandatoryFeesVnd":0,"matchedVariantId":"retailer:cellphones:dien-thoai-oppo-find-x8","observedAt":"2026-11-14T05:50:06.142000+00:00","shippingVnd":0,"sourceId":"cellphones","sourceUrl":"https://cellphones.com.vn/dien-thoai-oppo-find-x8.html","stockStatus":"IN_STOCK"},{"basePriceVnd":21290000,"completenessStatus":"COMPLETE","condition":"NEW","conditionalDiscountVnd":0,"externalOfferId":"0220042003457","mandatoryFeesVnd":0,"matchedVariantId":"retailer:dienmayxanh:0220042003457","observedAt":"2026-11-14T05:50:47.598000+00:00","shippingVnd":0,"sourceId":"dienmayxanh","sourceUrl":"https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at","stockStatus":"IN_STOCK"},{"basePriceVnd":22990000,"completenessStatus":"COMPLETE","condition":"NEW","conditionalDiscountVnd":0,"externalOfferId":"00928037","mandatoryFeesVnd":0,"matchedVariantId":"retailer:fptshop:00928037","observedAt":"2026-11-14T05:50:14.627000+00:00","shippingVnd":0,"sourceId":"fptshop","sourceUrl":"https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-go-15-ai-ag15-52p-52wt","stockStatus":"IN_STOCK"}],"publishedAt":"2026-11-14T05:51:01.893000+00:00","ruleVersion":"2026.11","schemaVersion":"1.0.0","variants":[{"brand":"Acer","category":"pc_laptop","factIds":[],"familyId":"acer:aspire-7-a715-59g-59rd","modelName":"Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen","specifications":{"cpu":"Intel Core 5 210H","displayInches":15.6,"gpu":"NVIDIA GeForce RTX 3050 4GB","os":"Windows 11 Home","ramGb":16,"storageGb":512},"variantId":"retailer:laptopaz:SP002078"},{"brand":"OPPO","category":"phone","factIds":[],"familyId":"oppo:find-x8","modelName":"OPPO Find X8 16GB 512GB","specifications":{"cpu":"MediaTek Dimensity 9400","displayInches":6.59,"gpu":"Immortalis G925 MC12","os":"Android 15","ramGb":16,"storageGb":512},"variantId":"retailer:cellphones:dien-thoai-oppo-find-x8"},{"brand":"HP","category":"pc_laptop","factIds":[],"familyId":"hp:240r-g10-c3ru7at","modelName":"Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)","specifications":{"cpu":"Intel Core 5 120U","os":"Windows 11 Home SL","ramGb":16,"storageGb":512},"variantId":"retailer:dienmayxanh:0220042003457"},{"brand":"Acer","category":"pc_laptop","factIds":[],"familyId":"acer:aspire-go-ag15-52p-52wt","modelName":"Acer Aspire Go 15 AI AG15-52P-52WT","specifications":{"cpu":"Intel Core Ultra 5 115U","displayInches":15.6,"gpu":"Intel Graphics","os":"Windows 11","ramGb":16,"storageGb":512},"variantId":"retailer:fptshop:00928037"}]}
+{
+  "schemaVersion": "1.0.0",
+  "catalogVersion": "warehouse-31f4040ac9f445389d902a3b85ea9db1",
+  "ruleVersion": "2026.11",
+  "publishedAt": "2026-11-14T08:43:18.694Z",
+  "variants": [
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-acer-aspire-lite-14-al14-57p-59hb",
+      "modelName": "Laptop Acer Aspire Lite 14 AL14-57P-59HB",
+      "sourceUrl": "https://cellphones.com.vn/laptop-acer-aspire-lite-14-al14-57p-59hb.html",
+      "variantId": "retailer:cellphones:laptop-acer-aspire-lite-14-al14-57p-59hb",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core 5 320 (6 lõi / 6 luồng, Tần số cơ bản của nhân hiệu năng cao 1.5 GHz, Công nghệ Turbo Boost Max 3.0 lên đến 4.6 GHz, 6 MB Smart Cache)",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-acer-swift-air-14-sfa14-i31-55nr",
+      "modelName": "Laptop Acer Swift Air 14 SFA14-I31-55NR",
+      "sourceUrl": "https://cellphones.com.vn/laptop-acer-swift-air-14-sfa14-i31-55nr.html",
+      "variantId": "retailer:cellphones:laptop-acer-swift-air-14-sfa14-i31-55nr",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.729+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core 5 320 (6 lõi / 6 luồng, Tần số cơ bản của nhân hiệu năng cao 1.5 GHz, 3.0 up to 4.6 GHz, 6 MB Smart Cache)",
+        "gpu": "Intel Graphics",
+        "ramGb": 12,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 24990000
+    },
+    {
+      "brand": "ASUS",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-asus-vivobook-16-x1607ca-mb399w",
+      "modelName": "Laptop ASUS Vivobook 16 X1607CA-MB399W",
+      "sourceUrl": "https://cellphones.com.vn/laptop-asus-vivobook-16-x1607ca-mb399w.html",
+      "variantId": "retailer:cellphones:laptop-asus-vivobook-16-x1607ca-mb399w",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core Ultra 7 255H 2.0 GHz (24MB Cache, up to 5.1 GHz, 16 lõi, 16 luồng)",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 28990000
+    },
+    {
+      "brand": "ASUS",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-asus-vivobook-go-14-e1404fa-eb1941w",
+      "modelName": "Laptop ASUS Vivobook Go 14 E1404FA-EB1941W",
+      "sourceUrl": "https://cellphones.com.vn/laptop-asus-vivobook-go-14-e1404fa-eb1941w.html",
+      "variantId": "retailer:cellphones:laptop-asus-vivobook-go-14-e1404fa-eb1941w",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "AMD Ryzen 5 40 2.8GHz (6MB Cache, up to 4.3GHz, 4 lõi, 8 luồng)",
+        "gpu": "AMD Radeon Graphics",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 18890000
+    },
+    {
+      "brand": "ASUS",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-asus-vivobook-s16-s3607ca-sh080w",
+      "modelName": "Laptop ASUS Vivobook S16 S3607CA-SH080W",
+      "sourceUrl": "https://cellphones.com.vn/laptop-asus-vivobook-s16-s3607ca-sh080w.html",
+      "variantId": "retailer:cellphones:laptop-asus-vivobook-s16-s3607ca-sh080w",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.729+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core Ultra 5 225H 1.7 GHz (18MB Cache, up to 4.9 GHz, 14 lõi, 14 luồng)",
+        "gpu": "Intel Arc Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 27490000
+    },
+    {
+      "brand": "ASUS",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-asus-vivobook-s16-s5608qa-mb354w",
+      "modelName": "Laptop ASUS Vivobook S16 S5608QA-MB354W",
+      "sourceUrl": "https://cellphones.com.vn/laptop-asus-vivobook-s16-s5608qa-mb354w.html",
+      "variantId": "retailer:cellphones:laptop-asus-vivobook-s16-s5608qa-mb354w",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.729+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Snapdragon X X1 26 101 (30MB Cache, up to 2.97GHz, 8 lõi, 8 luồng)",
+        "gpu": "Qualcomm Adreno",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "ASUS",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-asus-zenbook-14-ux3405ca-st1713w",
+      "modelName": "Laptop ASUS Zenbook 14 UX3405CA-ST1713W",
+      "sourceUrl": "https://cellphones.com.vn/laptop-asus-zenbook-14-ux3405ca-st1713w.html",
+      "variantId": "retailer:cellphones:laptop-asus-zenbook-14-ux3405ca-st1713w",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core Ultra 5 225H 1.7 GHz (18MB Cache, up to 4.9 GHz, 14 lõi, 14 luồng)",
+        "gpu": "Intel Arc Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 32490000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-dell-14-dc14250-dc4c5375w1",
+      "modelName": "Laptop Dell 14 DC14250 DC4C5375W1 - Bảo hành 2 năm",
+      "sourceUrl": "https://cellphones.com.vn/laptop-dell-14-dc14250-dc4c5375w1.html",
+      "variantId": "retailer:cellphones:laptop-dell-14-dc14250-dc4c5375w1",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language, Microsoft Office Home 2024 + Microsoft 365 Basic 1 year",
+        "cpu": "Intel Core 5 120U (10 lõi, up to 5.0 GHz)",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 29990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14ahp10-83k9004rvn",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 14AHP10 83K9004RVN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14ahp10-83k9004rvn.html",
+      "variantId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14ahp10-83k9004rvn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.731+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language, English + Microsoft 365 Basic + Office Home 2024",
+        "cpu": "AMD Ryzen 7 155 (6 lõi / 12 luồng, 3 / 4.7GHz, 6MB L2 / 16MB L3)",
+        "gpu": "AMD Radeon 740M Graphics",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14iph11-83uq003nvn",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 14IPH11 83UQ003NVN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iph11-83uq003nvn.html",
+      "variantId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14iph11-83uq003nvn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language, English",
+        "cpu": "Intel Core Ultra 5 322, 6 lõi (2P + 4LPE) / 6 luồng, Max Turbo up to 4.4GHz, 12MB Intel Smart Cache",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 24990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14iwc11-83rq002pvn",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 14IWC11 83RQ002PVN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iwc11-83rq002pvn.html",
+      "variantId": "retailer:cellphones:laptop-lenovo-ideapad-slim-3-14iwc11-83rq002pvn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.729+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language, English",
+        "cpu": "Intel Core 5 320, 6C (2P + 4LPE) / 6T, Max Turbo up to 4.6Ghz, 6MB Intel Smart Cache",
+        "gpu": "Intel Graphics",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 18990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-lenovo-loq-15irh11e-83y9003vvn",
+      "modelName": "Laptop Lenovo LOQ 15IRH11E 83Y9003VVN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-lenovo-loq-15irh11e-83y9003vvn.html",
+      "variantId": "retailer:cellphones:laptop-lenovo-loq-15irh11e-83y9003vvn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.728+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language, English",
+        "cpu": "Intel Core 5 205H, 8 lõi (4P + 4E) / 12 luồng, P-core 2.2 / 4.8GHz, E-core 1.6 / 3.6GHz, 12MB Intel Smart Cache",
+        "gpu": "NVIDIA GeForce RTX 3050 6GB GDDR6, Boost Clock 1732MHz, TGP 75W, 142 AI TOPS",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 26990000
+    },
+    {
+      "brand": "MSI",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-msi-modern-14-h1m-014vn",
+      "modelName": "Laptop MSI Modern 14 H1M-014VN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-msi-modern-14-h1m-014vn.html",
+      "variantId": "retailer:cellphones:laptop-msi-modern-14-h1m-014vn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.73+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language",
+        "cpu": "Intel Core 7 150U, 10 lõi (2 P-cores + 8 E-cores), 12 luồng, 12 MB Intel Smart Cache, Max Turbo Frequency 5.4 GHz",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "MSI",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:laptop-msi-modern-15-f1mg-1225vn",
+      "modelName": "Laptop MSI Modern 15 F1MG-1225VN",
+      "sourceUrl": "https://cellphones.com.vn/laptop-msi-modern-15-f1mg-1225vn.html",
+      "variantId": "retailer:cellphones:laptop-msi-modern-15-f1mg-1225vn",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.731+07:00",
+      "specifications": {
+        "os": "Windows 11 Home Single Language 64-bit",
+        "cpu": "Intel Core 5 120U (10 lõi (2 P-cores + 8 E-cores), 12 luồng, 5.0 GHz)",
+        "gpu": "Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 20990000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:cellphones:macbook-neo-13-a18-pro-6-cpu-5-gpu-8gb-256gb",
+      "modelName": "MacBook Neo 13 inch A18 Pro 2026 6CPU 5GPU 8GB 256GB | Chính hãng Apple Việt Nam",
+      "sourceUrl": "https://cellphones.com.vn/macbook-neo-13-a18-pro-6-cpu-5-gpu-8gb-256gb.html",
+      "variantId": "retailer:cellphones:macbook-neo-13-a18-pro-6-cpu-5-gpu-8gb-256gb",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:00.731+07:00",
+      "specifications": {
+        "os": "macOS",
+        "cpu": "Chip Apple A18 Pro CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "gpu": "GPU 5 lõi Công nghệ dò tia tốc độ cao bằng phần cứng Neural Engine 16 lõi Băng thông bộ nhớ 60GB/s",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 18790000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:283775",
+      "modelName": "Laptop Lenovo Ideapad Gaming 3 15IAH7 i5 12500H/8GB/512GB/4GB RTX3050/120Hz/Win11 (82S9007TVN)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/lenovo-ideapad-gaming-3-15iah7-i5-82s9007tvn?pid=283775&isimei=1",
+      "variantId": "retailer:dienmayxanh:283775",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.284+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i5 Alder Lake - 12500H",
+        "gpu": "Card rời - NVIDIA GeForce RTX 3050, 4 GB",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 15010000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:307786",
+      "modelName": "Laptop Acer Aspire 7 Gaming A715 76G 5132 i5 12450H/8GB/512GB/4GB GTX1650/144Hz/Win11 (NH.QMESV.002)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/acer-aspire-7-gaming-a715-76g-5132-i5-nhqmesv002?pid=307786&isimei=1",
+      "variantId": "retailer:dienmayxanh:307786",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i5 Alder Lake - 12450H",
+        "gpu": "Card rời - NVIDIA GeForce GTX 1650 4 GB",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 11710000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:309016",
+      "modelName": "Laptop Apple MacBook Air 15 inch M2 8GB/256GB Sạc 35W",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/apple-macbook-air-m2-2023?pid=309016&isimei=1",
+      "variantId": "retailer:dienmayxanh:309016",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.284+07:00",
+      "specifications": {
+        "os": "macOS",
+        "cpu": "Apple M2 - Hãng không công bố",
+        "gpu": "Card tích hợp - 10 nhân GPU",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 17980000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:311145",
+      "modelName": "Laptop HP Pavilion 15 eg3094TU - 8C5L5PA (i5 1335U, 8GB, 512GB, Full HD, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/hp-pavilion-15-eg3094tu-i5-8c5l5pa?pid=311145&isimei=1",
+      "variantId": "retailer:dienmayxanh:311145",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i5 Raptor Lake - 1335U",
+        "gpu": "Card tích hợp - Intel Iris Xe Graphics",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 12300000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:311177",
+      "modelName": "Laptop HP Pavilion 15 eg3091TU - 8C5L2PA (i7 1355U, 16GB, 512GB, Full HD, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/hp-pavilion-15-eg3091tu-i7-8c5l2pa?pid=311177&isimei=1",
+      "variantId": "retailer:dienmayxanh:311177",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i7 Raptor Lake - 1355U",
+        "gpu": "Card tích hợp - Intel Iris Xe Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 17040000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:313177",
+      "modelName": "Laptop Acer Gaming Aspire 7 A715 76G 5806 - NH.QMFSV.002 (i5 12450H, 16GB, 512GB, RTX 3050 4GB, Full HD 144Hz, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/acer-aspire-7-gaming-a715-76g-5806-i5-nhqmfsv002?pid=313177&isimei=1",
+      "variantId": "retailer:dienmayxanh:313177",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i5 Alder Lake - 12450H",
+        "gpu": "Card rời - NVIDIA GeForce RTX 3050, 4 GB",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 15060000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:318230",
+      "modelName": "Laptop MacBook Pro 14 inch M3 Pro 18GB/512GB",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/apple-macbook-pro-14-inch-m3-pro-2023?pid=318230&isimei=1",
+      "variantId": "retailer:dienmayxanh:318230",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "macOS Sonoma",
+        "cpu": "Apple M3 Pro - Hãng không công bố",
+        "gpu": "Card tích hợp - 14 nhân GPU",
+        "ramGb": 18,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 38060000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:318233",
+      "modelName": "Laptop Apple MacBook Pro 16 inch M3 Pro 18GB/512GB",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/apple-macbook-pro-16-inch-m3-pro-2023-12-core?pid=318233&isimei=1",
+      "variantId": "retailer:dienmayxanh:318233",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "macOS Sonoma",
+        "cpu": "Apple M3 Pro - Hãng không công bố",
+        "gpu": "Card tích hợp - 18 nhân GPU",
+        "ramGb": 18,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 45780000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:322616",
+      "modelName": "Laptop Apple MacBook Air 15 inch M3 8GB/256GB",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/macbook-air-15-inch-m3-2024?pid=322616&isimei=1",
+      "variantId": "retailer:dienmayxanh:322616",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "macOS Sonoma",
+        "cpu": "Apple M3 - Hãng không công bố",
+        "gpu": "Card tích hợp - 10 nhân GPU",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 20770000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:325247",
+      "modelName": "Laptop Dell Inspiron 15 3530 - P16WD (i7 1355U, 16GB, 1TB, Full HD 120Hz, OfficeHS, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/dell-inspiron-15-3530-i7-p16wd?pid=325247&isimei=1",
+      "variantId": "retailer:dienmayxanh:325247",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL + Office Home & Student 2021 vĩnh viễn",
+        "cpu": "Intel Core i7 Raptor Lake - 1355U",
+        "gpu": "Card tích hợp - Intel Iris Xe Graphics",
+        "ramGb": 16,
+        "storageGb": 1024
+      },
+      "observedPriceVnd": 17680000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:325953",
+      "modelName": "Laptop Dell Inspiron 14 5440 - 7FN5J (Core 7 150U, 16GB, 1TB, Full HD+, OfficeHS, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/dell-inspiron-14-5440-core-7-7fn5j?pid=325953&isimei=1",
+      "variantId": "retailer:dienmayxanh:325953",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.286+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL + Office Home & Student 2021 vĩnh viễn",
+        "cpu": "Intel Core 7 Raptor Lake - 150U",
+        "gpu": "Card tích hợp - Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 1024
+      },
+      "observedPriceVnd": 21340000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:326830",
+      "modelName": "Laptop HP Pavilion X360 14 ek2024TU - 9Z2V6PA (Core 5 120U, 16GB, 512GB, Full HD, Cảm ứng, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/hp-pavilion-x360-14-ek2024tu-core-5-9z2v6pa?pid=326830&isimei=1",
+      "variantId": "retailer:dienmayxanh:326830",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core 5 Raptor Lake - 120U",
+        "gpu": "Card tích hợp - Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 15380000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:327506",
+      "modelName": "Laptop Acer Swift Go 14 41 R251 - NX.KG3SV.005 (R5 7430U, 16GB, 1TB, Full HD, Win11)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/acer-swift-go-14-41-r251-r5-nxkg3sv005?pid=327506&isimei=1",
+      "variantId": "retailer:dienmayxanh:327506",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "AMD Ryzen 5 - 7430U",
+        "gpu": "Card tích hợp - AMD Radeon Graphics",
+        "ramGb": 16,
+        "storageGb": 1024
+      },
+      "observedPriceVnd": 15010000
+    },
+    {
+      "brand": "Samsung",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:328598",
+      "modelName": "Laptop Samsung XE340XDA-KA1VN (N4500, 4GB, 32GB, HD, ChromeOS)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/samsung-galaxy-chromebook-go-xe340xda-n4500?pid=328598&isimei=1",
+      "variantId": "retailer:dienmayxanh:328598",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.284+07:00",
+      "specifications": {
+        "os": "Chrome OS",
+        "cpu": "Celeron - N4500",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 4,
+        "storageGb": 32
+      },
+      "observedPriceVnd": 5350000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:dienmayxanh:329337",
+      "modelName": "Laptop Acer Gaming Nitro AN515 58 773Y i7 12700H/16GB/512GB/4GB RTX3050Ti/144Hz/Win11 (NH.QFKSV.001.16G)",
+      "sourceUrl": "https://www.dienmayxanh.com/may-doi-tra/laptop/acer-nitro-an515-58-773y-i7-12700h-nhqfksv00116g?pid=329337&isimei=1",
+      "variantId": "retailer:dienmayxanh:329337",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:54:29.285+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core i7 Alder Lake - 12700H",
+        "gpu": "Card rời - NVIDIA GeForce RTX 3050Ti, 4 GB",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 20090000
+    },
+    {
+      "brand": "Colorful",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00918650",
+      "modelName": "Laptop Colorful Rimbook L1 i5-12450H/16GB/512GB/15.6\" FHD/Win11_CE50016512C-G-E1AD",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/colorful-rimbook-l1-i5-12450h-ce50016512c-g-e1ac",
+      "variantId": "retailer:fptshop:00918650",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11_CE50016512C-G-E1AD",
+        "cpu": "Core i5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 17490000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00921488",
+      "modelName": "Laptop HP OmniBook 7 14-fr0033TU Ultra 5-225U/AI/16GB/512GB/14\"/Win11/HS24/OS365 (C1MN2PA)",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/hp-omnibook-7-14-fr0033tu-ultra-5-225u-c1mn2pa",
+      "variantId": "retailer:fptshop:00921488",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11",
+        "cpu": "Core Ultra 5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 27990000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00922642",
+      "modelName": "Laptop HP 250R G10 Core 5-120U/16GB/512GB/15.6\" FHD/Win11 (C3SH7AT)",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/hp-250r-g10-core-5-120u-c3sh7at",
+      "variantId": "retailer:fptshop:00922642",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.131+07:00",
+      "specifications": {
+        "os": "Win11 (C3SH7AT)",
+        "cpu": "Core 5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 21290000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00922844",
+      "modelName": "Laptop HP 15-fd1289TU Ultra 7-155H/AI/16GB/512GB/15.6\"FHD/Win11_C2CV8PA",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/hp-15-fd1289tu-ultra-7-155h-c2cv8pa",
+      "variantId": "retailer:fptshop:00922844",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11_C2CV8PA",
+        "cpu": "Core Ultra 7",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 25990000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00924298",
+      "modelName": "Laptop Asus Vivobook X1404VA-EB355W Core 7 150U/16GB/512GB/14\" FHD/Win11",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/asus-vivobook-x1404va-eb355w-core-7-150u",
+      "variantId": "retailer:fptshop:00924298",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.131+07:00",
+      "specifications": {
+        "os": "Win11",
+        "cpu": "Core 7",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00924497",
+      "modelName": "Laptop Dell 14 DC14250 Core 5 120U/16GB/512GB/14\"FHD+/Win11/Office Home 2024/Microsoft 365",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/dell-14-dc14250-core-5-120u-dc4c5386w",
+      "variantId": "retailer:fptshop:00924497",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.131+07:00",
+      "specifications": {
+        "os": "Win11",
+        "cpu": "Core 5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 26990000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00926591",
+      "modelName": "MacBook Air 13 M5 10CPU/8GPU/16GB/512GB/30W",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/macbook-air-13-m5-2026-10cpu-8gpu-16gb-512gb",
+      "variantId": "retailer:fptshop:00926591",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "macOS Tahoe, có Apple Intelligence",
+        "cpu": "M5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 33390000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00926643",
+      "modelName": "MacBook Neo 13 8GB/256GB/20W",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/macbook-neo-13-inch-8gb-256gb",
+      "variantId": "retailer:fptshop:00926643",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Chưa xác minh",
+        "cpu": "A18 Pro",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 18790000
+    },
+    {
+      "brand": "HP",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00926893",
+      "modelName": "Laptop HP 14-em0024AU Ryzen 5-7520U/16GB/512GB/ 14\"FHD/Win11 (D0BG8PA)",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/hp-14-em0024au-ryzen-5-7520u-d0bg8pa",
+      "variantId": "retailer:fptshop:00926893",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11 (D0BG8PA)",
+        "cpu": "Ryzen 5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 21490000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00927288",
+      "modelName": "MacBook Pro 14 M5 10CPU/10GPU/16GB/1TB/96W",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/macbook-pro-14-m5-2026-10cpu-10gpu-16gb-1tb-96w",
+      "variantId": "retailer:fptshop:00927288",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Chưa xác minh",
+        "cpu": "M5",
+        "ramGb": 16,
+        "storageGb": 1024
+      },
+      "observedPriceVnd": 53990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00929657",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 14IWC11 Core 5 320/AI/8GB/512GB/14\"WUXGA/Win11SL (83RQ002PVN)",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/lenovo-ideapad-slim-3-14iwc11-83rq002pvn",
+      "variantId": "retailer:fptshop:00929657",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11SL (83RQ002PVN)",
+        "cpu": "Core 5",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 18490000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00930030",
+      "modelName": "Laptop Asus Vivobook 16 X1607CA-MB387W Ultra 5 225H/AI/16GB/512GB/16\" WUXGA/Win11",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/asus-vivobook-16-x1607ca-mb387w-ultra-5-225h",
+      "variantId": "retailer:fptshop:00930030",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11",
+        "cpu": "Core Ultra 5",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 24990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00930377",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 16IWC11 Core 5 320/AI/8GB/512GB/16\" WUXGA/Win11HSL (83RS002KVN)",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/lenovo-ideapad-slim-3-16iwc11-83rs002kvn",
+      "variantId": "retailer:fptshop:00930377",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win11HSL (83RS002KVN)",
+        "cpu": "Core 5",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 18490000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00930513",
+      "modelName": "Laptop Acer Aspire Lite 15 AL15-36P-30TN C3 N350/8GB/512GB/15.6\" FHD/Win 11",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-lite-15-al15-36p-30tn-c3-n350",
+      "variantId": "retailer:fptshop:00930513",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.132+07:00",
+      "specifications": {
+        "os": "Win 11",
+        "cpu": "N350",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 15690000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:fptshop:00930661",
+      "modelName": "Laptop Acer Aspire Lite 14 AL14-44P-R0SP R7 7730U/8GB/512GB/14.5\" FHD/Win11",
+      "sourceUrl": "https://fptshop.com.vn/may-tinh-xach-tay/acer-aspire-lite-14-al14-44p-r0sp-r7-7730u",
+      "variantId": "retailer:fptshop:00930661",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:55:19.131+07:00",
+      "specifications": {
+        "os": "Win11",
+        "cpu": "Ryzen 7",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 19490000
+    },
+    {
+      "brand": "Chưa xác minh",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:laptopaz:SP002078",
+      "modelName": "Laptop Acer Gaming Aspire 7 A715-59G-59RD NH.DXUSV.001 | Core 5 210H, 16GB, 512GB, RTX 3050 4GB, 15.6 inch FHD, Win 11, Đen",
+      "sourceUrl": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+      "variantId": "retailer:laptopaz:SP002078",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-14T15:28:30.513772+07:00",
+      "specifications": {
+        "os": "Chưa xác minh",
+        "cpu": "Intel Core 5 210H (8 nhân / 12 luồng, up to 4.8GHz)",
+        "gpu": "NVIDIA GeForce RTX 3050 4GB GDDR6",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 26590000
+    },
+    {
+      "brand": "Hp",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003311",
+      "modelName": "Laptop HP OmniBook 5 AI 16 af1048TU - BZ7Q9PA (Ultra 5 225U, 16GB, 512GB, WUXGA, OfficeH24, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/hp-omnibook-5-ai-16-af1048tu-ultra-5-225u-bz7q9pa",
+      "variantId": "retailer:tgdd:0220042003311",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL + Office Home 2024 vĩnh viễn",
+        "cpu": "Intel Core Ultra 5 Arrow Lake - 225U",
+        "gpu": "Card tích hợp - Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 26490000
+    },
+    {
+      "brand": "Hp",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003457",
+      "modelName": "Laptop HP 240R G10 - C3RU7AT (Core 5 120U, 16GB, 512GB, Full HD, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/hp-240r-g10-core-5-120u-c3ru7at",
+      "variantId": "retailer:tgdd:0220042003457",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.097+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core 5 Raptor Lake - 120U",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 21290000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003498",
+      "modelName": "Laptop Asus Vivobook S14 S3407VA - LY146W (Core 5 210H, 16GB, 512GB, WUXGA, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/asus-vivobook-s14-s3407va-core-5-210h-ly146w",
+      "variantId": "retailer:tgdd:0220042003498",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home",
+        "cpu": "Intel Core 5 Raptor Lake - 210H",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 21890000
+    },
+    {
+      "brand": "Hp",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003571",
+      "modelName": "Laptop HP 15 fc0023AU - D0BH1PA (R5 7520U, 16GB, 512GB, Full HD, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/hp-15-fc0023au-r5-7520u-d0bh1pa",
+      "variantId": "retailer:tgdd:0220042003571",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "AMD Ryzen 5 - 7520U",
+        "gpu": "Card tích hợp - AMD Radeon 610M Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 21990000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003649",
+      "modelName": "Laptop Dell 15 DC15250 - DC5I5897W1 (i5 1334U, 16GB, 512GB, Full HD+ 120Hz, OfficeH24+365, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-dc5i5897w1",
+      "variantId": "retailer:tgdd:0220042003649",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home + Office Home 2024 + Microsoft 365 Basic 1 năm",
+        "cpu": "Intel Core i5 Raptor Lake - 1334U",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003674",
+      "modelName": "Laptop Asus Zenbook 14 UM3406GA - QD073WS (R7 AI 445, 32GB, 1TB, WUXGA OLED, OfficeH24+365, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/asus-zenbook-14-um3406ga-r7-ai-445-qd073ws",
+      "variantId": "retailer:tgdd:0220042003674",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL + Microsoft Office Home 2024 vĩnh viễn + Microsoft 365 Basic 1 năm",
+        "cpu": "AMD Ryzen AI 7 - 445",
+        "gpu": "Card tích hợp - AMD Radeon 840M",
+        "ramGb": 32,
+        "storageGb": 1024
+      },
+      "observedPriceVnd": 35990000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003833",
+      "modelName": "Laptop Dell 15 DC15250 - 71092479 (i5 1334U, 16GB, 512GB, Full HD 120Hz, OfficeHS24+365B, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-71092479",
+      "variantId": "retailer:tgdd:0220042003833",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home + Microsoft Office Home 2024 vĩnh viễn + Microsoft 365 Basic 1 năm",
+        "cpu": "Intel Core i5 Raptor Lake - 1334U",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 22990000
+    },
+    {
+      "brand": "Lenovo",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003922",
+      "modelName": "Laptop Lenovo IdeaPad Slim 3 15IPH11 - 83UR00A4VN (Ultra 5 322, 16GB, 512GB, WUXGA, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/lenovo-ideapad-slim-3-15iph11-ultra-5-322-83ur00a4vn",
+      "variantId": "retailer:tgdd:0220042003922",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core Ultra 5 Panther Lake - 322",
+        "gpu": "Card tích hợp - Intel Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 24990000
+    },
+    {
+      "brand": "Acer",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003933",
+      "modelName": "Laptop Acer Aspire Lite 14 AL14-44P-R0SP - NX.DMCSV.003 (R7 7730U, 8GB, 512GB, Full HD+, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/acer-aspire-lite-14-al14-44p-r0sp-r7-7730u-nx-dmcsv-003",
+      "variantId": "retailer:tgdd:0220042003933",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "AMD Ryzen 7 - 7730U",
+        "gpu": "Card tích hợp - AMD Radeon 680M Graphics",
+        "ramGb": 8,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 19490000
+    },
+    {
+      "brand": "Singpc",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003938",
+      "modelName": "Laptop SingPC M16-i382 (i3 1215U, 8GB, 256GB, WUXGA, Win11 Pro)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/singpc-m16-i382-i3-1215u",
+      "variantId": "retailer:tgdd:0220042003938",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Pro",
+        "cpu": "Intel Core i3 Alder Lake - 1215U",
+        "gpu": "Card tích hợp - Intel Graphics",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 13690000
+    },
+    {
+      "brand": "Dell",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042003992",
+      "modelName": "Laptop Dell 15 DC15255 - DC5R5973W1-2Y (R5 7530U, 16GB, 512GB, Full HD 120Hz, OfficeHS24+365, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/dell-15-dc15255-r5-7530u-dc5r5973w1-2y",
+      "variantId": "retailer:tgdd:0220042003992",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home + Office Home 2024 + Microsoft 365 Basic 1 năm",
+        "cpu": "AMD Ryzen 5 - 7530U",
+        "gpu": "Card tích hợp - AMD Radeon Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 23990000
+    },
+    {
+      "brand": "Msi",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042004015",
+      "modelName": "Laptop MSI Modern 15 F1MG-1264VN (Core 5 120U, 16GB, 512GB, Full HD, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/msi-modern-15-f1mg-1264vn-core-5-120u",
+      "variantId": "retailer:tgdd:0220042004015",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core thế hệ 12 - 120U",
+        "gpu": "Card tích hợp - Không",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 20990000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042004028",
+      "modelName": "Laptop Asus Vivobook S 16 S3607VA - RP155W (Core 5 210H, 16GB, 512GB, Full HD+ 144Hz, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/asus-vivobook-s-16-s3607va-core-5-210h-rp155w",
+      "variantId": "retailer:tgdd:0220042004028",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core 5 Raptor Lake - 210H",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 25490000
+    },
+    {
+      "brand": "Asus",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:0220042104187",
+      "modelName": "Laptop Asus Vivobook 14 X1404VA - EB2385W (Core 3 100U, 8GB, 256GB, 14'' Full HD, Win11)",
+      "sourceUrl": "https://www.thegioididong.com/laptop/asus-vivobook-14-x1404va-core-3-100u-eb2385w",
+      "variantId": "retailer:tgdd:0220042104187",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.097+07:00",
+      "specifications": {
+        "os": "Windows 11 Home SL",
+        "cpu": "Intel Core 3 Raptor Lake - 100U",
+        "gpu": "Card tích hợp - Intel UHD Graphics",
+        "ramGb": 8,
+        "storageGb": 256
+      },
+      "observedPriceVnd": 15590000
+    },
+    {
+      "brand": "Apple",
+      "factIds": [],
+      "category": "pc_laptop",
+      "familyId": "retailer:tgdd:a1ee4165cda3b8ec",
+      "modelName": "MacBook Air 13 inch M5 16GB/512GB/8GPU 30W",
+      "sourceUrl": "https://www.thegioididong.com/laptop/macbook-air-13-inch-m5-16gb-512gb",
+      "variantId": "retailer:tgdd:a1ee4165cda3b8ec",
+      "dataStatus": "reference_only",
+      "observedAt": "2026-11-12T10:51:45.098+07:00",
+      "specifications": {
+        "os": "macOS Tahoe",
+        "cpu": "Apple M5",
+        "gpu": "Card tích hợp - 8 nhân GPU",
+        "ramGb": 16,
+        "storageGb": 512
+      },
+      "observedPriceVnd": 33390000
+    }
+  ],
+  "facts": [],
+  "offers": [
+    {
+      "sourceId": "laptopaz",
+      "condition": "NEW",
+      "sourceUrl": "https://laptopaz.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd-nh-dxusv-001-core-5-210h-16gb-512gb-rtx-3050-4gb-15-6-icnh-fhd-win-11-den.html",
+      "observedAt": "2026-11-14T05:49:52.231000+00:00",
+      "shippingVnd": 0,
+      "stockStatus": "IN_STOCK",
+      "basePriceVnd": 26590000,
+      "externalOfferId": "SP002078",
+      "mandatoryFeesVnd": 0,
+      "matchedVariantId": "retailer:laptopaz:SP002078",
+      "completenessStatus": "COMPLETE",
+      "conditionalDiscountVnd": 0
+    }
+  ]
+}

@@ -77,9 +77,19 @@ test("AC-COMPARE ties, unknown and neutral fields never imply winners", () => {
   assert.deepEqual(winners([13, 16], "neutral"), []);
 });
 test("AC-FILTER unknown price/condition/weight do not pass strict filters", () => {
+  const unknownMetadata = [
+    {
+      ...seed.variants[0],
+      specifications: {
+        ...seed.variants[0]!.specifications,
+        ramGb: 16,
+        weightKg: undefined,
+      },
+    },
+  ] as any;
   assert.equal(
     filterVariants(
-      seed.variants as any,
+      unknownMetadata,
       { ...emptyFilters, minPrice: "100" },
       "",
     ).length,
@@ -87,19 +97,19 @@ test("AC-FILTER unknown price/condition/weight do not pass strict filters", () =
   );
   assert.equal(
     filterVariants(
-      seed.variants as any,
+      unknownMetadata,
       { ...emptyFilters, condition: "new" },
       "",
     ).length,
     0,
   );
   assert.equal(
-    filterVariants(seed.variants as any, { ...emptyFilters, maxWeight: 2 }, "")
+    filterVariants(unknownMetadata, { ...emptyFilters, maxWeight: 2 }, "")
       .length,
     0,
   );
   assert.equal(
-    filterVariants(seed.variants as any, { ...emptyFilters, minRam: 32 }, "")
+    filterVariants(unknownMetadata, { ...emptyFilters, minRam: 32 }, "")
       .length,
     0,
   );

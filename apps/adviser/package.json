@@ -10,6 +10,7 @@
     "check": "tsc --noEmit",
     "test": "tsx --test src/*.test.ts",
     "build": "expo export --platform web",
+    "sync:catalog": "node ../../tools/export-mobile-catalog.mjs",
     "export:android": "expo export --platform android --output-dir dist-android",
     "test:e2e": "npm run build:chat-fixture && playwright test",
     "build:chat-fixture": "cd tests/chat-ui && expo export --platform web --output-dir ../../dist-chat-fixture"

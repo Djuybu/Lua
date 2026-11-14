@@ -56,13 +56,7 @@ import { CartsScreen } from "./screens/CartsScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { ComparisonView } from "./ComparisonView";
 import { CatalogProvider } from "./catalog-context";
-const emptyCatalog: SnapshotManifest = {
-  ...(seed as SnapshotManifest),
-  catalogVersion: "unavailable",
-  variants: [],
-  facts: [],
-  offers: [],
-};
+const bundledCatalog = seed as SnapshotManifest;
 const store = createStore(AsyncStorage);
 const destinations = [
   { id: "advisor", label: "Trang chủ", icon: House },
@@ -142,13 +136,13 @@ function Workspace({
   const { width, height } = useWindowDimensions();
   const rail = width >= 840 || (width >= 600 && height >= 600);
   const expanded = width >= 840;
-  const [catalog, setCatalog] = useState<SnapshotManifest>(emptyCatalog);
+  const [catalog, setCatalog] = useState<SnapshotManifest>(bundledCatalog);
   const [catalogStatus, setCatalogStatus] = useState<
-    "loading" | "live" | "failed"
+    "loading" | "live" | "bundled"
   >("loading");
   useEffect(() => {
     if (!DEFAULT_API_ENDPOINT) {
-      setCatalogStatus("failed");
+      setCatalogStatus("bundled");
       return;
     }
     const controller = new AbortController();
@@ -160,8 +154,8 @@ function Workspace({
       })
       .catch(() => {
         recordError("network", "CATALOG_UNAVAILABLE");
-        setCatalog(emptyCatalog);
-        setCatalogStatus("failed");
+        setCatalog(bundledCatalog);
+        setCatalogStatus("bundled");
       })
       .finally(() => clearTimeout(timer));
     return () => {
@@ -487,10 +481,9 @@ function Workspace({
             {catalogStatus === "loading" && (
               <Notice title="Đang tải catalog từ PostgreSQL/Qdrant…" />
             )}
-            {catalogStatus === "failed" && (
-              <Notice title="Không kết nối được catalog backend">
-                Không hiển thị dữ liệu seed để tránh nhầm placeholder là dữ liệu
-                đang hoạt động.
+            {catalogStatus === "bundled" && (
+              <Notice title="Đang dùng catalog đóng gói">
+                Mobile không kết nối được backend nên đang dùng snapshot {catalog.catalogVersion} gồm {catalog.variants.length} cấu hình. Giá và thời điểm quan sát có thể không còn mới.
               </Notice>
             )}
             {catalogStatus === "live" && (

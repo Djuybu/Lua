@@ -58,7 +58,10 @@ const legacy = createHttpServer(officialStore, new BoundedAiClient(new MockAiPro
 const send = (res, status, data) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(data)); };
 const expoPort = Number(process.env.EXPO_PORT || 8081);
 const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.2:${port}`]);
-if (process.env.PUBLIC_HOST) allowedHosts.add(`${process.env.PUBLIC_HOST}:${port}`);
+if (process.env.PUBLIC_HOST) {
+  allowedHosts.add(process.env.PUBLIC_HOST);
+  allowedHosts.add(`${process.env.PUBLIC_HOST}:${port}`);
+}
 const expoOrigins = new Set([`http://127.0.0.1:${expoPort}`, `http://localhost:${expoPort}`]);
 const localOrigins = new Set([...allowedHosts].map(host => `http://${host}`));
 allowedHosts.add('lua-adviser.vercel.app');

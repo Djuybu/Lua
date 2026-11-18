@@ -20,6 +20,7 @@ const bundledCatalog = JSON.parse(readFileSync(resolve(datasetDir, 'catalog-snap
 loadEnvFile(resolve(backendDir, '.env'));
 if (process.env.AI_MODE === 'provider' && process.env.AI_PROVIDER_NAME !== 'openai') throw new Error('This launcher supports AI_PROVIDER_NAME=openai');
 const port = Number(process.env.PORT || 8080);
+const bindHost = process.env.HOST || '127.0.0.1';
 const store = new AdviserPostgresStore();
 await store.health();
 // Seed the accepted offers into the active build when its catalog contains the
@@ -57,6 +58,7 @@ const legacy = createHttpServer(officialStore, new BoundedAiClient(new MockAiPro
 const send = (res, status, data) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(data)); };
 const expoPort = Number(process.env.EXPO_PORT || 8081);
 const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.2:${port}`]);
+if (process.env.PUBLIC_HOST) allowedHosts.add(`${process.env.PUBLIC_HOST}:${port}`);
 const expoOrigins = new Set([`http://127.0.0.1:${expoPort}`, `http://localhost:${expoPort}`]);
 const localOrigins = new Set([...allowedHosts].map(host => `http://${host}`));
 const trusted = req => allowedHosts.has(req.headers.host) && (!req.headers.origin || localOrigins.has(req.headers.origin) || expoOrigins.has(req.headers.origin));
@@ -108,5 +110,5 @@ const backend = http.createServer(async (req, res) => {
   } catch { if (!res.destroyed) send(res, 400, { error: { message: 'Cannot process explanation request' } }); }
 });
 backend.on('error', err => { console.error('Local server failed:', err.code); process.exit(1); });
-backend.listen(port, '127.0.0.1', () => console.log(`Backend: http://127.0.0.1:${port}`));
+backend.listen(port, bindHost, () => console.log(`Backend: http://${bindHost}:${port}`));
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, async () => { backend.closeAllConnections(); backend.close(); await store.close(); process.exit(0); });

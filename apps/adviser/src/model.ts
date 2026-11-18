@@ -104,10 +104,18 @@ export function vnd(n: number | null | undefined) {
 export function safeEndpoint(value: string) {
   try {
     const u = new URL(value);
+    const privateIpv4 =
+      /^10\./.test(u.hostname) ||
+      /^192\.168\./.test(u.hostname) ||
+      (() => {
+        const match = /^172\.(\d{1,2})\./.exec(u.hostname);
+        return !!match && Number(match[1]) >= 16 && Number(match[1]) <= 31;
+      })();
     return (
       u.protocol === "https:" ||
       (u.protocol === "http:" &&
-        ["localhost", "127.0.0.1", "10.0.2.2"].includes(u.hostname))
+        (["localhost", "127.0.0.1", "10.0.2.2"].includes(u.hostname) ||
+          privateIpv4))
     );
   } catch {
     return false;

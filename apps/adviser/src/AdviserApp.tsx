@@ -166,7 +166,14 @@ function Workspace({
   const [priceTracking, setPriceTracking] = useState(false);
   useEffect(() => {
     setPriceTracking(false);
-    if (!DEFAULT_API_ENDPOINT || state.preferences.offlineAiOnly) return;
+    // Catalog initialization owns the first backend request. Wait for it to
+    // finish (live or bundled fallback) before probing optional capabilities.
+    if (
+      catalogStatus === "loading" ||
+      !DEFAULT_API_ENDPOINT ||
+      state.preferences.offlineAiOnly
+    )
+      return;
     const a = new AbortController();
     const timer = setTimeout(() => a.abort(), 4000);
     probeCapabilities(DEFAULT_API_ENDPOINT, a.signal)
@@ -181,7 +188,7 @@ function Workspace({
       clearTimeout(timer);
       a.abort();
     };
-  }, [state.preferences.offlineAiOnly]);
+  }, [catalogStatus, state.preferences.offlineAiOnly]);
   const [tab, setTab] = useState<Tab>("advisor");
   const restoredTab = useRef(false);
   useEffect(() => {

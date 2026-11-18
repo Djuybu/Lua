@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/health",
+            "destination": "http://136.110.12.231:8080/health"
+        },
+        {
+            "source": "/advisor/v1/:path*",
+            "destination": "http://136.110.12.231:8080/advisor/v1/:path*"
+        }
+    ]
+}

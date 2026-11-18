@@ -66,7 +66,17 @@ allowedHosts.add('lua-adviser.vercel.app:443');
 localOrigins.add('https://lua-adviser.vercel.app');
 const trusted = req => allowedHosts.has(req.headers.host) && (!req.headers.origin || localOrigins.has(req.headers.origin) || expoOrigins.has(req.headers.origin));
 const backend = http.createServer(async (req, res) => {
-  if (!trusted(req)) return send(res, 403, { error: { message: 'Local origin required' } });
+  if (!trusted(req)) {
+    console.warn('[request-rejected]', JSON.stringify({
+      host: req.headers.host ?? null,
+      origin: req.headers.origin ?? null,
+      forwardedHost: req.headers['x-forwarded-host'] ?? null,
+      allowedHosts: [...allowedHosts],
+    }));
+    return send(res, 403, {
+      error: { message: 'Local origin required' },
+    });
+  }
   if (expoOrigins.has(req.headers.origin)) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Vary', 'Origin');

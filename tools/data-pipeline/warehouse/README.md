@@ -1,10 +1,25 @@
 # PostgreSQL + dbt + Qdrant pipeline
 
 Run from `tools/data-pipeline` using Python 3.13 in `.work/warehouse-venv`.
+The repository-root `.venv` used on the VM is supported too. See
+[background deployment](../deploy/README.md) for systemd setup.
 Connection values come from the Git-ignored `services/adviser-backend/.env`.
 No password belongs in this directory, dbt profile or command line.
 Install the backend's Node dependencies (`npm ci` in `services/adviser-backend`)
 and this pipeline's `requirements-warehouse.txt` before running publication.
+
+```bash
+# Up to 20 pages per new source; first seed only after successful initialization.
+~/Lua/.venv/bin/python -m scripts.warehouse --crawl-all
+```
+
+The eight configs in `sources/` define the category, seed URLs and link scope.
+All parsed source identities enter the reference catalog automatically after
+dbt checks; duplicate source + external ID pairs collapse to the newest observation.
+Missing RAM/storage is null. Unmapped/quarantined records retain quality issues
+but no longer need manual catalog admission. This does not approve offers or
+invent total prices. A partially failed crawl can publish the successful data
+with `status=partial`; source failures remain visible in the report.
 
 ```powershell
 # Import the existing database's raw crawl history, normalize, test and publish.
@@ -29,8 +44,8 @@ new live observations merely because this pipeline is run again.
 `public.laptops`, `public.pipeline_runs`, or the original Qdrant `laptops`
 collection. Input source + external identity remain distinct across retailers.
 Imported legacy captures retain their original timestamps and are labelled
-`existing_postgres_capture`. Rows missing parsed RAM/storage, category, identity
-or a safe source URL cannot enter the catalog; they remain in raw/staging data.
+`existing_postgres_capture`. Missing RAM/storage/category is explicitly unknown;
+source identity and safe source URL remain part of the parsed-record contract.
 Unknown OS/CPU are shown as `Chưa xác minh`, never as compatible evidence.
 
 Storage:
@@ -64,8 +79,8 @@ To roll back, use a known previously successful schema + collection pair in
 
 Reports and dbt artifacts: `.work/warehouse/<run-id>/`. The process returns
 nonzero on crawl, dbt or indexing failure. The `pipeline_runs` table records
-status and failure type without credentials. The frontend displays loading,
-error and empty states and does not silently switch to bundled JSON.
+status and failure type without credentials. The frontend accepts null RAM/storage;
+its existing bundled fallback behavior is independent of publication.
 
 Verification on 2026-11-14: imported 60 original observations and re-imported
 with zero duplicates. A live LaptopAZ request parsed and stored one additional

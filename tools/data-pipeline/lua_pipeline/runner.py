@@ -3,7 +3,8 @@ import hashlib
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urljoin
-from .extract import extract
+from .extract import extract, Document
+import re
 from .sources import PipelineError, check_url
 
 
@@ -15,9 +16,12 @@ def parse_fixture(path, url, observed_at, config, mode="fixture"):
                    "contentHash": hashlib.sha256(raw).hexdigest(), "captureMode": mode}, config)
 
 
-def crawl(config, fetcher, store, *, max_pages=3, resume=False):
+def crawl(config, fetcher, store, *, max_pages=3, resume=False, follow_links=False):
     processed, failures, skipped, parsed, inserted, quarantined = 0, 0, 0, 0, 0, 0
-    for url in dict.fromkeys(check_url(u, config["sourceId"]) for u in config["seeds"]):
+    queue = list(dict.fromkeys(check_url(u, config["sourceId"]) for u in config["seeds"]))
+    seen = set(queue)
+    while queue:
+        url = queue.pop(0)
         if processed >= max_pages:
             break
         if resume and store.completed(config["sourceId"], url):
@@ -28,6 +32,19 @@ def crawl(config, fetcher, store, *, max_pages=3, resume=False):
             capture = fetcher.fetch(url)
             if capture["contentType"] not in {"text/html", "application/xhtml+xml"}:
                 raise PipelineError("NOT_HTML")
+            if follow_links:
+                for node in Document(capture['body']).root.walk():
+                    if node.tag != 'a' or not node.attrs.get('href'):
+                        continue
+                    try:
+                        candidate = check_url(urljoin(capture['url'], node.attrs['href']), config['sourceId'])
+                    except PipelineError:
+                        continue
+                    # Explicit product/category scope prevents crawling account/cart/news links.
+                    if any(re.search(pattern, candidate) for pattern in config.get('followPatterns', [])) and candidate not in seen:
+                        seen.add(candidate)
+                        if len(queue) < 1000:
+                            queue.append(candidate)
             rows = extract(capture["body"], capture, config)
             inserted += store.ingest(rows, (config["sourceId"], url, "done", {"records": len(rows), "contentHash": capture["contentHash"]}))
             parsed += len(rows)

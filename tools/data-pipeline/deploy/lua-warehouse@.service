@@ -1,0 +1,20 @@
+[Unit]
+Description=Lua crawl, dbt build and Qdrant publication (%i)
+Wants=network-online.target postgresql.service qdrant.service
+After=network-online.target postgresql.service qdrant.service
+
+[Service]
+Type=oneshot
+User=%i
+WorkingDirectory=/home/%i/Lua/tools/data-pipeline
+Environment=PYTHONUNBUFFERED=1
+Environment=PATH=/home/%i/Lua/.venv/bin:/usr/local/bin:/usr/bin:/bin
+# warehouse.py loads services/adviser-backend/.env itself.
+# Keep secrets out of this unit and command-line arguments.
+ExecStart=/home/%i/Lua/.venv/bin/python -m scripts.warehouse --crawl-all
+TimeoutStartSec=30min
+TimeoutStopSec=30s
+KillMode=control-group
+UMask=0077
+StandardOutput=journal
+StandardError=journal

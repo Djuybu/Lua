@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "tgdd",
+  "seeds": [
+    "https://www.thegioididong.com/dtdd/iphone-17-pro-max-1tb"
+  ],
+  "sitemap": "https://www.thegioididong.com/newsitemap/sitemap-product",
+  "regionContext": null,
+  "variantMap": {},
+  "category": "phone",
+  "followPatterns": [
+    "/dtdd/[^/?]+$"
+  ]
+}

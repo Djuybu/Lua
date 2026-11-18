@@ -59,8 +59,8 @@ export function filterVariants(
         (f.condition === "all" || m?.condition === f.condition) &&
         (!f.minPrice || (m?.price != null && m.price >= Number(f.minPrice))) &&
         (!f.maxPrice || (m?.price != null && m.price <= Number(f.maxPrice))) &&
-        s.ramGb >= f.minRam &&
-        s.storageGb >= f.minStorage &&
+        (f.minRam === 0 || (s.ramGb !== null && s.ramGb >= f.minRam)) &&
+        (f.minStorage === 0 || (s.storageGb !== null && s.storageGb >= f.minStorage)) &&
         (!f.gpu || (!!s.gpu && /RTX|GTX|Radeon RX|Arc A/i.test(s.gpu))) &&
         (!f.minScreen ||
           (s.displayInches != null && s.displayInches >= f.minScreen)) &&

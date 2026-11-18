@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "dienmayxanh",
+  "seeds": [
+    "https://www.dienmayxanh.com/laptop/hp-240r-g10-core-5-120u-c3ru7at"
+  ],
+  "sitemap": "https://www.dienmayxanh.com/newsitemap/sitemap-product",
+  "regionContext": null,
+  "variantMap": {},
+  "category": "pc_laptop",
+  "followPatterns": [
+    "/laptop/[^/?]+$"
+  ]
+}

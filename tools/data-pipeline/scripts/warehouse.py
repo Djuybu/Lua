@@ -10,10 +10,9 @@ import psycopg
 from psycopg.types.json import Jsonb
 from dotenv import load_dotenv
 from lua_pipeline.postgres import PostgresStore
-from lua_pipeline.runner import crawl
-from lua_pipeline.fetch import Fetcher
 from lua_pipeline.sources import load_config
 from lua_pipeline.storage import verify_bundle
+from lua_pipeline.scheduled import crawl_sources, mark_published
 
 ROOT = Path(__file__).resolve().parents[3]
 PIPELINE = Path(__file__).resolve().parents[1]
@@ -22,13 +21,20 @@ PIPELINE = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--import-existing', action='store_true', help='Read public.raw_crawled_laptops without changing it')
-    parser.add_argument('--crawl-config', type=Path)
-    parser.add_argument('--max-pages', type=int, default=1)
+    parser.add_argument('--crawl-config', type=Path, action='append', default=[], help='Repeat for multiple websites')
+    parser.add_argument('--crawl-all', action='store_true', help='Crawl the eight configured retailers')
+    parser.add_argument('--max-pages', type=int, default=None, help='Override automatic 20-page bootstrap / 1-page refresh')
     parser.add_argument('--category', choices=['pc_laptop','pc_desktop','phone','tablet'])
     parser.add_argument('--bundle', type=Path, help='Historical reviewed-format staging bundle; original timestamps retained')
     args = parser.parse_args()
-    if not 1 <= args.max_pages <= 20:
+    if args.max_pages is not None and not 1 <= args.max_pages <= 20:
         parser.error('--max-pages must be 1..20')
+    paths = args.crawl_config + (sorted((PIPELINE/'sources').glob('*.json')) if args.crawl_all else [])
+    configs = [load_config(path) for path in paths]
+    if len({c['sourceId'] for c in configs}) != len(configs):
+        parser.error('Only one config per source is allowed')
+    if any(not c['seeds'] or not (c.get('category') or args.category) for c in configs):
+        parser.error('Each crawl source needs seeds and a category (config or --category)')
     load_dotenv(ROOT / 'services/adviser-backend/.env')
     run_id = uuid.uuid4().hex
     build_schema = 'lua_build_' + run_id
@@ -57,12 +63,11 @@ def main():
                 bundle = json.loads(args.bundle.read_text(encoding='utf-8'))
                 verify_bundle(bundle)
                 report['historicalBundleInserted'] = store.ingest(bundle['records'])
-            if args.crawl_config:
-                config = load_config(args.crawl_config)
-                result = crawl(config, Fetcher(config['sourceId'],timeout=15,retries=1), store, max_pages=args.max_pages)
-                report['crawl'] = result
-                if result['failed'] or not result['parsed']:
-                    raise RuntimeError('Live crawl did not produce a complete successful batch; active catalog retained')
+            initialized = []
+            if configs:
+                report['crawl'], initialized = crawl_sources(db, configs, args.category, args.max_pages)
+                if not any(r['parsed'] for r in report['crawl'].values()):
+                    raise RuntimeError('No live source parsed data; active catalog retained')
             env = dict(os.environ)
             env.pop('AI_API_KEY',None)
             env['DBT_ENV_SECRET_PGPASSWORD'] = env.get('PGPASSWORD','')
@@ -78,7 +83,8 @@ def main():
             publish = subprocess.run(['node','--experimental-strip-types',str(ROOT/'services/adviser-backend/scripts/publish-warehouse.mjs'),build_schema,run_id],env=env)
             if publish.returncode:
                 raise RuntimeError('Qdrant publication failed; active catalog retained')
-            report['status'] = 'passed'
+            mark_published(db, initialized, run_id)
+            report['status'] = 'partial' if configs and any(r['failed'] or not r['parsed'] for r in report['crawl'].values()) else 'passed'
         except Exception as exc:
             report['status'] = 'failed'
             # Do not serialize driver exception text, connection strings or passwords.

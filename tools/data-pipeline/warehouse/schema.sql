@@ -1,5 +1,9 @@
 CREATE SCHEMA IF NOT EXISTS lua_raw;
 CREATE SCHEMA IF NOT EXISTS lua_app;
+CREATE TABLE IF NOT EXISTS lua_raw.crawl_state (
+ source text PRIMARY KEY, initialized_at timestamptz NOT NULL DEFAULT now(),
+ run_id text NOT NULL
+);
 CREATE TABLE IF NOT EXISTS lua_raw.product_observations (
  observation_id text PRIMARY KEY, source text NOT NULL, external_id text NOT NULL,
  observed_at timestamptz NOT NULL, payload jsonb NOT NULL, capture_mode text NOT NULL,

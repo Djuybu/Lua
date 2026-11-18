@@ -1,0 +1,13 @@
+.git
+.agents
+apps
+docs
+dist
+**/node_modules
+**/.work
+**/__pycache__
+**/.env
+**/.env.*
+**/*.sqlite*
+**/*.dump
+**/*.snapshot

@@ -13,12 +13,12 @@ export interface ProductVariant {
   variantId: string;
   familyId: string;
   modelName: string;
-  category: DeviceCategory;
+  category: DeviceCategory | 'unknown';
   brand: string;
   specifications: {
-    ramGb: number;
+    ramGb: number | null;
     os: string;
-    storageGb: number;
+    storageGb: number | null;
     cpu: string;
     gpu?: string;
     weightKg?: number;

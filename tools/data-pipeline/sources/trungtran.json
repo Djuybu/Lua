@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "trungtran",
+  "seeds": [
+    "https://trungtran.vn/gigabyte-aero-x16-ryzen-7-16-rtx-5060-2k-1vh93vnc94dh-white/"
+  ],
+  "sitemap": null,
+  "regionContext": null,
+  "variantMap": {},
+  "category": "pc_laptop",
+  "followPatterns": [
+    "/(?:laptop|lenovo|dell|hp|asus|acer|gigabyte|thinkpad)[^/?]*/?$"
+  ]
+}

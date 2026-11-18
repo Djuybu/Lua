@@ -1,5 +1,6 @@
 """Source configuration deliberately keeps retailer-specific identities separate."""
 import json
+import re
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
@@ -50,6 +51,16 @@ def load_config(path):
         raise PipelineError("TOO_MANY_SEEDS")
     for url in value["seeds"]:
         check_url(url, value["sourceId"])
+    patterns = value.get('followPatterns', [])
+    if not isinstance(patterns, list) or not all(isinstance(p, str) and 0 < len(p) <= 300 for p in patterns):
+        raise PipelineError('INVALID_FOLLOW_PATTERNS')
+    try:
+        for pattern in patterns:
+            re.compile(pattern)
+    except re.error as exc:
+        raise PipelineError('INVALID_FOLLOW_PATTERNS') from exc
+    if value.get('category') is not None and value['category'] not in {'pc_laptop','pc_desktop','phone','tablet'}:
+        raise PipelineError('INVALID_CATEGORY')
     maps = value.get("variantMap", {})
     if not isinstance(maps, dict) or not all(isinstance(k, str) and k and isinstance(v, str) and v.strip()
                                              for k, v in maps.items()):

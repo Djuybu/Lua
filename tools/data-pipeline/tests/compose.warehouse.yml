@@ -1,0 +1,37 @@
+name: lua-warehouse-check
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: lua_test
+      POSTGRES_PASSWORD: local-test-only
+      POSTGRES_DB: lua_test_warehouse
+    tmpfs:
+      - /var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lua_test -d lua_test_warehouse"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  qdrant:
+    image: qdrant/qdrant:v1.20.2
+    tmpfs:
+      - /qdrant/storage
+  verify:
+    build:
+      context: ../../..
+      dockerfile: tools/data-pipeline/tests/Dockerfile.warehouse
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: lua_test
+      PGPASSWORD: local-test-only
+      PGDATABASE: lua_test_warehouse
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: lua_test_catalog
+      PYTHONUNBUFFERED: "1"

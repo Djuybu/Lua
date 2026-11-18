@@ -71,14 +71,14 @@ export function evaluateEligibility(
 
   // 3. Hard constraint: Minimum RAM
   if (profile.hardConstraints?.minRamGb !== undefined) {
-    if (variant.specifications.ramGb < profile.hardConstraints.minRamGb) {
+    if (variant.specifications.ramGb === null || variant.specifications.ramGb < profile.hardConstraints.minRamGb) {
       return {
         isEligible: false,
         exclusion: {
           variantId: variant.variantId,
           modelName: variant.modelName,
-          reasonCode: 'RAM_INSUFFICIENT',
-          detail: `RAM ${variant.specifications.ramGb}GB is below required minimum of ${profile.hardConstraints.minRamGb}GB`
+          reasonCode: variant.specifications.ramGb === null ? 'UNKNOWN_CAPABILITY' : 'RAM_INSUFFICIENT',
+          detail: variant.specifications.ramGb === null ? 'RAM chưa xác minh' : `RAM ${variant.specifications.ramGb}GB is below required minimum of ${profile.hardConstraints.minRamGb}GB`
         },
         reasons
       };

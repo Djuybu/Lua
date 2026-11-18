@@ -186,7 +186,7 @@ export function explanationFacts(
     requiredOs.some(required => spec.os.toLowerCase().includes(required.toLowerCase()));
   const failures: string[] = [];
   if (variant.category !== profile.category) failures.push('khác nhóm thiết bị đã chọn');
-  if (requiredMinRam !== undefined && spec.ramGb < requiredMinRam) failures.push('RAM dưới mức tối thiểu');
+  if (requiredMinRam !== undefined && (spec.ramGb === null || spec.ramGb < requiredMinRam)) failures.push('RAM dưới mức tối thiểu');
   if (!osMatched) failures.push('hệ điều hành không khớp yêu cầu');
   if (!best) failures.push('chưa có tổng giá đầy đủ');
   else if (best.totalVnd > ceiling) failures.push('giá vượt trần ngân sách');
@@ -205,9 +205,9 @@ export function explanationFacts(
   });
   facts.push({
     id: 'ram',
-    text: `RAM chính thức ${spec.ramGb} GB.${requiredMinRam !== undefined ? ` Yêu cầu tối thiểu ${requiredMinRam} GB: ${spec.ramGb >= requiredMinRam ? 'đáp ứng' : 'không đáp ứng'}.` : ''}`
+    text: `RAM chính thức ${spec.ramGb === null ? 'chưa xác minh' : spec.ramGb + ' GB'}.${requiredMinRam !== undefined ? ` Yêu cầu tối thiểu ${requiredMinRam} GB: ${(spec.ramGb !== null && spec.ramGb >= requiredMinRam) ? 'đáp ứng' : 'không đáp ứng'}.` : ''}`
   });
-  facts.push({ id: 'storage', text: `Lưu trữ chính thức ${spec.storageGb} GB.` });
+  facts.push({ id: 'storage', text: `Lưu trữ chính thức ${spec.storageGb === null ? 'chưa xác minh' : spec.storageGb + ' GB'}.` });
   facts.push({
     id: 'os',
     text: `Hệ điều hành chính thức ${spec.os}.${requiredOs?.length ? ` Yêu cầu: ${requiredOs.join(', ')}: ${osMatched ? 'đáp ứng' : 'không đáp ứng'}.` : ''}`
@@ -227,7 +227,7 @@ export function explanationFacts(
 
   const fits: string[] = [];
   const wants = new Set(profile.orderedPriorities);
-  if (wants.has('priority_performance_cpu')) fits.push(`xử lý ${spec.cpu} với ${spec.ramGb} GB RAM`);
+  if (wants.has('priority_performance_cpu')) fits.push(`xử lý ${spec.cpu} với ${spec.ramGb === null ? 'chưa xác minh' : spec.ramGb + ' GB'} RAM`);
   if (wants.has('priority_graphics_gpu')) fits.push(spec.gpu ? `đồ họa ${spec.gpu}` : 'không công bố GPU rời');
   if (wants.has('priority_battery_life')) fits.push(spec.batteryWattHours !== undefined ? `pin ${spec.batteryWattHours} Wh` : 'chưa có dung lượng pin');
   if (wants.has('priority_display_quality')) fits.push(spec.displayInches !== undefined ? `màn hình ${spec.displayInches} inch` : 'chưa có kích thước màn hình');

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "lua.pipeline-config.v1",
+  "sourceId": "shopdunk",
+  "seeds": [
+    "https://shopdunk.com/dien-thoai-iphone-17-pro-max-256gb"
+  ],
+  "sitemap": "https://shopdunk.com/sitemap.xml",
+  "regionContext": null,
+  "variantMap": {},
+  "category": "phone",
+  "followPatterns": [
+    "/dien-thoai-[^/?]+$"
+  ]
+}

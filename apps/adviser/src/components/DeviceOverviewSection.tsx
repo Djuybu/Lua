@@ -17,8 +17,8 @@ export function DeviceOverviewSection({
       <View style={s.row}>
         {[
           [Cpu, "CPU", v.specifications.cpu],
-          [MemoryStick, "RAM", v.specifications.ramGb + " GB"],
-          [HardDrive, "Lưu trữ", v.specifications.storageGb + " GB"],
+          [MemoryStick, "RAM", v.specifications.ramGb == null ? "Chưa xác minh" : v.specifications.ramGb + " GB"],
+          [HardDrive, "Lưu trữ", v.specifications.storageGb == null ? "Chưa xác minh" : v.specifications.storageGb + " GB"],
           [
             Monitor,
             "Màn hình",

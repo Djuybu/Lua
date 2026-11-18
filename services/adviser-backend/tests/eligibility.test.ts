@@ -50,6 +50,13 @@ const baseOffer: StagedCrawlerOffer = {
   completenessStatus: 'COMPLETE'
 };
 
+test('Eligibility - automatically cataloged unknown RAM cannot satisfy a minimum', () => {
+  const variant = {...baseVariant, specifications: {...baseVariant.specifications, ramGb: null}};
+  const result = evaluateEligibility(variant, [baseOffer], baseProfile);
+  assert.equal(result.isEligible, false);
+  assert.equal(result.exclusion?.reasonCode, 'UNKNOWN_CAPABILITY');
+});
+
 test('Eligibility - eligible when all hard constraints and budget are met', () => {
   const res = evaluateEligibility(baseVariant, [baseOffer], baseProfile);
   assert.equal(res.isEligible, true);

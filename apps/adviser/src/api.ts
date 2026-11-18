@@ -28,8 +28,8 @@ export async function loadCatalog(
         typeof variant?.variantId === "string" &&
         typeof variant?.modelName === "string" &&
         typeof variant?.brand === "string" &&
-        typeof variant?.specifications?.ramGb === "number" &&
-        typeof variant?.specifications?.storageGb === "number",
+        (variant?.specifications?.ramGb === null || typeof variant?.specifications?.ramGb === "number") &&
+        (variant?.specifications?.storageGb === null || typeof variant?.specifications?.storageGb === "number"),
     )
   )
     throw new Error("INVALID_CATALOG_RESPONSE");

@@ -39,7 +39,7 @@ function scorePriority(
 
     case 'priority_performance_cpu': {
       // Based on RAM and CPU core/class heuristic
-      let ramScore = Math.min(60, (specs.ramGb / 32) * 60);
+      let ramScore = Math.min(60, ((specs.ramGb ?? 0) / 32) * 60);
       let cpuBonus = 20;
       const cpu = specs.cpu.toLowerCase();
       if (cpu.includes('i7') || cpu.includes('i9') || cpu.includes('ryzen 7') || cpu.includes('ryzen 9') || cpu.includes('m2') || cpu.includes('m3')) {

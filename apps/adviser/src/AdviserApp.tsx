@@ -386,7 +386,7 @@ function Workspace({
       !state.confirmed ||
       (v.category === state.confirmed.category &&
         (!state.confirmed.hardConstraints?.minRamGb ||
-          v.specifications.ramGb >= state.confirmed.hardConstraints.minRamGb)),
+          (v.specifications.ramGb !== null && v.specifications.ramGb >= state.confirmed.hardConstraints.minRamGb))),
   );
   const nav = (
     <View

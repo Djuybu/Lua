@@ -14,8 +14,8 @@ export function specRows(v: ProductVariant) {
     ["Hãng / Dòng", v.brand + " / " + v.familyId],
     ["CPU", x.cpu],
     ["GPU", x.gpu],
-    ["RAM", x.ramGb + " GB"],
-    ["Lưu trữ", x.storageGb + " GB"],
+    ["RAM", x.ramGb == null ? "Chưa xác minh" : x.ramGb + " GB"],
+    ["Lưu trữ", x.storageGb == null ? "Chưa xác minh" : x.storageGb + " GB"],
     ["Màn hình", x.displayInches ? x.displayInches + " inch" : null],
     ["Pin", x.batteryWattHours ? x.batteryWattHours + " Wh" : null],
     ["Cân nặng", x.weightKg ? x.weightKg + " kg" : null],
@@ -40,6 +40,7 @@ export function PSREFListingCard({
     tablet: Tablet,
     pc_laptop: Laptop,
     pc_desktop: Monitor,
+    unknown: Monitor,
   }[v.category];
   return (
     <View
@@ -56,7 +57,7 @@ export function PSREFListingCard({
       <View style={s.row}>
         <Icon size={26} color={c.primary} />
         <Body muted>
-          {sourceOf(v)} · {t(categories[v.category])}
+          {sourceOf(v)} · {t(v.category === 'unknown' ? 'Chưa xác minh' : categories[v.category])}
         </Body>
       </View>
       <Text

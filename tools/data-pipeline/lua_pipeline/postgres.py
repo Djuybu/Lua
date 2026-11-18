@@ -37,7 +37,8 @@ class PostgresStore:
                     'brand':attr('Thương hiệu','Brand'),
                     'specs':{'ram':attr('RAM','Dung lượng RAM'),'storage':attr('Ổ cứng','Storage'),
                              'cpu':attr('CPU','Loại CPU'),'os':attr('Hệ điều hành','OS'),'gpu':attr('GPU','Card đồ họa')},
-                    'pricing':{'current':row['basePriceVnd']},'pipelineObservationId':row['observationId']}
+                    'pricing':{'current':row['basePriceVnd']},'pipelineObservationId':row['observationId'],
+                    'qualityIssues':row['reasons']}
                 self.product(row['sourceId'],row['externalOfferId'],row['observedAt'],payload,row['captureMode'],row['status'])
                 inserted += 1
             if job:

@@ -77,7 +77,7 @@ export function variant(value: unknown): value is ProductVariant {
     ![value.variantId, value.familyId, value.modelName, value.brand].every(
       id,
     ) ||
-    !VALID_CATEGORIES.includes(value.category) ||
+    !(VALID_CATEGORIES.includes(value.category) || value.category === 'unknown') ||
     !strings(value.factIds) ||
     new Set(value.factIds).size !== value.factIds.length ||
     !record(value.specifications)
@@ -85,10 +85,8 @@ export function variant(value: unknown): value is ProductVariant {
     return false;
   const s = value.specifications;
   return (
-    amount(s.ramGb) &&
-    s.ramGb > 0 &&
-    amount(s.storageGb) &&
-    s.storageGb > 0 &&
+    (s.ramGb === null || (amount(s.ramGb) && s.ramGb > 0)) &&
+    (s.storageGb === null || (amount(s.storageGb) && s.storageGb > 0)) &&
     id(s.os) &&
     id(s.cpu) &&
     (s.gpu === undefined || text(s.gpu)) &&

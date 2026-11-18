@@ -558,15 +558,47 @@ function Workspace({
                 )}
                 {networkError && <Notice title={networkError} />}{" "}
                 {result && <Notice title={outcome(result)} />}
-                {result?.shortlist.map((candidate) => (
-                  <Notice key={candidate.variantId} title={candidate.modelName}>
-                    <Body>{vnd(candidate.totalVnd)}</Body>
-                    <Body muted>
-                      {candidate.bestOffer?.sourceId}{" "}
-                      {candidate.bestOffer?.observedAt}
-                    </Body>
-                  </Notice>
-                ))}
+                {result?.shortlist.map((candidate) => {
+                  const variant = catalog.variants.find(
+                    (v) => v.variantId === candidate.variantId,
+                  );
+                  const selected = compare.some(
+                    (v) => v.variantId === candidate.variantId,
+                  );
+                  return (
+                    <Notice key={candidate.variantId} title={candidate.modelName}>
+                      <Body>{vnd(candidate.totalVnd)}</Body>
+                      <Body muted>
+                        {candidate.bestOffer?.sourceId}{" "}
+                        {candidate.bestOffer?.observedAt}
+                      </Body>
+                      <View style={s.row}>
+                        <Button
+                          label="Xem cấu hình"
+                          disabled={!variant}
+                          onPress={() => {
+                            if (!variant) return;
+                            setHistorical(false);
+                            setDetail(variant);
+                          }}
+                        />
+                        <Button
+                          label={selected ? "Bỏ chọn" : "So sánh"}
+                          selected={selected}
+                          disabled={!variant}
+                          onPress={() => {
+                            if (variant) select(variant);
+                          }}
+                        />
+                      </View>
+                      {!variant && (
+                        <Body muted>
+                          Cấu hình này chưa có trong catalog hiện tại. Vui lòng tải lại trang để cập nhật.
+                        </Body>
+                      )}
+                    </Notice>
+                  );
+                })}
                 <View
                   onLayout={(e) => setGridWidth(e.nativeEvent.layout.width)}
                 >

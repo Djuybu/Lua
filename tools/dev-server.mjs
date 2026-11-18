@@ -61,6 +61,9 @@ const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.
 if (process.env.PUBLIC_HOST) allowedHosts.add(`${process.env.PUBLIC_HOST}:${port}`);
 const expoOrigins = new Set([`http://127.0.0.1:${expoPort}`, `http://localhost:${expoPort}`]);
 const localOrigins = new Set([...allowedHosts].map(host => `http://${host}`));
+allowedHosts.add('lua-adviser.vercel.app');
+allowedHosts.add('lua-adviser.vercel.app:443');
+localOrigins.add('https://lua-adviser.vercel.app');
 const trusted = req => allowedHosts.has(req.headers.host) && (!req.headers.origin || localOrigins.has(req.headers.origin) || expoOrigins.has(req.headers.origin));
 const backend = http.createServer(async (req, res) => {
   if (!trusted(req)) return send(res, 403, { error: { message: 'Local origin required' } });

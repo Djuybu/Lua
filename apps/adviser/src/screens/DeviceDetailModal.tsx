@@ -1,3 +1,6 @@
+import { OfficialPrice } from "../components/OfficialPrice";
+import { OfficialExplanation } from "../components/OfficialExplanation";
+import type { ConfirmedNeedsProfile } from "../model";
 import React, { useEffect, useState } from "react";
 import { Modal, ScrollView, View, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,6 +19,10 @@ export function DeviceDetailModal({
   onCompare,
   onAdd,
   historical = false,
+  profile = null,
+  revision = 0,
+  offline = true,
+  explanationEndpoint,
 }: {
   variant: ProductVariant | null;
   variants: ProductVariant[];
@@ -23,7 +30,11 @@ export function DeviceDetailModal({
   onVariant: (v: ProductVariant) => void;
   onCompare: (v: ProductVariant) => void;
   onAdd: (v: ProductVariant) => void;
+  explanationEndpoint?: string;
   historical?: boolean;
+  profile?: ConfirmedNeedsProfile | null;
+  revision?: number;
+  offline?: boolean;
 }) {
   const { c } = useTheme();
   const [tab, setTab] = useState(0);
@@ -49,6 +60,16 @@ export function DeviceDetailModal({
                 </Body>
               </View>
               <Title small>{variant.modelName}</Title>
+              {!historical && <OfficialPrice variantId={variant.variantId} />}
+              {!historical && (
+                <OfficialExplanation
+                  endpoint={explanationEndpoint}
+                  variantId={variant.variantId}
+                  profile={profile}
+                  revision={revision}
+                  offline={offline}
+                />
+              )}
               <View style={s.row}>
                 {["Tổng quan", "Thông số", "Nguồn & chi phí"].map((l, i) => (
                   <Button
@@ -63,11 +84,10 @@ export function DeviceDetailModal({
               {tab === 1 && <DeviceSpecsSection variant={variant} />}
               {tab === 2 && (
                 <>
-                  <Notice title="Chưa có giá trọn gói đã xác minh">
-                    Chưa xác định
-                  </Notice>
-                  {variant.sourceUrl?.startsWith("https://") && <View style={{gap:12}}><Body>Giá quan sát: {vnd(variant.observedPriceVnd)}</Body><Body muted>{variant.observedAt ? new Date(variant.observedAt).toLocaleString("vi-VN") : ""}</Body><Button label="Mở trang nhà bán lẻ" onPress={() => Linking.openURL(variant.sourceUrl!)} /></View>}
-                  {(variant.sourceUrl ? [] : provenance.variants)
+                  {!historical && (
+                    <OfficialPrice variantId={variant.variantId} />
+                  )}
+                  {provenance.variants
                     .filter((x) => x.variantId === variant.variantId)
                     .map((x) => (
                       <View key={x.variantId} style={{ gap: 12 }}>

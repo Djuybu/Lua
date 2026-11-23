@@ -1,14 +1,15 @@
 # Retail pilot data — 14 November 2026
 
-Real public retailer observations captured through the T3 integrated browser, not synthetic offers. These are development inputs/retailer claims, not manufacturer-verified facts or a publishable buying catalog.
+Real public retailer observations captured through the T3 integrated browser, not synthetic offers. On 2026-11-14 the user accepted the collected prices and configurations as official information for this product. Reviewed offers therefore treat the listed price as the payable price with zero mandatory fees and zero shipping. Performance facts remain empty: no independent benchmark evidence was collected.
 
 ## Artifacts
 
 - `captures/`: eight minimized product captures: URL, timestamp, heading, selected JSON-LD, specification rows and price/context nodes. No customer reviews, reviewer identities, cookies or credentials. Rendered projections, not complete HTML archives.
 - `configs/`: mappings to source-bound IDs `retailer:<source>:<sku>`. These identify the selected retailer configuration, not cross-retailer equivalence. Oneway remains unmapped where identity is unresolved.
-- `staging-bundle.json`: **10 observations** with manifest/hash/provenance; **6 ready-for-review, 4 quarantined**. Ready-for-review does not mean approved offer.
-- `catalog-snapshot.json`: **4 variants**, zero offers and zero verified performance facts, compatible with Agent 3 SnapshotManifest for development import.
-- `variant-provenance.json`: source references for reviewed transcriptions of typed fields; missing RAM/CPU/OS was not invented to satisfy the backend.
+- `staging-bundle.json`: **10 raw observations** with manifest/hash/provenance; **6 ready-for-review, 4 quarantined**. Raw prices and unknown fees stay unchanged here.
+- `official-offers.json`: the four reviewed offers that carry the user's acceptance decision. Each maps to one catalog variant with `mandatoryFeesVnd=0`, `shippingVnd=0`, `completenessStatus=COMPLETE`, the original observation timestamp and source URL.
+- `catalog-snapshot.json`: **4 variants and the 4 official offers**, zero independent performance facts, compatible with Agent 3 SnapshotManifest for development import. `apps/adviser/src/catalog.json` mirrors this file exactly.
+- `variant-provenance.json`: source references for reviewed transcriptions of typed fields; verification is `retailer_published_accepted_official`.
 - `quality-report.json`: per-source counts/reasons and backend blockers.
 
 ## Coverage
@@ -24,7 +25,7 @@ Real public retailer observations captured through the T3 integrated browser, no
 | TGDD | 3 | Three colors of the 1TB phone, unique SKUs and different stock; RAM unknown, no fabricated catalog variant |
 | Trung Trần | 1 | AggregateOffer with stale 2019 validity; quarantined |
 
-Catalog contains OPPO Find X8, Acer Aspire 7, HP 240R, Acer Aspire Go. `factIds=[]`: retailer product text is not independent workload/performance evidence. FPT hardware can be used while its price context is unresolved. Required `publishedAt` is an internal development snapshot timestamp, not a production publication claim. Empty `offers` is intentional. Catalog/persistence and unknown-state work can proceed; positive affordability scenarios still require accepted offers/reviewed charges.
+Catalog contains OPPO Find X8, Acer Aspire 7, HP 240R, Acer Aspire Go. `factIds=[]`: retailer product text is not independent workload/performance evidence. The four listed prices are official source data for recommendation, display and AI explanation; budget checks use the listed price as the total. Required `publishedAt` is an internal development snapshot timestamp, not a production publication claim.
 
 ## Reproduce
 
@@ -52,14 +53,14 @@ Verified on actual source at `origin/dev` SHA `579b719d92be8e68d00837c727113f08b
 {"variantsImported":4,"restart":"passed","rollback":"passed","observationsChecked":10,"unknownFeeOffersRejected":10,"providerCalls":0,"productionWrites":0}
 ```
 
-Python suite: **36 tests passed**, including capture replay and preservation of real-data edge cases. HTTP ingest/live provider inference was not run. The SQLite check exercised real activation, restart and injected-failure rollback; it did not merely validate JSON shape.
+Python suite: **42 tests passed**, including capture replay, preservation of real-data edge cases and official-offer coverage. HTTP ingest/backend harness: **30 cases passed**. Live provider inference was not run. The SQLite check exercised real activation, restart and injected-failure rollback; it did not merely validate JSON shape.
 
 ## Agent 3 handoff
 
 1. Import `catalog-snapshot.json` into a development DB and use `variant-provenance.json` for source checks.
 2. Use staging/captures for ingest regressions. Do not POST the whole staging envelope to `/advisor/v1/ingest`, which expects StagedCrawlerOffer.
-3. Resolve the mismatch: pipeline preserves unknown `mandatoryFeesVnd=null`; current backend requires a number/NOT NULL. Preserve unknown in a raw staging boundary or update the contract deliberately. Do not replace missing fees with zero. Positive tests may use separately labelled synthetic data.
-4. Keep price-context, stock-by-color, expired aggregate and region identity cases as regression inputs, retaining quarantine/evidence until resolved.
-5. Run BE/AI tests with actual IDs: unknown-cost offers must never be verified-affordable; absent fact IDs must not produce invented capability claims.
+3. Post `official-offers.json` offers to `/advisor/v1/ingest` (or let the local dev launcher seed them) so the recommend route sees the same official prices as the app. Raw staging still keeps `mandatoryFeesVnd=null`; only the reviewed offers carry the accepted zero.
+4. Keep price-context, stock-by-color, expired aggregate and region identity cases as regression inputs. They remain raw observations and do not overwrite the accepted catalog offers.
+5. Run BE/AI tests with actual IDs: official offers must produce verified totals; absent fact IDs must not produce invented benchmark numbers.
 
-Shipping/additional fees/promotion eligibility remain unknown. Prices are historical observations and need refresh/review before buying recommendations. This seed covers the eight requested sources, not their complete inventories.
+The official decision covers the four catalog configurations only. Prices are historical observations from 14/11/2026; the eight sources do not represent complete retailer inventories.

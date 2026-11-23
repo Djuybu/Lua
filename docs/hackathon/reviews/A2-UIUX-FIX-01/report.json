@@ -1,0 +1,175 @@
+{
+  "pin": "9b93d05c8ee1d1ac6b924b978ca0f58e93de1ee8",
+  "base": "fbdcd485e6204690a868121875ac8dad066c8a1d",
+  "root": "C:\\Users\\Minh Duy\\AppData\\Local\\Temp\\lua-a2-uiux-fix-review-h5s4oou3",
+  "sourceTree": "9920260301c4d24ab33ddcd790beff871333a24f",
+  "files": 75,
+  "unchangedBlobs": {
+    "apps/adviser/package-lock.json": "057ba4c482149b7fd73dba7d2698be8e785c4021",
+    "apps/adviser/src/catalog.json": "f2e3fb85159aafa8de681c461bee88dd407eb9ab",
+    "apps/adviser/src/provenance.json": "50ac5728f02ad928c05912e5a3aad3cb264656c7"
+  },
+  "status": "verified_and_integrated_ui_scope",
+  "defects": {
+    "UIUX-F01": "closed",
+    "UIUX-F02": "closed"
+  },
+  "sourceUnchangedAfterChecks": true,
+  "productionFixtureExcluded": true,
+  "runtime": {
+    "node": "v22.19.0",
+    "npm": "10.9.3",
+    "python": "3.15.2"
+  },
+  "commands": [
+    {
+      "argv": [
+        "npm.cmd",
+        "ci",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exitCode": 0,
+      "log": "npm-ci.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "test"
+      ],
+      "exitCode": 0,
+      "passed": 45,
+      "failed": 0,
+      "log": "unit-tests.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": "build.log"
+    },
+    {
+      "argv": [
+        "npm.cmd",
+        "run",
+        "test:e2e"
+      ],
+      "exitCode": 0,
+      "passed": 14,
+      "failed": 0,
+      "log": "e2e.log"
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/tsx/dist/cli.mjs",
+        "--test",
+        "<review-root>/original-corruption-probe.ts"
+      ],
+      "cwd": "apps/adviser",
+      "exitCode": 0,
+      "passed": 3,
+      "failed": 0,
+      "log": "original-corruption-probe.log"
+    }
+  ],
+  "integration": {
+    "source": "9b93d05c8ee1d1ac6b924b978ca0f58e93de1ee8",
+    "devBase": "4659c614137103b8a111761579758a4eb8f0155f",
+    "mergeCommit": "c14349d906a3cc2202319b3afd7b5b851a5cadd1",
+    "mergeTree": "1c6ba321ff4f2adc28e06427111b142126456ac3",
+    "integrationBranch": "codex/integration/a2-uiux-fix-01",
+    "appTree": "f4f543302028099650e06007eae53af9a59bc5c0",
+    "changedPaths": [
+      "apps/adviser/.gitignore",
+      "apps/adviser/ACCEPTANCE.md",
+      "apps/adviser/App.tsx",
+      "apps/adviser/CHAT_PREP.md",
+      "apps/adviser/README.md",
+      "apps/adviser/UIUX_FIX_01.md",
+      "apps/adviser/VERIFICATION.md",
+      "apps/adviser/package.json",
+      "apps/adviser/playwright.config.ts",
+      "apps/adviser/src/AdviserApp.tsx",
+      "apps/adviser/src/ChatPanel.tsx",
+      "apps/adviser/src/ComparisonView.tsx",
+      "apps/adviser/src/acceptance.test.ts",
+      "apps/adviser/src/api/capabilities.ts",
+      "apps/adviser/src/api/config.ts",
+      "apps/adviser/src/chat.test.ts",
+      "apps/adviser/src/chat.ts",
+      "apps/adviser/src/components/AddToCartModal.tsx",
+      "apps/adviser/src/components/CartCandidateCard.tsx",
+      "apps/adviser/src/components/DeviceOverviewSection.tsx",
+      "apps/adviser/src/components/DeviceSpecsSection.tsx",
+      "apps/adviser/src/components/FloatingSearchBar.tsx",
+      "apps/adviser/src/components/PSREFListingCard.tsx",
+      "apps/adviser/src/components/TrackPriceSheet.tsx",
+      "apps/adviser/src/components/UnifiedFilterPanel.tsx",
+      "apps/adviser/src/domain/carts.ts",
+      "apps/adviser/src/domain/filters.ts",
+      "apps/adviser/src/domain/navigation.ts",
+      "apps/adviser/src/domain/persisted-prices.ts",
+      "apps/adviser/src/domain/price-tracking.ts",
+      "apps/adviser/src/domain/validation.ts",
+      "apps/adviser/src/i18n.tsx",
+      "apps/adviser/src/model.ts",
+      "apps/adviser/src/screens/CartsScreen.tsx",
+      "apps/adviser/src/screens/DeviceDetailModal.tsx",
+      "apps/adviser/src/screens/NeedsModal.tsx",
+      "apps/adviser/src/screens/SettingsScreen.tsx",
+      "apps/adviser/src/storage.ts",
+      "apps/adviser/src/theme.tsx",
+      "apps/adviser/src/ui.tsx",
+      "apps/adviser/src/uiux-fix.test.ts",
+      "apps/adviser/src/utils/comparison-semantics.ts",
+      "apps/adviser/src/utils/error-logger.ts",
+      "apps/adviser/tests/chat-ui/app.json",
+      "apps/adviser/tests/chat-ui/index.tsx",
+      "apps/adviser/tests/chat-ui/metro.config.cjs",
+      "apps/adviser/tests/chat-ui/package.json",
+      "apps/adviser/tests/chat.spec.ts",
+      "apps/adviser/tests/fixtures/persisted-state.ts",
+      "apps/adviser/tests/journey.spec.ts",
+      "apps/adviser/tests/uiux-fix.spec.ts",
+      "apps/adviser/verification/acceptance-compact-settings.png",
+      "apps/adviser/verification/acceptance-expanded-catalog.png",
+      "apps/adviser/verification/chat-confirmed.png",
+      "apps/adviser/verification/chat-fixture-fallback.png"
+    ],
+    "backendUnchanged": true,
+    "pipelineUnchanged": true,
+    "sharedHeadPreserved": "f9494f231313f87f0b2655c87a432b0340bdbb2f",
+    "devRemoteVerified": true
+  },
+  "evidenceSha256": {
+    "npm-ci.log": "55ab945c8335556fb20ade69043d3e71ade7d890630a9bf820775560ae1e367b",
+    "typecheck.log": "6e6108ff6ee063c6fa5142bcc8b7fc0d206bb02dc06d7009851a1d4b57a479b1",
+    "unit-tests.log": "4e36bb73eddafba3d1db44439d7cb8b58fccfa95483018838e4fa30554a72704",
+    "build.log": "aa022d4745694adc179d9cba2ab15fd09ee82fd4ff3b4b6fa736b3ff51e1637e",
+    "e2e.log": "df10b53e15f8891cefa99c683aa63166d5e6223f3d15bce0ded33d4fb82f588b",
+    "original-corruption-probe.ts": "7dff8c758f25808a0f84961ff8a803935292bb0eb69bab656fd28eec9b9f4c33",
+    "original-corruption-probe.log": "a736afee67d68483efcd67125f8440620a3c4bb23a6ea8b1635d20c57cf4c3ac",
+    "integration.json": "d5f35ce8507956c4eaeb003ec70d6b25d133d52dfd8e9c389a18890a97074ace"
+  },
+  "notRun": [
+    "live backend/chat/provider/Nano",
+    "native Android APK/device/TalkBack/Back/IME/wallpaper/performance",
+    "tracking poller/notifications",
+    "full bilingual native/manual acceptance"
+  ],
+  "productionWrites": 0,
+  "providerCalls": 0
+}

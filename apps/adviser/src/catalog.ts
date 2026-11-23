@@ -6,9 +6,6 @@ import { type DeviceCategory } from "./taxonomy.ts";
 import { type StagedCrawlerOffer } from "./crawler.ts";
 
 export interface ProductVariant {
-  sourceUrl?: string;
-  observedAt?: string;
-  observedPriceVnd?: number | null;
   variantId: string;
   familyId: string;
   modelName: string;
@@ -26,6 +23,9 @@ export interface ProductVariant {
   };
   /** Verified capability facts associated with this exact variant */
   factIds: string[];
+  sourceUrl?: string;
+  observedAt?: string;
+  observedPriceVnd?: number | null;
 }
 
 export interface FactAssertion {

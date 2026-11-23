@@ -1,3 +1,4 @@
+import { officialOffer, offerTotal } from "./domain/official";
 import { destination } from "./domain/navigation";
 import { probeCapabilities } from "./api/capabilities";
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -33,7 +34,7 @@ import {
 import type { ProductVariant, SnapshotManifest } from "./catalog";
 import type { RecommendationResponseEnvelope } from "./envelope";
 import seed from "./catalog.json";
-import { recommend, fetchCatalog, liveChatTransport } from "./api";
+import { loadCatalog, recommend, liveChatTransport } from "./api";
 import { DEFAULT_API_ENDPOINT } from "./api/config";
 import { recordError } from "./utils/error-logger";
 import { ChatPanel } from "./ChatPanel";
@@ -54,7 +55,8 @@ import { DeviceDetailModal } from "./screens/DeviceDetailModal";
 import { CartsScreen } from "./screens/CartsScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { ComparisonView } from "./ComparisonView";
-
+import { CatalogProvider } from "./catalog-context";
+const bundledCatalog = seed as SnapshotManifest;
 const store = createStore(AsyncStorage);
 const destinations = [
   { id: "advisor", label: "Trang chủ", icon: House },
@@ -65,7 +67,8 @@ const destinations = [
 type Tab = (typeof destinations)[number]["id"];
 export default function AdviserApp({
   chatTransport = liveChatTransport,
-}: { chatTransport?: ChatTransport } = {}) {
+  explanationEndpoint,
+}: { chatTransport?: ChatTransport; explanationEndpoint?: string } = {}) {
   const [state, setState] = useState<State>(empty);
   const [boot, setBoot] = useState<"loading" | "ready" | "failed">("loading");
   useEffect(() => {
@@ -96,6 +99,7 @@ export default function AdviserApp({
       <LocaleProvider locale={state.preferences.locale ?? "vi"}>
         <AdvisorTheme preferences={state.preferences}>
           <Workspace
+            explanationEndpoint={explanationEndpoint}
             state={state}
             boot={boot}
             update={update}
@@ -113,6 +117,7 @@ export default function AdviserApp({
   );
 }
 function Workspace({
+  explanationEndpoint,
   state,
   boot,
   update,
@@ -123,6 +128,7 @@ function Workspace({
   boot: string;
   update: (fn: (x: State) => State) => Promise<State>;
   chatTransport?: ChatTransport;
+  explanationEndpoint?: string;
   recover: () => Promise<void>;
 }) {
   const { c, isDark } = useTheme();
@@ -130,6 +136,33 @@ function Workspace({
   const { width, height } = useWindowDimensions();
   const rail = width >= 840 || (width >= 600 && height >= 600);
   const expanded = width >= 840;
+  const [catalog, setCatalog] = useState<SnapshotManifest>(bundledCatalog);
+  const [catalogStatus, setCatalogStatus] = useState<
+    "loading" | "live" | "bundled"
+  >("loading");
+  useEffect(() => {
+    if (!DEFAULT_API_ENDPOINT) {
+      setCatalogStatus("bundled");
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    loadCatalog(DEFAULT_API_ENDPOINT, controller.signal)
+      .then((manifest) => {
+        setCatalog(manifest);
+        setCatalogStatus("live");
+      })
+      .catch(() => {
+        recordError("network", "CATALOG_UNAVAILABLE");
+        setCatalog(bundledCatalog);
+        setCatalogStatus("bundled");
+      })
+      .finally(() => clearTimeout(timer));
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, []);
   const [priceTracking, setPriceTracking] = useState(false);
   useEffect(() => {
     setPriceTracking(false);
@@ -159,23 +192,9 @@ function Workspace({
   }, [boot, state.destination]);
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
-  const [catalog, setCatalog] = useState<SnapshotManifest>({ ...seed, variants: [], offers: [], facts: [] } as SnapshotManifest);
-  const [catalogStatus, setCatalogStatus] = useState("loading");
-  const [refresh, setRefresh] = useState(0);
   const [catalogPage, setCatalogPage] = useState(0);
   const contentScroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const catalogPageSize = 24;
-  useEffect(() => {
-    const controller = new AbortController();
-    let current = true;
-    const timer = setTimeout(() => controller.abort(), 10000);
-    setCatalogStatus("loading");
-    const debounce = setTimeout(() => { void fetchCatalog(DEFAULT_API_ENDPOINT, deferredQuery, controller.signal).then(data => {
-      if (current) { setCatalog(data); setCatalogStatus("ready"); }
-    }).catch(() => { if (current) setCatalogStatus("error"); })
-      .finally(() => clearTimeout(timer)); }, deferredQuery ? 300 : 0);
-    return () => { current = false; controller.abort(); clearTimeout(timer); clearTimeout(debounce); };
-  }, [deferredQuery, refresh]);
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const [filterOpen, setFilterOpen] = useState(false);
   const [gridWidth, setGridWidth] = useState(width - 48);
@@ -332,11 +351,30 @@ function Workspace({
     setDetail(null);
     setAddVariants(v);
   }
-  const priceMetadata = useMemo(() => pricingMetadata(state.offers, state.observations), [state.offers, state.observations]);
+  const priceMetadata = useMemo(() => ({
+    ...Object.fromEntries(
+      catalog.variants.flatMap((v) => {
+        const o = officialOffer(catalog, v.variantId);
+        return o
+          ? [
+              [
+                v.variantId,
+                {
+                  price: o.basePriceVnd,
+                  total: offerTotal(o),
+                  condition: o.condition === "NEW" ? "new" : "used",
+                },
+              ],
+            ]
+          : [];
+      }),
+    ),
+    ...pricingMetadata(state.offers, state.observations),
+  }), [catalog, state.offers, state.observations]);
   const filtered = useMemo(() => filterVariants(
     catalog.variants,
     filters,
-    "",
+    deferredQuery,
     priceMetadata,
   ).filter(
     (v) =>
@@ -345,7 +383,7 @@ function Workspace({
       (v.category === state.confirmed.category &&
         (!state.confirmed.hardConstraints?.minRamGb ||
           v.specifications.ramGb >= state.confirmed.hardConstraints.minRamGb)),
-  ), [catalog.variants, filters, priceMetadata, state.confirmed]);
+  ), [catalog.variants, filters, deferredQuery, priceMetadata, state.confirmed]);
   useEffect(() => { setCatalogPage(0); }, [filters, deferredQuery, catalog.catalogVersion]);
   const pageCount = Math.max(1, Math.ceil(filtered.length / catalogPageSize));
   const currentPage = Math.min(catalogPage, pageCount - 1);
@@ -399,6 +437,7 @@ function Workspace({
     </View>
   );
   return (
+    <CatalogProvider manifest={catalog}>
     <SafeAreaView style={{ flex: 1, backgroundColor: c.background }}>
       <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
       <View
@@ -451,6 +490,19 @@ function Workspace({
               </Notice>
             )}
             {!!notice && <Notice title={notice} />}
+            {catalogStatus === "loading" && (
+              <Notice title="Đang tải catalog từ PostgreSQL/Qdrant…" />
+            )}
+            {catalogStatus === "bundled" && (
+              <Notice title="Đang dùng catalog đóng gói">
+                Mobile không kết nối được backend nên đang dùng snapshot {catalog.catalogVersion} gồm {catalog.variants.length} cấu hình. Giá và thời điểm quan sát có thể không còn mới.
+              </Notice>
+            )}
+            {catalogStatus === "live" && (
+              <Body muted>
+                Catalog live · {catalog.variants.length} cấu hình · {catalog.catalogVersion}
+              </Body>
+            )}
             {tab === "advisor" && (
               <View style={s.section}>
                 <Title>Những gì đã biết, và những gì còn thiếu.</Title>
@@ -511,15 +563,21 @@ function Workspace({
                 )}
                 {!!networkError && <Notice title={networkError} />}
                 {result && <Notice title={outcome(result)} />}
-                {catalogStatus === "loading" && <ActivityIndicator accessibilityLabel="Đang tải catalog" color={c.primary} />}
-                {catalogStatus === "error" && <Notice title="Không tải được danh mục thiết bị"><Body>Kiểm tra kết nối với máy chủ và thử lại.</Body><Button label="Thử tải lại" onPress={() => setRefresh(x => x + 1)} /></Notice>}
-                {catalogStatus === "ready" && <Body muted>{catalog.variants.length} cấu hình · dữ liệu từ nhà bán lẻ</Body>}
+                {result?.shortlist.map((candidate) => (
+                  <Notice key={candidate.variantId} title={candidate.modelName}>
+                    <Body>{vnd(candidate.totalVnd)}</Body>
+                    <Body muted>
+                      {candidate.bestOffer?.sourceId}{" "}
+                      {candidate.bestOffer?.observedAt}
+                    </Body>
+                  </Notice>
+                ))}
                 <View
                   onLayout={(e) => setGridWidth(e.nativeEvent.layout.width)}
                 >
                   <FlatList
                     key={expanded ? "two" : "one"}
-                    data={catalogStatus === "ready" ? pageVariants : []}
+                    data={catalogStatus !== "loading" ? pageVariants : []}
                     numColumns={expanded ? 2 : 1}
                     scrollEnabled={false}
                     keyExtractor={(v) => v.variantId}
@@ -530,7 +588,7 @@ function Workspace({
                       <View style={{ height: 16 }} />
                     )}
                     ListEmptyComponent={
-                      <View>{catalogStatus === "ready" && <Notice title="Không có cấu hình khớp bộ lọc." />}</View>
+                      <View>{catalogStatus !== "loading" && <Notice title="Không có cấu hình khớp bộ lọc." />}</View>
                     }
                     renderItem={({ item }) => (
                       <View
@@ -555,7 +613,7 @@ function Workspace({
                     )}
                   />
                 </View>
-                {catalogStatus === "ready" && filtered.length > catalogPageSize && (
+                {catalogStatus !== "loading" && filtered.length > catalogPageSize && (
                   <View style={s.row}>
                     <Button label="Trang trước" disabled={currentPage === 0} onPress={() => changeCatalogPage(currentPage - 1)} />
                     <Body>Trang {currentPage + 1}/{pageCount} · {filtered.length} cấu hình</Body>
@@ -646,7 +704,11 @@ function Workspace({
       <DeviceDetailModal
         variant={detail}
         variants={catalog.variants}
+        explanationEndpoint={explanationEndpoint}
         historical={historical}
+        profile={state.confirmed}
+        revision={state.revision}
+        offline={!!state.preferences.offlineAiOnly}
         onClose={() => setDetail(null)}
         onVariant={setDetail}
         onCompare={select}
@@ -764,5 +826,6 @@ function Workspace({
         </View>
       </Modal>
     </SafeAreaView>
+    </CatalogProvider>
   );
 }

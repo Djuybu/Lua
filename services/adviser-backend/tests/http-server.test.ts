@@ -7,6 +7,7 @@ import { AdviserSqliteStore } from '../src/data/sqlite.ts';
 import { BoundedAiClient, MockAiProvider } from '../src/ai/adapter.ts';
 import { type SnapshotManifest } from '../src/contracts/catalog.ts';
 import { type RecommendationRequestEnvelope } from '../src/contracts/envelope.ts';
+import type { StagedCrawlerOffer } from '../src/contracts/crawler.ts';
 
 function makeRequest(
   port: number,
@@ -83,6 +84,37 @@ const sampleManifest: SnapshotManifest = {
     }
   ]
 };
+
+test('Large catalogs read offers in one batch and preserve recommendation behavior', async () => {
+  const store = new AdviserSqliteStore(':memory:');
+  const variants = Array.from({ length: 1000 }, (_, i) => ({ ...sampleManifest.variants[0]!, variantId: `batch-${i}` }));
+  store.activateSnapshot({ ...sampleManifest, variants, offers: [] });
+  let batchReads = 0;
+  const batched = Object.assign(store, {
+    async getOffersForVariants(ids: string[]) {
+      batchReads++;
+      assert.equal(ids.length,1000);
+      return new Map<string,StagedCrawlerOffer[]>([['batch-0',[{ ...sampleManifest.offers[0]!, matchedVariantId:'batch-0' }]]]);
+    },
+  });
+  store.getOffersForVariant = () => { throw new Error('Unexpected per-variant query'); };
+  const server = createHttpServer(batched,new BoundedAiClient(new MockAiProvider()));
+  await new Promise<void>(resolve => server.listen(0,'127.0.0.1',resolve));
+  try {
+    const result = await makeRequest((server.address() as AddressInfo).port,'/advisor/v1/recommend','POST',{
+      requestId:'batch-test',decisionId:'batch-test',profileRevision:1,
+      profile:{category:'pc_laptop',orderedPurposes:['laptop_office_study','laptop_software_dev','laptop_ultraportable'],
+        orderedPriorities:['priority_budget_savings','priority_performance_cpu','priority_battery_life'],budget:{hardCeilingVnd:20_000_000}},
+    });
+    assert.equal(result.status,200);
+    assert.equal(result.data.status,'SUCCESS');
+    assert.equal(result.data.shortlist[0].variantId,'batch-0');
+    assert.equal(batchReads,1);
+  } finally {
+    await new Promise<void>(resolve => server.close(() => resolve()));
+    store.close();
+  }
+});
 
 test('HTTP Server Boundary - live localhost network integration', async () => {
   const store = new AdviserSqliteStore(':memory:');

@@ -7,6 +7,7 @@ import { Body, Button, Title, Notice, s } from "../ui";
 import { DeviceSpecsSection } from "../components/DeviceSpecsSection";
 import { DeviceOverviewSection } from "../components/DeviceOverviewSection";
 import provenance from "../provenance.json";
+import { vnd } from "../model";
 export function DeviceDetailModal({
   variant,
   variants,
@@ -58,14 +59,15 @@ export function DeviceDetailModal({
                   />
                 ))}
               </View>
-              {tab === 0 && <DeviceOverviewSection variant={variant} />}{" "}
-              {tab === 1 && <DeviceSpecsSection variant={variant} />}{" "}
+              {tab === 0 && <DeviceOverviewSection variant={variant} />}
+              {tab === 1 && <DeviceSpecsSection variant={variant} />}
               {tab === 2 && (
                 <>
                   <Notice title="Chưa có giá trọn gói đã xác minh">
                     Chưa xác định
                   </Notice>
-                  {provenance.variants
+                  {variant.sourceUrl?.startsWith("https://") && <View style={{gap:12}}><Body>Giá quan sát: {vnd(variant.observedPriceVnd)}</Body><Body muted>{variant.observedAt ? new Date(variant.observedAt).toLocaleString("vi-VN") : ""}</Body><Button label="Mở trang nhà bán lẻ" onPress={() => Linking.openURL(variant.sourceUrl!)} /></View>}
+                  {(variant.sourceUrl ? [] : provenance.variants)
                     .filter((x) => x.variantId === variant.variantId)
                     .map((x) => (
                       <View key={x.variantId} style={{ gap: 12 }}>
@@ -77,7 +79,7 @@ export function DeviceDetailModal({
                         />
                       </View>
                     ))}
-                  <Body muted>Không phải giá hiện tại.</Body>
+                  <Body muted>Giá tại thời điểm thu thập; cần xác nhận lại tồn kho và tổng chi phí.</Body>
                 </>
               )}
               <Title small>Cấu hình cùng dòng</Title>

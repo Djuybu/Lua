@@ -223,7 +223,7 @@ export function UnifiedFilterPanel({
             selected={d.showExcluded}
             onPress={() => set({ ...d, showExcluded: !d.showExcluded })}
           />
-          {error && <Body>{error}</Body>}
+          {!!error && <Body>{error}</Body>}
         </ScrollView>
         <View
           style={[s.row, { padding: 16, backgroundColor: c.surfaceContainer }]}

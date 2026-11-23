@@ -59,7 +59,7 @@ export function TrackPriceSheet({
             selected={notifications}
             onPress={() => setNotifications(!notifications)}
           />
-          {error && <Body>{error}</Body>}
+          {!!error && <Body>{error}</Body>}
           <Button label="Hủy" disabled={busy} onPress={onClose} />
           <Button
             label="Bắt đầu theo dõi"

@@ -107,7 +107,7 @@ export function safeEndpoint(value: string) {
     return (
       u.protocol === "https:" ||
       (u.protocol === "http:" &&
-        ["localhost", "127.0.0.1", "10.0.2.2"].includes(u.hostname))
+        (["localhost", "127.0.0.1", "10.0.2.2"].includes(u.hostname) || /^(10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(u.hostname)))
     );
   } catch {
     return false;

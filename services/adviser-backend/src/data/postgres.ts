@@ -32,6 +32,17 @@ export class AdviserPostgresStore {
   async getOffersForVariant(variantId: string): Promise<StagedCrawlerOffer[]> {
     return (await this.pool.query('SELECT payload FROM lua_app.reviewed_offers WHERE variant_id=$1 ORDER BY payload->>\'observedAt\' DESC',[variantId])).rows.map(r=>r.payload);
   }
+  async getOffersForVariants(variantIds: string[]): Promise<Map<string, StagedCrawlerOffer[]>> {
+    const offers = new Map<string, StagedCrawlerOffer[]>();
+    if (!variantIds.length) return offers;
+    const rows = await this.pool.query('SELECT variant_id,payload FROM lua_app.reviewed_offers WHERE variant_id=ANY($1::text[]) ORDER BY payload->>\'observedAt\' DESC', [variantIds]);
+    for (const row of rows.rows) {
+      const group = offers.get(row.variant_id) ?? [];
+      group.push(row.payload);
+      offers.set(row.variant_id, group);
+    }
+    return offers;
+  }
   async saveOffers(offers: StagedCrawlerOffer[]): Promise<void> {
     const client = await this.pool.connect();
     try {

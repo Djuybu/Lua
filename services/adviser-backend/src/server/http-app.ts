@@ -197,9 +197,12 @@ export function createHttpServer(
         const variants: import('../contracts/catalog.ts').ProductVariant[] = catalogData?.variants ?? await store.getVariantsForActiveCatalog();
         const eligibleList = [];
         const excludedList = [];
+        const offersByVariant = 'getOffersForVariants' in store
+          ? await store.getOffersForVariants(variants.map(variant => variant.variantId))
+          : null;
 
         for (const variant of variants) {
-          const offers = await store.getOffersForVariant(variant.variantId);
+          const offers = offersByVariant ? offersByVariant.get(variant.variantId) ?? [] : await store.getOffersForVariant(variant.variantId);
           const eligibility = evaluateEligibility(variant, offers, envelope.profile);
           if (eligibility.isEligible) {
             eligibleList.push({ variant, eligibility });

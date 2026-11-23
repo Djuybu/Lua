@@ -80,7 +80,7 @@ export function ChatPanel({
         </Notice>
       )}
       <Notice title="Giới hạn dữ liệu">
-        Catalog tham khảo có 4 cấu hình, chưa có chào bán hoặc bằng chứng hiệu
+        Catalog được tải từ máy chủ, chưa có chào bán hoặc bằng chứng hiệu
         năng được duyệt. Chat không xác nhận giá trọn gói hay độ phù hợp từ dữ
         liệu còn thiếu.
       </Notice>

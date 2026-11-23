@@ -13,5 +13,6 @@ select variant_id, model_name, brand, category, source, source_url, observed_at,
  ) as variant
 from {{ ref('stg_products') }}
 where model_name is not null and category in ('phone','tablet','pc_laptop','pc_desktop')
- and ram_gb > 0 and storage_gb > 0 and review_status <> 'quarantine'
+ and ram_gb > 0 and storage_gb > 0
+ and (review_status <> 'quarantine' or payload->>'referenceEligible' = 'true')
  and source_url ~ '^https://'

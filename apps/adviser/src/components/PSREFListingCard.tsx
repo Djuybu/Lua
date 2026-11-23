@@ -5,7 +5,7 @@ import type { ProductVariant } from "../catalog";
 import { useTheme } from "../theme";
 import { useLocale } from "../i18n";
 import { Body, Button, s } from "../ui";
-import { categories } from "../model";
+import { categories, vnd } from "../model";
 import { sourceOf } from "../domain/filters";
 export function specRows(v: ProductVariant) {
   const x = v.specifications;
@@ -71,7 +71,8 @@ export function PSREFListingCard({
       <Body muted>
         {t("Hãng")}: {v.brand} · {t("Kiểu máy")}: {v.familyId}
       </Body>
-      <Body>Chưa có giá trọn gói đã xác minh</Body>
+      <Body>{v.observedPriceVnd != null ? `Giá quan sát: ${vnd(v.observedPriceVnd)}` : "Chưa có giá công bố"}</Body>
+      <Body muted>Chưa xác minh tổng chi phí{v.observedAt ? ` · ${new Date(v.observedAt).toLocaleString("vi-VN")}` : ""}</Body>
       {specRows(v).map(([label, value]) => (
         <View key={label} style={{ flexDirection: "row", gap: 12 }}>
           <Text style={{ width: 88, color: c.onSurfaceVariant, fontSize: 14 }}>

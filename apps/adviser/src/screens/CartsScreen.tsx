@@ -132,7 +132,7 @@ export function CartsScreen({
         />
       </View>
       {sort === "drop" && <Body muted>Chưa kiểm tra giá</Body>}
-      {error && <Notice title={error} />}{" "}
+      {!!error && <Notice title={error} />}
       {!carts.length && <Notice title="Chưa có giỏ hàng" />}
       {carts.map((cart) => {
         const candidates = state.cartData.candidates.filter(

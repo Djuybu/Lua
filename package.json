@@ -1,0 +1,12 @@
+{
+  "name": "lua-local-app",
+  "private": true,
+  "scripts": {
+    "start": "node tools/start-expo.mjs",
+    "start:api": "node --experimental-strip-types tools/dev-server.mjs",
+    "start:expo": "npm --prefix apps/adviser start -- --go --lan --port 8082"
+  },
+  "devDependencies": {
+    "@expo/ngrok": "^4.1.3"
+  }
+}

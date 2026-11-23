@@ -14,6 +14,7 @@ export function AddToCartModal({
   update,
   onClose,
   onSaved,
+  catalogVersion = "unknown",
 }: {
   variants: ProductVariant[];
   visible: boolean;
@@ -21,6 +22,7 @@ export function AddToCartModal({
   update: (fn: (s: State) => State) => Promise<State>;
   onClose: () => void;
   onSaved?: () => void;
+  catalogVersion?: string;
 }) {
   const { c } = useTheme();
   const { t } = useLocale();
@@ -82,7 +84,7 @@ export function AddToCartModal({
           cart,
           variants,
           x.confirmed,
-          "retail-dev-2026-11-14",
+          catalogVersion,
           at,
         ),
       }));
@@ -166,7 +168,7 @@ export function AddToCartModal({
               }
             />
           )}
-          {error && <Notice title={error} />}
+          {!!error && <Notice title={error} />}
           <Body muted>Chưa có giá trọn gói đã xác minh</Body>
           <View style={s.row}>
             <Button label="Hủy" disabled={busy} onPress={onClose} />

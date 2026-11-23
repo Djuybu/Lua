@@ -29,7 +29,10 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.max_pages <= 20:
         parser.error('--max-pages must be 1..20')
+    load_dotenv(ROOT / '.env')
     load_dotenv(ROOT / 'services/adviser-backend/.env')
+    if not os.environ.get('PGPASSWORD') and os.environ.get('DB_PASSWORD'):
+        os.environ['PGPASSWORD'] = os.environ['DB_PASSWORD']
     run_id = uuid.uuid4().hex
     build_schema = 'lua_build_' + run_id
     out = PIPELINE / '.work/warehouse' / run_id

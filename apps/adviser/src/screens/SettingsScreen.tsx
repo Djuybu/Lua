@@ -4,6 +4,7 @@ import { useTheme, type Preferences } from "../theme";
 import { useLocale } from "../i18n";
 import { Body, Button, Title, Notice, s } from "../ui";
 import { diagnosticReport } from "../utils/error-logger";
+import { CrawlPanel } from "../components/CrawlPanel";
 export function SettingsScreen({
   preferences,
   pending,
@@ -27,6 +28,7 @@ export function SettingsScreen({
   return (
     <View style={s.section}>
       <Title>Cài đặt</Title>
+      <CrawlPanel />
       <View
         style={{
           backgroundColor: c.surfaceContainerLow,
@@ -114,10 +116,10 @@ export function SettingsScreen({
       <Title small>Quyền riêng tư & AI</Title>
       <Body>
         {configured
-          ? "AI hội thoại chưa khả dụng."
+          ? "Tư vấn AI qua máy chủ. Nếu nhà cung cấp lỗi, ứng dụng hiển thị phản hồi dự phòng."
           : "AI chưa được cấu hình trong bản build này."}
       </Body>
-      <Body muted>Không có URL hoặc token cần nhập.</Body>
+      <Body muted>Khi gửi tin nhắn, nội dung hội thoại được gửi đến máy chủ và nhà cung cấp AI. API key chỉ lưu trên máy chủ.</Body>
       <Button
         label="Chỉ xử lý AI ngoại tuyến"
         selected={!!preferences.offlineAiOnly}

@@ -6,6 +6,9 @@ import { type DeviceCategory } from "./taxonomy.ts";
 import { type StagedCrawlerOffer } from "./crawler.ts";
 
 export interface ProductVariant {
+  sourceUrl?: string;
+  observedAt?: string;
+  observedPriceVnd?: number | null;
   variantId: string;
   familyId: string;
   modelName: string;

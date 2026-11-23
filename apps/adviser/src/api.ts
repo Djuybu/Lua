@@ -50,3 +50,21 @@ export async function recommend(
     throw new Error("Phản hồi không khớp phiên nhu cầu.");
   return data;
 }
+
+export async function fetchCatalog(endpoint: string, query: string, signal: AbortSignal) {
+  const res = await fetch(endpoint.replace(/\/$/, "") + "/advisor/v1/catalog?q=" + encodeURIComponent(query), { signal });
+  if (!res.ok) throw Error("CATALOG_UNAVAILABLE");
+  const data = await res.json();
+  if (typeof data.catalogVersion !== "string" || !Array.isArray(data.variants) ||
+      !data.variants.every((v: any) => v && typeof v.variantId === "string" && typeof v.modelName === "string" && v.specifications && Number.isSafeInteger(v.specifications.ramGb) && Number.isSafeInteger(v.specifications.storageGb) && Array.isArray(v.factIds))) throw Error("INVALID_CATALOG");
+  return data as import("./catalog").SnapshotManifest;
+}
+export const liveChatTransport: import("./chat").ChatTransport = async (input, signal) => {
+  const { DEFAULT_API_ENDPOINT } = await import("./api/config");
+  const res = await fetch(DEFAULT_API_ENDPOINT + "/advisor/v1/chat", {
+    method: "POST", headers: { "Content-Type": "application/json" }, signal,
+    body: JSON.stringify({ ...input, history: input.history.slice(-10).map(x => ({role:x.role,text:x.text})) }),
+  });
+  if (!res.ok) throw Error("CHAT_UNAVAILABLE");
+  return res.json();
+};

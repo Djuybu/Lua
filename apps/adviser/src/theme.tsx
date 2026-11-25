@@ -105,6 +105,9 @@ export function validPalette(c: Colors) {
     contrast(c.onSurfaceVariant, c.surfaceContainer) >= 4.5 &&
     contrast(c.onPrimary, c.primary) >= 4.5 &&
     contrast(c.onPrimaryContainer, c.primaryContainer) >= 4.5 &&
+    contrast(c.onSecondaryContainer, c.secondaryContainer) >= 4.5 &&
+    contrast(c.onError, c.error) >= 4.5 &&
+    contrast(c.primary, c.surface) >= 3 &&
     contrast(c.outline, c.surface) >= 3
   );
 }
@@ -115,6 +118,46 @@ const ThemeContext = createContext<{
   fallback: boolean;
 }>({ c: light, reduceMotion: true, isDark: false, fallback: false });
 export const useTheme = () => useContext(ThemeContext);
+
+const MaterialThemeResolver = React.memo(function MaterialThemeResolver({
+  seed,
+  dynamic,
+  isDark,
+  reduceMotion,
+  children,
+}: {
+  seed: string;
+  dynamic: boolean;
+  isDark: boolean;
+  reduceMotion: boolean;
+  children: React.ReactNode;
+}) {
+  const { theme, updateTheme, resetTheme } = useMaterial3Theme(
+    dynamic ? { fallbackSourceColor: seed } : { sourceColor: seed },
+  );
+  useEffect(() => {
+    if (dynamic) resetTheme();
+    else updateTheme(seed);
+    const sub = AppState.addEventListener("change", (state) => {
+      if (state === "active" && dynamic) resetTheme();
+    });
+    return () => sub.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seed, dynamic]);
+  const value = useMemo(() => {
+    const candidate = {
+      ...(isDark ? dark : light),
+      ...theme[isDark ? "dark" : "light"],
+    };
+    const fallback = !validPalette(candidate);
+    const c = fallback ? (isDark ? dark : light) : candidate;
+    return { c, reduceMotion, isDark, fallback };
+  }, [theme, isDark, reduceMotion]);
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
+});
+
 export function AdvisorTheme({
   preferences,
   children,
@@ -127,25 +170,6 @@ export function AdvisorTheme({
     preferences.appearance === "system"
       ? mode === "dark"
       : preferences.appearance === "dark";
-  const { theme, updateTheme, resetTheme } = useMaterial3Theme(
-    preferences.dynamic
-      ? { fallbackSourceColor: preferences.seed }
-      : { sourceColor: preferences.seed },
-  );
-  useEffect(() => {
-    if (preferences.dynamic) resetTheme();
-    else updateTheme(preferences.seed);
-    const sub = AppState.addEventListener("change", (state) => {
-      if (state === "active" && preferences.dynamic) resetTheme();
-    });
-    return () => sub.remove();
-  }, [preferences.seed, preferences.dynamic]);
-  const candidate = {
-    ...(isDark ? dark : light),
-    ...theme[isDark ? "dark" : "light"],
-  };
-  const fallback = !validPalette(candidate);
-  const c = fallback ? (isDark ? dark : light) : candidate;
   const [reduceMotion, setReduced] = useState(true);
   useEffect(() => {
     AccessibilityInfo.isReduceMotionEnabled()
@@ -167,15 +191,13 @@ export function AdvisorTheme({
     };
   }, []);
   return (
-    <ThemeContext.Provider
-      value={{
-        c,
-        reduceMotion: reduceMotion || preferences.motion === "reduced",
-        isDark,
-        fallback,
-      }}
+    <MaterialThemeResolver
+      seed={preferences.seed}
+      dynamic={preferences.dynamic}
+      isDark={isDark}
+      reduceMotion={reduceMotion || preferences.motion === "reduced"}
     >
       {children}
-    </ThemeContext.Provider>
+    </MaterialThemeResolver>
   );
 }

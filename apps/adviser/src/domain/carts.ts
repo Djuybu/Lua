@@ -106,6 +106,11 @@ export function importSaved(
   }
   return out;
 }
+function clampAfter(candidateAt: string, minAt: string): string {
+  const c = Date.parse(candidateAt);
+  const m = Date.parse(minAt);
+  return Number.isFinite(c) && Number.isFinite(m) && c >= m ? candidateAt : minAt;
+}
 export function addCandidates(
   data: CartData,
   cart: Cart,
@@ -113,21 +118,39 @@ export function addCandidates(
   profile: ConfirmedNeedsProfile | null,
   catalogVersion: string,
   at: string,
+  resolveBaseline?: (variant: ProductVariant) => {
+    savedOfferId: string | null;
+    baselineAmount: number | null;
+    baselinePriceBasis: "listing" | "complete" | "unknown";
+  },
 ) {
   const out = structuredClone(data);
   if (!out.carts.some((c) => c.id === cart.id)) out.carts.push(cart);
+  const existingIds = new Set(out.candidates.map((c) => c.id));
   for (const variant of variants) {
+    const baseline = resolveBaseline?.(variant) ?? {
+      savedOfferId: null,
+      baselineAmount: null,
+      baselinePriceBasis: "unknown" as const,
+    };
     if (
       out.candidates.some(
         (c) =>
           c.cartId === cart.id &&
           c.productVariantId === variant.variantId &&
-          c.savedOfferId === null,
+          c.savedOfferId === baseline.savedOfferId,
       )
     )
       continue;
+    let candidateId = cart.id + ":" + variant.variantId;
+    if (existingIds.has(candidateId)) {
+      let suffix = 2;
+      while (existingIds.has(candidateId + ":" + suffix)) suffix++;
+      candidateId = candidateId + ":" + suffix;
+    }
+    existingIds.add(candidateId);
     out.candidates.push({
-      id: cart.id + ":" + variant.variantId,
+      id: candidateId,
       cartId: cart.id,
       productVariantId: variant.variantId,
       decisionSnapshot: {
@@ -137,14 +160,61 @@ export function addCandidates(
         catalogVersion,
       },
       savedAt: at,
-      savedOfferId: null,
-      baselineAmount: null,
+      savedOfferId: baseline.savedOfferId,
+      baselineAmount: baseline.baselineAmount,
       baselineCurrency: "VND",
-      baselinePriceBasis: "unknown",
+      baselinePriceBasis: baseline.baselinePriceBasis,
     });
   }
   out.carts = out.carts.map((c) =>
-    c.id === cart.id ? { ...c, updatedAt: at } : c,
+    c.id === cart.id ? { ...c, updatedAt: clampAfter(at, c.createdAt) } : c,
+  );
+  return out;
+}
+export function removeCandidateFromCart(
+  data: CartData,
+  candidateId: string,
+  at: string,
+): CartData {
+  const out = structuredClone(data);
+  const target = out.candidates.find((c) => c.id === candidateId);
+  if (!target) return out;
+  out.candidates = out.candidates.filter((c) => c.id !== candidateId);
+  out.legacyMap = Object.fromEntries(
+    Object.entries(out.legacyMap)
+      .map(([k, ids]) => [k, ids.filter((x) => x !== candidateId)] as const)
+      .filter(([, ids]) => ids.length > 0),
+  );
+  out.carts = out.carts.map((c) =>
+    c.id === target.cartId
+      ? { ...c, updatedAt: clampAfter(at, c.createdAt) }
+      : c,
+  );
+  return out;
+}
+export function updateCartDetails(
+  data: CartData,
+  cartId: string,
+  patch: {
+    title: string;
+    useCase: string;
+    budget: number | null;
+    decisionNote: string;
+  },
+  at: string,
+): CartData {
+  const out = structuredClone(data);
+  out.carts = out.carts.map((c) =>
+    c.id === cartId
+      ? {
+          ...c,
+          title: patch.title.trim() || c.title,
+          useCase: patch.useCase.trim(),
+          budget: patch.budget,
+          decisionNote: patch.decisionNote.trim(),
+          updatedAt: clampAfter(at, c.createdAt),
+        }
+      : c,
   );
   return out;
 }

@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Cpu, MemoryStick, Monitor, HardDrive } from "lucide-react-native";
+import Cpu from "lucide-react-native/icons/cpu";
+import MemoryStick from "lucide-react-native/icons/memory-stick";
+import Monitor from "lucide-react-native/icons/monitor";
+import HardDrive from "lucide-react-native/icons/hard-drive";
 import type { ProductVariant } from "../catalog";
 import { useTheme } from "../theme";
 import { useLocale } from "../i18n";
@@ -12,48 +15,70 @@ export function DeviceOverviewSection({
 }) {
   const { c } = useTheme();
   const { t } = useLocale();
+  const items = [
+    {
+      Icon: Cpu,
+      label: "CPU",
+      value: v.specifications.cpu || t("Chưa công bố"),
+      wide: true,
+    },
+    {
+      Icon: MemoryStick,
+      label: "RAM",
+      value:
+        v.specifications.ramGb == null
+          ? t("Chưa xác minh")
+          : v.specifications.ramGb + " GB",
+      wide: false,
+    },
+    {
+      Icon: HardDrive,
+      label: "Lưu trữ",
+      value:
+        v.specifications.storageGb == null
+          ? t("Chưa xác minh")
+          : v.specifications.storageGb + " GB",
+      wide: false,
+    },
+    {
+      Icon: Monitor,
+      label: "Màn hình",
+      value: v.specifications.displayInches
+        ? v.specifications.displayInches + " inch"
+        : t("Chưa công bố"),
+      wide: false,
+    },
+  ];
   return (
     <View style={{ gap: 20 }}>
       <View style={s.row}>
-        {[
-          [Cpu, "CPU", v.specifications.cpu],
-          [MemoryStick, "RAM", v.specifications.ramGb == null ? "Chưa xác minh" : v.specifications.ramGb + " GB"],
-          [HardDrive, "Lưu trữ", v.specifications.storageGb == null ? "Chưa xác minh" : v.specifications.storageGb + " GB"],
-          [
-            Monitor,
-            "Màn hình",
-            v.specifications.displayInches
-              ? v.specifications.displayInches + " inch"
-              : t("Chưa công bố"),
-          ],
-        ].map(([Icon, label, value]) => {
-          const I = Icon as typeof Cpu;
-          return (
-            <View
-              key={label as string}
+        {items.map(({ Icon, label, value, wide }) => (
+          <View
+            key={label}
+            style={{
+              width: wide ? "100%" : undefined,
+              flexGrow: wide ? 0 : 1,
+              flexBasis: wide ? "100%" : "46%",
+              backgroundColor: c.surfaceContainerLow,
+              padding: 16,
+              borderRadius: 16,
+              gap: 6,
+            }}
+          >
+            <Icon size={22} color={c.primary} />
+            <Body muted>{label}</Body>
+            <Text
               style={{
-                width: "47%",
-                backgroundColor: c.surfaceContainerLow,
-                padding: 16,
-                borderRadius: 16,
-                gap: 8,
+                color: c.onSurface,
+                fontSize: wide ? 17 : 19,
+                lineHeight: 25,
+                fontWeight: "600",
               }}
             >
-              <I size={24} color={c.primary} />
-              <Body muted>{label as string}</Body>
-              <Text
-                style={{
-                  color: c.onSurface,
-                  fontSize: 19,
-                  lineHeight: 26,
-                  fontWeight: "600",
-                }}
-              >
-                {value as string}
-              </Text>
-            </View>
-          );
-        })}
+              {value}
+            </Text>
+          </View>
+        ))}
       </View>
       <Notice title="Độ phù hợp">Chưa có đo kiểm độc lập</Notice>
       <Body muted>Thông số do nhà bán lẻ công bố.</Body>

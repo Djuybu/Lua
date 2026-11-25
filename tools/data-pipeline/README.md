@@ -1,5 +1,7 @@
 # Lua data pipeline
 
+Để cập nhật dữ liệu theo yêu cầu hoặc lịch 02:00 hằng ngày, xem [hướng dẫn inventory](../../docs/FULL_CRAWL.md). Mỗi lượt tối đa 50 URL/300 giây, 2 worker, lưu checkpoint rồi tạm dừng. Mở app/tìm kiếm/xem trạng thái không tự cào; rebuild catalog chỉ xảy ra một lần khi lượt được yêu cầu có `--publish`. Các lệnh crawl mẫu bên dưới vẫn là lệnh giới hạn trang.
+
 Crawler/staging CLI cho CellphoneS, Thế Giới Di Động, FPT Shop, Trung Trần, LaptopAZ, ShopDunk, Điện Máy Xanh và Oneway. Python 3.11+; chỉ dùng standard library, không cần pip, Docker, API key hoặc tài khoản bán lẻ.
 
 Pipeline tách fetch → extract → normalize/quality → SQLite history → export → review → backend payload. Không tự POST vào backend, không phát hành catalog. `ready_for_review` chỉ có nghĩa parser có đủ identity/price theo config và không phát hiện lỗi; không phải sản phẩm đã được duyệt mua hoặc phù hợp ngân sách.

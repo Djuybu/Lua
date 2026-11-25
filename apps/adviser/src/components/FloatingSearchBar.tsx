@@ -2,19 +2,18 @@ import React from "react";
 import { TextInput, View } from "react-native";
 import { useTheme } from "../theme";
 import { useLocale } from "../i18n";
-import { Button, s } from "../ui";
+import { Button } from "../ui";
+
 export function FloatingSearchBar({
   query,
   onQuery,
   onFilters,
-  onAdvisor,
   onAi,
   count,
 }: {
   query: string;
   onQuery: (q: string) => void;
   onFilters: () => void;
-  onAdvisor: () => void;
   onAi: () => void;
   count: number;
 }) {
@@ -24,10 +23,14 @@ export function FloatingSearchBar({
     <View
       style={{
         backgroundColor: c.surfaceContainerHigh,
-        padding: 12,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
         borderRadius: 28,
-        gap: 8,
-        margin: 12,
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 6,
+        marginHorizontal: 12,
+        marginVertical: 8,
       }}
     >
       <TextInput
@@ -36,21 +39,29 @@ export function FloatingSearchBar({
         placeholderTextColor={c.onSurfaceVariant}
         value={query}
         onChangeText={onQuery}
+        returnKeyType="search"
         style={{
-          minHeight: 48,
-          paddingHorizontal: 16,
+          flex: 1,
+          minWidth: 0,
+          minHeight: 44,
+          paddingHorizontal: 12,
           color: c.onSurface,
-          fontSize: 16,
+          fontSize: 15,
         }}
       />
-      <View style={s.row}>
+      {query !== "" && (
         <Button
-          label={t("Lọc") + (count ? " (" + count + ")" : "")}
-          onPress={onFilters}
+          quiet
+          label="×"
+          a11yLabel="Xóa từ khóa tìm kiếm"
+          onPress={() => onQuery("")}
         />
-        <Button quiet label="Mở Device Advisor" onPress={onAdvisor} />
-        <Button quiet label="Tư vấn AI" onPress={onAi} />
-      </View>
+      )}
+      <Button
+        label={t("Lọc") + (count ? " (" + count + ")" : "")}
+        onPress={onFilters}
+      />
+      <Button quiet label="Tư vấn AI" onPress={onAi} />
     </View>
   );
 }

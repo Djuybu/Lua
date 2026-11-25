@@ -6,12 +6,14 @@ export const sourceLabels: Record<string, string> = {
   dienmayxanh: "Điện Máy Xanh",
   fptshop: "FPT Shop",
   tgdd: "Thế Giới Di Động",
+  thegioididong: "Thế Giới Di Động",
   shopdunk: "ShopDunk",
   trungtran: "Trung Trần",
   oneway: "Oneway",
 };
 export function sourceLabel(sourceId: string) {
-  return sourceLabels[sourceId] ?? sourceId;
+  if (!sourceId) return "";
+  return sourceLabels[sourceId.toLowerCase()] ?? sourceId;
 }
 /** Payable total: listed price plus known mandatory fees and shipping. */
 export function offerTotal(offer: StagedCrawlerOffer): number | null {

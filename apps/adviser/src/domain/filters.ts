@@ -1,5 +1,6 @@
 import type { ProductVariant } from "../catalog";
 import provenance from "../provenance.json";
+import { sourceLabel } from "./official";
 export type Filters = {
   category: string;
   brands: string[];
@@ -32,12 +33,54 @@ export const emptyFilters: Filters = {
   sort: "name",
   showExcluded: true,
 };
+const CANONICAL_BRANDS: Record<string, string> = {
+  asus: "ASUS",
+  hp: "HP",
+  msi: "MSI",
+  acer: "Acer",
+  lenovo: "Lenovo",
+  dell: "Dell",
+  apple: "Apple",
+  lg: "LG",
+  gigabyte: "Gigabyte",
+  masstel: "Masstel",
+};
+export function normalizeBrand(brand: string): string {
+  const trimmed = brand.trim();
+  if (!trimmed) return "";
+  return CANONICAL_BRANDS[trimmed.toLowerCase()] ?? trimmed;
+}
+function sourceFromHostname(urlString?: string): string {
+  if (!urlString) return "";
+  try {
+    const host = new URL(urlString).hostname.toLowerCase();
+    if (host.includes("thegioididong.com")) return "thegioididong";
+    if (host.includes("dienmayxanh.com")) return "dienmayxanh";
+    if (host.includes("fptshop.com")) return "fptshop";
+    if (host.includes("cellphones.com")) return "cellphones";
+    if (host.includes("laptopaz.vn")) return "laptopaz";
+    if (host.includes("shopdunk.com")) return "shopdunk";
+    if (host.includes("trungtran.vn")) return "trungtran";
+    if (host.includes("oneway")) return "oneway";
+  } catch {}
+  return "";
+}
 export function sourceOf(v: ProductVariant) {
-  return (
-    provenance.variants
-      .find((p) => p.variantId === v.variantId)
-      ?.sourceCapture.replace(".json", "") ?? ""
-  );
+  const fromProvenance = provenance.variants
+    .find((p) => p.variantId === v.variantId)
+    ?.sourceCapture.replace(".json", "");
+  if (fromProvenance) return fromProvenance;
+  const match = /^retailer:([^:]+):/i.exec(v.variantId);
+  if (match) return match[1].toLowerCase();
+  return sourceFromHostname(v.sourceUrl);
+}
+export function normalizeSearchText(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "d")
+    .toLowerCase();
 }
 export function filterVariants(
   variants: ProductVariant[],
@@ -47,40 +90,67 @@ export function filterVariants(
     string,
     { price: number | null; total: number | null; condition: string | null }
   > = {},
+  fitOrder?: Record<string, number>,
 ) {
+  const tokens = normalizeSearchText(query).trim().split(/\s+/).filter(Boolean);
+  const selectedBrands = new Set(f.brands.map(normalizeBrand));
   return variants
     .filter((v) => {
       const s = v.specifications;
       const m = metadata[v.variantId];
+      const effectivePrice = m?.price ?? m?.total ?? null;
+      const src = sourceOf(v);
+      const haystack = tokens.length
+        ? normalizeSearchText(
+            [
+              v.modelName,
+              v.variantId,
+              v.brand,
+              s.cpu,
+              s.gpu ?? "",
+              s.os,
+              src,
+              sourceLabel(src),
+              s.ramGb != null ? s.ramGb + "GB" : "",
+              s.storageGb != null ? s.storageGb + "GB" : "",
+            ].join(" "),
+          )
+        : "";
       return (
         (!f.category || v.category === f.category) &&
-        (!f.brands.length || f.brands.includes(v.brand)) &&
-        (!f.sources.length || f.sources.includes(sourceOf(v))) &&
+        (!selectedBrands.size || selectedBrands.has(normalizeBrand(v.brand))) &&
+        (!f.sources.length || f.sources.includes(src)) &&
         (f.condition === "all" || m?.condition === f.condition) &&
-        (!f.minPrice || (m?.price != null && m.price >= Number(f.minPrice))) &&
-        (!f.maxPrice || (m?.price != null && m.price <= Number(f.maxPrice))) &&
+        (!f.minPrice ||
+          (effectivePrice != null && effectivePrice >= Number(f.minPrice))) &&
+        (!f.maxPrice ||
+          (effectivePrice != null && effectivePrice <= Number(f.maxPrice))) &&
         (f.minRam === 0 || (s.ramGb !== null && s.ramGb >= f.minRam)) &&
-        (f.minStorage === 0 || (s.storageGb !== null && s.storageGb >= f.minStorage)) &&
-        (!f.gpu || (!!s.gpu && /RTX|GTX|Radeon RX|Arc A/i.test(s.gpu))) &&
+        (f.minStorage === 0 ||
+          (s.storageGb !== null && s.storageGb >= f.minStorage)) &&
+        (!f.gpu ||
+          (!!s.gpu &&
+            /RTX|GTX|Radeon\s*(RX|Pro)|Arc\s*[AB]|Quadro|GeForce\s*MX/i.test(
+              s.gpu,
+            ))) &&
         (!f.minScreen ||
           (s.displayInches != null && s.displayInches >= f.minScreen)) &&
         (!f.maxScreen ||
           (s.displayInches != null && s.displayInches <= f.maxScreen)) &&
         (!f.maxWeight || (s.weightKg != null && s.weightKg <= f.maxWeight)) &&
-        [
-          v.modelName,
-          v.variantId,
-          v.brand,
-          s.cpu,
-          s.ramGb + "GB",
-          s.storageGb + "GB",
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(query.toLowerCase())
+        tokens.every((tok) => haystack.includes(tok))
       );
     })
     .sort((a, b) => {
+      if (f.sort === "fit" && fitOrder) {
+        const aRank = fitOrder[a.variantId];
+        const bRank = fitOrder[b.variantId];
+        if (aRank != null || bRank != null) {
+          if (aRank == null) return 1;
+          if (bRank == null) return -1;
+          if (aRank !== bRank) return aRank - bRank;
+        }
+      }
       if (f.sort === "price" || f.sort === "total") {
         const key = f.sort === "price" ? "price" : "total";
         const aPrice = metadata[a.variantId]?.[key];
@@ -136,20 +206,35 @@ export function pricingMetadata(
       now - Date.parse(p.fetchedAt) >= 86400000
     )
       continue;
-    const condition = o.condition.toLowerCase();
-    const next = {
-      price: o.priceBasis === "listing" ? p.amount : null,
-      total: o.priceBasis === "complete" ? p.amount : null,
-      condition:
-        condition === "new"
-          ? "new"
-          : ["used", "refurbished", "like_new"].includes(condition)
-            ? "used"
-            : null,
+    const rawCond = o.condition.toLowerCase();
+    const condition =
+      rawCond === "new"
+        ? "new"
+        : ["used", "refurbished", "like_new"].includes(rawCond)
+          ? "used"
+          : null;
+    const prior = out[o.productVariantId] ?? {
+      price: null,
+      total: null,
+      condition: null,
     };
-    const prior = out[o.productVariantId];
-    if (!prior || p.amount < (prior.price ?? prior.total ?? Infinity))
-      out[o.productVariantId] = next;
+    const nextPrice =
+      o.priceBasis === "listing"
+        ? prior.price == null
+          ? p.amount
+          : Math.min(prior.price, p.amount)
+        : prior.price;
+    const nextTotal =
+      o.priceBasis === "complete"
+        ? prior.total == null
+          ? p.amount
+          : Math.min(prior.total, p.amount)
+        : prior.total;
+    out[o.productVariantId] = {
+      price: nextPrice,
+      total: nextTotal,
+      condition: prior.condition ?? condition,
+    };
   }
   return out;
 }

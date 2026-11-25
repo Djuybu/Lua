@@ -6,6 +6,8 @@ import { useLocale } from "../i18n";
 import { Title } from "../ui";
 import { specRows } from "./PSREFListingCard";
 import { sourceOf } from "../domain/filters";
+import { sourceLabel } from "../domain/official";
+
 export function DeviceSpecsSection({
   variant: v,
 }: {
@@ -14,11 +16,9 @@ export function DeviceSpecsSection({
   const { c } = useTheme();
   const { t } = useLocale();
   const rows = specRows(v);
+  const retailer = sourceLabel(sourceOf(v)) || null;
   const groups = [
-    [
-      "Nhận dạng & Xuất xứ",
-      [rows[0], ["Nhà bán lẻ", sourceOf(v)], ["Tình trạng máy", null]],
-    ],
+    ["Nhận dạng & Xuất xứ", [rows[0], ["Nhà bán lẻ", retailer]]],
     ["Vi xử lý & Đồ họa", rows.slice(1, 3)],
     ["Bộ nhớ & Lưu trữ", rows.slice(3, 5)],
     ["Màn hình, Pin & Thiết kế", rows.slice(5)],
@@ -58,7 +58,7 @@ export function DeviceSpecsSection({
                   fontStyle: value ? "normal" : "italic",
                 }}
               >
-                {value || t("Chưa công bố")}
+                {value ? t(value) : t("Chưa công bố")}
               </Text>
             </View>
           ))}

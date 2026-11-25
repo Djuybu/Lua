@@ -2,11 +2,16 @@
 // Native/Android Studio builds have no browser origin and may omit Expo env vars.
 export const DEFAULT_GCP_API_GATEWAY = "https://lua-adviser.vercel.app";
 
-export function resolveApiEndpoint(configured?: string): string {
+export function resolveApiEndpoint(
+  configured?: string,
+  backendMode?: string,
+): string {
+  if (backendMode?.trim().toLowerCase() === "offline") return "";
   return (configured?.trim() || DEFAULT_GCP_API_GATEWAY).replace(/\/+$/, "");
 }
 
 // Keep direct process.env access so Expo can inline the build-time override.
 export const DEFAULT_API_ENDPOINT = resolveApiEndpoint(
   process.env.EXPO_PUBLIC_API_URL,
+  process.env.EXPO_PUBLIC_BACKEND_MODE,
 );

@@ -13,3 +13,7 @@ select variant_id, coalesce(model_name, external_id) as model_name, brand, coale
    'qualityIssues',coalesce(payload->'qualityIssues','[]'::jsonb)
  ) as variant
 from {{ ref('stg_products') }}
+where model_name is not null and category in ('phone','tablet','pc_laptop','pc_desktop')
+ and ram_gb > 0 and storage_gb > 0
+ and (review_status <> 'quarantine' or payload->>'referenceEligible' = 'true')
+ and source_url ~ '^https://'

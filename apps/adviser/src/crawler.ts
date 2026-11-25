@@ -116,8 +116,26 @@ export function validateStagedCrawlerOffer(
   if (!isValidVnd(o.basePriceVnd)) {
     errors.push("basePriceVnd must be a non-negative safe integer");
   }
-  if (o.mandatoryFeesVnd === null || !isValidVnd(o.mandatoryFeesVnd)) {
-    errors.push("mandatoryFeesVnd must be a non-negative safe integer");
+  if (o.mandatoryFeesVnd !== null && !isValidVnd(o.mandatoryFeesVnd)) {
+    errors.push("mandatoryFeesVnd must be null or a non-negative safe integer");
+  }
+  const validCompleteness: OfferCompleteness[] = [
+    "COMPLETE",
+    "PARTIAL_UNKNOWN",
+  ];
+  if (
+    !o.completenessStatus ||
+    !validCompleteness.includes(o.completenessStatus)
+  ) {
+    errors.push(
+      `completenessStatus must be one of: ${validCompleteness.join(", ")}`,
+    );
+  }
+  if (
+    o.completenessStatus === "COMPLETE" &&
+    (o.mandatoryFeesVnd === null || o.shippingVnd === null)
+  ) {
+    errors.push("COMPLETE offers require known mandatoryFeesVnd and shippingVnd");
   }
   if (o.shippingVnd !== null && !isValidVnd(o.shippingVnd)) {
     errors.push("shippingVnd must be null or a non-negative safe integer");

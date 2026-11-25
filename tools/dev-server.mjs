@@ -1,6 +1,7 @@
 // Local PostgreSQL + Qdrant API. Expo serves the frontend on port 8081.
 import http from 'node:http';
-import { readFileSync } from 'node:fs';
+import { networkInterfaces } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEnvFile } from 'node:process';
@@ -10,18 +11,26 @@ import { BoundedAiClient, MockAiProvider } from '../services/adviser-backend/src
 import { LiveExplanation } from '../services/adviser-backend/src/ai/live-explanation.ts';
 import { LiveChat } from '../services/adviser-backend/src/ai/live-chat.ts';
 import { validateConfirmedProfile } from '../services/adviser-backend/src/contracts/taxonomy.ts';
+import { CrawlControl, createCrawlHandler } from './crawl-control.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const backendDir = resolve(root, 'services/adviser-backend');
+for (const path of [resolve(root, '.env'), resolve(backendDir, '.env')]) if (existsSync(path)) loadEnvFile(path);
+process.env.PGPASSWORD ||= process.env.DB_PASSWORD;
+process.env.AI_API_KEY ||= process.env.API_KEY;
+process.env.AI_MODE ||= process.env.AI_API_KEY ? 'provider' : 'fallback_only';
+process.env.AI_MODEL ||= 'gpt-4.1-mini';
+process.env.AI_PROVIDER_NAME ||= 'openai';
 const datasetDir = resolve(root, 'tools/data-pipeline/datasets/retail-pilot-2026-11-14');
 // User decision 2026-11-14: collected retail prices/configurations are official.
 const official = JSON.parse(readFileSync(resolve(datasetDir, 'official-offers.json'), 'utf8'));
 const bundledCatalog = JSON.parse(readFileSync(resolve(datasetDir, 'catalog-snapshot.json'), 'utf8'));
-loadEnvFile(resolve(backendDir, '.env'));
 if (process.env.AI_MODE === 'provider' && process.env.AI_PROVIDER_NAME !== 'openai') throw new Error('This launcher supports AI_PROVIDER_NAME=openai');
 const port = Number(process.env.PORT || 8080);
 const bindHost = process.env.HOST || '127.0.0.1';
 const store = new AdviserPostgresStore();
+const crawl = new CrawlControl(root);
+const handleCrawl = createCrawlHandler(crawl);
 await store.health();
 // Seed the accepted offers into the active build when its catalog contains the
 // same exact variant IDs. Existing identical observations are idempotent.
@@ -57,12 +66,13 @@ const officialStore = new Proxy(store, {
 const legacy = createHttpServer(officialStore, new BoundedAiClient(new MockAiProvider()));
 const send = (res, status, data) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(data)); };
 const expoPort = Number(process.env.EXPO_PORT || 8081);
-const allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.2:${port}`]);
+const lanIps = Object.values(networkInterfaces()).flat().filter(x => x && x.family === 'IPv4' && !x.internal).map(x => x.address);
+const allowedHosts = new Set([...lanIps.map(ip => `${ip}:${port}`),`127.0.0.1:${port}`, `localhost:${port}`, `10.0.2.2:${port}`]);
+const expoOrigins = new Set([...lanIps.flatMap(ip => [expoPort,8082].map(p => `http://${ip}:${p}`)),`http://localhost:8082`,`http://127.0.0.1:8082`,`http://127.0.0.1:${expoPort}`, `http://localhost:${expoPort}`]);
 if (process.env.PUBLIC_HOST) {
   allowedHosts.add(process.env.PUBLIC_HOST);
   allowedHosts.add(`${process.env.PUBLIC_HOST}:${port}`);
 }
-const expoOrigins = new Set([`http://127.0.0.1:${expoPort}`, `http://localhost:${expoPort}`]);
 const localOrigins = new Set([...allowedHosts].map(host => `http://${host}`));
 allowedHosts.add('lua-adviser.vercel.app');
 allowedHosts.add('lua-adviser.vercel.app:443');
@@ -87,8 +97,10 @@ const backend = http.createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
   }
-  if (req.url === '/advisor/v1/ai/status' && req.method === 'GET') return send(res, 200, { mode: ai.mode, model: ai.model, maxCallsPerProcess: 20 });
-  if (req.url !== '/advisor/v1/explain' && req.url !== '/advisor/v1/chat') { legacy.emit('request', req, res); return; }
+  if (req.url === '/advisor/v1/ingest') return send(res, 403, {error:{message:'Use the warehouse import command'}});
+  if (await handleCrawl(req,res)) return;
+  if (req.url === '/advisor/v1/ai/status' && req.method === 'GET') return send(res, 200, { mode: ai.mode, model: ai.model, chat: true, configured: !!process.env.AI_API_KEY, maxCallsPerProcess: 20 });
+  if (!['/advisor/v1/explain', '/advisor/v1/chat'].includes(req.url)) { legacy.emit('request', req, res); return; }
   if (req.method !== 'POST' || !req.headers['content-type']?.startsWith('application/json')) return send(res, 400, { error: { message: 'JSON POST required' } });
   const controller = new AbortController();
   res.on('close', () => { if (!res.writableEnded) controller.abort(); });
@@ -127,4 +139,4 @@ const backend = http.createServer(async (req, res) => {
 });
 backend.on('error', err => { console.error('Local server failed:', err.code); process.exit(1); });
 backend.listen(port, bindHost, () => console.log(`Backend: http://${bindHost}:${port}`));
-for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, async () => { backend.closeAllConnections(); backend.close(); await store.close(); process.exit(0); });
+for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, async () => { if (crawl.child) await crawl.pause(); backend.closeAllConnections(); backend.close(); await store.close(); process.exit(0); });

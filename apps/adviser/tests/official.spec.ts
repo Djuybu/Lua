@@ -46,6 +46,10 @@ test("current UI retains Carts and asks the explanation route with confirmed nee
     .first()
     .click();
   await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Tư vấn AI", exact: true })
+    .click();
+  await page
     .getByLabel("Câu hỏi về cấu hình", { exact: true })
     .fill("Giá bao nhiêu?");
   await page.getByRole("button", { name: "Hỏi AI", exact: true }).click();
@@ -64,6 +68,10 @@ test("current UI retains Carts and asks the explanation route with confirmed nee
   await page
     .getByRole("button", { name: "Xem cấu hình", exact: true })
     .first()
+    .click();
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Tư vấn AI", exact: true })
     .click();
   await expect(
     page.getByRole("button", { name: "Hỏi AI", exact: true }),

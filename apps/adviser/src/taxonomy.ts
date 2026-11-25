@@ -168,6 +168,40 @@ export function validateConfirmedProfile(
     }
   }
 
+  // 5. Hard constraints validation
+  if (p.hardConstraints !== undefined) {
+    if (!p.hardConstraints || typeof p.hardConstraints !== "object" || Array.isArray(p.hardConstraints)) {
+      errors.push("hardConstraints must be an object");
+    } else {
+      const h = p.hardConstraints;
+      if (
+        h.minRamGb !== undefined &&
+        (typeof h.minRamGb !== "number" || !Number.isSafeInteger(h.minRamGb) || h.minRamGb <= 0)
+      ) {
+        errors.push("hardConstraints.minRamGb must be a positive safe integer");
+      }
+      if (
+        h.requiredOs !== undefined &&
+        (!Array.isArray(h.requiredOs) ||
+          h.requiredOs.some((os) => typeof os !== "string" || !os.trim()))
+      ) {
+        errors.push("hardConstraints.requiredOs must contain non-empty strings");
+      }
+      if (
+        h.maxWeightKg !== undefined &&
+        (typeof h.maxWeightKg !== "number" || !Number.isFinite(h.maxWeightKg) || h.maxWeightKg <= 0)
+      ) {
+        errors.push("hardConstraints.maxWeightKg must be a positive number");
+      }
+      if (
+        h.formFactor !== undefined &&
+        (typeof h.formFactor !== "string" || !h.formFactor.trim())
+      ) {
+        errors.push("hardConstraints.formFactor must be a non-empty string");
+      }
+    }
+  }
+
   return {
     valid: errors.length === 0,
     errors,

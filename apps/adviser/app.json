@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "L\u1ef1a",
+    "name": "Lựa",
     "slug": "lua-adviser",
-    "version": "0.1.0",
+    "version": "0.5.1",
     "orientation": "default",
     "userInterfaceStyle": "automatic",
     "android": {
@@ -11,7 +11,8 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.SYSTEM_ALERT_WINDOW"
-      ]
+      ],
+      "versionCode": 6
     },
     "web": {
       "bundler": "metro"

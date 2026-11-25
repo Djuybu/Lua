@@ -64,7 +64,9 @@ function checked(reply: ChatReply, revision: number): ChatReply {
     reply.sources.some((s) => {
       try {
         return (
-          typeof s.label !== "string" || new URL(s.url).protocol !== "https:"
+          typeof s.label !== "string" ||
+          !s.label.trim() ||
+          new URL(s.url).protocol !== "https:"
         );
       } catch {
         return true;
@@ -78,7 +80,9 @@ function checked(reply: ChatReply, revision: number): ChatReply {
       draftErrors(reply.proposal.draft).length)
   )
     throw Error("INVALID_PROPOSAL");
-  return structuredClone(reply);
+  const out = structuredClone(reply);
+  if (out.proposal) out.proposal.draft.os = out.proposal.draft.os.trim();
+  return out;
 }
 export class ChatController {
   private state: ChatState;
@@ -90,6 +94,7 @@ export class ChatController {
   private lastText = "";
   private lastRevision = 0;
   private lastHistory: ChatMessage[] = [];
+  private committingSelf = false;
   constructor(
     private transport?: ChatTransport,
     private timeoutMs = 15000,
@@ -205,6 +210,16 @@ export class ChatController {
       return Promise.resolve();
     return this.send(this.lastText, revision, true);
   }
+  cancelInFlight() {
+    if (this.state.status !== "sending") return;
+    ++this.sequence;
+    this.active?.abort();
+    this.active = null;
+    this.publish({
+      status: this.transport ? "cancelled" : "unavailable",
+      error: "",
+    });
+  }
   cancel() {
     if (
       this.state.status === "applying" ||
@@ -221,9 +236,28 @@ export class ChatController {
       error: "",
     });
   }
+  clearConversation() {
+    if (this.state.status === "applying") return;
+    ++this.sequence;
+    this.active?.abort();
+    this.active = null;
+    this.lastText = "";
+    this.lastHistory = [];
+    this.publish({
+      status: this.transport ? "idle" : "unavailable",
+      messages: [],
+      proposal: null,
+      reviewing: false,
+      error: "",
+    });
+  }
   revisionChanged(revision: number) {
     if (revision === this.revision) return;
     this.revision = revision;
+    if (this.committingSelf) {
+      this.committingSelf = false;
+      return;
+    }
     const wasActive = this.state.status === "sending" || !!this.state.proposal;
     this.cancel();
     this.publish({
@@ -243,7 +277,16 @@ export class ChatController {
   }
   dismissProposal() {
     if (this.state.status !== "applying")
-      this.publish({ proposal: null, reviewing: false, error: "" });
+      this.publish({
+        status: this.transport
+          ? this.state.status === "error"
+            ? "idle"
+            : this.state.status
+          : "unavailable",
+        proposal: null,
+        reviewing: false,
+        error: "",
+      });
   }
   async confirm(commit: (proposal: ChatProposal) => Promise<unknown>) {
     if (
@@ -259,6 +302,7 @@ export class ChatController {
       return;
     }
     this.publish({ status: "applying", error: "" });
+    this.committingSelf = true;
     try {
       await commit(proposal);
       this.publish({
@@ -268,6 +312,7 @@ export class ChatController {
         error: "",
       });
     } catch {
+      this.committingSelf = false;
       this.publish({
         status: "error",
         error:

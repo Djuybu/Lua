@@ -60,6 +60,7 @@ export const initialDraft: Draft = {
   os: "",
 };
 export function profileOf(d: Draft): ConfirmedNeedsProfile {
+  const os = d.os.trim();
   return {
     category: d.category,
     orderedPurposes: d.purposes as [string, string, string],
@@ -67,7 +68,7 @@ export function profileOf(d: Draft): ConfirmedNeedsProfile {
     budget: { hardCeilingVnd: /^\d+$/.test(d.budget) ? Number(d.budget) : NaN },
     hardConstraints: {
       ...(d.minRam ? { minRamGb: Number(d.minRam) } : {}),
-      ...(d.os ? { requiredOs: [d.os] } : {}),
+      ...(os ? { requiredOs: [os] } : {}),
     },
   };
 }
@@ -90,35 +91,65 @@ export function toggleOrdered(xs: string[], id: string): string[] {
       : xs;
 }
 export function changeCategory(d: Draft, category: DeviceCategory): Draft {
+  if (d.category === category) return d;
   return { ...d, category, purposes: [], os: "", minRam: "" };
 }
-export function vnd(n: number | null | undefined) {
+export function vnd(n: number | null | undefined, fallback = "Chưa xác định") {
   return n == null || !Number.isFinite(n)
-    ? "Chưa xác định"
+    ? fallback
     : new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
         maximumFractionDigits: 0,
       }).format(n);
 }
+export function formatObservedAt(
+  iso: string | null | undefined,
+  locale: "vi" | "en" = "vi",
+) {
+  if (!iso) return "";
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return iso;
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(ms));
+}
+function isStrictPrivateIpv4(host: string) {
+  if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) return false;
+  const p = host.split(".").map(Number);
+  if (p.some((x) => !Number.isInteger(x) || x < 0 || x > 255)) return false;
+  return (
+    p[0] === 10 ||
+    (p[0] === 192 && p[1] === 168) ||
+    (p[0] === 172 && p[1] >= 16 && p[1] <= 31)
+  );
+}
 export function safeEndpoint(value: string) {
   try {
     const u = new URL(value);
-    const privateIpv4 =
-      /^10\./.test(u.hostname) ||
-      /^192\.168\./.test(u.hostname) ||
-      (() => {
-        const match = /^172\.(\d{1,2})\./.exec(u.hostname);
-        return !!match && Number(match[1]) >= 16 && Number(match[1]) <= 31;
-      })();
+    if (u.username || u.password) return false;
     return (
       u.protocol === "https:" ||
       (u.protocol === "http:" &&
         (["localhost", "127.0.0.1", "10.0.2.2"].includes(u.hostname) ||
-          privateIpv4))
+          isStrictPrivateIpv4(u.hostname)))
     );
   } catch {
     return false;
+  }
+}
+export function safeExternalUrl(value: string | null | undefined): string | null {
+  if (!value) return null;
+  try {
+    const u = new URL(value);
+    if (u.protocol !== "https:" || u.username || u.password) return null;
+    return u.toString();
+  } catch {
+    return null;
   }
 }
 

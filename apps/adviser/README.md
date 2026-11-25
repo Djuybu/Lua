@@ -1,18 +1,12 @@
 # Lựa frontend
 
-Expo SDK 58 / React Native 0.88 / React 19.3. One entry: index.ts → App.tsx → src/AdviserApp.tsx. Android is the delivery target; Expo web previews the same screens.
+Expo SDK 58 / React Native 0.88 / React 19.3. Entry: index.ts → App.tsx → src/AdviserApp.tsx. Android qua Expo Go là mục tiêu chạy; Expo web dùng cùng giao diện.
 
-```powershell
-cd "D:\Lua - Pickem\Lua\apps\adviser"
-npm ci
-npm run web
-# Custom Android development build (requires Android SDK/JDK/device):
-npm run android
-```
+Từ repo root dùng `npm start` để chạy API và Expo. Xem [hướng dẫn đầy đủ](../../docs/EXPO_LOCAL.md). Điện thoại cùng Wi-Fi; API được suy ra từ host Expo. Ghi đè bằng EXPO_PUBLIC_API_URL khi cần. API key và DB password chỉ nằm trong `.env` ở root.
 
-## Material You
+Giữ Material You, light/dark/system và bảng màu tùy chọn. Expo Go dùng bảng màu fallback; màu wallpaper cần native development build. Bốn trang: trang chủ, so sánh, giỏ quyết định, cài đặt. Catalog và tìm kiếm nối PostgreSQL/Qdrant, có trạng thái tải/lỗi/thử lại, bộ lọc, sáu bước nhu cầu, xem nguồn và giá quan sát, so sánh tối đa bốn cấu hình, lưu giỏ trên thiết bị. Chat dùng API hội thoại thật, có hủy/thử lại, nguồn, phản hồi dự phòng và xem lại bản nháp trước xác nhận. Lịch sử chat chỉ giữ trong phiên.
 
-Settings → Bảng màu Material You: use Android 12+ system colors or choose a seed/custom #RRGGBB. System/light/dark appearance is independent. Theme updates immediately, persists on-device, and refreshes on foreground. @pchmn/expo-material3-theme needs a rebuilt native development client for wallpaper colors; Expo Go/web use a generated fallback. Contrast gates may select the documented accessible fallback. No fixed forest-green identity.
+Giá chưa gồm phí/ship đã xác minh. Không kết luận phù hợp tác vụ từ thông số hoặc dùng dữ liệu đóng gói để thay thế lỗi mạng. Chưa có đồng bộ giỏ qua tài khoản hoặc mô hình AI trên thiết bị.
 
 ## Features
 
@@ -40,3 +34,5 @@ Android export produces a Hermes bundle, not an APK or native integration certif
 ## Chat preparation
 
 The floating search area opens session-only AI consultation with an injected transport seam and the current search as an editable initial prompt. Default production state is unavailable until the approved backend contract is handed off. See [CHAT_PREP.md](CHAT_PREP.md) for states, proposal confirmation, fixtures and integration dependencies. `npm run test:e2e` builds a separate in-memory fixture; it does not test a live AI provider.
+
+Kiểm tra: `npm run check`, `npm test`, `npm run build`, `npm run export:android`. Export Android tạo bundle, chưa phải APK hay xác minh trên điện thoại thật.

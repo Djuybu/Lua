@@ -5,6 +5,7 @@ from datetime import datetime
 from psycopg.types.json import Jsonb
 from .storage import validate_row, encoded
 from .sources import PipelineError
+from .reference import reference_payload
 
 
 class PostgresStore:
@@ -30,15 +31,7 @@ class PostgresStore:
                 if old:
                     continue
                 self.db.execute('INSERT INTO lua_raw.pipeline_observations(observation_id,payload) VALUES(%s,%s)', (row['observationId'],Jsonb(row)))
-                attrs = row.get('attributes', {})
-                def attr(*keys):
-                    return next((attrs[k] for k in keys if attrs.get(k)), None)
-                payload = {'name':row['name'],'url':row['offerUrl'],'category':self.category,
-                    'brand':attr('Thương hiệu','Brand'),
-                    'specs':{'ram':attr('RAM','Dung lượng RAM'),'storage':attr('Ổ cứng','Storage'),
-                             'cpu':attr('CPU','Loại CPU'),'os':attr('Hệ điều hành','OS'),'gpu':attr('GPU','Card đồ họa')},
-                    'pricing':{'current':row['basePriceVnd']},'pipelineObservationId':row['observationId'],
-                    'qualityIssues':row['reasons']}
+                payload = reference_payload(row, self.category)
                 self.product(row['sourceId'],row['externalOfferId'],row['observedAt'],payload,row['captureMode'],row['status'])
                 inserted += 1
             if job:

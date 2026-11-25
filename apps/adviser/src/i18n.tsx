@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 export type SupportedLocale = "vi" | "en";
 const EN: Record<string, string> = {
   "Giá hiện tại": "Current price",
@@ -9,6 +9,7 @@ const EN: Record<string, string> = {
   "Cho phép thông báo": "Enable notifications",
   "Bắt đầu theo dõi": "Start tracking",
   "Xem nhật ký lỗi": "View diagnostic log",
+  "Ẩn nhật ký lỗi": "Hide diagnostic log",
   "Liên lạc hằng ngày": "Daily communication",
   "Chụp ảnh": "Photography",
   "Chơi game": "Gaming",
@@ -56,6 +57,7 @@ const EN: Record<string, string> = {
   "Chọn có căn cứ": "Choose with evidence",
   "Tìm thiết bị, RAM, dung lượng…": "Search devices, RAM, storage…",
   "Tìm thiết bị": "Search devices",
+  "Xóa từ khóa tìm kiếm": "Clear search query",
   Lọc: "Filters",
   "Mở Device Advisor": "Open Device Advisor",
   "Tư vấn AI": "Ask AI",
@@ -65,6 +67,7 @@ const EN: Record<string, string> = {
   "Tất cả": "All",
   "Thêm vào giỏ": "Add to cart",
   "Tạo giỏ mới": "Create cart",
+  "Tạo giỏ": "Create cart",
   "Tên giỏ": "Cart name",
   "Mục đích sử dụng": "Use case",
   "Ngân sách": "Budget",
@@ -77,15 +80,33 @@ const EN: Record<string, string> = {
   "Lưu trữ giỏ": "Archive cart",
   "Khôi phục giỏ": "Restore cart",
   "Xóa giỏ": "Delete cart",
+  "Sửa giỏ": "Edit cart",
+  "Lưu thay đổi": "Save changes",
+  "Xóa khỏi giỏ": "Remove from cart",
   "Giá khi lưu": "Price when saved",
   "Giá catalog mới nhất": "Latest catalog price",
+  "Giá chính thức": "Official price",
+  "Giá niêm yết tham khảo": "Reference list price",
+  "Chưa gồm phí & vận chuyển": "Fees & shipping not included",
+  "Chưa có giá công bố": "No published price yet",
+  "Thời điểm quan sát": "Observed at",
+  "Đã lưu": "Saved",
+  "Còn hàng": "In stock",
+  "Hết hàng": "Out of stock",
+  "Ngừng kinh doanh": "Discontinued",
   "Chưa kiểm tra giá": "Not checked yet",
   "Chưa xác định": "Unknown",
+  "Chưa xác minh": "Unverified",
   "Chưa công bố": "Not published",
   "Đổi máy": "Replace device",
   "Bỏ chọn": "Remove selection",
+  "Bỏ chọn tất cả": "Clear all selections",
   "Chọn so sánh": "Select for comparison",
+  "Đã chọn": "Selected",
+  "Bỏ chọn so sánh": "Remove from comparison",
   "Chưa có giỏ hàng": "No carts yet",
+  "Lưu các cấu hình quan tâm từ Trang chủ để theo dõi giá hoặc so sánh song song.":
+    "Save candidate devices from Home to track prices or compare side by side.",
   "Lý do gốc": "Original reasoning",
   "Quyết định đã nhập": "Imported decisions",
   "Xác nhận xóa": "Confirm deletion",
@@ -98,6 +119,12 @@ const EN: Record<string, string> = {
   Tối: "Dark",
   "Bảng màu Material You": "Material You palette",
   "Dùng màu của thiết bị": "Use device colors",
+  "Tím mặc định": "Default violet",
+  "Xanh dương": "Ocean blue",
+  "Hồng mận": "Plum rose",
+  "Hổ phách": "Warm amber",
+  "Xanh ngọc": "Teal",
+  "Xám đá": "Slate",
   "Mã màu tùy chỉnh": "Custom color hex",
   "Áp dụng màu tùy chỉnh": "Apply custom color",
   "Theo hệ thống": "Follow system",
@@ -110,12 +137,54 @@ const EN: Record<string, string> = {
   "Mô tả sự cố": "Issue description",
   "Chia sẻ báo cáo lỗi": "Share diagnostic report",
   "Sao lưu dữ liệu JSON": "Export personal data JSON",
+  "Đã tải xuống báo cáo lỗi JSON.": "Downloaded diagnostic JSON report.",
+  "Đã sao chép báo cáo lỗi vào bộ nhớ tạm.": "Copied diagnostic report to clipboard.",
+  "Không thể chia sẻ báo cáo lỗi trên thiết bị này.": "Could not share diagnostic report on this device.",
+  "Tư vấn AI qua máy chủ. Nếu nhà cung cấp lỗi, ứng dụng hiển thị phản hồi dự phòng.":
+    "Server-assisted AI advice. If the provider fails, fallback responses are shown.",
+  "Khi gửi tin nhắn, nội dung hội thoại được gửi đến máy chủ và nhà cung cấp AI. API key chỉ lưu trên máy chủ.":
+    "When sending a message, conversation content is sent to the server and AI provider. API keys remain on the server only.",
   "AI chưa được cấu hình trong bản build này.":
     "AI is not configured in this build.",
   "AI hội thoại chưa khả dụng.": "Conversational AI is unavailable.",
   "Dữ liệu được lưu trên thiết bị này.": "Data is stored on this device.",
   "Không có URL hoặc token cần nhập.": "No URL or token entry is required.",
+  "Quản trị dữ liệu": "Data administration",
+  "Thu gọn": "Collapse",
+  "Mở rộng": "Expand",
+  "Cập nhật dữ liệu": "Data updates",
+  "Chỉ lấy dữ liệu khi bạn bấm cập nhật hoặc đến lịch 02:00 hằng ngày, giờ Việt Nam. Mỗi lượt tối đa 50 trang.":
+    "Fetches data only when you trigger an update or at the 02:00 ICT daily schedule. Up to 50 pages per batch.",
+  "Tiến trình được lưu trên máy chủ. Lượt sau tiếp tục các URL còn chờ; dữ liệu đã lưu vẫn dùng được khi tạm dừng.":
+    "Progress is persisted on the server. Subsequent runs resume pending URLs; saved data stays usable while paused.",
+  "Đang đọc tiến trình cập nhật": "Loading update progress",
+  "Đang ở chế độ ngoại tuyến hoặc chưa kết nối máy chủ cập nhật.":
+    "Offline mode is enabled or update server is unavailable.",
+  "Chưa có lượt cập nhật": "No update run yet",
+  "Đang lấy dữ liệu từ nhà bán lẻ": "Fetching retailer data",
+  "Đang hoàn tất trang hiện tại và lưu tiến trình": "Finishing current page and saving progress",
+  "Đang cập nhật danh mục từ dữ liệu đã lấy": "Publishing catalog from collected data",
+  "Đã lưu tiến trình": "Progress saved",
+  "Đã lưu tiến trình; một số nguồn gặp lỗi": "Progress saved; some sources failed",
+  "Đã xử lý hết hàng đợi": "Queue exhausted",
+  "Lượt cập nhật gặp lỗi; tiến trình đã lưu được giữ lại": "Update failed; saved progress kept",
+  "URL đã xong": "URLs done",
+  "URL còn chờ": "URLs pending",
+  "URL lỗi": "URLs failed",
+  "Lượt này": "This batch",
+  trang: "pages",
+  "Máy chủ chưa hoàn tất lượt cập nhật. Bạn có thể xem tiến độ hoặc tiếp tục.":
+    "Server did not finish the batch. You can check progress or resume.",
+  "Không đọc được tiến trình cập nhật. Kiểm tra kết nối máy chủ rồi thử lại.":
+    "Could not load update progress. Check server connection and retry.",
+  "Cập nhật thêm 50 trang": "Fetch 50 more pages",
+  "Tạm dừng và lưu": "Pause and save",
+  "Xem tiến độ": "Check progress",
   "Xem cấu hình": "View configuration",
+  "Mở trang nhà bán lẻ": "Open retailer page",
+  "Chưa có liên kết nguồn bán lẻ đã xác minh.": "No verified retailer link available.",
+  "Giá tại thời điểm thu thập; cần xác nhận lại tồn kho và tổng chi phí.":
+    "Price at capture time; verify stock and total cost before purchasing.",
   "Hãng / Dòng": "Brand / Series",
   Hãng: "Brand",
   "Kiểu máy": "Model",
@@ -145,6 +214,7 @@ const EN: Record<string, string> = {
   "Vượt trội về thông số này": "Better on this specification",
   "Không đủ dữ liệu để kết luận máy tốt hơn.":
     "Insufficient evidence to declare a better device.",
+  "Chỉ hiện điểm khác biệt": "Show differences only",
   "Bộ lọc tổng": "All filters",
   "Nguồn mua": "Retailer source",
   "Mức giá (VND)": "Price range (VND)",
@@ -161,6 +231,10 @@ const EN: Record<string, string> = {
   "Gọn ≤ 14.5 inch": "Compact ≤ 14.5 inch",
   "Rộng ≥ 15 inch": "Large ≥ 15 inch",
   "Mỏng nhẹ ≤ 1.5 kg": "Light ≤ 1.5 kg",
+  "0–15 triệu": "0–15M VND",
+  "15–20 triệu": "15–20M VND",
+  "20–30 triệu": "20–30M VND",
+  ">30 triệu": ">30M VND",
   "Sắp xếp": "Sort",
   "Tên A–Z": "Name A–Z",
   "Giá niêm yết": "Listed price",
@@ -172,6 +246,22 @@ const EN: Record<string, string> = {
   "Xóa bộ lọc": "Clear filters",
   "Chưa có dữ liệu giá/điều kiện được duyệt; bộ lọc không coi unknown là đạt.":
     "No approved price/condition data; unknown values do not pass filters.",
+  Bước: "Step",
+  "Đã chọn:": "Selected:",
+  Trần: "Ceiling",
+  "Chưa yêu cầu": "Not required",
+  "Chưa đặt ngân sách": "Budget not set",
+  "Ví dụ: 20000000": "Example: 20000000",
+  "Ví dụ: 16": "Example: 16",
+  "Ví dụ: Windows": "Example: Windows",
+  "Nhập số nguyên, không dấu phân cách. Phí chưa biết sẽ không được tính bằng 0.":
+    "Enter a whole number without separators. Unknown fees are never treated as 0.",
+  "RAM phải là số nguyên dương.": "RAM must be a positive whole number.",
+  "Sửa thiết bị": "Edit device",
+  "Sửa mục đích": "Edit purposes",
+  "Sửa ngân sách": "Edit budget",
+  "Sửa ưu tiên": "Edit priorities",
+  "Sửa làm rõ": "Edit details",
   "Thiết bị": "Device",
   "Mục đích": "Purposes",
   "Ưu tiên": "Priorities",
@@ -197,26 +287,46 @@ const EN: Record<string, string> = {
   "Chưa rõ thì để trống": "Leave unknown fields empty",
   "Ứng dụng không suy ra khả năng chạy phần mềm chỉ từ tên tác vụ.":
     "Application compatibility is not inferred from a task name.",
+  "Giá trọn gói, hiệu năng và độ phù hợp vẫn cần bằng chứng. Xác nhận không đồng nghĩa tất cả thiết bị đều đáp ứng.":
+    "Complete cost, performance, and suitability still require evidence. Confirming does not guarantee every device qualifies.",
   "Điện thoại": "Phone",
   "Máy tính bảng": "Tablet",
   Laptop: "Laptop",
   "PC để bàn": "Desktop PC",
   "Tư vấn": "Advice",
   "Khám phá": "Explore",
+  "Hội thoại tư vấn": "Consultation chat",
   "Trao đổi về nhu cầu": "Discuss your needs",
+  "Xóa hội thoại": "Clear chat",
+  "Gợi ý bắt đầu nhanh:": "Quick starter prompts:",
   "Tin nhắn tư vấn": "Chat message",
+  "Bạn cần thiết bị cho công việc gì?": "What do you need a device for?",
   "Gửi tin nhắn": "Send message",
   "Chatbot chưa khả dụng": "Chatbot unavailable",
   "Thử gửi lại": "Retry message",
   "Hủy gửi": "Cancel message",
+  "Đang gửi hội thoại": "Sending message",
   "Đang chờ phản hồi…": "Waiting for reply…",
+  "Đã hủy yêu cầu. Phản hồi đến muộn sẽ được bỏ qua.":
+    "Request cancelled. Any late reply will be ignored.",
   "Phản hồi dự phòng": "Fallback response",
+  "Phản hồi từ nhà cung cấp": "Provider response",
+  "Fallback — không phải kết quả AI live": "Fallback — not a live AI response",
+  "Nội dung cần đối chiếu nguồn": "Verify details against sources",
+  Nguồn: "Source",
   Bạn: "You",
   "Xem lại đề xuất nhu cầu": "Review proposed needs",
   "Xem lại đề xuất": "Review proposal",
   "Hủy đề xuất": "Cancel proposal",
   "Xác nhận đề xuất": "Confirm proposal",
+  "Đang lưu đề xuất…": "Saving proposal…",
+  "Nhu cầu đang dùng chưa thay đổi. Xác nhận chỉ hoàn tất sau khi lưu thành công.":
+    "Active needs remain unchanged until saved.",
+  "Mục đích theo thứ tự": "Ordered purposes",
+  "Ưu tiên theo thứ tự": "Ordered priorities",
   "Giới hạn dữ liệu": "Evidence limits",
+  "Chatbot tra cứu danh mục thiết bị trực tuyến. Kết quả chưa xác nhận hiệu năng khi chưa có đo kiểm độc lập; giá chính thức luôn gắn với đúng cấu hình và nguồn dữ liệu.":
+    "Chatbot searches the online device catalog. Suitability is unverified without independent benchmarks; official prices remain tied to exact specs and sources.",
   "Lịch sử chỉ giữ trong phiên này. Đề xuất không tự thay đổi nhu cầu đã xác nhận.":
     "Conversation lasts only for this session. Proposals never silently change confirmed needs.",
   "Không có cấu hình khớp bộ lọc.": "No configurations match these filters.",
@@ -224,6 +334,7 @@ const EN: Record<string, string> = {
     "What is known, and what is still missing.",
   "Tìm thiết bị cho tôi": "Find a device for me",
   "Điều chỉnh nhu cầu": "Edit needs",
+  "Cập nhật kết quả": "Update results",
   "Dữ liệu tham khảo, không phải chào bán":
     "Reference data, not an approved offer",
   "Cần khôi phục dữ liệu": "Data recovery required",
@@ -231,16 +342,65 @@ const EN: Record<string, string> = {
   "Xác nhận đặt lại dữ liệu": "Confirm data reset",
   "Đã xác nhận nhu cầu.": "Needs confirmed.",
   "Đã thêm vào giỏ.": "Added to cart.",
+  "Đã tạo giỏ mới.": "Cart created.",
   "Đã lưu tùy chọn.": "Preferences saved.",
+  "Đã xóa giỏ hàng.": "Cart history deleted.",
+  "Đã bắt đầu theo dõi giá.": "Price tracking enabled.",
+  "Đã đạt giới hạn 4 máy so sánh.": "Comparison limit of 4 devices reached.",
+  "Đang tải danh mục thiết bị…": "Loading device catalog…",
+  "Danh mục trực tuyến": "Live catalog",
+  "Danh mục đóng gói": "Bundled catalog",
+  "Thử kết nối lại": "Retry connection",
+  "Trang trước": "Previous",
+  "Trang sau": "Next",
+  Trang: "Page",
+  "cấu hình": "configurations",
+  "giỏ hàng": "carts",
+  "cấu hình đang ẩn theo bộ lọc": "hidden by filters",
+  "Chọn thêm ít nhất 1 cấu hình nữa để so sánh.":
+    "Select at least 1 more device to compare.",
+  "Chỉ các cấu hình có giá chính thức mới lưu mức giá đối chiếu.":
+    "Only configurations with official offers store a comparison baseline.",
+  "Đặt ngưỡng giá mong muốn để ghi nhận quy tắc theo dõi trên thiết bị.":
+    "Set a target price to save a tracking rule on this device.",
+  "Không thể bắt đầu theo dõi; trạng thái chưa thay đổi.":
+    "Could not start tracking; state was not modified.",
+  "Tư vấn về cấu hình này": "Ask AI about this configuration",
+  "Đang bật chế độ chỉ xử lý AI ngoại tuyến": "Offline AI-only mode is enabled",
+  "Xác nhận nhu cầu trước khi hỏi AI": "Confirm your needs before asking AI",
+  "Dịch vụ tư vấn chưa khả dụng": "Advice service unavailable",
+  "Câu hỏi về cấu hình": "Question about configuration",
+  "Nhập câu hỏi về cấu hình này…": "Ask a question about this configuration…",
+  "Hỏi AI": "Ask AI",
+  "Hủy hỏi AI": "Cancel AI request",
+  "Có phù hợp ngân sách không?": "Does it fit my budget?",
+  "Thông số nổi bật là gì?": "What are the key specs?",
+  "Có phù hợp ưu tiên của tôi không?": "Does it match my priorities?",
+  "Không tải được tư vấn. Bạn có thể thử lại.":
+    "Could not load advice. Please try again.",
+  "Nhà cung cấp": "Provider",
   "Mở nguồn thông số": "Open specification source",
   "Bản lưu lịch sử": "Historical snapshot",
   "Không gian của bạn": "Your preferences",
   "Chia sẻ": "Share",
   "Chưa chọn thiết bị": "No devices selected",
+  "Chọn tối đa 4 cấu hình từ Trang chủ hoặc Giỏ hàng để đối chiếu thông số và giá.":
+    "Pick up to 4 configurations from Home or Carts to compare specs and prices.",
   "Chọn thêm thiết bị": "Choose more devices",
   Tên: "Name",
   "Ưu đãi tốt hơn": "Better offer",
+  "Vì sao các máy khác bị loại?": "Why were other devices excluded?",
+  "Đang tải kết quả…": "Updating results…",
+  "Không tải được kết quả. Nhu cầu vẫn được giữ.":
+    "Could not load results. Confirmed needs were kept.",
+  "Mô hình AI đang tắt; câu trả lời được tổng hợp trực tiếp từ dữ liệu chính thức.":
+    "AI model is off; reply is compiled directly from official data.",
+  "Đã đạt giới hạn lượt gọi AI; câu trả lời được tổng hợp trực tiếp từ dữ liệu chính thức.":
+    "AI call limit reached; reply is compiled directly from official data.",
+  "AI tạm thời không phản hồi; câu trả lời lấy từ dữ liệu chính thức.":
+    "AI temporarily unavailable; reply comes from official data.",
 };
+
 const LocaleContext = createContext<SupportedLocale>("vi");
 export function LocaleProvider({
   locale,
@@ -260,8 +420,18 @@ function english(value: string) {
 }
 export function useLocale() {
   const locale = useContext(LocaleContext);
-  return {
-    locale,
-    t: (value: string) => (locale === "en" ? english(value) : value),
-  };
+  return useMemo(
+    () => ({
+      locale,
+      t: (value: string, vars?: Record<string, string | number>) => {
+        let out = locale === "en" ? english(value) : value;
+        if (vars) {
+          for (const [k, v] of Object.entries(vars))
+            out = out.replaceAll(`{${k}}`, String(v));
+        }
+        return out;
+      },
+    }),
+    [locale],
+  );
 }

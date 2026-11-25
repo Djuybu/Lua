@@ -105,6 +105,19 @@ test("acceptance journey: four destinations, floating search, filters, needs, ca
   await page.getByLabel("Tìm thiết bị", { exact: true }).fill("");
   await page.getByRole("button", { name: "Lọc", exact: true }).click();
   await page.getByRole("button", { name: "32 GB", exact: true }).click();
+  const expected32Gb = seed.variants.filter(
+    (v) =>
+      v.category === "pc_laptop" &&
+      v.specifications.ramGb != null &&
+      v.specifications.ramGb >= 32,
+  ).length;
+  await page
+    .getByRole("button", { name: `Áp dụng · ${expected32Gb}`, exact: true })
+    .click();
+  await page.getByRole("button", { name: "Lọc (1)", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Mỏng nhẹ ≤ 1.5 kg", exact: true })
+    .click();
   await page.getByRole("button", { name: "Áp dụng · 0", exact: true }).click();
   await expect(
     page.getByText("Không có cấu hình khớp bộ lọc.", { exact: true }),

@@ -35,7 +35,10 @@ def main():
         parser.error('Only one config per source is allowed')
     if any(not c['seeds'] or not (c.get('category') or args.category) for c in configs):
         parser.error('Each crawl source needs seeds and a category (config or --category)')
+    load_dotenv(ROOT / '.env')
     load_dotenv(ROOT / 'services/adviser-backend/.env')
+    if not os.environ.get('PGPASSWORD') and os.environ.get('DB_PASSWORD'):
+        os.environ['PGPASSWORD'] = os.environ['DB_PASSWORD']
     run_id = uuid.uuid4().hex
     build_schema = 'lua_build_' + run_id
     out = PIPELINE / '.work/warehouse' / run_id

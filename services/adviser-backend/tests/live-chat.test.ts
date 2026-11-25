@@ -35,4 +35,3 @@ test('live chat fallback never invents a source', async () => {
   assert.equal(reply.mode, 'fallback');
   assert.deepEqual(reply.sources, []);
 });
-

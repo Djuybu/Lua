@@ -1,4 +1,4 @@
-import type { ConfirmedNeedsProfile } from "./model";
+import { safeEndpoint, type ConfirmedNeedsProfile } from "./model";
 import {
   record,
   text,
@@ -12,6 +12,7 @@ import {
 } from "./domain/validation";
 import { validPriceData } from "./domain/persisted-prices";
 import type { Preferences } from "./theme";
+import { DEFAULT_API_ENDPOINT } from "./api/config";
 const defaults: Preferences = {
   appearance: "system",
   seed: "#6750A4",
@@ -32,7 +33,6 @@ import type {
   TrackingRule,
   AlertDelivery,
 } from "./domain/price-tracking";
-import { DEFAULT_API_ENDPOINT } from "./api/config";
 export type Saved = {
   id: string;
   at: string;
@@ -113,6 +113,7 @@ export function validState(x: unknown): x is State {
     /^#[0-9a-f]{6}$/i.test(x.preferences.seed) &&
     typeof x.preferences?.dynamic === "boolean" &&
     typeof x.preferences?.endpoint === "string" &&
+    (x.preferences.endpoint === "" || safeEndpoint(x.preferences.endpoint)) &&
     (x.preferences.locale === undefined ||
       ["vi", "en"].includes(x.preferences.locale)) &&
     (x.preferences.motion === undefined ||
@@ -135,41 +136,51 @@ export function createStore(storage: {
   let blocked = true;
   let tail = Promise.resolve();
   return {
-    async load() {
-      blocked = true;
-      const raw = await storage.getItem(key);
-      if (raw !== null) {
+    load() {
+      const next = tail.then(async () => {
+        blocked = true;
+        const raw = await storage.getItem(key);
+        if (raw === null) {
+          state = structuredClone(empty);
+          blocked = false;
+          return structuredClone(state);
+        }
         const parsed = JSON.parse(raw);
         if (parsed?.version === 1) {
           if (!Array.isArray(parsed.saved) || !parsed.saved.every(validSaved))
             throw Error("Invalid legacy snapshots");
+          const importedCarts = importSaved(parsed.saved ?? []);
+          const rawEndpoint = parsed.preferences?.endpoint;
+          const endpoint =
+            typeof rawEndpoint === "string" &&
+            (rawEndpoint === "" || safeEndpoint(rawEndpoint))
+              ? rawEndpoint
+              : DEFAULT_API_ENDPOINT;
           const migrated = {
             ...empty,
             ...parsed,
             version: 2,
             destination: destination(parsed.destination ?? parsed.tab),
-            cartData: importSaved(parsed.saved ?? []),
+            cartData: importedCarts,
             offers: [],
             observations: [],
-            trackingRules: importSaved(parsed.saved ?? []).candidates.map(
-              (candidate) => ({
-                id: "off:" + candidate.id,
-                candidateId: candidate.id,
-                status: "off",
-                offerScope: [],
-                targetAmount: null,
-                currency: "VND",
-                notificationsEnabled: false,
-                createdAt: candidate.savedAt,
-                updatedAt: candidate.savedAt,
-              }),
-            ),
+            trackingRules: importedCarts.candidates.map((candidate) => ({
+              id: "off:" + candidate.id,
+              candidateId: candidate.id,
+              status: "off",
+              offerScope: [],
+              targetAmount: null,
+              currency: "VND",
+              notificationsEnabled: false,
+              createdAt: candidate.savedAt,
+              updatedAt: candidate.savedAt,
+            })),
             alertDeliveries: [],
             legacyRaw: raw,
             preferences: {
               ...defaults,
               ...parsed.preferences,
-              endpoint: DEFAULT_API_ENDPOINT,
+              endpoint,
             },
           };
           if (!validState(migrated)) throw Error("Invalid legacy data");
@@ -179,9 +190,14 @@ export function createStore(storage: {
           if (!validState(parsed)) throw new Error("Dữ liệu lưu không hợp lệ.");
           state = parsed;
         }
-      }
-      blocked = false;
-      return structuredClone(state);
+        blocked = false;
+        return structuredClone(state);
+      });
+      tail = next.then(
+        () => {},
+        () => {},
+      );
+      return next;
     },
     update(fn: (s: State) => State) {
       const result = tail.then(async () => {
